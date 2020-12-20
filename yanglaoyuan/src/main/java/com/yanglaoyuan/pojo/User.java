@@ -1,9 +1,7 @@
 package com.yanglaoyuan.pojo;
 
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -12,6 +10,19 @@ public class User {
     private String uname;
     private String uphone;
     private String upass;
+    private List<Accident> accidentsByUid;
+    private List<Checkin> checkinsByUid;
+    private List<Costflow> costflowsByUid;
+    private List<Deposit> depositsByUid;
+    private List<Health> healthByUid;
+    private List<Oorder> oordersByUid;
+    private List<Outregistration> outregistrationsByUid;
+    private List<Register> registersByUid;
+    private List<Relation> relationsByUid;
+    private List<Settlement> settlementsByUid;
+    private List<Stayback> staybacksByUid;
+    private List<Tryout> tryoutsByUid;
+    private List<Visit> visitsByUid;
 
     @Id
     @Column(name = "uid", nullable = false)
@@ -24,7 +35,7 @@ public class User {
     }
 
     @Basic
-    @Column(name = "uname", nullable = true, length = 255)
+    @Column(name = "uname", nullable = true, length = 30)
     public String getUname() {
         return uname;
     }
@@ -34,7 +45,7 @@ public class User {
     }
 
     @Basic
-    @Column(name = "uphone", nullable = true, length = 255)
+    @Column(name = "uphone", nullable = true, length = 11)
     public String getUphone() {
         return uphone;
     }
@@ -44,7 +55,7 @@ public class User {
     }
 
     @Basic
-    @Column(name = "upass", nullable = true, length = 255)
+    @Column(name = "upass", nullable = true, length = 30)
     public String getUpass() {
         return upass;
     }
@@ -67,5 +78,122 @@ public class User {
     @Override
     public int hashCode() {
         return Objects.hash(uid, uname, uphone, upass);
+    }
+
+    @OneToMany(mappedBy = "userByUid")
+    public List<Accident> getAccidentsByUid() {
+        return accidentsByUid;
+    }
+
+    public void setAccidentsByUid(List<Accident> accidentsByUid) {
+        this.accidentsByUid = accidentsByUid;
+    }
+
+    @OneToMany(mappedBy = "userByUid")
+    public List<Checkin> getCheckinsByUid() {
+        return checkinsByUid;
+    }
+
+    public void setCheckinsByUid(List<Checkin> checkinsByUid) {
+        this.checkinsByUid = checkinsByUid;
+    }
+
+    @OneToMany(mappedBy = "userByUid")
+    public List<Costflow> getCostflowsByUid() {
+        return costflowsByUid;
+    }
+
+    public void setCostflowsByUid(List<Costflow> costflowsByUid) {
+        this.costflowsByUid = costflowsByUid;
+    }
+
+    @OneToMany(mappedBy = "userByUid")
+    public List<Deposit> getDepositsByUid() {
+        return depositsByUid;
+    }
+
+    public void setDepositsByUid(List<Deposit> depositsByUid) {
+        this.depositsByUid = depositsByUid;
+    }
+
+    @OneToMany(mappedBy = "userByUid")
+    public List<Health> getHealthByUid() {
+        return healthByUid;
+    }
+
+    public void setHealthByUid(List<Health> healthByUid) {
+        this.healthByUid = healthByUid;
+    }
+
+    @OneToMany(mappedBy = "userByUid")
+    public List<Oorder> getOordersByUid() {
+        return oordersByUid;
+    }
+
+    public void setOordersByUid(List<Oorder> oordersByUid) {
+        this.oordersByUid = oordersByUid;
+    }
+
+    @OneToMany(mappedBy = "userByUseUid")
+    public List<Outregistration> getOutregistrationsByUid() {
+        return outregistrationsByUid;
+    }
+
+    public void setOutregistrationsByUid(List<Outregistration> outregistrationsByUid) {
+        this.outregistrationsByUid = outregistrationsByUid;
+    }
+
+    @OneToMany(mappedBy = "userByUid")
+    public List<Register> getRegistersByUid() {
+        return registersByUid;
+    }
+
+    public void setRegistersByUid(List<Register> registersByUid) {
+        this.registersByUid = registersByUid;
+    }
+
+    @OneToMany(mappedBy = "userByUid")
+    public List<Relation> getRelationsByUid() {
+        return relationsByUid;
+    }
+
+    public void setRelationsByUid(List<Relation> relationsByUid) {
+        this.relationsByUid = relationsByUid;
+    }
+
+    @OneToMany(mappedBy = "userByUid")
+    public List<Settlement> getSettlementsByUid() {
+        return settlementsByUid;
+    }
+
+    public void setSettlementsByUid(List<Settlement> settlementsByUid) {
+        this.settlementsByUid = settlementsByUid;
+    }
+
+    @OneToMany(mappedBy = "userByUid")
+    public List<Stayback> getStaybacksByUid() {
+        return staybacksByUid;
+    }
+
+    public void setStaybacksByUid(List<Stayback> staybacksByUid) {
+        this.staybacksByUid = staybacksByUid;
+    }
+
+    @OneToMany(mappedBy = "userByUid")
+    public List<Tryout> getTryoutsByUid() {
+        return tryoutsByUid;
+    }
+
+    public void setTryoutsByUid(List<Tryout> tryoutsByUid) {
+        this.tryoutsByUid = tryoutsByUid;
+    }
+
+    @OneToMany(mappedBy = "userByUid")
+    public List<Visit> getVisitsByUid() {
+        return visitsByUid;
+    }
+
+    public void setVisitsByUid(List<Visit> visitsByUid) {
+        this.visitsByUid = visitsByUid;
     }
 }
