@@ -13,11 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-/**
- *@Description
- *@Author liujiawei
- *@Date 2020-12-20 19:21 
- */
+
 @RestController
 @RequestMapping("/user")
 public class UserController {
