@@ -4,6 +4,7 @@ import yanglaoyuan from '@/page/yanglaoyuan'
 import login from '@/page/login'
 import hugongguanli from '@/components/hugongguanli'
 import Outregistration from '@/components/Outregistration'
+import dashboard from '@/components/Dashboard'
 
 
 
@@ -28,6 +29,10 @@ const router = new Router({
               {
                 path: '/outregistration',
                 component: Outregistration
+              },
+              {
+                path: '/',
+                component: dashboard
               },
             ]
         }

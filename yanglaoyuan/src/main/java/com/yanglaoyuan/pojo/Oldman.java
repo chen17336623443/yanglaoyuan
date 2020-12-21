@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Objects;
 
 @Entity
+@Table(name = "oldman", schema = "yanglaoyuan")
 public class Oldman {
     private Integer omId;
     private String tomName;
