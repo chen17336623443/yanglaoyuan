@@ -8,11 +8,6 @@ import java.util.Objects;
 @Entity
 public class Deposit {
     private Integer depId;
-<<<<<<< HEAD
-    private Integer uid;
-
-=======
->>>>>>> 4031d1a9123513706313ed6039b075201257fa7a
     private BigDecimal depMoney;
     private Timestamp depDate;
     private String depPayment;
@@ -31,21 +26,8 @@ public class Deposit {
         this.depId = depId;
     }
 
-    @Basic
-<<<<<<< HEAD
-    @Column(name = "uid", nullable = true)
-    public Integer getUid() {
-        return uid;
-    }
-
-    public void setUid(Integer uid) {
-        this.uid = uid;
-    }
-
 
     @Basic
-=======
->>>>>>> 4031d1a9123513706313ed6039b075201257fa7a
     @Column(name = "dep_money", nullable = false, precision = 2)
     public BigDecimal getDepMoney() {
         return depMoney;
@@ -101,11 +83,6 @@ public class Deposit {
         if (o == null || getClass() != o.getClass()) return false;
         Deposit deposit = (Deposit) o;
         return Objects.equals(depId, deposit.depId) &&
-<<<<<<< HEAD
-                Objects.equals(uid, deposit.uid) &&
-
-=======
->>>>>>> 4031d1a9123513706313ed6039b075201257fa7a
                 Objects.equals(depMoney, deposit.depMoney) &&
                 Objects.equals(depDate, deposit.depDate) &&
                 Objects.equals(depPayment, deposit.depPayment) &&
@@ -115,11 +92,7 @@ public class Deposit {
 
     @Override
     public int hashCode() {
-<<<<<<< HEAD
-        return Objects.hash(depId, uid, depMoney, depDate, depPayment, depPaytype, depRemarks);
-=======
         return Objects.hash(depId, depMoney, depDate, depPayment, depPaytype, depRemarks);
->>>>>>> 4031d1a9123513706313ed6039b075201257fa7a
     }
 
     @ManyToOne
