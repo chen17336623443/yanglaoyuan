@@ -7,8 +7,6 @@ import java.util.Objects;
 @Entity
 public class Outregistration {
     private Integer outId;
-    private Integer omId;
-    private Integer useUid;
     private Timestamp outTime;
     private String outAccompanyname;
     private String outAccompanyphone;
@@ -16,7 +14,6 @@ public class Outregistration {
     private Timestamp outReturnestimate;
     private Integer outOutsum;
     private String outReason;
-    private Integer uid;
     private Integer outTrue;
     private Oldman oldmanByOmId;
     private User userByUseUid;
@@ -29,26 +26,6 @@ public class Outregistration {
 
     public void setOutId(Integer outId) {
         this.outId = outId;
-    }
-
-    @Basic
-    @Column(name = "om_id", nullable = true)
-    public Integer getOmId() {
-        return omId;
-    }
-
-    public void setOmId(Integer omId) {
-        this.omId = omId;
-    }
-
-    @Basic
-    @Column(name = "use_uid", nullable = true)
-    public Integer getUseUid() {
-        return useUid;
-    }
-
-    public void setUseUid(Integer useUid) {
-        this.useUid = useUid;
     }
 
     @Basic
@@ -122,16 +99,6 @@ public class Outregistration {
     }
 
     @Basic
-    @Column(name = "uid", nullable = true)
-    public Integer getUid() {
-        return uid;
-    }
-
-    public void setUid(Integer uid) {
-        this.uid = uid;
-    }
-
-    @Basic
     @Column(name = "out_true", nullable = true)
     public Integer getOutTrue() {
         return outTrue;
@@ -147,8 +114,6 @@ public class Outregistration {
         if (o == null || getClass() != o.getClass()) return false;
         Outregistration that = (Outregistration) o;
         return Objects.equals(outId, that.outId) &&
-                Objects.equals(omId, that.omId) &&
-                Objects.equals(useUid, that.useUid) &&
                 Objects.equals(outTime, that.outTime) &&
                 Objects.equals(outAccompanyname, that.outAccompanyname) &&
                 Objects.equals(outAccompanyphone, that.outAccompanyphone) &&
@@ -156,13 +121,12 @@ public class Outregistration {
                 Objects.equals(outReturnestimate, that.outReturnestimate) &&
                 Objects.equals(outOutsum, that.outOutsum) &&
                 Objects.equals(outReason, that.outReason) &&
-                Objects.equals(uid, that.uid) &&
                 Objects.equals(outTrue, that.outTrue);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(outId, omId, useUid, outTime, outAccompanyname, outAccompanyphone, outReturntime, outReturnestimate, outOutsum, outReason, uid, outTrue);
+        return Objects.hash(outId, outTime, outAccompanyname, outAccompanyphone, outReturntime, outReturnestimate, outOutsum, outReason, outTrue);
     }
 
     @ManyToOne

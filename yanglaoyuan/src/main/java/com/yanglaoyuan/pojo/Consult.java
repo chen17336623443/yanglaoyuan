@@ -10,7 +10,6 @@ import java.util.Objects;
 @Entity
 public class Consult {
     private Integer cId;
-    private Integer uid;
     private String omname;
     private String card;
     private String omsex;
@@ -31,16 +30,6 @@ public class Consult {
 
     public void setcId(Integer cId) {
         this.cId = cId;
-    }
-
-    @Basic
-    @Column(name = "uid", nullable = true)
-    public Integer getUid() {
-        return uid;
-    }
-
-    public void setUid(Integer uid) {
-        this.uid = uid;
     }
 
     @Basic
@@ -159,7 +148,6 @@ public class Consult {
         if (o == null || getClass() != o.getClass()) return false;
         Consult consult = (Consult) o;
         return Objects.equals(cId, consult.cId) &&
-                Objects.equals(uid, consult.uid) &&
                 Objects.equals(omname, consult.omname) &&
                 Objects.equals(card, consult.card) &&
                 Objects.equals(omsex, consult.omsex) &&
@@ -175,6 +163,6 @@ public class Consult {
 
     @Override
     public int hashCode() {
-        return Objects.hash(cId, uid, omname, card, omsex, omage, omselfCare, oname, relation, newtime, way, cphone, content);
+        return Objects.hash(cId, omname, card, omsex, omage, omselfCare, oname, relation, newtime, way, cphone, content);
     }
 }

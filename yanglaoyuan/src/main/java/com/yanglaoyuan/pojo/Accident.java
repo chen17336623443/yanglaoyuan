@@ -7,8 +7,6 @@ import java.util.Objects;
 @Entity
 public class Accident {
     private Integer accId;
-    private Integer omId;
-    private Integer uid;
     private Timestamp accTime;
     private Integer accType;
     private String accReason;
@@ -24,26 +22,6 @@ public class Accident {
 
     public void setAccId(Integer accId) {
         this.accId = accId;
-    }
-
-    @Basic
-    @Column(name = "om_id", nullable = true)
-    public Integer getOmId() {
-        return omId;
-    }
-
-    public void setOmId(Integer omId) {
-        this.omId = omId;
-    }
-
-    @Basic
-    @Column(name = "uid", nullable = true)
-    public Integer getUid() {
-        return uid;
-    }
-
-    public void setUid(Integer uid) {
-        this.uid = uid;
     }
 
     @Basic
@@ -92,8 +70,6 @@ public class Accident {
         if (o == null || getClass() != o.getClass()) return false;
         Accident accident = (Accident) o;
         return Objects.equals(accId, accident.accId) &&
-                Objects.equals(omId, accident.omId) &&
-                Objects.equals(uid, accident.uid) &&
                 Objects.equals(accTime, accident.accTime) &&
                 Objects.equals(accType, accident.accType) &&
                 Objects.equals(accReason, accident.accReason) &&
@@ -102,7 +78,7 @@ public class Accident {
 
     @Override
     public int hashCode() {
-        return Objects.hash(accId, omId, uid, accTime, accType, accReason, accDescribe);
+        return Objects.hash(accId, accTime, accType, accReason, accDescribe);
     }
 
     @ManyToOne

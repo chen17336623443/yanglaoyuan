@@ -6,7 +6,6 @@ import java.util.Objects;
 @Entity
 public class Foodweek {
     private Integer fwId;
-    private Integer fpId;
     private String fwWeekday;
     private String fwMeals;
     private String fwFoods;
@@ -20,16 +19,6 @@ public class Foodweek {
 
     public void setFwId(Integer fwId) {
         this.fwId = fwId;
-    }
-
-    @Basic
-    @Column(name = "fp_id", nullable = true)
-    public Integer getFpId() {
-        return fpId;
-    }
-
-    public void setFpId(Integer fpId) {
-        this.fpId = fpId;
     }
 
     @Basic
@@ -68,7 +57,6 @@ public class Foodweek {
         if (o == null || getClass() != o.getClass()) return false;
         Foodweek foodweek = (Foodweek) o;
         return Objects.equals(fwId, foodweek.fwId) &&
-                Objects.equals(fpId, foodweek.fpId) &&
                 Objects.equals(fwWeekday, foodweek.fwWeekday) &&
                 Objects.equals(fwMeals, foodweek.fwMeals) &&
                 Objects.equals(fwFoods, foodweek.fwFoods);
@@ -76,7 +64,7 @@ public class Foodweek {
 
     @Override
     public int hashCode() {
-        return Objects.hash(fwId, fpId, fwWeekday, fwMeals, fwFoods);
+        return Objects.hash(fwId, fwWeekday, fwMeals, fwFoods);
     }
 
     @ManyToOne

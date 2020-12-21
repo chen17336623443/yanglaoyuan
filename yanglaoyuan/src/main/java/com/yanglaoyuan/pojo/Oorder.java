@@ -8,7 +8,6 @@ import java.util.Objects;
 @Entity
 public class Oorder {
     private Integer oId;
-    private Integer uid;
     private String omname;
     private String card;
     private String omsex;
@@ -32,16 +31,6 @@ public class Oorder {
 
     public void setoId(Integer oId) {
         this.oId = oId;
-    }
-
-    @Basic
-    @Column(name = "uid", nullable = true)
-    public Integer getUid() {
-        return uid;
-    }
-
-    public void setUid(Integer uid) {
-        this.uid = uid;
     }
 
     @Basic
@@ -180,7 +169,6 @@ public class Oorder {
         if (o == null || getClass() != o.getClass()) return false;
         Oorder oorder = (Oorder) o;
         return Objects.equals(oId, oorder.oId) &&
-                Objects.equals(uid, oorder.uid) &&
                 Objects.equals(omname, oorder.omname) &&
                 Objects.equals(card, oorder.card) &&
                 Objects.equals(omsex, oorder.omsex) &&
@@ -198,7 +186,7 @@ public class Oorder {
 
     @Override
     public int hashCode() {
-        return Objects.hash(oId, uid, omname, card, omsex, omage, omselfCare, oname, relation, newtime, cphone, ordertime, privateroom, omoney, payment);
+        return Objects.hash(oId, omname, card, omsex, omage, omselfCare, oname, relation, newtime, cphone, ordertime, privateroom, omoney, payment);
     }
 
     @ManyToOne

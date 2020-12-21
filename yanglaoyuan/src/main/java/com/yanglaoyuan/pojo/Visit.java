@@ -7,8 +7,6 @@ import java.util.Objects;
 @Entity
 public class Visit {
     private Integer vId;
-    private Integer uid;
-    private Integer omId;
     private String vName;
     private String vPhone;
     private Integer vRelationship;
@@ -27,26 +25,6 @@ public class Visit {
 
     public void setvId(Integer vId) {
         this.vId = vId;
-    }
-
-    @Basic
-    @Column(name = "uid", nullable = true)
-    public Integer getUid() {
-        return uid;
-    }
-
-    public void setUid(Integer uid) {
-        this.uid = uid;
-    }
-
-    @Basic
-    @Column(name = "om_id", nullable = true)
-    public Integer getOmId() {
-        return omId;
-    }
-
-    public void setOmId(Integer omId) {
-        this.omId = omId;
     }
 
     @Basic
@@ -125,8 +103,6 @@ public class Visit {
         if (o == null || getClass() != o.getClass()) return false;
         Visit visit = (Visit) o;
         return Objects.equals(vId, visit.vId) &&
-                Objects.equals(uid, visit.uid) &&
-                Objects.equals(omId, visit.omId) &&
                 Objects.equals(vName, visit.vName) &&
                 Objects.equals(vPhone, visit.vPhone) &&
                 Objects.equals(vRelationship, visit.vRelationship) &&
@@ -138,7 +114,7 @@ public class Visit {
 
     @Override
     public int hashCode() {
-        return Objects.hash(vId, uid, omId, vName, vPhone, vRelationship, vReason, vVisittime, vLeavetime, vRemarks);
+        return Objects.hash(vId, vName, vPhone, vRelationship, vReason, vVisittime, vLeavetime, vRemarks);
     }
 
     @ManyToOne

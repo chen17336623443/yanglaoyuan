@@ -6,7 +6,6 @@ import java.util.Objects;
 @Entity
 public class Equipmenthouse {
     private Integer ehid;
-    private Integer fiid;
     private String shname;
     private Floorinfo floorinfoByFiid;
 
@@ -18,16 +17,6 @@ public class Equipmenthouse {
 
     public void setEhid(Integer ehid) {
         this.ehid = ehid;
-    }
-
-    @Basic
-    @Column(name = "fiid", nullable = true)
-    public Integer getFiid() {
-        return fiid;
-    }
-
-    public void setFiid(Integer fiid) {
-        this.fiid = fiid;
     }
 
     @Basic
@@ -46,13 +35,12 @@ public class Equipmenthouse {
         if (o == null || getClass() != o.getClass()) return false;
         Equipmenthouse that = (Equipmenthouse) o;
         return Objects.equals(ehid, that.ehid) &&
-                Objects.equals(fiid, that.fiid) &&
                 Objects.equals(shname, that.shname);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(ehid, fiid, shname);
+        return Objects.hash(ehid, shname);
     }
 
     @ManyToOne
