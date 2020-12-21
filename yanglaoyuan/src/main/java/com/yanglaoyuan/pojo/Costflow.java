@@ -8,8 +8,6 @@ import java.util.Objects;
 @Entity
 public class Costflow {
     private Integer cosId;
-    private Integer omId;
-    private Integer uid;
     private String cosCategory;
     private BigDecimal cosMoney;
     private Timestamp cosDate;
@@ -28,25 +26,6 @@ public class Costflow {
         this.cosId = cosId;
     }
 
-    @Basic
-    @Column(name = "om_id", nullable = true)
-    public Integer getOmId() {
-        return omId;
-    }
-
-    public void setOmId(Integer omId) {
-        this.omId = omId;
-    }
-
-    @Basic
-    @Column(name = "uid", nullable = true)
-    public Integer getUid() {
-        return uid;
-    }
-
-    public void setUid(Integer uid) {
-        this.uid = uid;
-    }
 
     @Basic
     @Column(name = "cos_category", nullable = false, length = 50)
@@ -104,8 +83,6 @@ public class Costflow {
         if (o == null || getClass() != o.getClass()) return false;
         Costflow costflow = (Costflow) o;
         return Objects.equals(cosId, costflow.cosId) &&
-                Objects.equals(omId, costflow.omId) &&
-                Objects.equals(uid, costflow.uid) &&
                 Objects.equals(cosCategory, costflow.cosCategory) &&
                 Objects.equals(cosMoney, costflow.cosMoney) &&
                 Objects.equals(cosDate, costflow.cosDate) &&
@@ -115,7 +92,7 @@ public class Costflow {
 
     @Override
     public int hashCode() {
-        return Objects.hash(cosId, omId, uid, cosCategory, cosMoney, cosDate, cosExplain, cosRemarks);
+        return Objects.hash(cosId, cosCategory, cosMoney, cosDate, cosExplain, cosRemarks);
     }
 
     @ManyToOne

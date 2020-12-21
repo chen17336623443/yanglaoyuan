@@ -7,7 +7,6 @@ import java.util.Objects;
 @Entity
 public class Nursingrecord {
     private Integer nrId;
-    private Integer omId;
     private Timestamp nrTime;
     private Integer nrCompletion;
     private Timestamp nrMoney;
@@ -24,15 +23,6 @@ public class Nursingrecord {
         this.nrId = nrId;
     }
 
-    @Basic
-    @Column(name = "om_id", nullable = true)
-    public Integer getOmId() {
-        return omId;
-    }
-
-    public void setOmId(Integer omId) {
-        this.omId = omId;
-    }
 
     @Basic
     @Column(name = "nr_time", nullable = true)
@@ -80,7 +70,6 @@ public class Nursingrecord {
         if (o == null || getClass() != o.getClass()) return false;
         Nursingrecord that = (Nursingrecord) o;
         return Objects.equals(nrId, that.nrId) &&
-                Objects.equals(omId, that.omId) &&
                 Objects.equals(nrTime, that.nrTime) &&
                 Objects.equals(nrCompletion, that.nrCompletion) &&
                 Objects.equals(nrMoney, that.nrMoney) &&
@@ -89,7 +78,7 @@ public class Nursingrecord {
 
     @Override
     public int hashCode() {
-        return Objects.hash(nrId, omId, nrTime, nrCompletion, nrMoney, nrOther);
+        return Objects.hash(nrId,  nrTime, nrCompletion, nrMoney, nrOther);
     }
 
     @ManyToOne

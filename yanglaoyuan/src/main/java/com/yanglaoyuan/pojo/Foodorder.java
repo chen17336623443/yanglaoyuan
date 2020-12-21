@@ -9,7 +9,6 @@ import java.util.Objects;
 @Entity
 public class Foodorder {
     private Integer foId;
-    private Integer omId;
     private String foMeals;
     private Timestamp foTime;
     private String foFoods;
@@ -26,16 +25,6 @@ public class Foodorder {
 
     public void setFoId(Integer foId) {
         this.foId = foId;
-    }
-
-    @Basic
-    @Column(name = "om_id", nullable = true)
-    public Integer getOmId() {
-        return omId;
-    }
-
-    public void setOmId(Integer omId) {
-        this.omId = omId;
     }
 
     @Basic
@@ -94,7 +83,6 @@ public class Foodorder {
         if (o == null || getClass() != o.getClass()) return false;
         Foodorder foodorder = (Foodorder) o;
         return Objects.equals(foId, foodorder.foId) &&
-                Objects.equals(omId, foodorder.omId) &&
                 Objects.equals(foMeals, foodorder.foMeals) &&
                 Objects.equals(foTime, foodorder.foTime) &&
                 Objects.equals(foFoods, foodorder.foFoods) &&
@@ -104,7 +92,7 @@ public class Foodorder {
 
     @Override
     public int hashCode() {
-        return Objects.hash(foId, omId, foMeals, foTime, foFoods, foPrice, foState);
+        return Objects.hash(foId, foMeals, foTime, foFoods, foPrice, foState);
     }
 
     @OneToMany(mappedBy = "foodorderByFoId")

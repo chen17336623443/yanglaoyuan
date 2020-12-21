@@ -6,8 +6,6 @@ import java.util.Objects;
 @Entity
 public class Health {
     private Integer hid;
-    private Integer uid;
-    private Integer omId;
     private String capacity;
     private String accommodation;
     private String vision;
@@ -26,25 +24,6 @@ public class Health {
         this.hid = hid;
     }
 
-    @Basic
-    @Column(name = "uid", nullable = true)
-    public Integer getUid() {
-        return uid;
-    }
-
-    public void setUid(Integer uid) {
-        this.uid = uid;
-    }
-
-    @Basic
-    @Column(name = "om_id", nullable = true)
-    public Integer getOmId() {
-        return omId;
-    }
-
-    public void setOmId(Integer omId) {
-        this.omId = omId;
-    }
 
     @Basic
     @Column(name = "capacity", nullable = true, length = 255)
@@ -102,8 +81,6 @@ public class Health {
         if (o == null || getClass() != o.getClass()) return false;
         Health health = (Health) o;
         return Objects.equals(hid, health.hid) &&
-                Objects.equals(uid, health.uid) &&
-                Objects.equals(omId, health.omId) &&
                 Objects.equals(capacity, health.capacity) &&
                 Objects.equals(accommodation, health.accommodation) &&
                 Objects.equals(vision, health.vision) &&
@@ -113,7 +90,7 @@ public class Health {
 
     @Override
     public int hashCode() {
-        return Objects.hash(hid, uid, omId, capacity, accommodation, vision, hearing, medical);
+        return Objects.hash(hid, capacity, accommodation, vision, hearing, medical);
     }
 
     @ManyToOne

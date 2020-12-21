@@ -7,8 +7,6 @@ import java.util.Objects;
 @Entity
 public class Stayback {
     private Integer stId;
-    private Integer uid;
-    private Integer seId;
     private String stType;
     private String stForm;
     private Timestamp stTime;
@@ -24,26 +22,6 @@ public class Stayback {
 
     public void setStId(Integer stId) {
         this.stId = stId;
-    }
-
-    @Basic
-    @Column(name = "uid", nullable = true)
-    public Integer getUid() {
-        return uid;
-    }
-
-    public void setUid(Integer uid) {
-        this.uid = uid;
-    }
-
-    @Basic
-    @Column(name = "se_id", nullable = true)
-    public Integer getSeId() {
-        return seId;
-    }
-
-    public void setSeId(Integer seId) {
-        this.seId = seId;
     }
 
     @Basic
@@ -92,8 +70,6 @@ public class Stayback {
         if (o == null || getClass() != o.getClass()) return false;
         Stayback stayback = (Stayback) o;
         return Objects.equals(stId, stayback.stId) &&
-                Objects.equals(uid, stayback.uid) &&
-                Objects.equals(seId, stayback.seId) &&
                 Objects.equals(stType, stayback.stType) &&
                 Objects.equals(stForm, stayback.stForm) &&
                 Objects.equals(stTime, stayback.stTime) &&
@@ -102,7 +78,7 @@ public class Stayback {
 
     @Override
     public int hashCode() {
-        return Objects.hash(stId, uid, seId, stType, stForm, stTime, stReason);
+        return Objects.hash(stId, stType, stForm, stTime, stReason);
     }
 
     @ManyToOne

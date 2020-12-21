@@ -8,8 +8,6 @@ import java.util.Objects;
 @Entity
 public class Register {
     private Integer regId;
-    private Integer uid;
-    private Integer omId;
     private Timestamp regDate;
     private BigDecimal regMoney;
     private String regPaytype;
@@ -28,25 +26,6 @@ public class Register {
         this.regId = regId;
     }
 
-    @Basic
-    @Column(name = "uid", nullable = true)
-    public Integer getUid() {
-        return uid;
-    }
-
-    public void setUid(Integer uid) {
-        this.uid = uid;
-    }
-
-    @Basic
-    @Column(name = "om_id", nullable = true)
-    public Integer getOmId() {
-        return omId;
-    }
-
-    public void setOmId(Integer omId) {
-        this.omId = omId;
-    }
 
     @Basic
     @Column(name = "reg_date", nullable = false)
@@ -104,8 +83,6 @@ public class Register {
         if (o == null || getClass() != o.getClass()) return false;
         Register register = (Register) o;
         return Objects.equals(regId, register.regId) &&
-                Objects.equals(uid, register.uid) &&
-                Objects.equals(omId, register.omId) &&
                 Objects.equals(regDate, register.regDate) &&
                 Objects.equals(regMoney, register.regMoney) &&
                 Objects.equals(regPaytype, register.regPaytype) &&
@@ -115,7 +92,7 @@ public class Register {
 
     @Override
     public int hashCode() {
-        return Objects.hash(regId, uid, omId, regDate, regMoney, regPaytype, regPay, regRemarks);
+        return Objects.hash(regId,  regDate, regMoney, regPaytype, regPay, regRemarks);
     }
 
     @ManyToOne

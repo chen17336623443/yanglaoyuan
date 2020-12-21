@@ -7,7 +7,6 @@ import java.util.Objects;
 @Entity
 public class Tryout {
     private Integer tomId;
-    private Integer uid;
     private String tomName;
     private String tomCard;
     private String tomSex;
@@ -31,16 +30,6 @@ public class Tryout {
 
     public void setTomId(Integer tomId) {
         this.tomId = tomId;
-    }
-
-    @Basic
-    @Column(name = "uid", nullable = true)
-    public Integer getUid() {
-        return uid;
-    }
-
-    public void setUid(Integer uid) {
-        this.uid = uid;
     }
 
     @Basic
@@ -179,7 +168,6 @@ public class Tryout {
         if (o == null || getClass() != o.getClass()) return false;
         Tryout tryout = (Tryout) o;
         return Objects.equals(tomId, tryout.tomId) &&
-                Objects.equals(uid, tryout.uid) &&
                 Objects.equals(tomName, tryout.tomName) &&
                 Objects.equals(tomCard, tryout.tomCard) &&
                 Objects.equals(tomSex, tryout.tomSex) &&
@@ -197,7 +185,7 @@ public class Tryout {
 
     @Override
     public int hashCode() {
-        return Objects.hash(tomId, uid, tomName, tomCard, tomSex, tomNumber, tomAddress, tomCategory, tomDiet, tomLabour, tomCheckIntime, tomFn, tomImg, tomBigintime, tomEndtime);
+        return Objects.hash(tomId, tomName, tomCard, tomSex, tomNumber, tomAddress, tomCategory, tomDiet, tomLabour, tomCheckIntime, tomFn, tomImg, tomBigintime, tomEndtime);
     }
 
     @ManyToOne

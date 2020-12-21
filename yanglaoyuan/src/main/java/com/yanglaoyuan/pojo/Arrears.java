@@ -7,7 +7,6 @@ import java.util.Objects;
 @Entity
 public class Arrears {
     private Integer arrId;
-    private Integer omId;
     private BigDecimal arrMoney;
     private BigDecimal arrMonth;
     private BigDecimal arrOther;
@@ -22,16 +21,6 @@ public class Arrears {
 
     public void setArrId(Integer arrId) {
         this.arrId = arrId;
-    }
-
-    @Basic
-    @Column(name = "om_id", nullable = true)
-    public Integer getOmId() {
-        return omId;
-    }
-
-    public void setOmId(Integer omId) {
-        this.omId = omId;
     }
 
     @Basic
@@ -80,7 +69,6 @@ public class Arrears {
         if (o == null || getClass() != o.getClass()) return false;
         Arrears arrears = (Arrears) o;
         return Objects.equals(arrId, arrears.arrId) &&
-                Objects.equals(omId, arrears.omId) &&
                 Objects.equals(arrMoney, arrears.arrMoney) &&
                 Objects.equals(arrMonth, arrears.arrMonth) &&
                 Objects.equals(arrOther, arrears.arrOther) &&
@@ -89,7 +77,7 @@ public class Arrears {
 
     @Override
     public int hashCode() {
-        return Objects.hash(arrId, omId, arrMoney, arrMonth, arrOther, arrSfpay);
+        return Objects.hash(arrId, arrMoney, arrMonth, arrOther, arrSfpay);
     }
 
     @ManyToOne

@@ -8,7 +8,6 @@ import java.util.Objects;
 @Entity
 public class Nursing {
     private Integer nurId;
-    private Integer ntId;
     private String nuName;
     private BigDecimal nuMonry;
     private Nursingtype nursingtypeByNtId;
@@ -22,16 +21,6 @@ public class Nursing {
 
     public void setNurId(Integer nurId) {
         this.nurId = nurId;
-    }
-
-    @Basic
-    @Column(name = "nt_id", nullable = true)
-    public Integer getNtId() {
-        return ntId;
-    }
-
-    public void setNtId(Integer ntId) {
-        this.ntId = ntId;
     }
 
     @Basic
@@ -60,14 +49,13 @@ public class Nursing {
         if (o == null || getClass() != o.getClass()) return false;
         Nursing nursing = (Nursing) o;
         return Objects.equals(nurId, nursing.nurId) &&
-                Objects.equals(ntId, nursing.ntId) &&
                 Objects.equals(nuName, nursing.nuName) &&
                 Objects.equals(nuMonry, nursing.nuMonry);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(nurId, ntId, nuName, nuMonry);
+        return Objects.hash(nurId, nuName, nuMonry);
     }
 
     @ManyToOne

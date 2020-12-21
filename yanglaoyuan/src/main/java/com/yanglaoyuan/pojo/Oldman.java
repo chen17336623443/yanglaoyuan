@@ -8,8 +8,6 @@ import java.util.Objects;
 @Entity
 public class Oldman {
     private Integer omId;
-    private Integer tslId;
-    private Integer acId;
     private String tomName;
     private String tomCard;
     private String tomSex;
@@ -45,26 +43,6 @@ public class Oldman {
 
     public void setOmId(Integer omId) {
         this.omId = omId;
-    }
-
-    @Basic
-    @Column(name = "tsl_id", nullable = true)
-    public Integer getTslId() {
-        return tslId;
-    }
-
-    public void setTslId(Integer tslId) {
-        this.tslId = tslId;
-    }
-
-    @Basic
-    @Column(name = "ac_id", nullable = true)
-    public Integer getAcId() {
-        return acId;
-    }
-
-    public void setAcId(Integer acId) {
-        this.acId = acId;
     }
 
     @Basic
@@ -183,8 +161,6 @@ public class Oldman {
         if (o == null || getClass() != o.getClass()) return false;
         Oldman oldman = (Oldman) o;
         return Objects.equals(omId, oldman.omId) &&
-                Objects.equals(tslId, oldman.tslId) &&
-                Objects.equals(acId, oldman.acId) &&
                 Objects.equals(tomName, oldman.tomName) &&
                 Objects.equals(tomCard, oldman.tomCard) &&
                 Objects.equals(tomSex, oldman.tomSex) &&
@@ -200,7 +176,7 @@ public class Oldman {
 
     @Override
     public int hashCode() {
-        return Objects.hash(omId, tslId, acId, tomName, tomCard, tomSex, tomNumber, tomAddress, tomCategory, tomDiet, tomLabour, tomCheckIntime, tomFn, tomImg);
+        return Objects.hash(omId, tomName, tomCard, tomSex, tomNumber, tomAddress, tomCategory, tomDiet, tomLabour, tomCheckIntime, tomFn, tomImg);
     }
 
     @OneToMany(mappedBy = "oldmanByOmId")
