@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--
+    @description: 
+    @author: ChenZhiPeng
+    @create: 2020-12-21 21:03
+-->
+<mapper namespace="com.yanglaoyuan.model.Mapper.IOutregistrationMapper">
+    <resultMap id="outregistration" type="com.yanglaoyuan.pojo.Outregistration">
+        <id property="outId" column="out_id"/>
+        <result property="outTime" column="out_time"/>
+        <result property="outAccompanyname" column="out_accompanyname"/>
+        <result property="outAccompanyphone" column="out_accompanyphone"/>
+        <result property="outReturntime" column="out_returntime"/>
+        <result property="outReturnestimate" column="out_returnestimate"/>
+        <result property="outOutsum" column="out_outsum"/>
+        <result property="outReason" column="out_reason"/>
+        <result property="outTrue" column="out_true"/>
+    </resultMap>
+
+    <!--根据老人姓名，外出类型，外出时间模糊查询-->
+    <select id="selectByParam" resultMap="outregistration">
+        select o.out_id, o.om_id, o.use_uid, o.out_time, o.out_accompanyname, o.out_accompanyphone,
+       o.out_returntime, o.out_returnestimate, o.out_outsum, o.out_reason, o.out_true,
+       o2.om_id, o2.tsl_id, o2.ac_id, o2.fp_id, o2.tom_name, o2.tom_card, o2.tom_sex,
+       o2.tom_number, o2.tom_address, o2.tom_category, o2.tom_diet, o2.tom_labour,
+       o2.tom_check_intime, o2.tom_img from outregistration o
+       left join oldman o2 on o.om_id = o2.om_id where 1=1
+       <if test="tomName!=null and tomName!=''">
+           and o2.tom_name like concat('%',#{tomName,jdbcType=VARCHAR},'%')
+       </if>
+       <if test="outtrue!=null and outtrue!=''">
+           and o.out_true=#{outtrue}
+       </if>
+       <if test="time1!=null and time1!='' and time2!=null and time2!=''">
+           and o.out_time between #{time1} and #{time2}
+       </if>
+       order by o.out_id desc
+    </select>
+</mapper>

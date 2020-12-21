@@ -8,6 +8,7 @@ import Floor from '@/components/Floor'
 
 import Yucungl from '@/components/Yucungl'
 import FoodManage from '@/components/FoodManage'
+import Outregistration from '@/components/Outregistration'
 
 
 Vue.use(Router)
@@ -44,6 +45,10 @@ const router = new Router({
               {
                 path: '/ycgl',
                 component: Yucungl
+              },
+              {
+                path: '/outregistration',
+                component: Outregistration
               },
             ]
         }
