@@ -3,13 +3,26 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.yanglaoyuan.model.Mapper.IConsultMapper">
-    <resultMap id="all" type="com.yanglaoyuan.pojo.User">
-        <id column="uid" property="uid"/>
-        <result column="uname" property="uname"/>
-        <result column="uphone" property="uphone"/>
-        <result column="upass" property="upass"/>
+    <resultMap id="all" type="com.yanglaoyuan.pojo.Consult">
+        <id column="c_id" property="cId"/>
+       <result column="omname" property="omname"/>
+        <result column="card" property="card"/>
+        <result column="omsex" property="omsex"/>
+        <result column="omage" property="omage"/>
+        <result column="omself_care" property="omselfCare"/>
+        <result column="oname" property="oname"/>
+        <result column="relation" property="relation"/>
+        <result column="newtime" property="newtime"/>
+        <result column="way" property="way"/>
+        <result column="cphone" property="cphone"/>
+        <result column="content" property="content"/>
+
+
+
+
+
     </resultMap>
-    <select id="login" resultMap="all">
-        select * from user where uphone=#{phone} and upass=#{upass}
+    <select id="consultall" resultMap="all">
+    select *  from  consult
     </select>
 </mapper>
