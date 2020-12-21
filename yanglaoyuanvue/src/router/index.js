@@ -3,7 +3,7 @@ import Router from 'vue-router'
 import yanglaoyuan from '@/page/yanglaoyuan'
 import login from '@/page/login'
 import hugongguanli from '@/components/hugongguanli'
-
+import Yucungl from '@/components/Yucungl'
 
 Vue.use(Router)
 
@@ -18,10 +18,16 @@ const router = new Router({
         {
             path: '/home',
             component: yanglaoyuan,
-            children: [{
+            children: [
+              {
                 path: '/hugongguanli',
                 component: hugongguanli
-            }]
+              },
+              {
+                path: '/ycgl',
+                component: Yucungl
+              },
+            ]
         }
     ]
 })
