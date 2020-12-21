@@ -1,5 +1,7 @@
 package com.yanglaoyuan.pojo;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -17,6 +19,7 @@ public class Consult {
     private String omselfCare;
     private String oname;
     private String relation;
+    @JsonFormat( pattern = "yyyy-MM-dd HH:mm:ss" , timezone = " GMT+8 " )
     private Timestamp newtime;
     private String way;
     private Long cphone;
