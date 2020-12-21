@@ -33,7 +33,7 @@ public class DepositContrller {
      * @Date 2020/12/21 16:46
      */
     @RequestMapping("/pager")
-    public PageInfo<Deposit> pager(Integer no, @RequestParam(required = false) Integer size){
+    public PageInfo<Deposit> pager(@RequestParam("no") Integer no, @RequestParam(value="size",required = false) Integer size){
         Integer pageSize = 5;
         if(size!=null){
             pageSize = size;
