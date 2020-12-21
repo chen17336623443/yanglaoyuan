@@ -11,7 +11,9 @@ let loading;
 function startLoading() {}
 
 function stopLoading() {}
+
 //统一的跨域访问前缀
+axios.defaults.baseURL = 'http://localhost:8089/';
 axios.defaults.timeout = 15000; //5秒
 
 //请求拦截器配置（拦截器会在向后台发送请求之前执行）

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--
+    @description: 
+    @author: ChenZhiPeng
+    @create: 2020-12-21 16:23
+-->
+<mapper namespace="com.yanglaoyuan.model.Mapper.IOldmanMapper">
+
+    <resultMap id="oldman" type="com.yanglaoyuan.pojo.Oldman">
+        <id property="omId" column="om_id"/>
+        <result property="tomName" column="tom_name"/>
+        <result property="tomCard" column="tom_card"/>
+        <result property="tomSex" column="tom_sex"/>
+        <result property="tomNumber" column="tom_number"/>
+        <result property="tomAddress" column="tom_address"/>
+        <result property="tomCategory" column="tom_category"/>
+        <result property="tomDiet" column="tom_diet"/>
+        <result property="tomLabour" column="tom_labour"/>
+        <result property="tomCheckIntime" column="tom_check_intime"/>
+        <result property="tomFn" column="tom_fn"/>
+        <result property="tomImg" column="tom_img"/>
+    </resultMap>
+
+    <select id="selectoldmanAll" resultMap="oldman">
+        select * from oldman
+    </select>
+
+</mapper>
