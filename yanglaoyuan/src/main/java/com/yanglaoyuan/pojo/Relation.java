@@ -6,8 +6,6 @@ import java.util.Objects;
 @Entity
 public class Relation {
     private Integer rid;
-    private Integer uid;
-    private Integer omId;
     private String rname;
     private Long phone;
     private String card;
@@ -26,26 +24,6 @@ public class Relation {
 
     public void setRid(Integer rid) {
         this.rid = rid;
-    }
-
-    @Basic
-    @Column(name = "uid", nullable = true)
-    public Integer getUid() {
-        return uid;
-    }
-
-    public void setUid(Integer uid) {
-        this.uid = uid;
-    }
-
-    @Basic
-    @Column(name = "om_id", nullable = true)
-    public Integer getOmId() {
-        return omId;
-    }
-
-    public void setOmId(Integer omId) {
-        this.omId = omId;
     }
 
     @Basic
@@ -124,8 +102,6 @@ public class Relation {
         if (o == null || getClass() != o.getClass()) return false;
         Relation relation1 = (Relation) o;
         return Objects.equals(rid, relation1.rid) &&
-                Objects.equals(uid, relation1.uid) &&
-                Objects.equals(omId, relation1.omId) &&
                 Objects.equals(rname, relation1.rname) &&
                 Objects.equals(phone, relation1.phone) &&
                 Objects.equals(card, relation1.card) &&
@@ -137,7 +113,7 @@ public class Relation {
 
     @Override
     public int hashCode() {
-        return Objects.hash(rid, uid, omId, rname, phone, card, relation, omsex, site, guardian);
+        return Objects.hash(rid, rname, phone, card, relation, omsex, site, guardian);
     }
 
     @ManyToOne

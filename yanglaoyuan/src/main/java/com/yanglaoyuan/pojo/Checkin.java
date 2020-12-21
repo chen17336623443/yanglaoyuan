@@ -7,8 +7,6 @@ import java.util.Objects;
 @Entity
 public class Checkin {
     private Integer cheId;
-    private Integer omId;
-    private Integer uid;
     private BigDecimal cheBed;
     private BigDecimal cheNursing;
     private BigDecimal cheCanying;
@@ -27,26 +25,6 @@ public class Checkin {
 
     public void setCheId(Integer cheId) {
         this.cheId = cheId;
-    }
-
-    @Basic
-    @Column(name = "om_id", nullable = true)
-    public Integer getOmId() {
-        return omId;
-    }
-
-    public void setOmId(Integer omId) {
-        this.omId = omId;
-    }
-
-    @Basic
-    @Column(name = "uid", nullable = true)
-    public Integer getUid() {
-        return uid;
-    }
-
-    public void setUid(Integer uid) {
-        this.uid = uid;
     }
 
     @Basic
@@ -125,8 +103,6 @@ public class Checkin {
         if (o == null || getClass() != o.getClass()) return false;
         Checkin checkin = (Checkin) o;
         return Objects.equals(cheId, checkin.cheId) &&
-                Objects.equals(omId, checkin.omId) &&
-                Objects.equals(uid, checkin.uid) &&
                 Objects.equals(cheBed, checkin.cheBed) &&
                 Objects.equals(cheNursing, checkin.cheNursing) &&
                 Objects.equals(cheCanying, checkin.cheCanying) &&
@@ -138,7 +114,7 @@ public class Checkin {
 
     @Override
     public int hashCode() {
-        return Objects.hash(cheId, omId, uid, cheBed, cheNursing, cheCanying, cheDue, cheActual, cheMode, cheRemarks);
+        return Objects.hash(cheId, cheBed, cheNursing, cheCanying, cheDue, cheActual, cheMode, cheRemarks);
     }
 
     @ManyToOne

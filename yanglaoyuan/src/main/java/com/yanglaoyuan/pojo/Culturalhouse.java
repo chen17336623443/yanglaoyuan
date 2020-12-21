@@ -6,7 +6,6 @@ import java.util.Objects;
 @Entity
 public class Culturalhouse {
     private Integer chid;
-    private Integer fiid;
     private String chname;
     private Floorinfo floorinfoByFiid;
 
@@ -19,17 +18,6 @@ public class Culturalhouse {
     public void setChid(Integer chid) {
         this.chid = chid;
     }
-
-    @Basic
-    @Column(name = "fiid", nullable = true)
-    public Integer getFiid() {
-        return fiid;
-    }
-
-    public void setFiid(Integer fiid) {
-        this.fiid = fiid;
-    }
-
     @Basic
     @Column(name = "chname", nullable = true, length = 50)
     public String getChname() {
@@ -46,13 +34,12 @@ public class Culturalhouse {
         if (o == null || getClass() != o.getClass()) return false;
         Culturalhouse that = (Culturalhouse) o;
         return Objects.equals(chid, that.chid) &&
-                Objects.equals(fiid, that.fiid) &&
                 Objects.equals(chname, that.chname);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(chid, fiid, chname);
+        return Objects.hash(chid, chname);
     }
 
     @ManyToOne

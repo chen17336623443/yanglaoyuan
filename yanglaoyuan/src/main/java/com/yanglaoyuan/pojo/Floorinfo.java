@@ -7,7 +7,6 @@ import java.util.Objects;
 @Entity
 public class Floorinfo {
     private Integer fiid;
-    private Integer fid;
     private String fiinfo;
     private List<Culturalhouse> culturalhousesByFiid;
     private List<Equipmenthouse> equipmenthousesByFiid;
@@ -26,16 +25,6 @@ public class Floorinfo {
     }
 
     @Basic
-    @Column(name = "fid", nullable = true)
-    public Integer getFid() {
-        return fid;
-    }
-
-    public void setFid(Integer fid) {
-        this.fid = fid;
-    }
-
-    @Basic
     @Column(name = "fiinfo", nullable = true, length = 500)
     public String getFiinfo() {
         return fiinfo;
@@ -51,13 +40,12 @@ public class Floorinfo {
         if (o == null || getClass() != o.getClass()) return false;
         Floorinfo floorinfo = (Floorinfo) o;
         return Objects.equals(fiid, floorinfo.fiid) &&
-                Objects.equals(fid, floorinfo.fid) &&
                 Objects.equals(fiinfo, floorinfo.fiinfo);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(fiid, fid, fiinfo);
+        return Objects.hash(fiid, fiinfo);
     }
 
     @OneToMany(mappedBy = "floorinfoByFiid")

@@ -7,8 +7,6 @@ import java.util.Objects;
 @Entity
 public class Thenursingleveldetails {
     private Integer tsldId;
-    private Integer nurId;
-    private Integer tslId;
     private Integer tsldType;
     private Integer tsldNumber;
     private Timestamp tsldTime;
@@ -23,26 +21,6 @@ public class Thenursingleveldetails {
 
     public void setTsldId(Integer tsldId) {
         this.tsldId = tsldId;
-    }
-
-    @Basic
-    @Column(name = "nur_id", nullable = true)
-    public Integer getNurId() {
-        return nurId;
-    }
-
-    public void setNurId(Integer nurId) {
-        this.nurId = nurId;
-    }
-
-    @Basic
-    @Column(name = "tsl_id", nullable = true)
-    public Integer getTslId() {
-        return tslId;
-    }
-
-    public void setTslId(Integer tslId) {
-        this.tslId = tslId;
     }
 
     @Basic
@@ -81,8 +59,6 @@ public class Thenursingleveldetails {
         if (o == null || getClass() != o.getClass()) return false;
         Thenursingleveldetails that = (Thenursingleveldetails) o;
         return Objects.equals(tsldId, that.tsldId) &&
-                Objects.equals(nurId, that.nurId) &&
-                Objects.equals(tslId, that.tslId) &&
                 Objects.equals(tsldType, that.tsldType) &&
                 Objects.equals(tsldNumber, that.tsldNumber) &&
                 Objects.equals(tsldTime, that.tsldTime);
@@ -90,7 +66,7 @@ public class Thenursingleveldetails {
 
     @Override
     public int hashCode() {
-        return Objects.hash(tsldId, nurId, tslId, tsldType, tsldNumber, tsldTime);
+        return Objects.hash(tsldId, tsldType, tsldNumber, tsldTime);
     }
 
     @ManyToOne

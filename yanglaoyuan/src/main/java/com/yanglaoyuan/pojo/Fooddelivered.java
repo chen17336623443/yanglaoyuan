@@ -7,7 +7,6 @@ import java.util.Objects;
 @Entity
 public class Fooddelivered {
     private Integer fdId;
-    private Integer foId;
     private Integer fdType;
     private Timestamp fdTime;
     private String fdAddress;
@@ -21,16 +20,6 @@ public class Fooddelivered {
 
     public void setFdId(Integer fdId) {
         this.fdId = fdId;
-    }
-
-    @Basic
-    @Column(name = "fo_id", nullable = true)
-    public Integer getFoId() {
-        return foId;
-    }
-
-    public void setFoId(Integer foId) {
-        this.foId = foId;
     }
 
     @Basic
@@ -69,7 +58,6 @@ public class Fooddelivered {
         if (o == null || getClass() != o.getClass()) return false;
         Fooddelivered that = (Fooddelivered) o;
         return Objects.equals(fdId, that.fdId) &&
-                Objects.equals(foId, that.foId) &&
                 Objects.equals(fdType, that.fdType) &&
                 Objects.equals(fdTime, that.fdTime) &&
                 Objects.equals(fdAddress, that.fdAddress);
@@ -77,7 +65,7 @@ public class Fooddelivered {
 
     @Override
     public int hashCode() {
-        return Objects.hash(fdId, foId, fdType, fdTime, fdAddress);
+        return Objects.hash(fdId, fdType, fdTime, fdAddress);
     }
 
     @ManyToOne

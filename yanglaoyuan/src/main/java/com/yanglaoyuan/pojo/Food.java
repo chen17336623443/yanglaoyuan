@@ -8,7 +8,6 @@ import java.util.Objects;
 @Entity
 public class Food {
     private Integer fId;
-    private Integer ftId;
     private String fName;
     private BigDecimal fPrice;
     private String fPiquancy;
@@ -26,16 +25,6 @@ public class Food {
 
     public void setfId(Integer fId) {
         this.fId = fId;
-    }
-
-    @Basic
-    @Column(name = "ft_id", nullable = true)
-    public Integer getFtId() {
-        return ftId;
-    }
-
-    public void setFtId(Integer ftId) {
-        this.ftId = ftId;
     }
 
     @Basic
@@ -104,7 +93,6 @@ public class Food {
         if (o == null || getClass() != o.getClass()) return false;
         Food food = (Food) o;
         return Objects.equals(fId, food.fId) &&
-                Objects.equals(ftId, food.ftId) &&
                 Objects.equals(fName, food.fName) &&
                 Objects.equals(fPrice, food.fPrice) &&
                 Objects.equals(fPiquancy, food.fPiquancy) &&
@@ -115,7 +103,7 @@ public class Food {
 
     @Override
     public int hashCode() {
-        return Objects.hash(fId, ftId, fName, fPrice, fPiquancy, fTaste, fImg, fRemark);
+        return Objects.hash(fId, fName, fPrice, fPiquancy, fTaste, fImg, fRemark);
     }
 
     @ManyToOne
