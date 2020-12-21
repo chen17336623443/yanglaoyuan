@@ -12,7 +12,6 @@ function startLoading() {}
 
 function stopLoading() {}
 //统一的跨域访问前缀
-
 axios.defaults.timeout = 15000; //5秒
 
 axios.defaults.baseURL = "http://localhost:8089/";

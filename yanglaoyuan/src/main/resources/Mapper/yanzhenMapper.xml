@@ -2,7 +2,7 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.yanglaoyuan.model.Mapper.yanzhenMapper">
+<mapper namespace="com.yanglaoyuan.model.Mapper.IyanzhenMapper">
     <resultMap id="all" type="com.yanglaoyuan.pojo.Yanzhen">
         <id column="yzid" property="yzid"/>
         <result column="token" property="token"/>

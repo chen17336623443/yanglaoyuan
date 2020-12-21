@@ -13,9 +13,11 @@ public class Food {
     private String fPiquancy;
     private String fTaste;
     private String fImg;
+    private Integer fSales;
     private String fRemark;
     private Foodtype foodtypeByFtId;
     private List<Shiwuzhongjianbiao> shiwuzhongjianbiaosByFId;
+    private List<Taboocrowd> taboocrowds;
 
     @Id
     @Column(name = "f_id", nullable = false)
@@ -78,6 +80,16 @@ public class Food {
     }
 
     @Basic
+    @Column(name = "f_sales")
+    public Integer getfSales() {
+        return fSales;
+    }
+
+    public void setfSales(Integer fSales) {
+        this.fSales = fSales;
+    }
+
+    @Basic
     @Column(name = "f_remark", nullable = true, length = 255)
     public String getfRemark() {
         return fRemark;
@@ -98,12 +110,13 @@ public class Food {
                 Objects.equals(fPiquancy, food.fPiquancy) &&
                 Objects.equals(fTaste, food.fTaste) &&
                 Objects.equals(fImg, food.fImg) &&
+                Objects.equals(fSales, food.fSales) &&
                 Objects.equals(fRemark, food.fRemark);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(fId, fName, fPrice, fPiquancy, fTaste, fImg, fRemark);
+        return Objects.hash(fId, fName, fPrice, fPiquancy, fTaste, fImg, fSales, fRemark);
     }
 
     @ManyToOne
@@ -123,5 +136,15 @@ public class Food {
 
     public void setShiwuzhongjianbiaosByFId(List<Shiwuzhongjianbiao> shiwuzhongjianbiaosByFId) {
         this.shiwuzhongjianbiaosByFId = shiwuzhongjianbiaosByFId;
+    }
+
+    @ManyToMany
+    @JoinTable(name = "foodtaboocrowd", catalog = "", schema = "yanglaoyuan", joinColumns = @JoinColumn(name = "f_id", referencedColumnName = "f_id", nullable = false), inverseJoinColumns = @JoinColumn(name = "tc_id", referencedColumnName = "tc_id", nullable = false))
+    public List<Taboocrowd> getTaboocrowds() {
+        return taboocrowds;
+    }
+
+    public void setTaboocrowds(List<Taboocrowd> taboocrowds) {
+        this.taboocrowds = taboocrowds;
     }
 }

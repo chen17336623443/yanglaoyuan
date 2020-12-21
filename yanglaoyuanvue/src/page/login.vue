@@ -50,7 +50,7 @@ export default {
         this.$message.error("账号或密码不能为空");
       } else {
         this.$http
-          .post("http://localhost:8089/user/login", {
+          .post("user/login", {
             uphone: this.loginForm.ename,
             upass: this.loginForm.elpass,
           })

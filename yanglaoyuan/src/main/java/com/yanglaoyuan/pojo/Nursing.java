@@ -7,20 +7,20 @@ import java.util.Objects;
 
 @Entity
 public class Nursing {
-    private Integer nurId;
+    private Integer nuId;
     private String nuName;
     private BigDecimal nuMonry;
     private Nursingtype nursingtypeByNtId;
     private List<Thenursingleveldetails> thenursingleveldetailsByNurId;
 
     @Id
-    @Column(name = "nur_id", nullable = false)
+    @Column(name = "nu_id", nullable = false)
     public Integer getNurId() {
-        return nurId;
+        return nuId;
     }
 
     public void setNurId(Integer nurId) {
-        this.nurId = nurId;
+        this.nuId = nurId;
     }
 
     @Basic
@@ -48,14 +48,14 @@ public class Nursing {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Nursing nursing = (Nursing) o;
-        return Objects.equals(nurId, nursing.nurId) &&
+        return Objects.equals(nuId, nursing.nuId) &&
                 Objects.equals(nuName, nursing.nuName) &&
                 Objects.equals(nuMonry, nursing.nuMonry);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(nurId, nuName, nuMonry);
+        return Objects.hash(nuId, nuName, nuMonry);
     }
 
     @ManyToOne

@@ -4,6 +4,7 @@ import yanglaoyuan from '@/page/yanglaoyuan'
 import login from '@/page/login'
 import hugongguanli from '@/components/hugongguanli'
 import Yucungl from '@/components/Yucungl'
+import FoodManage from '@/components/FoodManage'
 
 Vue.use(Router)
 
@@ -19,14 +20,18 @@ const router = new Router({
             path: '/home',
             component: yanglaoyuan,
             children: [
-              {
-                path: '/hugongguanli',
-                component: hugongguanli
-              },
-              {
-                path: '/ycgl',
-                component: Yucungl
-              },
+                {
+                  path: '/hugongguanli',
+                  component: hugongguanli
+                },
+                {
+                  path: '/ycgl',
+                  component: Yucungl
+                },
+                {
+                  path: '/foodManage',
+                  component: FoodManage
+                }
             ]
         }
     ]

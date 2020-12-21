@@ -46,7 +46,7 @@
                 <i class="el-icon-user"></i>
                 <span>老人管理</span>
               </template>
-              <router-link to="" style="text-decoration: none">
+              <router-link tag="span" to="/outregistration" style="text-decoration: none">
                 <el-menu-item index="3-1">外出登记</el-menu-item>
               </router-link>
               <router-link to="" style="text-decoration: none">

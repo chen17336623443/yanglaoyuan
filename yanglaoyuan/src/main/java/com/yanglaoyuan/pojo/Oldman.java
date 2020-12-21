@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Objects;
 
 @Entity
+@Table(name = "oldman", schema = "yanglaoyuan")
 public class Oldman {
     private Integer omId;
     private String tomName;
@@ -35,9 +36,11 @@ public class Oldman {
     private List<Relation> relationsByOmId;
     private List<Settlement> settlementsByOmId;
     private List<Visit> visitsByOmId;
+    private Foodpackge foodpackge;
 
     @Id
     @Column(name = "om_id", nullable = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     public Integer getOmId() {
         return omId;
     }
@@ -173,6 +176,24 @@ public class Oldman {
                 Objects.equals(tomCheckIntime, oldman.tomCheckIntime) &&
                 Objects.equals(tomFn, oldman.tomFn) &&
                 Objects.equals(tomImg, oldman.tomImg);
+    }
+
+    @Override
+    public String toString() {
+        return "Oldman{" +
+                "omId=" + omId +
+                ", tomName='" + tomName + '\'' +
+                ", tomCard='" + tomCard + '\'' +
+                ", tomSex='" + tomSex + '\'' +
+                ", tomNumber=" + tomNumber +
+                ", tomAddress='" + tomAddress + '\'' +
+                ", tomCategory='" + tomCategory + '\'' +
+                ", tomDiet='" + tomDiet + '\'' +
+                ", tomLabour='" + tomLabour + '\'' +
+                ", tomCheckIntime=" + tomCheckIntime +
+                ", tomFn='" + tomFn + '\'' +
+                ", tomImg='" + tomImg + '\'' +
+                '}';
     }
 
     @Override
@@ -315,5 +336,15 @@ public class Oldman {
 
     public void setVisitsByOmId(List<Visit> visitsByOmId) {
         this.visitsByOmId = visitsByOmId;
+    }
+
+    @ManyToOne
+    @JoinColumn(name = "fp_id", referencedColumnName = "fp_id")
+    public Foodpackge getFoodpackge() {
+        return foodpackge;
+    }
+
+    public void setFoodpackge(Foodpackge foodpackge) {
+        this.foodpackge = foodpackge;
     }
 }

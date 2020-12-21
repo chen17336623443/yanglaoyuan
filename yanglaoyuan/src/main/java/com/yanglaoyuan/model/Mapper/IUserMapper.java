@@ -6,6 +6,6 @@ import org.springframework.stereotype.Repository;
 
 @Mapper
 @Repository
-public interface UserMapper {
+public interface IUserMapper {
     User login(String phone,String upass);
 }
