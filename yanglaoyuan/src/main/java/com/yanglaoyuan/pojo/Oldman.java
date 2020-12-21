@@ -37,6 +37,7 @@ public class Oldman {
 
     @Id
     @Column(name = "om_id", nullable = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     public Integer getOmId() {
         return omId;
     }
@@ -172,6 +173,24 @@ public class Oldman {
                 Objects.equals(tomCheckIntime, oldman.tomCheckIntime) &&
                 Objects.equals(tomFn, oldman.tomFn) &&
                 Objects.equals(tomImg, oldman.tomImg);
+    }
+
+    @Override
+    public String toString() {
+        return "Oldman{" +
+                "omId=" + omId +
+                ", tomName='" + tomName + '\'' +
+                ", tomCard='" + tomCard + '\'' +
+                ", tomSex='" + tomSex + '\'' +
+                ", tomNumber=" + tomNumber +
+                ", tomAddress='" + tomAddress + '\'' +
+                ", tomCategory='" + tomCategory + '\'' +
+                ", tomDiet='" + tomDiet + '\'' +
+                ", tomLabour='" + tomLabour + '\'' +
+                ", tomCheckIntime=" + tomCheckIntime +
+                ", tomFn='" + tomFn + '\'' +
+                ", tomImg='" + tomImg + '\'' +
+                '}';
     }
 
     @Override
