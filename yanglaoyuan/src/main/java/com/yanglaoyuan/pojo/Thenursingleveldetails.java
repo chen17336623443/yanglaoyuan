@@ -70,7 +70,7 @@ public class Thenursingleveldetails {
     }
 
     @ManyToOne
-    @JoinColumn(name = "nur_id", referencedColumnName = "nur_id")
+    @JoinColumn(name = "nu_id", referencedColumnName = "nu_id")
     public Nursing getNursingByNurId() {
         return nursingByNurId;
     }
