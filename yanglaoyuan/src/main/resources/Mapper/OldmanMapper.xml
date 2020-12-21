@@ -28,4 +28,8 @@
         select * from oldman
     </select>
 
+    <select id="selectoldmanByid" resultMap="oldman">
+        select * from oldman o inner join acare a on o.ac_id=a.ac_id where o.ac_id=#{acid}
+    </select>
+
 </mapper>

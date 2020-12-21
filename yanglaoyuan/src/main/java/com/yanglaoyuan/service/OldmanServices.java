@@ -25,4 +25,8 @@ public class OldmanServices {
     public List<Oldman> selectAll(){
         return mapper.selectoldmanAll();
     }
+
+    public List<Oldman> selectoldmanByid(Integer acid){
+        return mapper.selectoldmanByid(acid);
+    }
 }

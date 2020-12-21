@@ -30,4 +30,13 @@ public class AcareService {
         PageInfo<Acare> acarePageInfo = new PageInfo<>(selectall);
         return acarePageInfo;
     }
+
+    //护工模糊条件查询
+    public PageInfo<Acare> selectlike(Integer num,String acname,String acphone){
+        System.out.println(acphone);
+        PageHelper.startPage(num,5);
+        List<Acare> selectall = am.selectlike("%"+acname+"%", "%"+acphone+"%");
+        PageInfo<Acare> acarePageInfo = new PageInfo<>(selectall);
+        return acarePageInfo;
+    }
 }

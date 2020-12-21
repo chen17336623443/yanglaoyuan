@@ -2,7 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import yanglaoyuan from '@/page/yanglaoyuan'
 import login from '@/page/login'
-// import hugongguanli from '@/components/hugongguanli'
+import hugongguanli from '@/components/hugongguanli'
 import FoodManage from '@/components/FoodManage'
 
 
@@ -18,17 +18,15 @@ const router = new Router({
         },
         {
             path: '/home',
-            component: yanglaoyuan
-            ,
-            children: [
-            //     {
-            //     path: '/hugongguanli',
-            //     component: hugongguanli
-            // },
-            {
-                path: '/foodManage',
-                component: FoodManage
-            }
+            component: yanglaoyuan,
+            children: [{
+                    path: '/hugongguanli',
+                    component: hugongguanli
+                },
+                {
+                    path: '/foodManage',
+                    component: FoodManage
+                }
             ]
         }
     ]
