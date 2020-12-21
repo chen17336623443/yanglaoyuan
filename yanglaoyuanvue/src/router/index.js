@@ -3,6 +3,7 @@ import Router from 'vue-router'
 import yanglaoyuan from '@/page/yanglaoyuan'
 import login from '@/page/login'
 // import hugongguanli from '@/components/hugongguanli'
+import FoodManage from '@/components/FoodManage'
 
 
 Vue.use(Router)
@@ -18,11 +19,17 @@ const router = new Router({
         {
             path: '/home',
             component: yanglaoyuan
-            // ,
-            // children: [{
+            ,
+            children: [
+            //     {
             //     path: '/hugongguanli',
             //     component: hugongguanli
-            // }]
+            // },
+            {
+                path: '/foodManage',
+                component: FoodManage
+            }
+            ]
         }
     ]
 })

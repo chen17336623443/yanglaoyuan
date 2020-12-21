@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--
+    @description: 食物Mybatis配置
+    @author: YeJin Tan
+    @create: 2020-12-21 16:23
+-->
+<mapper namespace="com.yanglaoyuan.model.Mapper.IFoodMapper">
+    <resultMap id="FoodMap" type="Food">
+        <id property="fId" column="f_id"/>
+        <result property="fName" column="f_name"/>
+        <result property="fPrice" column="f_price"/>
+        <result property="fPiquancy" column="f_piquancy"/>
+        <result property="fTaste" column="f_taste"/>
+        <result property="fImg" column="f_img"/>
+        <result property="fSales" column="f_sales"/>
+        <result property="fRemark" column="f_remark"/>
+    </resultMap>
+    <!--//查询所有食物
+    List<Food> selectFoodAll();-->
+    <select id="selectFoodAll" resultMap="FoodMap">
+        select * from food order by f_id desc
+    </select>
+    <!--//根据类别id查询该类别下的所有食物
+    List<Food> selectFoodAllByFoodtypeId(Integer ft_id);-->
+    <select id="selectFoodAllByFoodtypeId" resultMap="FoodMap" parameterType="java.lang.Integer">
+        select * from food where ft_id=#{ft_id}
+    </select>
+</mapper>

@@ -1,7 +1,7 @@
 package com.yanglaoyuan.service;
 
 import com.yanglaoyuan.model.Dao.yanzhenDao;
-import com.yanglaoyuan.model.Mapper.yanzhenMapper;
+import com.yanglaoyuan.model.Mapper.IyanzhenMapper;
 import com.yanglaoyuan.pojo.Yanzhen;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -11,7 +11,7 @@ public class yanzhenServices {
     @Autowired
     yanzhenDao ydao;
     @Autowired
-    yanzhenMapper ym;
+    IyanzhenMapper ym;
 
     public Integer add(Yanzhen yz){
         try {

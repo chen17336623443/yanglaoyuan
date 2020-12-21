@@ -6,6 +6,8 @@ import router from './router' /*路由 src/router/index.js*/
 /*引用axios*/
 import axios from 'axios'
 import http from './util/http'
+/*引用qs */
+
 /* 3、全局导入element-ui */
 import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';

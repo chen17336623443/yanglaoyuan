@@ -1,13 +1,11 @@
 package com.yanglaoyuan.model.Mapper;
 
-import com.yanglaoyuan.pojo.Yanzhen;
+import com.yanglaoyuan.pojo.User;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
 @Mapper
 @Repository
-public interface yanzhenMapper {
-    Integer del(String ename);
-
-    Yanzhen select(String token);
+public interface IUserMapper {
+    User login(String phone,String upass);
 }

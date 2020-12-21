@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--
+    @description: 食物类别mybatis配置文件
+    @author: YeJin Tan
+    @create: 2020-12-21 16:10
+-->
+<mapper namespace="com.yanglaoyuan.model.Mapper.IFoodtypeMapper">
+    <resultMap id="FoodtypeMap" type="Foodtype">
+        <id property="ftId" column="ft_id"/>
+        <result property="ftName" column="ft_name"/>
+        <result property="ftRemark" column="ft_remark"/>
+<!--        <collection property="foodsByFtId" resultMap="Food" column="ft_id" select="com.yanglaoyuan.model.Mapper.IFoodMapper.selectFoodAllByFoodtypeId">-->
+<!--            <id property="fId" column="f_id"/>-->
+<!--            <result property="fName" column="f_name"/>-->
+<!--            <result property="fPrice" column="f_price"/>-->
+<!--            <result property="fPiquancy" column="f_piquancy"/>-->
+<!--            <result property="fTaste" column="f_taste"/>-->
+<!--            <result property="fImg" column="f_img"/>-->
+<!--            <result property="fSales" column="f_sales"/>-->
+<!--            <result property="fRemark" column="f_remark"/>-->
+<!--        </collection>-->
+    </resultMap>
+    <!--//查询所有食物类别
+    List<Foodtype> selectFoodtypeAll();-->
+    <select id="selectFoodtypeAll" resultMap="FoodtypeMap">
+        select * from foodtype
+    </select>
+</mapper>
