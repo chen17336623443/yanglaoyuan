@@ -1,6 +1,6 @@
 package com.yanglaoyuan.service;
 
-import com.yanglaoyuan.model.Dao.yanzhenDao;
+import com.yanglaoyuan.model.Dao.IyanzhenDao;
 import com.yanglaoyuan.model.Mapper.IyanzhenMapper;
 import com.yanglaoyuan.pojo.Yanzhen;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class yanzhenServices {
     @Autowired
-    yanzhenDao ydao;
+    IyanzhenDao ydao;
     @Autowired
     IyanzhenMapper ym;
 
