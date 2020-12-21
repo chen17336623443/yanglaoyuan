@@ -12,6 +12,8 @@ public class Foodpackge {
     private BigDecimal fpPrice;
     private String fpRemark;
     private List<Foodweek> foodweeksByFpId;
+    private String fpImg;
+    private List<Oldman> oldmans;
 
     @Id
     @Column(name = "fp_id", nullable = false)
@@ -76,5 +78,24 @@ public class Foodpackge {
 
     public void setFoodweeksByFpId(List<Foodweek> foodweeksByFpId) {
         this.foodweeksByFpId = foodweeksByFpId;
+    }
+
+    @Basic
+    @Column(name = "fp_img")
+    public String getFpImg() {
+        return fpImg;
+    }
+
+    public void setFpImg(String fpImg) {
+        this.fpImg = fpImg;
+    }
+
+    @OneToMany(mappedBy = "foodpackge")
+    public List<Oldman> getOldmans() {
+        return oldmans;
+    }
+
+    public void setOldmans(List<Oldman> oldmans) {
+        this.oldmans = oldmans;
     }
 }
