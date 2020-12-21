@@ -122,7 +122,7 @@
                 <i class="el-icon-bank-card"></i>
                 <span>费用管理</span>
               </template>
-              <router-link to="" style="text-decoration: none">
+              <router-link tag="span" to="/ycgl" style="text-decoration: none">
                 <el-menu-item index="7-1">预存管理</el-menu-item>
               </router-link>
               <router-link to="" style="text-decoration: none">

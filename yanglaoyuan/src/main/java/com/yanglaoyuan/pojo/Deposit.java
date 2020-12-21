@@ -13,8 +13,23 @@ public class Deposit {
     private String depPayment;
     private String depPaytype;
     private String depRemarks;
+
     private User userByUid;
     private Oldman oldmanByOmId;
+
+    @Override
+    public String toString() {
+        return "Deposit{" +
+                "depId=" + depId +
+                ", depMoney=" + depMoney +
+                ", depDate=" + depDate +
+                ", depPayment='" + depPayment + '\'' +
+                ", depPaytype='" + depPaytype + '\'' +
+                ", depRemarks='" + depRemarks + '\'' +
+                ", userByUid=" + userByUid +
+                ", oldmanByOmId=" + oldmanByOmId +
+                '}';
+    }
 
     @Id
     @Column(name = "dep_id", nullable = false)

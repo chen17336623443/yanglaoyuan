@@ -6,6 +6,9 @@ import hugongguanli from '@/components/hugongguanli'
 import Outregistration from '@/components/Outregistration'
 import Floor from '@/components/Floor'
 
+import Yucungl from '@/components/Yucungl'
+import FoodManage from '@/components/FoodManage'
+
 
 Vue.use(Router)
 
@@ -25,18 +28,23 @@ const router = new Router({
                 path: '/hugongguanli',
                 component: hugongguanli
               },
+            {
+                path: '/foodManage',
+                component: FoodManage
+            },
               {
                 path: '/outregistration',
                 component: Outregistration
               },
               {
-                path: '/foodManage',
-                component: FoodManage
-              },
-              {
                 path:'/Floor',
                 component: Floor
-              }
+              },
+             
+              {
+                path: '/ycgl',
+                component: Yucungl
+              },
             ]
         }
     ]

@@ -14,8 +14,25 @@ public class Checkin {
     private BigDecimal cheActual;
     private String cheMode;
     private String cheRemarks;
+
     private Oldman oldmanByOmId;
     private User userByUid;
+
+    @Override
+    public String toString() {
+        return "Checkin{" +
+                "cheId=" + cheId +
+                ", cheBed=" + cheBed +
+                ", cheNursing=" + cheNursing +
+                ", cheCanying=" + cheCanying +
+                ", cheDue=" + cheDue +
+                ", cheActual=" + cheActual +
+                ", cheMode='" + cheMode + '\'' +
+                ", cheRemarks='" + cheRemarks + '\'' +
+                ", oldmanByOmId=" + oldmanByOmId +
+                ", userByUid=" + userByUid +
+                '}';
+    }
 
     @Id
     @Column(name = "che_id", nullable = false)

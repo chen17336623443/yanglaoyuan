@@ -19,9 +19,6 @@
     </properties>
 
     <dependencies>
-
-
-
         <!-- 1、spring boot整合jpa的包 -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -125,7 +122,24 @@
                 </exclusion>
             </exclusions>
         </dependency>
+        <!-- json支持 -->
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>fastjson</artifactId>
+            <version>1.2.46</version>
+        </dependency>
 
+        <dependency>
+            <groupId>com.github.pagehelper</groupId>
+            <artifactId>pagehelper-spring-boot-starter</artifactId>
+            <version>1.2.5</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>druid</artifactId>
+            <version>1.1.9</version>
+        </dependency>
     </dependencies>
 
     <build>
