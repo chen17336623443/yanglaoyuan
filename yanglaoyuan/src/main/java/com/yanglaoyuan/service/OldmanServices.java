@@ -25,4 +25,6 @@ public class OldmanServices {
     public List<Oldman> selectAll(){
         return mapper.selectoldmanAll();
     }
+
+
 }

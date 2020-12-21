@@ -7,6 +7,8 @@ import router from './router' /*路由 src/router/index.js*/
 import axios from 'axios'
 import http from './util/http'
 /*引用qs */
+import qs from 'qs'
+Vue.prototype.$qs=qs;
 
 /* 3、全局导入element-ui */
 import ElementUI from 'element-ui';
