@@ -4,7 +4,7 @@ import yanglaoyuan from '@/page/yanglaoyuan'
 import login from '@/page/login'
 import hugongguanli from '@/components/hugongguanli'
 import Outregistration from '@/components/Outregistration'
-
+import Floor from '@/components/Floor'
 
 
 Vue.use(Router)
@@ -29,6 +29,10 @@ const router = new Router({
                 path: '/outregistration',
                 component: Outregistration
               },
+              {
+                path:'/Floor',
+                component: Floor
+              }
             ]
         }
     ]
