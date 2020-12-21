@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yanglaoyuan.model.Mapper.FloorMapper">
+    <!--
+    private List<Bed> bedsByFid;
+    private List<Floor> floorsByFid;
+    private List<Floorinfo> floorinfosByFid;-->
+    <resultMap id="floor" type="com.yanglaoyuan.pojo.Floor">
+        <id column="fid" property="fid"/>
+        <result column="fname" property="fname"/>
+        <result column="fdad" property="fdad"/>
+        <collection property="floorsByFid" ofType="com.yanglaoyuan.pojo.Floor">
+            <id column="fid2" property="fid"/>
+            <result column="fname2" property="fname"/>
+            <result column="fdad2" property="fdad"/>
+            <collection property="floorsByFid" ofType="com.yanglaoyuan.pojo.Floor">
+                <id column="fid3" property="fid"/>
+                <result column="fname3" property="fname"/>
+                <result column="fdad3" property="fdad"/>
+            </collection>
+        </collection>
+    </resultMap>
+    <select id="selectAll" resultMap="floor">
+        select
+            f1.fid,f1.fname,f1.fdad,
+            f2.fid as fid2,f2.fname as fname2,f2.fdad as fdad2,
+            f3.fid as fid3,f3.fname as fname3,f3.fdad as fdad3
+        from floor f1,floor f2,floor f3 where f1.fid = f2.fdad and f2.fid = f3.fdad
+    </select>
+</mapper>
