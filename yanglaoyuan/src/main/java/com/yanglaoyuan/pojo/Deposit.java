@@ -9,7 +9,7 @@ import java.util.Objects;
 public class Deposit {
     private Integer depId;
     private Integer uid;
-    private Integer omId;
+
     private BigDecimal depMoney;
     private Timestamp depDate;
     private String depPayment;
@@ -38,15 +38,6 @@ public class Deposit {
         this.uid = uid;
     }
 
-    @Basic
-    @Column(name = "om_id", nullable = true)
-    public Integer getOmId() {
-        return omId;
-    }
-
-    public void setOmId(Integer omId) {
-        this.omId = omId;
-    }
 
     @Basic
     @Column(name = "dep_money", nullable = false, precision = 2)
@@ -105,7 +96,7 @@ public class Deposit {
         Deposit deposit = (Deposit) o;
         return Objects.equals(depId, deposit.depId) &&
                 Objects.equals(uid, deposit.uid) &&
-                Objects.equals(omId, deposit.omId) &&
+
                 Objects.equals(depMoney, deposit.depMoney) &&
                 Objects.equals(depDate, deposit.depDate) &&
                 Objects.equals(depPayment, deposit.depPayment) &&
@@ -115,7 +106,7 @@ public class Deposit {
 
     @Override
     public int hashCode() {
-        return Objects.hash(depId, uid, omId, depMoney, depDate, depPayment, depPaytype, depRemarks);
+        return Objects.hash(depId, uid, depMoney, depDate, depPayment, depPaytype, depRemarks);
     }
 
     @ManyToOne
