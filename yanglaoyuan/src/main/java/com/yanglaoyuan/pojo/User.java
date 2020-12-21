@@ -10,6 +10,7 @@ public class User {
     private String uname;
     private String uphone;
     private String upass;
+
     private List<Accident> accidentsByUid;
     private List<Checkin> checkinsByUid;
     private List<Costflow> costflowsByUid;

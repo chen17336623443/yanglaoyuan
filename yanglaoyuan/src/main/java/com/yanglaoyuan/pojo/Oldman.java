@@ -19,6 +19,7 @@ public class Oldman {
     private Timestamp tomCheckIntime;
     private String tomFn;
     private String tomImg;
+
     private List<Accident> accidentsByOmId;
     private List<Arrears> arrearsByOmId;
     private List<Checkin> checkinsByOmId;
