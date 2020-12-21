@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yanglaoyuan.model.Mapper.IAcareMapper">
+    <resultMap id="all" type="com.yanglaoyuan.pojo.Acare">
+        <id column="ac_id" property="acId"/>
+        <result column="ac_name" property="acName"/>
+        <result column="ac_idcare" property="acIdcare"/>
+        <result column="ac_sex" property="acSex"/>
+        <result column="ac_birth" property="acBirth"/>
+        <result column="ac_dizi" property="acDizi"/>
+        <result column="ac_phone" property="acPhone"/>
+        <result column="ac_img" property="acImg"/>
+        <collection property="oldmenByAcId" ofType="com.yanglaoyuan.pojo.Oldman">
+            <id column="om_id" property="omId"/>
+        </collection>
+    </resultMap>
+    <select id="selectall" resultMap="all">
+        select * from acare a left join oldman o on a.ac_id=o.ac_id
+    </select>
+</mapper>
