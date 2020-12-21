@@ -33,6 +33,7 @@ public class Oorder {
         this.oId = oId;
     }
 
+
     @Basic
     @Column(name = "omname", nullable = true, length = 255)
     public String getOmname() {
@@ -186,7 +187,7 @@ public class Oorder {
 
     @Override
     public int hashCode() {
-        return Objects.hash(oId, omname, card, omsex, omage, omselfCare, oname, relation, newtime, cphone, ordertime, privateroom, omoney, payment);
+        return Objects.hash(oId,omname, card, omsex, omage, omselfCare, oname, relation, newtime, cphone, ordertime, privateroom, omoney, payment);
     }
 
     @ManyToOne

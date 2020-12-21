@@ -26,6 +26,7 @@ public class Register {
         this.regId = regId;
     }
 
+
     @Basic
     @Column(name = "reg_date", nullable = false)
     public Timestamp getRegDate() {
@@ -91,7 +92,7 @@ public class Register {
 
     @Override
     public int hashCode() {
-        return Objects.hash(regId, regDate, regMoney, regPaytype, regPay, regRemarks);
+        return Objects.hash(regId,  regDate, regMoney, regPaytype, regPay, regRemarks);
     }
 
     @ManyToOne

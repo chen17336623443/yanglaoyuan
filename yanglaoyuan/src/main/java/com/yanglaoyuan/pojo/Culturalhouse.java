@@ -18,6 +18,7 @@ public class Culturalhouse {
     public void setChid(Integer chid) {
         this.chid = chid;
     }
+
     @Basic
     @Column(name = "chname", nullable = true, length = 50)
     public String getChname() {

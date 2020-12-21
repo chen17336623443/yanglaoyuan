@@ -2,10 +2,8 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import yanglaoyuan from '@/page/yanglaoyuan'
 import login from '@/page/login'
-import hugongguanli from '@/components/hugongguanli'
-import Outregistration from '@/components/Outregistration'
-import dashboard from '@/components/Dashboard'
-
+// import hugongguanli from '@/components/hugongguanli'
+import FoodManage from '@/components/FoodManage'
 
 
 Vue.use(Router)
@@ -20,20 +18,17 @@ const router = new Router({
         },
         {
             path: '/home',
-            component: yanglaoyuan,
+            component: yanglaoyuan
+            ,
             children: [
-              {
-                path: '/hugongguanli',
-                component: hugongguanli
-              },
-              {
-                path: '/outregistration',
-                component: Outregistration
-              },
-              {
-                path: '/',
-                component: dashboard
-              },
+            //     {
+            //     path: '/hugongguanli',
+            //     component: hugongguanli
+            // },
+            {
+                path: '/foodManage',
+                component: FoodManage
+            }
             ]
         }
     ]

@@ -10,6 +10,7 @@ public class Taboocrowd {
     private String tcName;
     private String tcRemark;
     private List<Shiwuzhongjianbiao> shiwuzhongjianbiaosByTcId;
+    private List<Food> foods;
 
     @Id
     @Column(name = "tc_id", nullable = false)
@@ -63,5 +64,14 @@ public class Taboocrowd {
 
     public void setShiwuzhongjianbiaosByTcId(List<Shiwuzhongjianbiao> shiwuzhongjianbiaosByTcId) {
         this.shiwuzhongjianbiaosByTcId = shiwuzhongjianbiaosByTcId;
+    }
+
+    @ManyToMany(mappedBy = "taboocrowds")
+    public List<Food> getFoods() {
+        return foods;
+    }
+
+    public void setFoods(List<Food> foods) {
+        this.foods = foods;
     }
 }

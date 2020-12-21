@@ -24,6 +24,7 @@ public class Floor {
         this.fid = fid;
     }
 
+
     @Basic
     @Column(name = "fname", nullable = true, length = 20)
     public String getFname() {
@@ -56,7 +57,7 @@ public class Floor {
 
     @Override
     public int hashCode() {
-        return Objects.hash(fid, fname, fdad);
+        return Objects.hash(fid,  fname, fdad);
     }
 
     @OneToMany(mappedBy = "floorByFid")

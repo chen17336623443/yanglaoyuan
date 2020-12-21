@@ -23,6 +23,7 @@ public class Nursingrecord {
         this.nrId = nrId;
     }
 
+
     @Basic
     @Column(name = "nr_time", nullable = true)
     public Timestamp getNrTime() {
@@ -77,7 +78,7 @@ public class Nursingrecord {
 
     @Override
     public int hashCode() {
-        return Objects.hash(nrId, nrTime, nrCompletion, nrMoney, nrOther);
+        return Objects.hash(nrId,  nrTime, nrCompletion, nrMoney, nrOther);
     }
 
     @ManyToOne

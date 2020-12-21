@@ -40,7 +40,7 @@ public class Equipmenthouse {
 
     @Override
     public int hashCode() {
-        return Objects.hash(ehid, shname);
+        return Objects.hash(ehid,  shname);
     }
 
     @ManyToOne

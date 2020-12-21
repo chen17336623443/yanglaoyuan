@@ -19,6 +19,7 @@ public class Publicshouse {
         this.phid = phid;
     }
 
+
     @Basic
     @Column(name = "chname", nullable = true, length = 50)
     public String getChname() {

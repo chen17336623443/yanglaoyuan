@@ -26,7 +26,6 @@ public class Deposit {
         this.depId = depId;
     }
 
-
     @Basic
     @Column(name = "dep_money", nullable = false, precision = 2)
     public BigDecimal getDepMoney() {

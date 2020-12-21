@@ -24,6 +24,7 @@ public class Floorinfo {
         this.fiid = fiid;
     }
 
+
     @Basic
     @Column(name = "fiinfo", nullable = true, length = 500)
     public String getFiinfo() {

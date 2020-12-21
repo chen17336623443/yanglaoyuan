@@ -26,6 +26,7 @@ public class Costflow {
         this.cosId = cosId;
     }
 
+
     @Basic
     @Column(name = "cos_category", nullable = false, length = 50)
     public String getCosCategory() {
@@ -91,7 +92,7 @@ public class Costflow {
 
     @Override
     public int hashCode() {
-        return Objects.hash(cosId,cosCategory, cosMoney, cosDate, cosExplain, cosRemarks);
+        return Objects.hash(cosId, cosCategory, cosMoney, cosDate, cosExplain, cosRemarks);
     }
 
     @ManyToOne

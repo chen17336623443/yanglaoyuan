@@ -9,7 +9,6 @@ public class Shiwuzhongjianbiao {
     private Food foodByFId;
     private Taboocrowd taboocrowdByTcId;
 
-
     @Id
     @Column(name = "fct_id", nullable = false)
     public Integer getFctId() {

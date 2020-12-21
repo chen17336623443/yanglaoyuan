@@ -113,7 +113,7 @@ public class Relation {
 
     @Override
     public int hashCode() {
-        return Objects.hash(rid, rname, phone, card, relation, omsex, site, guardian);
+        return Objects.hash(rid,  rname, phone, card, relation, omsex, site, guardian);
     }
 
     @ManyToOne

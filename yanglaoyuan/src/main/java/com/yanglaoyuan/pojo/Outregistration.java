@@ -28,6 +28,7 @@ public class Outregistration {
         this.outId = outId;
     }
 
+
     @Basic
     @Column(name = "out_time", nullable = true)
     public Timestamp getOutTime() {
@@ -98,6 +99,7 @@ public class Outregistration {
         this.outReason = outReason;
     }
 
+
     @Basic
     @Column(name = "out_true", nullable = true)
     public Integer getOutTrue() {
@@ -126,7 +128,7 @@ public class Outregistration {
 
     @Override
     public int hashCode() {
-        return Objects.hash(outId, outTime, outAccompanyname, outAccompanyphone, outReturntime, outReturnestimate, outOutsum, outReason, outTrue);
+        return Objects.hash(outId,outTime, outAccompanyname, outAccompanyphone, outReturntime, outReturnestimate, outOutsum, outReason, outTrue);
     }
 
     @ManyToOne

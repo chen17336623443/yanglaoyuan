@@ -21,6 +21,7 @@ public class Foodweek {
         this.fwId = fwId;
     }
 
+
     @Basic
     @Column(name = "fw_weekday", nullable = true, length = 30)
     public String getFwWeekday() {

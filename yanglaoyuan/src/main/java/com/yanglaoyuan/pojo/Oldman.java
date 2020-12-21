@@ -35,6 +35,7 @@ public class Oldman {
     private List<Relation> relationsByOmId;
     private List<Settlement> settlementsByOmId;
     private List<Visit> visitsByOmId;
+    private Foodpackge foodpackge;
 
     @Id
     @Column(name = "om_id", nullable = false)
@@ -334,5 +335,15 @@ public class Oldman {
 
     public void setVisitsByOmId(List<Visit> visitsByOmId) {
         this.visitsByOmId = visitsByOmId;
+    }
+
+    @ManyToOne
+    @JoinColumn(name = "fp_id", referencedColumnName = "fp_id")
+    public Foodpackge getFoodpackge() {
+        return foodpackge;
+    }
+
+    public void setFoodpackge(Foodpackge foodpackge) {
+        this.foodpackge = foodpackge;
     }
 }

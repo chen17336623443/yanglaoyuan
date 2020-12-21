@@ -24,6 +24,7 @@ public class Health {
         this.hid = hid;
     }
 
+
     @Basic
     @Column(name = "capacity", nullable = true, length = 255)
     public String getCapacity() {
