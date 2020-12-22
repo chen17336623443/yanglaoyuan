@@ -9,6 +9,10 @@ import http from './util/http'
 /*引用qs */
 import qs from 'qs'
 Vue.prototype.$qs=qs;
+/*引用moment*/
+import moment from 'moment'
+Vue.use(require('vue-moment'));
+Vue.prototype.moment = moment;
 
 /* 3、全局导入element-ui */
 import ElementUI from 'element-ui';

@@ -22,4 +22,10 @@ public class OldmanController {
     public List<Oldman> selectAll(){
         return oldmanServices.selectAll();
     }
+
+    /*查询未外出的老人*/
+    @PostMapping("/selectNotOut")
+    public List<Oldman> selectNotOut(){
+        return oldmanServices.selectNotOut();
+    }
 }

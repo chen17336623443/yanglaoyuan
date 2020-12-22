@@ -7,5 +7,9 @@ import org.springframework.stereotype.Repository;
 @Mapper
 @Repository
 public interface IUserMapper {
+
     User login(String phone,String upass);
+
+    /*根据用户主键查询*/
+    User selectByUid(Integer uid);
 }
