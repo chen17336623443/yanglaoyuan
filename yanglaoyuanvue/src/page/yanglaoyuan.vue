@@ -103,7 +103,7 @@
                 <i class="el-icon-dish-1"></i>
                 <span>餐饮管理</span>
               </template>
-              <router-link to="" style="text-decoration: none">
+              <router-link to="foodManage" style="text-decoration: none">
                 <el-menu-item index="6-1">食物管理</el-menu-item>
               </router-link>
               <router-link to="" style="text-decoration: none">
