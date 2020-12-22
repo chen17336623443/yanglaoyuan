@@ -14,6 +14,9 @@ import java.util.List;
  */
 @Mapper
 @Repository
-public interface FloorMapper {
+public interface IFloorMapper {
     List<Floor> selectAll();
+
+    int insertLou(Floor floor);
+
 }
