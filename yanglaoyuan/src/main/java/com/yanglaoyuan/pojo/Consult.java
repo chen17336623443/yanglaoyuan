@@ -2,10 +2,7 @@ package com.yanglaoyuan.pojo;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.sql.Timestamp;
 import java.util.Objects;
 
@@ -24,9 +21,12 @@ public class Consult {
     private String way;
     private Long cphone;
     private String content;
+    private User myuser;
+    private String site;
 
     @Id
     @Column(name = "c_id", nullable = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     public Integer getcId() {
         return cId;
     }
@@ -167,5 +167,25 @@ public class Consult {
     @Override
     public int hashCode() {
         return Objects.hash(cId, omname, card, omsex, omage, omselfCare, oname, relation, newtime, way, cphone, content);
+    }
+
+    @ManyToOne
+    @JoinColumn(name = "uid", referencedColumnName = "uid")
+    public User getMyuser() {
+        return myuser;
+    }
+
+    public void setMyuser(User myuser) {
+        this.myuser = myuser;
+    }
+
+    @Basic
+    @Column(name = "site", nullable = true, length = 500)
+    public String getSite() {
+        return site;
+    }
+
+    public void setSite(String site) {
+        this.site = site;
     }
 }

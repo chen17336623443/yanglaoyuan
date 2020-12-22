@@ -8,4 +8,9 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface IUserMapper {
     User login(String phone,String upass);
+
+
+    /*根据用户名查询用户信息*/
+
+    User byuphone(String name);
 }

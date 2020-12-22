@@ -8,7 +8,7 @@ import Floor from '@/components/Floor'
 
 import Yucungl from '@/components/Yucungl'
 import FoodManage from '@/components/FoodManage'
-import Outregistration from '@/components/Outregistration'
+
 import dashboard from '@/components/Dashboard'
 import consult from '@/components/consult'
 

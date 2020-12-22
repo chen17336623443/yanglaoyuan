@@ -12,4 +12,8 @@ public class UserServices {
     public User login(String phone,String upass){
         return um.login(phone, upass);
     }
+
+    public  User byuphone(String name){
+        return  um.byuphone(name);
+    }
 }
