@@ -9,6 +9,10 @@ import http from './util/http'
 /*引用qs */
 import qs from 'qs'
 Vue.prototype.$qs=qs;
+/*引用moment*/
+import moment from 'moment'
+Vue.use(require('vue-moment'));
+Vue.prototype.moment = moment;
 
 /* 3、全局导入element-ui */
 import ElementUI from 'element-ui';
@@ -17,9 +21,6 @@ import 'element-ui/lib/theme-chalk/index.css';
 import * as socketApi from './util/socket'
 // fade/zoom 等
 import 'element-ui/lib/theme-chalk/base.css';
-//引入qs
-import qs from 'qs'
-Vue.prototype.$qs = qs;
 // collapse 展开折叠
 import CollapseTransition from 'element-ui/lib/transitions/collapse-transition';
 Vue.component(CollapseTransition.name, CollapseTransition)

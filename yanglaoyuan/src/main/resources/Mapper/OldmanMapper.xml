@@ -24,8 +24,19 @@
         <result property="tomImg" column="tom_img"/>
     </resultMap>
 
+    <!--查询所有老人-->
     <select id="selectoldmanAll" resultMap="oldman">
         select * from oldman
+    </select>
+
+    <!--根据老人主键查询-->
+    <select id="selectOldmanByomid" resultMap="oldman">
+        select * from oldman where om_id=#{oldman}
+    </select>
+
+    <!--查询未外出的老人-->
+    <select id="selectNotOut" resultMap="oldman">
+        select * from oldman where om_id not in (select o.om_id from outregistration o where o.out_true=1)
     </select>
 
 </mapper>

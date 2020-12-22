@@ -18,4 +18,10 @@ public interface IOldmanMapper {
 
     List<Oldman> selectoldmanAll();
 
+    /*根据老人主键查询*/
+    Oldman selectOldmanByomid(Integer omid);
+
+    /*查询未外出的老人*/
+    List<Oldman> selectNotOut();
+
 }

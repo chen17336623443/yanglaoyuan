@@ -18,6 +18,8 @@
         <result property="outOutsum" column="out_outsum"/>
         <result property="outReason" column="out_reason"/>
         <result property="outTrue" column="out_true"/>
+        <association property="oldmanByOmId" column="om_id" select="com.yanglaoyuan.model.Mapper.IOldmanMapper.selectOldmanByomid"/>
+        <association property="userByUseUid" column="use_uid" select="com.yanglaoyuan.model.Mapper.IUserMapper.selectByUid"/>
     </resultMap>
 
     <!--根据老人姓名，外出类型，外出时间模糊查询-->
@@ -39,4 +41,14 @@
        </if>
        order by o.out_id desc
     </select>
+
+    <!--修改外出状态-->
+    <update id="updateOutregistration">
+        update outregistration set out_true=2,out_returntime=#{outReturntime} where out_id=#{outid}
+    </update>
+
+    <!--修改延期-->
+    <update id="updateOutReturnestimate">
+        update outregistration set out_returnestimate=#{outReturnestimate} where out_id=#{outid}
+    </update>
 </mapper>

@@ -9,7 +9,12 @@
         <result column="uphone" property="uphone"/>
         <result column="upass" property="upass"/>
     </resultMap>
+
     <select id="login" resultMap="all">
         select * from user where uphone=#{phone} and upass=#{upass}
+    </select>
+
+    <select id="selectByUid" resultMap="all">
+        select * from user where uid=#{uid}
     </select>
 </mapper>
