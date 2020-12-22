@@ -43,4 +43,16 @@
         select * from oldman o inner join acare a on o.ac_id=a.ac_id where o.ac_id=#{acid}
     </select>
 
+    <update id="del">
+        update oldman set ac_id=null where om_id=#{id}
+    </update>
+
+    <update id="updateid">
+        update oldman set ac_id=#{acid} where om_id=#{omid}
+    </update>
+
+    <select id="selectnoacid" resultMap="oldman">
+        select * from oldman where ac_id is null
+    </select>
+
 </mapper>

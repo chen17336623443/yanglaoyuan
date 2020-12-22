@@ -39,4 +39,20 @@ public class AcareService {
         PageInfo<Acare> acarePageInfo = new PageInfo<>(selectall);
         return acarePageInfo;
     }
+
+    //新增护工
+    public Integer add(Acare acare){
+        try {
+            ad.save(acare);
+            return 1;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return -1;
+        }
+    }
+
+    //护工离职
+    public Integer del(Integer acid){
+        return am.del(acid);
+    }
 }

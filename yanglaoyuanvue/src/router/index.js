@@ -4,11 +4,15 @@ import yanglaoyuan from '@/page/yanglaoyuan'
 import login from '@/page/login'
 import hugongguanli from '@/components/hugongguanli'
 import Floor from '@/components/Floor'
+
 import Yucungl from '@/components/Yucungl'
 import FoodManage from '@/components/FoodManage'
 import Outregistration from '@/components/Outregistration'
 import dashboard from '@/components/Dashboard'
 import consult from '@/components/consult'
+
+import Huliguanli from '@/components/Huliguanli'
+
 import Feiyonls from '@/components/Feiyonls'
 
 Vue.use(Router)
@@ -63,6 +67,10 @@ const router = new Router({
               {
                 path: '/fyls',
                 component: Feiyonls
+              },
+              {
+                path: '/Huliguanli',
+                component: Huliguanli
               }
             ]
         }

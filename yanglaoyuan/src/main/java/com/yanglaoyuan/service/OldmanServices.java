@@ -40,4 +40,16 @@ public class OldmanServices {
     public List<Oldman> selectoldmanByid(Integer acid){
         return mapper.selectoldmanByid(acid);
     }
+
+    public Integer del(Integer id){
+        return mapper.del(id);
+    }
+
+    public Integer updateid(Integer acid,Integer omid){
+        return mapper.updateid(acid, omid);
+    }
+
+    public List<Oldman> selectnoacid(){
+        return mapper.selectnoacid();
+    }
 }

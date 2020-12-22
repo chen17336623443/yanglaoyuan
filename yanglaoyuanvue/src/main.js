@@ -6,9 +6,7 @@ import router from './router' /*路由 src/router/index.js*/
 /*引用axios*/
 import axios from 'axios'
 import http from './util/http'
-/*引用qs */
-import qs from 'qs'
-Vue.prototype.$qs=qs;
+
 /*引用moment*/
 import moment from 'moment'
 Vue.use(require('vue-moment'));
@@ -23,6 +21,9 @@ import * as socketApi from './util/socket'
 import 'font-awesome/css/font-awesome.min.css'
 // fade/zoom 等
 import 'element-ui/lib/theme-chalk/base.css';
+//引入qs
+import qs from 'qs'
+Vue.prototype.$qs = qs;
 // collapse 展开折叠
 import CollapseTransition from 'element-ui/lib/transitions/collapse-transition';
 Vue.component(CollapseTransition.name, CollapseTransition)
