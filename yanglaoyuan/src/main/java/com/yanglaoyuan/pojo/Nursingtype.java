@@ -9,9 +9,11 @@ public class Nursingtype {
     private Integer ntId;
     private String ntName;
     private List<Nursing> nursingsByNtId;
+    private String ntOther;
 
     @Id
     @Column(name = "nt_id", nullable = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     public Integer getNtId() {
         return ntId;
     }
@@ -51,5 +53,15 @@ public class Nursingtype {
 
     public void setNursingsByNtId(List<Nursing> nursingsByNtId) {
         this.nursingsByNtId = nursingsByNtId;
+    }
+
+    @Basic
+    @Column(name = "nt_other", nullable = true, length = 255)
+    public String getNtOther() {
+        return ntOther;
+    }
+
+    public void setNtOther(String ntOther) {
+        this.ntOther = ntOther;
     }
 }

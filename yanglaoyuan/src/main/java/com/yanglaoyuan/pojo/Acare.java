@@ -19,6 +19,7 @@ public class Acare {
 
     @Id
     @Column(name = "ac_id", nullable = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     public Integer getAcId() {
         return acId;
     }

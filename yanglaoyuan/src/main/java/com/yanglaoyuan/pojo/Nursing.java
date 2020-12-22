@@ -12,6 +12,19 @@ public class Nursing {
     private BigDecimal nuMonry;
     private Nursingtype nursingtypeByNtId;
     private List<Thenursingleveldetails> thenursingleveldetailsByNurId;
+    private String nuWay;
+    private String nuTime;
+    private String nuOther;
+
+    @Id
+    @Column(name = "nu_id", nullable = false)
+    public Integer getNuId() {
+        return nuId;
+    }
+
+    public void setNuId(Integer nuId) {
+        this.nuId = nuId;
+    }
 
     @Id
     @Column(name = "nu_id", nullable = false)
@@ -75,5 +88,35 @@ public class Nursing {
 
     public void setThenursingleveldetailsByNurId(List<Thenursingleveldetails> thenursingleveldetailsByNurId) {
         this.thenursingleveldetailsByNurId = thenursingleveldetailsByNurId;
+    }
+
+    @Basic
+    @Column(name = "nu_way", nullable = true, length = 255)
+    public String getNuWay() {
+        return nuWay;
+    }
+
+    public void setNuWay(String nuWay) {
+        this.nuWay = nuWay;
+    }
+
+    @Basic
+    @Column(name = "nu_time", nullable = true, length = 255)
+    public String getNuTime() {
+        return nuTime;
+    }
+
+    public void setNuTime(String nuTime) {
+        this.nuTime = nuTime;
+    }
+
+    @Basic
+    @Column(name = "nu_other", nullable = true, length = 255)
+    public String getNuOther() {
+        return nuOther;
+    }
+
+    public void setNuOther(String nuOther) {
+        this.nuOther = nuOther;
     }
 }

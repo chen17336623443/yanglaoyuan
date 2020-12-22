@@ -22,4 +22,19 @@ public class OldmanController {
     public List<Oldman> selectAll(){
         return oldmanServices.selectAll();
     }
+
+    @RequestMapping("/del")
+    public void del(Integer omid){
+        oldmanServices.del(omid);
+    }
+
+    @RequestMapping("/upid")
+    public String updateid(Integer acid,Integer omid){
+        return oldmanServices.updateid(acid, omid)==1?"安排老人成功！":"安排失败！";
+    }
+
+    @RequestMapping("/noall")
+    public List<Oldman> selectnoacid(){
+        return oldmanServices.selectnoacid();
+    }
 }
