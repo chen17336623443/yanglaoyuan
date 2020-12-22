@@ -19,4 +19,13 @@
     <select id="selectall" resultMap="all">
         select * from acare a left join oldman o on a.ac_id=o.ac_id
     </select>
+    <select id="selectlike" resultMap="all">
+        select * from acare a left join oldman o on a.ac_id=o.ac_id where 1=1
+        <if test="acname!='%%' || acname!=null">
+            and a.ac_name like #{acname}
+        </if>
+        <if test="acphone!='%%' || acphone!=null">
+            and a.ac_phone like #{acphone}
+        </if>
+    </select>
 </mapper>

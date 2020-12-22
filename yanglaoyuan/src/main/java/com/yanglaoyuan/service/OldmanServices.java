@@ -27,4 +27,8 @@ public class OldmanServices {
     }
 
 
+
+    public List<Oldman> selectoldmanByid(Integer acid){
+        return mapper.selectoldmanByid(acid);
+    }
 }

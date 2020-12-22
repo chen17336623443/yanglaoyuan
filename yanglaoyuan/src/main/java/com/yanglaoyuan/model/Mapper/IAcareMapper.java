@@ -17,4 +17,7 @@ import java.util.List;
 public interface IAcareMapper {
     //护工查询所有
     List<Acare> selectall();
+
+    //护工模糊条件查询
+    List<Acare> selectlike(String acname,String acphone);
 }

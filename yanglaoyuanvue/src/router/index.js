@@ -24,7 +24,7 @@ const router = new Router({
             component: login
         },
         {
-            
+
             path: '/home',
             component: yanglaoyuan
             ,
@@ -49,7 +49,7 @@ const router = new Router({
                 path:'/Floor',
                 component: Floor
               },
-             
+
               {
                 path: '/ycgl',
                 component: Yucungl

@@ -18,4 +18,6 @@ public interface IOldmanMapper {
 
     List<Oldman> selectoldmanAll();
 
+    List<Oldman> selectoldmanByid(Integer acid);
+
 }
