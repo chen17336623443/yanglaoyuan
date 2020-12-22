@@ -134,7 +134,7 @@
               <router-link to="" style="text-decoration: none">
                 <el-menu-item index="7-4">欠费管理</el-menu-item>
               </router-link>
-              <router-link to="" style="text-decoration: none">
+              <router-link tag="span" to="/fyls" style="text-decoration: none">
                 <el-menu-item index="7-5">费用流水</el-menu-item>
               </router-link>
             </el-submenu>

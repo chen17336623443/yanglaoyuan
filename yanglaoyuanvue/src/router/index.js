@@ -5,13 +5,11 @@ import login from '@/page/login'
 import hugongguanli from '@/components/hugongguanli'
 import Outregistration from '@/components/Outregistration'
 import Floor from '@/components/Floor'
-
 import Yucungl from '@/components/Yucungl'
 import FoodManage from '@/components/FoodManage'
-import Outregistration from '@/components/Outregistration'
 import dashboard from '@/components/Dashboard'
 import consult from '@/components/consult'
-
+import Feiyonls from '@/components/Feiyonls'
 
 Vue.use(Router)
 
@@ -24,10 +22,8 @@ const router = new Router({
             component: login
         },
         {
-            
             path: '/home',
-            component: yanglaoyuan
-            ,
+            component: yanglaoyuan,
             children: [
               {
                 path: '/',
@@ -37,10 +33,10 @@ const router = new Router({
                 path: '/hugongguanli',
                 component: hugongguanli
               },
-            {
-                path: '/foodManage',
-                component: FoodManage
-            },
+              {
+                  path: '/foodManage',
+                  component: FoodManage
+              },
               {
                 path: '/outregistration',
                 component: Outregistration
@@ -49,7 +45,7 @@ const router = new Router({
                 path:'/Floor',
                 component: Floor
               },
-             
+
               {
                 path: '/ycgl',
                 component: Yucungl
@@ -61,6 +57,10 @@ const router = new Router({
               {
                 path: '/consult',
                 component: consult
+              },
+              {
+                path: '/fyls',
+                component: Feiyonls
               }
             ]
         }

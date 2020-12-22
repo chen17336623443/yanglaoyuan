@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yanglaoyuan.model.Mapper.ICostflowMapper">
+    <resultMap id="resultCostflow" type="com.yanglaoyuan.pojo.Costflow">
+        <id property="cosId" column="cos_id"/>
+        <result property="cosCategory" column="cos_category"/>
+        <result property="cosMoney" column="cos_money"/>
+        <result property="cosDate" column="cos_date"/>
+        <result property="cosExplain" column="cos_explain"/>
+        <result property="cosRemarks" column="cos_remarks"/>
+        <association property="oldmanByOmId" javaType="com.yanglaoyuan.pojo.Oldman">
+            <id property="omId" column="om_id"/>
+            <result property="tomName" column="tom_name"/>
+            <result property="tomCard" column="tom_card"/>
+            <result property="tomNumber" column="tom_number"/>
+        </association>
+        <association property="userByUid" javaType="com.yanglaoyuan.pojo.User">
+            <id property="uid" column="uid"/>
+            <result property="uname" column="uname"/>
+        </association>
+    </resultMap>
+
+    <select id="selectall" resultMap="resultCostflow">
+        select cos_id, cos_category, cos_money, cos_date, cos_explain, cos_remarks,
+               o.om_id, o.tom_name, o.tom_number, o.tom_card, u.uid, u.uname from costflow c
+                inner join oldman o on c.om_id = o.om_id
+                inner join user u on c.uid = u.uid
+        order by cos_date desc
+    </select>
+
+    <select id="selectbykwy" resultMap="resultCostflow">
+        select cos_id, cos_category, cos_money, cos_date, cos_explain, cos_remarks,
+               o.om_id, o.tom_name, o.tom_number, o.tom_card, u.uid, u.uname from costflow c
+                inner join oldman o on c.om_id = o.om_id
+                inner join user u on c.uid = u.uid
+                <where>
+                    <if test="name!=null and name!=''">
+                        and o.tom_name like #{name}
+                    </if>
+                    <if test="lx!=null and lx!=''">
+                        and c.cos_category = #{lx}
+                    </if>
+                    <if test="kdate!=null and kdate!='' and jdate!=null and jdate!=''">
+                        and c.cos_date between #{kdate} and #{jdate}
+                    </if>
+                </where>
+        order by cos_date desc
+    </select>
+
+</mapper>

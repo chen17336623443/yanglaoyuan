@@ -4,6 +4,8 @@ import com.yanglaoyuan.pojo.Deposit;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
+import java.math.BigDecimal;
+import java.sql.Timestamp;
 import java.util.List;
 
 /**
@@ -24,8 +26,26 @@ public interface IDepositMapper {
      * @Author chenxing
      * @Date 2020/12/21 16:25
      */
-    List<Deposit> selectall();
+    List<Deposit> selectalls();
 
+    /**
+     * @Description 方法:a
+     * @Param 参是:a
+     * @Return 返回型是:a
+     * @Author chenxing
+     * @Date 2020/12/22 10:02
+     */
+    List<Deposit> selectbykwy(String name,String phone,String card);
 
+    /**
+     * @Description 方法:a
+     * @Param 参是:a
+     * @Return 返回型是:a
+     * @Author chenxing
+     * @Date 2020/12/22 19:13
+     */
+    Deposit selectbyid(Integer omid);
+
+    void upadtedep(BigDecimal depMoney, Timestamp depDate,String depPayment,String depPaytype,String depRemarks,Integer omid);
 
 }

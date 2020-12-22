@@ -8,6 +8,8 @@ import com.yanglaoyuan.pojo.Deposit;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
+import java.sql.Timestamp;
 import java.util.List;
 
 /**
@@ -23,6 +25,18 @@ public class DepositServices {
     IDepositDao dao;
     @Autowired
     IDepositMapper mapper;
+
+    /**
+     * @Description 方法:a
+     * @Param 参是:a
+     * @Return 返回型是:a
+     * @Author chenxing
+     * @Date 2020/12/22 20:15
+     */
+    public void update(BigDecimal depMoney, Timestamp depDate, String depPayment,
+                       String depPaytype, String depRemarks, Integer omid){
+        mapper.upadtedep(depMoney, depDate, depPayment, depPaytype, depRemarks, omid);
+    }
 
     /**
      * @Description 方法:doinsert
@@ -42,6 +56,17 @@ public class DepositServices {
     }
 
     /**
+     * @Description 方法:a
+     * @Param 参是:a
+     * @Return 返回型是:a
+     * @Author chenxing
+     * @Date 2020/12/22 19:17
+     */
+    public Deposit selectbyid(Integer omid){
+        return mapper.selectbyid(omid);
+    }
+
+    /**
      * @Description 方法:selectByPager
      * @Param 参数是:pageNo,pageSize
      * @Return 返回型是:PageInfo<Deposit>
@@ -50,13 +75,22 @@ public class DepositServices {
      */
     public PageInfo<Deposit> selectByPager(Integer pageNo, Integer pageSize){
         PageHelper.startPage(pageNo,pageSize);
-        List<Deposit> list = mapper.selectall();
+        List<Deposit> list = mapper.selectalls();
         return  new PageInfo<>(list);
     }
 
-    public List<Deposit> select(){
-        System.out.println("list:"+mapper.selectall());
-        return mapper.selectall();
+    /**
+     * @Description 方法:selectByPagers
+     * @Param 参是:a
+     * @Return 返回型是:a
+     * @Author chenxing
+     * @Date 2020/12/22 10:12
+     */
+    public PageInfo<Deposit> selectByPagers(Integer pageNo, Integer pageSize,String name,String phone,String card){
+        PageHelper.startPage(pageNo,pageSize);
+        List<Deposit> list = mapper.selectbykwy("%"+name+"%",phone,card);
+        return  new PageInfo<>(list);
     }
+
 
 }

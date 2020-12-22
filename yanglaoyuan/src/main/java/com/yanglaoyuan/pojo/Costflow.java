@@ -1,5 +1,7 @@
 package com.yanglaoyuan.pojo;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.sql.Timestamp;
@@ -10,14 +12,17 @@ public class Costflow {
     private Integer cosId;
     private String cosCategory;
     private BigDecimal cosMoney;
+    @JsonFormat( pattern = "yyyy-MM-dd HH:mm:ss" , timezone = " GMT+8 " )
     private Timestamp cosDate;
     private String cosExplain;
     private String cosRemarks;
+
     private Oldman oldmanByOmId;
     private User userByUid;
 
     @Id
     @Column(name = "cos_id", nullable = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     public Integer getCosId() {
         return cosId;
     }
