@@ -20,6 +20,7 @@ public class Food {
     private List<Taboocrowd> taboocrowds;
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "f_id", nullable = false)
     public Integer getfId() {
         return fId;

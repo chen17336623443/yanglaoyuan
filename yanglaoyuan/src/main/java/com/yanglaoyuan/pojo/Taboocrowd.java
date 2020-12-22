@@ -13,6 +13,7 @@ public class Taboocrowd {
     private List<Food> foods;
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "tc_id", nullable = false)
     public Integer getTcId() {
         return tcId;

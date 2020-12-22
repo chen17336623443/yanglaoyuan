@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--
+    @description: 食物套餐mybatis配置文件
+    @author: YeJin Tan
+    @create: 2020-12-22 21:13
+-->
+<mapper namespace="com.yanglaoyuan.model.Mapper.IFoodpackgeMapper">
+    <resultMap id="FoodpackgeMap" type="Foodpackge">
+        <id property="fpId" column="fp_id"/>
+        <result property="fpName" column="fp_name"/>
+        <result property="fpPrice" column="fp_price"/>
+        <result property="fpRemark" column="fp_remark"/>
+        <result property="fpImg" column="fp_img"/>
+    </resultMap>
+    <!--//查询所有套餐
+    List<Foodpackge> selectFoodpackgeAll();-->
+    <select id="selectFoodpackgeAll" resultMap="FoodpackgeMap">
+        select * from foodpackge
+    </select>
+    <!--//新增套餐
+    Integer insertFoodpackge(@Param("fpackge")Foodpackge fpackge);-->
+    <insert id="insertFoodpackge" parameterType="Foodpackge" useGeneratedKeys="true" keyProperty="fpId">
+        insert into foodpackge(fp_id,fp_name,fp_price,fp_remark,fp_img)
+        value(#{fpackge.fpId},#{fpackge.fpName},#{fpackge.fpPrice},#{fpackge.fpRemark},#{fpackge.fpImg})
+    </insert>
+    <!--//修改套餐
+    Integer updateFoodpackge(@Param("fpackge")Foodpackge fpackge);-->
+    <update id="updateFoodpackge" parameterType="Foodpackge">
+        update foodpackge set fp_name=#{fpackge.fpName},fp_price=#{fpackge.fpPrice},fp_remark=#{fpackge.fpRemark},fp_img=#{fpackge.fpImg}
+        where fp_id=#{fpackeg.fpId}
+    </update>
+    <!--//删除套餐
+    Integer deleteFoodpackge(Integer fp_id);-->
+    <delete id="deleteFoodpackge" parameterType="java.lang.Integer">
+        delete from foodpackge where fp_id=#{fp_id}
+    </delete>
+</mapper>
