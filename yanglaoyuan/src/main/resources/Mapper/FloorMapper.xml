@@ -2,7 +2,7 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.yanglaoyuan.model.Mapper.FloorMapper">
+<mapper namespace="com.yanglaoyuan.model.Mapper.IFloorMapper">
     <!--
     private List<Bed> bedsByFid;
     private List<Floor> floorsByFid;
@@ -11,22 +11,36 @@
         <id column="fid" property="fid"/>
         <result column="fname" property="fname"/>
         <result column="fdad" property="fdad"/>
+        <result column="ftype" property="ftype"/>
         <collection property="floorsByFid" ofType="com.yanglaoyuan.pojo.Floor">
             <id column="fid2" property="fid"/>
             <result column="fname2" property="fname"/>
             <result column="fdad2" property="fdad"/>
+            <result column="ftype2" property="ftype"/>
             <collection property="floorsByFid" ofType="com.yanglaoyuan.pojo.Floor">
                 <id column="fid3" property="fid"/>
                 <result column="fname3" property="fname"/>
                 <result column="fdad3" property="fdad"/>
+                <result column="ftype3" property="ftype"/>
+                <collection property="floorsByFid" ofType="com.yanglaoyuan.pojo.Floor">
+                    <id column="fid4" property="fid"/>
+                    <result column="fname4" property="fname"/>
+                    <result column="fdad4" property="fdad"/>
+                    <result column="ftype4" property="ftype"/>
+                </collection>
             </collection>
         </collection>
     </resultMap>
     <select id="selectAll" resultMap="floor">
-        select
-            f1.fid,f1.fname,f1.fdad,
-            f2.fid as fid2,f2.fname as fname2,f2.fdad as fdad2,
-            f3.fid as fid3,f3.fname as fname3,f3.fdad as fdad3
-        from floor f1,floor f2,floor f3 where f1.fid = f2.fdad and f2.fid = f3.fdad
+         SELECT
+            f1.fid,f1.fname,f1.fdad,f1.ftype,
+            f2.fid AS fid2,f2.fname AS fname2,f2.fdad AS fdad2,f2.ftype AS ftype2,
+            f3.fid AS fid3,f3.fname AS fname3,f3.fdad AS fdad3,f3.ftype AS ftype3,
+            f4.fid AS fid4,f4.fname AS fname4,f4.fdad AS fdad4,f4.ftype AS ftype4
+        FROM `floor` f1,`floor` f2,`floor` f3,`floor` f4 WHERE f1.fid = f2.fdad AND f2.fid = f3.fdad  AND f3.fid = f4.fdad
     </select>
+    <insert id="insertLou"  parameterType="com.yanglaoyuan.pojo.Floor" useGeneratedKeys="true" keyProperty="fid">
+        INSERT INTO `floor`(fid,flo_fid,fname,fdad,ftype) VALUES (#{fid},null,#{fname},#{fdad},#{ftype})
+    </insert>
+
 </mapper>

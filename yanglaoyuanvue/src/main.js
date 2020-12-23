@@ -21,9 +21,7 @@ import * as socketApi from './util/socket'
 import 'font-awesome/css/font-awesome.min.css'
 // fade/zoom 等
 import 'element-ui/lib/theme-chalk/base.css';
-//引入qs
-import qs from 'qs'
-Vue.prototype.$qs = qs;
+
 // collapse 展开折叠
 import CollapseTransition from 'element-ui/lib/transitions/collapse-transition';
 Vue.component(CollapseTransition.name, CollapseTransition)
