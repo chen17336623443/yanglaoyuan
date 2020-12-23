@@ -3,11 +3,14 @@ import Router from 'vue-router'
 import yanglaoyuan from '@/page/yanglaoyuan'
 import login from '@/page/login'
 import hugongguanli from '@/components/hugongguanli'
+import Outregistration from '@/components/Outregistration'
 import Floor from '@/components/Floor'
 
-import Yucungl from '@/components/Yucungl'
+import Yucungl from
+    '@/components/Yucungl'
 import FoodManage from '@/components/FoodManage'
-import Outregistration from '@/components/Outregistration'
+import FoodPackge from '@/components/FoodPackge'
+
 import dashboard from '@/components/Dashboard'
 import consult from '@/components/consult'
 
@@ -43,7 +46,11 @@ const router = new Router({
                 path: '/foodManage',
                 component: FoodManage
             },
-              {
+            {
+                path: '/foodPackge',
+                component: FoodPackge
+            },
+            {
                 path: '/outregistration',
                 component: Outregistration
               },

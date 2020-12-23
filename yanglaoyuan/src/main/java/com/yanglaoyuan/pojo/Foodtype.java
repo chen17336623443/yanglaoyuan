@@ -12,6 +12,7 @@ public class Foodtype {
     private List<Food> foodsByFtId;
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ft_id", nullable = false)
     public Integer getFtId() {
         return ftId;
