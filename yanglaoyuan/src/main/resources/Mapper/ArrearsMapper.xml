@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yanglaoyuan.model.Mapper.IArrearsMapper">
+    <resultMap id="resultArrears" type="com.yanglaoyuan.pojo.Arrears">
+        <id property="arrId" column="arr_id"/>
+        <result property="arrMoney" column="arr_money"/>
+        <result property="arrMonth" column="arr_month"/>
+        <result property="arrOther" column="arr_other"/>
+        <result property="arrSfpay" column="arr_sfpay"/>
+        <association property="oldmanByOmId" javaType="com.yanglaoyuan.pojo.Oldman">
+            <id property="omId" column="om_id"/>
+            <result property="tomName" column="tom_name"/>
+            <result property="tomCard" column="tom_card"/>
+            <result property="tomNumber" column="tom_number"/>
+            <result property="tomCheckIntime" column="tom_check_intime"/>
+        </association>
+    </resultMap>
+
+    <select id="selectall" resultMap="resultArrears">
+        select arr_id, arr_money, arr_month, arr_other, arr_sfpay,
+               o.om_id, o.tom_name, o.tom_card, o.tom_number, o.tom_check_intime from arrears a
+            inner join oldman o on a.om_id = o.om_id
+        order by arr_id desc
+    </select>
+
+    <select id="selectbykwy" resultMap="resultArrears">
+        select arr_id, arr_money, arr_month, arr_other, arr_sfpay,
+               o.om_id, o.tom_name, o.tom_card, o.tom_number, o.tom_check_intime from arrears a
+            inner join oldman o on a.om_id = o.om_id
+            <where>
+                <if test="name!=null and name!=''">
+                    and o.tom_name like #{name}
+                </if>
+                <if test="sfz!=null and sfz!=''">
+                    and o.tom_card like #{sfz}
+                </if>
+                <if test="qfje!=null and qfje!=''">
+                    and arr_money >= #{qfje}
+                </if>
+                <if test="kdate!=null and kdate!='' and jdate!=null and jdate!=''">
+                    and o.tom_check_intime between #{kdate} and #{jdate}
+                </if>
+                <if test="zt!=null and zt!=''">
+                    and arr_sfpay = #{zt}
+                </if>
+            </where>
+        order by arr_id desc
+    </select>
+
+</mapper>

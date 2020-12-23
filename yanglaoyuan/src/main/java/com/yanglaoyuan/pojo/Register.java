@@ -1,5 +1,7 @@
 package com.yanglaoyuan.pojo;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.sql.Timestamp;
@@ -8,16 +10,19 @@ import java.util.Objects;
 @Entity
 public class Register {
     private Integer regId;
+    @JsonFormat( pattern = "yyyy-MM-dd HH:mm:ss" , timezone = " GMT+8 " )
     private Timestamp regDate;
     private BigDecimal regMoney;
     private String regPaytype;
     private String regPay;
     private String regRemarks;
+
     private User userByUid;
     private Oldman oldmanByOmId;
 
     @Id
     @Column(name = "reg_id", nullable = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     public Integer getRegId() {
         return regId;
     }

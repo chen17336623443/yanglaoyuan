@@ -7,6 +7,9 @@ import router from './router' /*路由 src/router/index.js*/
 import axios from 'axios'
 import http from './util/http'
 
+import qs from 'qs'
+Vue.prototype.$qs = qs;
+
 /*引用moment*/
 import moment from 'moment'
 Vue.use(require('vue-moment'));

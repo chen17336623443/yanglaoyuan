@@ -5,18 +5,15 @@ import login from '@/page/login'
 import hugongguanli from '@/components/hugongguanli'
 import Outregistration from '@/components/Outregistration'
 import Floor from '@/components/Floor'
-
-import Yucungl from
-    '@/components/Yucungl'
+import Yucungl from '@/components/Yucungl'
 import FoodManage from '@/components/FoodManage'
 import FoodPackge from '@/components/FoodPackge'
-
 import dashboard from '@/components/Dashboard'
 import consult from '@/components/consult'
-
 import Huliguanli from '@/components/Huliguanli'
-
 import Feiyonls from '@/components/Feiyonls'
+import Jiaofeidj from '@/components/Jiaofeidj'
+import Qianfeigl from '@/components/Qianfeigl'
 
 Vue.use(Router)
 
@@ -78,6 +75,14 @@ const router = new Router({
               {
                 path: '/Huliguanli',
                 component: Huliguanli
+              },
+              {
+                path: '/jfdj',
+                component: Jiaofeidj
+              },
+              {
+                path: '/qfgl',
+                component: Qianfeigl
               }
             ]
         }

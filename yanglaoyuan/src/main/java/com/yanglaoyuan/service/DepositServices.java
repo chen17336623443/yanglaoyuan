@@ -27,6 +27,19 @@ public class DepositServices {
     IDepositMapper mapper;
 
     /**
+     * 修改余额
+     * @Description 方法:a
+     * @Param 参是:a
+     * @Return 返回型是:a
+     * @Author chenxing
+     * @Date 2020/12/23 15:31
+     */
+    public void updatemoney(BigDecimal depMoney,Integer omid){
+        mapper.updatemoney(depMoney,omid);
+    }
+
+    /**
+     * 修改
      * @Description 方法:a
      * @Param 参是:a
      * @Return 返回型是:a
@@ -39,6 +52,7 @@ public class DepositServices {
     }
 
     /**
+     * 新增
      * @Description 方法:doinsert
      * @Param 参数是:Deposit
      * @Return 返回型是:Integer
@@ -56,6 +70,7 @@ public class DepositServices {
     }
 
     /**
+     * 根据id查询
      * @Description 方法:a
      * @Param 参是:a
      * @Return 返回型是:a
@@ -67,6 +82,7 @@ public class DepositServices {
     }
 
     /**
+     * 分页查询
      * @Description 方法:selectByPager
      * @Param 参数是:pageNo,pageSize
      * @Return 返回型是:PageInfo<Deposit>
@@ -80,6 +96,7 @@ public class DepositServices {
     }
 
     /**
+     * 多条件分页查询
      * @Description 方法:selectByPagers
      * @Param 参是:a
      * @Return 返回型是:a

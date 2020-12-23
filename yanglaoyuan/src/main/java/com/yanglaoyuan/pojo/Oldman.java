@@ -1,5 +1,7 @@
 package com.yanglaoyuan.pojo;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import javax.persistence.*;
 import java.sql.Timestamp;
 import java.util.List;
@@ -17,6 +19,7 @@ public class Oldman {
     private String tomCategory;
     private String tomDiet;
     private String tomLabour;
+    @JsonFormat( pattern = "yyyy-MM-dd HH:mm:ss" , timezone = " GMT+8 " )
     private Timestamp tomCheckIntime;
     private String tomFn;
     private String tomImg;

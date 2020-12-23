@@ -26,16 +26,6 @@ public class Nursing {
         this.nuId = nuId;
     }
 
-    @Id
-    @Column(name = "nu_id", nullable = false)
-    public Integer getNurId() {
-        return nuId;
-    }
-
-    public void setNurId(Integer nurId) {
-        this.nuId = nurId;
-    }
-
     @Basic
     @Column(name = "nu_name", nullable = true, length = 200)
     public String getNuName() {
