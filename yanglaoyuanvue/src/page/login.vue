@@ -59,7 +59,6 @@ export default {
             localStorage.setItem("token", res.object.token);
             localStorage.setItem("uid", res.object.user.uid);
             localStorage.setItem("uname", res.object.user.uname);
-            localStorage.setItem("uid", res.object.user.uid);
             this.$router.push("/home");
           })
           .catch((error) => {

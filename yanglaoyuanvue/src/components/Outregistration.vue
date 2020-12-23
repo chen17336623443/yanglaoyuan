@@ -103,10 +103,10 @@
             label="外出天数">
             <template slot-scope="x">
               <span v-if="x.row.outtrue==1">
-                {{moment(x.row.outReturntime).diff(moment(x.row.outTime), 'days')}}
+                {{moment(new Date().getTime()).diff(moment(x.row.outTime).getTime(), 'days')}}
               </span>
-              <span v-if="x.row.outtrue!=1">
-                {{moment(new Date()).diff(moment(x.row.outTime), 'days')}}
+              <span v-if="x.row.outtrue!=2">
+                {{moment(x.row.outReturntime).diff(moment(x.row.outTime), 'days')}}
               </span>
             </template>
           </el-table-column>
@@ -144,7 +144,7 @@
           @size-change="handleSizeChange"
           @current-change="handleCurrentChange"
           :current-page="current"
-          :page-sizes="[4, 6, 8, 10]"
+          :page-sizes="[2, 4, 6]"
           :page-size="pageSize"
           layout="total, sizes, prev, pager, next, jumper"
           :total="total"
@@ -275,7 +275,7 @@
         },
         uname:'',
         total:0,
-        pageSize:4,
+        pageSize:2,
         current:1,
         outregistrationPage:[],
         /*未外出的老人*/
@@ -456,7 +456,7 @@
           .then(r=>{
             this.$message({
               type: 'success',
-              message: '老人逃跑成功~~~',
+              message: '老人逃跑成功！！！',
               duration: 1000,
               showClose: true,
             })

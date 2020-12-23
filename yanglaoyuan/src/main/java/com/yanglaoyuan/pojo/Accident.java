@@ -1,5 +1,7 @@
 package com.yanglaoyuan.pojo;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import javax.persistence.*;
 import java.sql.Timestamp;
 import java.util.Objects;
@@ -7,6 +9,7 @@ import java.util.Objects;
 @Entity
 public class Accident {
     private Integer accId;
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss" , timezone = " GMT+8 " )
     private Timestamp accTime;
     private Integer accType;
     private String accReason;
@@ -16,6 +19,7 @@ public class Accident {
 
     @Id
     @Column(name = "acc_id", nullable = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     public Integer getAccId() {
         return accId;
     }

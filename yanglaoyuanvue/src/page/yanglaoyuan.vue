@@ -49,10 +49,10 @@
               <router-link tag="span" to="/outregistration" style="text-decoration: none">
                 <el-menu-item index="3-1">外出登记</el-menu-item>
               </router-link>
-              <router-link to="" style="text-decoration: none">
+              <router-link tag="span" to="/visit" style="text-decoration: none">
                 <el-menu-item index="3-2">探视来访</el-menu-item>
               </router-link>
-              <router-link to="" style="text-decoration: none">
+              <router-link tag="span" to="/accident" style="text-decoration: none">
                 <el-menu-item index="3-3">意外记录</el-menu-item>
               </router-link>
               <router-link to="" style="text-decoration: none">
