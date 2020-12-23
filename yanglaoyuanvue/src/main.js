@@ -9,7 +9,6 @@ import http from './util/http'
 
 import qs from 'qs'
 Vue.prototype.$qs = qs;
-cnpm i vue-
 
 
 /*引用moment*/

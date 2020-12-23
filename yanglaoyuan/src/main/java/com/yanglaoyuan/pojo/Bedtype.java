@@ -1,5 +1,7 @@
 package com.yanglaoyuan.pojo;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.sql.Timestamp;
@@ -12,13 +14,29 @@ public class Bedtype {
     private String byname;
     private BigDecimal bymoney;
     private BigDecimal byallmoney;
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
     private Timestamp bytime;
     private String byinfo;
     private String byimg;
     private List<Bed> bedsByByid;
 
+
+    @Override
+    public String toString() {
+        return "Bedtype{" +
+                "byid=" + byid +
+                ", byname='" + byname + '\'' +
+                ", bymoney=" + bymoney +
+                ", byallmoney=" + byallmoney +
+                ", bytime=" + bytime +
+                ", byinfo='" + byinfo + '\'' +
+                ", byimg='" + byimg + '\'' +
+                '}';
+    }
+
     @Id
     @Column(name = "byid", nullable = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     public Integer getByid() {
         return byid;
     }

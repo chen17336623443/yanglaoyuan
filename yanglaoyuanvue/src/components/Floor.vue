@@ -57,10 +57,27 @@
               <el-form-item label="房间名称后缀" prop="mchz">
                 <el-input v-model="ruleForm.mchz"  style="width: 100px"></el-input>
               </el-form-item>
+
             </el-col>
           </el-row>
-
-
+          <el-row>
+            <el-col :span="12">
+              <el-form-item label="床位数量" prop="cwnumber">
+                <el-input  style="width: 200px" v-model="ruleForm.cwnumber">
+                </el-input>/房间
+              </el-form-item>
+            </el-col>
+            <el-col :span="12">
+              <el-form-item label="床位类型" prop="cwtype">
+                <el-select v-model="ruleForm.cwtype" filterable placeholder="请选择" >
+                  <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value">
+                    <span style="float: left">{{ item.label }}</span>
+                    <span style="float: right; color: #8492a6; font-size: 13px">{{ item.value}}</span>
+                  </el-option>
+                </el-select>
+              </el-form-item>
+            </el-col>
+          </el-row>
           <el-form-item>
             <el-button type="primary" @click="submitForm('ruleForm')">立即创建</el-button>
             <el-button @click="resetForm('ruleForm')">取消</el-button>
@@ -70,14 +87,9 @@
       <el-container  v-show="stepthree">
         <el-header style="text-align: left; font-size: 12px">
           <el-button @click="addloudong"> <i class="el-icon-circle-plus-outline" style="margin-right: 5px"></i>新增楼栋</el-button>
-          <el-button> <i class="el-icon-remove-outline" style="margin-right: 5px"></i>删除楼栋</el-button>
         </el-header>
         <el-main>
-          <el-table :data="tableData" tooltip-effect="dark"  @selection-change="handleSelectionChange">
-            <el-table-column
-              type="selection"
-              width="55">
-            </el-table-column>
+          <el-table :data="tableData">
             <el-table-column prop="fname" label="楼栋名称">
             </el-table-column>
             <el-table-column prop="floorsByFid.length" label="楼层数量">
@@ -96,7 +108,8 @@
             </el-table-column>
             <el-table-column  label="操作">
               <template slot-scope="scope">
-                <el-button size="mini"><i class="el-icon-edit" style="margin-right: 5px"></i>修改名称</el-button>
+                <el-button size="mini" @click="updateNameByFid(scope.row.fid)"><i class="el-icon-edit" style="margin-right: 5px"></i>修改名称</el-button>
+                <el-button size="mini" @click="deldetByFid(scope.row.fid)"><i class="el-icon-remove-outline" style="margin-right: 5px"></i>删除</el-button>
               </template >
             </el-table-column>
           </el-table>
@@ -140,6 +153,24 @@
               </el-form-item>
             </el-col>
           </el-row>
+          <el-row>
+            <el-col :span="12">
+              <el-form-item label="床位数量" prop="cwnumber">
+                <el-input  style="width: 200px" v-model="ruleForm.cwnumber">
+                </el-input>/房间
+              </el-form-item>
+            </el-col>
+            <el-col :span="12">
+              <el-form-item label="床位类型" prop="cwtype">
+                <el-select v-model="ruleForm.cwtype" filterable placeholder="请选择" >
+                  <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value">
+                    <span style="float: left">{{ item.label }}</span>
+                    <span style="float: right; color: #8492a6; font-size: 13px">{{ item.value}}</span>
+                  </el-option>
+                </el-select>
+              </el-form-item>
+            </el-col>
+          </el-row>
           <el-form-item>
             <el-button type="primary" @click="submitFormlc('ruleForm')">立即创建</el-button>
             <el-button @click="resetFormlc('ruleForm')">取消</el-button>
@@ -149,21 +180,19 @@
       <el-container  v-show="stepone">
         <el-header style="text-align: left; font-size: 12px">
           <el-button @click="addlouchen"><i class="el-icon-circle-plus-outline" style="margin-right: 5px" ></i>新增楼层</el-button>
-          <el-button><i class="el-icon-remove-outline" style="margin-right: 5px"></i>删除楼层</el-button>
         </el-header>
         <el-main>
-          <el-table :data="tableData"tooltip-effect="dark"  @selection-change="handleSelectionChange">
-            <el-table-column
-              type="selection"
-              width="55">
-            </el-table-column>
+          <el-table :data="tableData">
+
             <el-table-column prop="fname" label="楼层名称" >
             </el-table-column>
             <el-table-column prop="floorsByFid.length" label="房间数量">
             </el-table-column>
             <el-table-column  label="操作">
               <template slot-scope="scope">
-                <el-button size="mini"><i class="el-icon-edit" style="margin-right: 5px"></i>修改名称</el-button>
+                <el-button size="mini"  @click="updateNameByFid(scope.row.fid)"><i class="el-icon-edit" style="margin-right: 5px"></i>修改名称</el-button>
+                <el-button size="mini" @click="deldetByFid(scope.row.fid)"><i class="el-icon-remove-outline" style="margin-right: 5px"></i>删除</el-button>
+
               </template >
             </el-table-column>
           </el-table>
@@ -179,8 +208,26 @@
         <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm">
           <el-row>
             <el-col :span="12">
-              <el-form-item label="楼层名称" prop="fname">
+              <el-form-item label="房间名称" prop="fname">
                 <el-input v-model="ruleForm.fname" style="width: 200px;"></el-input>
+              </el-form-item>
+            </el-col>
+          </el-row>
+          <el-row>
+            <el-col :span="12">
+              <el-form-item label="床位数量" prop="cwnumber">
+                <el-input  style="width: 200px" v-model="ruleForm.cwnumber">
+                </el-input>
+              </el-form-item>
+            </el-col>
+            <el-col :span="12">
+              <el-form-item label="床位类型" prop="cwtype">
+                <el-select v-model="ruleForm.cwtype" filterable placeholder="请选择" >
+                  <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value">
+                    <span style="float: left">{{ item.label }}</span>
+                    <span style="float: right; color: #8492a6; font-size: 13px">{{ item.value}}</span>
+                  </el-option>
+                </el-select>
               </el-form-item>
             </el-col>
           </el-row>
@@ -193,7 +240,6 @@
       <el-container  v-show="steptwo">
         <el-header style="text-align: left; font-size: 12px">
           <el-button @click="addfangjain"><i class="el-icon-circle-plus-outline" style="margin-right: 5px"></i>新增房间</el-button>
-          <el-button> <i class="el-icon-remove-outline" style="margin-right: 5px"></i>删除房间</el-button>
 
         </el-header>
         <el-main>
@@ -204,32 +250,90 @@
             </el-table-column>
             <el-table-column prop="fname" label="房间名称">
             </el-table-column>
-            <el-table-column label="床位数量" >
-            </el-table-column>
             <el-table-column  label="操作">
               <template slot-scope="scope">
-                <el-button size="mini"><i class="el-icon-edit" style="margin-right: 5px"></i>修改名称</el-button>
+                <el-button size="mini"  @click="updateNameByFid(scope.row.fid)"><i class="el-icon-edit" style="margin-right: 5px"></i>修改名称</el-button>
+                <el-button size="mini" @click="deldetByFidfj(scope.row.fid)"><i class="el-icon-remove-outline" style="margin-right: 5px"></i>删除</el-button>
+
               </template >
             </el-table-column>
           </el-table>
         </el-main>
       </el-container>
 
+      <!--新增床位-->
+      <el-dialog
+        title="提示"
+        :visible.sync="dialogVisiblecw"
+        width="50%"
+        :before-close="handleClose">
+        <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm">
+          <el-row>
+            <el-col :span="12">
+              <el-form-item label="床位名称" prop="fname">
+                <el-input v-model="ruleForm.fname" style="width: 200px;"></el-input>
+              </el-form-item>
+            </el-col>
+            <el-col :span="12">
+              <el-form-item label="床位类型" prop="cwtype">
+                <el-select v-model="ruleForm.cwtype" filterable placeholder="请选择" >
+                  <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value">
+                    <span style="float: left">{{ item.label }}</span>
+                    <span style="float: right; color: #8492a6; font-size: 13px">{{ item.value}}</span>
+                  </el-option>
+                </el-select>
+              </el-form-item>
+            </el-col>
+          </el-row>
+          <el-form-item>
+            <el-button type="primary" @click="submitFormcw('ruleForm')">立即创建</el-button>
+            <el-button @click="resetFormcw('ruleForm')">取消</el-button>
+          </el-form-item>
+        </el-form>
+      </el-dialog>
       <el-container  v-show="steplost">
         <el-header style="text-align: left; font-size: 12px">
-          <el-button><i class="el-icon-circle-plus-outline" style="margin-right: 5px"></i>新增床位</el-button>
-          <el-button> <i class="el-icon-remove-outline" style="margin-right: 5px"></i>删除床位</el-button>
-
+          <el-button @click="addchuangwei"><i class="el-icon-circle-plus-outline" style="margin-right: 5px"></i>新增床位</el-button>
         </el-header>
         <el-main>
-          <el-table :data="tableData">
-            <el-table-column prop="date" label="日期" width="140">
-            </el-table-column>
-            <el-table-column prop="fname" label="楼层名称" width="120">
-            </el-table-column>
-            <el-table-column prop="address" label="地址">
-            </el-table-column>
-          </el-table>
+
+           <fieldset>
+             <legend>{{fname}}</legend>
+             <div v-if="bedList!=[]" v-for="i in bedList" >
+
+
+               <fieldset v-if="i.myoldman==null" style="line-height: 3;width:300px;height: 300px;margin:20px;float: left;border: 1px solid gray">
+                 <legend>{{i.bname}}</legend>
+                 <span>{{i.bedtypeByByid.byname}}</span>
+                 <p></p>
+                 床位空闲
+                 <p></p>
+                 <el-button size="mini" @click="deldetByFidcw(i)"><i class="el-icon-remove-outline" style="margin-right: 5px"></i>删除床位</el-button>
+               </fieldset>
+
+                 <fieldset v-if="i.myoldman!=null" style="line-height: 3;width:300px;height: 300px;margin:20px;float: left;border: 1px solid gray">
+                   <legend>{{i.bname}}</legend>
+                   <p></p>
+                   {{i.bedtypeByByid.byname}}
+                   <p></p>
+
+                   <span v-if="i.myoldman.tomSex=='男'">
+                     <i class="el-icon-user-solid" style="color: #0090ff"></i><span>{{i.myoldman.tomName}}</span>
+                   </span>
+                   <span v-if="i.myoldman.tomSex=='女'">
+                     <i class="el-icon-user-solid" style="color: pink"></i><span>{{i.myoldman.tomName}}</span>
+                   </span>
+                   <p></p>
+                 </fieldset>
+
+             </div>
+               <div v-if="bedList.length==0" style="height: 300px;text-align: center;line-height: 30px">
+                 该房间暂时还未添加床位
+               </div>
+           </fieldset>
+
+
+
         </el-main>
       </el-container>
 
@@ -310,6 +414,15 @@
           fjnumber: [
             { required: true, message: '请输房间数量', trigger: 'blur' }
           ],
+          cwnumber:[
+            { required: true, message: '请输床位数量', trigger: 'blur' }
+          ],
+          cwtype:[
+            { required: true, message: '请选择', trigger: 'change' }
+          ],
+          lcstyle:[
+            { required: true, message: '请选择', trigger: 'change' }
+          ]
         },
         ruleForm:{
           fname:'',
@@ -318,15 +431,250 @@
           lcstyle:'',
           mcqz:'',
           mchz:'',
+          cwnumber:'',
+          cwtype:'',
         },
         /*新增楼层*/
         dialogVisiblelc:false,
         fid:0,
         /*新增房间*/
         dialogVisiblefj:false,
+        bedType:[],
+        options:[],
+        fname :'',
+        bedList:[],
+        /*新增床位*/
+        dialogVisiblecw:false,
       }
     },
     methods:{
+      deldetByFidcw(r){
+        this.$confirm('此操作将永久删除, 是否继续?', '提示', {
+          confirmButtonText: '确定',
+          cancelButtonText: '取消',
+          type: 'warning'
+        }).then(() => {
+          console.log(r)
+          this.$axios.post("http://localhost:8089/floor/deldetByFidcw",this.$qs.stringify({
+            bid : r.bid,
+          }))
+            .then(r=>{
+              console.log(r);
+                this.$message({
+                  type: 'success',
+                  message: '删除成功 '
+                });
+              this.steplost = false
+              this.stepthree = true
+              this.dialogVisiblecw =false;
+              this.tree();
+            })
+        }).catch(() => {
+          this.$message({
+            type: 'info',
+            message: '已取消删除'
+          });
+        });
+      },
+      /*删除房间*/
+      deldetByFidfj(r){
+        this.$confirm('此操作将永久删除, 是否继续?', '提示', {
+          confirmButtonText: '确定',
+          cancelButtonText: '取消',
+          type: 'warning'
+        }).then(() => {
+          console.log(r)
+          this.$axios.post("http://localhost:8089/floor/deldetByFidfj",this.$qs.stringify({
+            fid : r,
+          }))
+            .then(r=>{
+              console.log(r);
+              if(r==2){
+                this.$message({
+                  type: 'success',
+                  message: '删除成功 '
+                });
+              }
+              if(r==1){
+                this.$message({
+                  type: 'warning',
+                  message: '删除失败:有床位有人老人住 '
+                });
+              }
+              this.tree();
+            })
+        }).catch(() => {
+          this.$message({
+            type: 'info',
+            message: '已取消删除'
+          });
+        });
+      },
+      /*删除楼层*/
+      deldetByFidlc(r){
+        this.$confirm('此操作将永久删除, 是否继续?', '提示', {
+          confirmButtonText: '确定',
+          cancelButtonText: '取消',
+          type: 'warning'
+        }).then(() => {
+          this.$axios.post("http://localhost:8089/floor/deldetByFidlc",this.$qs.stringify({
+            fid : r,
+          }))
+            .then(r=>{
+              console.log(r);
+              if(r==2){
+                this.$message({
+                  type: 'success',
+                  message: '删除成功 '
+                });
+              }
+              if(r==1){
+                this.$message({
+                  type: 'warning',
+                  message: '删除失败:有床位有人老人住 '
+                });
+              }
+              this.tree();
+            })
+        }).catch(() => {
+          this.$message({
+            type: 'info',
+            message: '已取消删除'
+          });
+        });
+      },
+      /*删除*/
+      deldetByFid(r){
+        this.$confirm('此操作将永久删除, 是否继续?', '提示', {
+          confirmButtonText: '确定',
+          cancelButtonText: '取消',
+          type: 'warning'
+        }).then(() => {
+          this.$axios.post("http://localhost:8089/floor/deldetByFid",this.$qs.stringify({
+            fid : r,
+          }))
+            .then(r=>{
+              console.log(r);
+              if(r==2){
+                this.$message({
+                  type: 'success',
+                  message: '删除成功 '
+                });
+              }
+              if(r==1){
+                this.$message({
+                  type: 'warning',
+                  message: '删除失败:有床位有人老人住 '
+                });
+              }
+              this.tree();
+            })
+        }).catch(() => {
+          this.$message({
+            type: 'info',
+            message: '已取消删除'
+          });
+        });
+      },
+      /*修改名称*/
+      updateNameByFid(r){
+        this.$prompt('请输入名字', '提示', {
+          confirmButtonText: '确定',
+          cancelButtonText: '取消',
+          inputPattern: /\S/,
+          inputErrorMessage: '请输入名称'
+        }).then(({ value }) => {
+          this.$axios.post("http://localhost:8089/floor/updateNameByFid",this.$qs.stringify({
+            fname : value,
+            fid : r,
+          }))
+            .then(r=>{
+              this.tree();
+              this.$message({
+                type: 'success',
+                message: '修改成功: '
+              });
+            })
+
+        }).catch(() => {
+          this.$message({
+            type: 'info',
+            message: '取消输入'
+          });
+        });
+        console.log(r)
+      },
+      addchuangwei(){
+        this.ruleForm={
+          fname : '',
+          lcnumber:'',
+          fjnumber:'',
+          lcstyle:'',
+          mcqz:'',
+          mchz:'',
+          cwnumber:'',
+          cwtype:''
+        }
+        this.dialogVisiblecw = true
+      },
+      /* 添加床位的from验证 新增*/
+      submitFormcw(formName) {
+        this.$refs[formName].validate((valid) => {
+          if (valid) {
+            console.log(this.ruleForm)
+            console.log(this.fid);
+            this.$axios.post("http://localhost:8089/floor/insertChuangwei",this.$qs.stringify({
+              fname : this.ruleForm.fname,
+              fjnumber : this.ruleForm.fjnumber,
+              lcnumber : this.ruleForm.lcnumber,
+              lcstyle : this.ruleForm.lcstyle,
+              mchz : this.ruleForm.mchz,
+              mcqz : this.ruleForm.mcqz,
+              fid : this.fid,
+              cwnumber:this.ruleForm.cwnumber,
+              cwtype:this.ruleForm.cwtype,
+            }))
+              .then(r=>{
+                this.tree();
+                this.steplost = false
+                this.stepthree = true
+                this.dialogVisiblecw =false;
+              })
+          } else {
+            console.log('error submit!!');
+            return false;
+          }
+        });
+      },
+      /*添加床位的from 关闭对话*/
+      resetFormcw(formName) {
+        this.$refs[formName].resetFields();
+        this.dialogVisiblecw =false;
+      },
+      /*根据fid房间id 查找床位*/
+      selectByFid(){
+        console.log(this.fid);
+        console.log(this.tableData);
+        this.$http.post("http://localhost:8089/floor/selectByFid",this.$qs.stringify({fid:this.fid}))
+          .then((res) => {
+            this.bedList = res;
+            console.log(res)
+          })
+      },
+      /*获取床位类型*/
+      selectBedType(){
+        this.$axios.post("http://localhost:8089/bedType/selectAll").then(r=>{
+          this.bedType = r;
+          this.bedType.forEach(v => {
+            var json = {
+              value: v.byid,
+              label: v.byname
+            };
+            this.options.push(json);
+          });
+          console.log(this.options);
+        })
+      },
       /*打开 添加房间的from 对话*/
       addfangjain(){
         this.ruleForm={
@@ -336,6 +684,8 @@
           lcstyle:'',
           mcqz:'',
           mchz:'',
+          cwnumber:'',
+          cwtype:''
         }
         this.dialogVisiblefj = true
       },
@@ -352,7 +702,9 @@
               lcstyle : this.ruleForm.lcstyle,
               mchz : this.ruleForm.mchz,
               mcqz : this.ruleForm.mcqz,
-              fid : this.fid
+              fid : this.fid,
+              cwnumber:this.ruleForm.cwnumber,
+              cwtype:this.ruleForm.cwtype,
             }))
               .then(r=>{
                 this.tree();
@@ -379,6 +731,8 @@
           lcstyle:'',
           mcqz:'',
           mchz:'',
+          cwnumber:'',
+          cwtype:'',
         }
         this.dialogVisiblelc = true
       },
@@ -395,7 +749,9 @@
               lcstyle : this.ruleForm.lcstyle,
               mchz : this.ruleForm.mchz,
               mcqz : this.ruleForm.mcqz,
-              fid : this.fid
+              fid : this.fid,
+              cwnumber:this.ruleForm.cwnumber,
+              cwtype:this.ruleForm.cwtype
             }))
               .then(r=>{
                 this.tree();
@@ -424,7 +780,9 @@
               lcnumber : this.ruleForm.lcnumber,
               lcstyle : this.ruleForm.lcstyle,
               mchz : this.ruleForm.mchz,
-              mcqz : this.ruleForm.mcqz
+              mcqz : this.ruleForm.mcqz,
+              cwnumber:this.ruleForm.cwnumber,
+              cwtype:this.ruleForm.cwtype,
             }))
               .then(r=>{
                 this.tree();
@@ -451,6 +809,8 @@
           lcstyle:'',
           mcqz:'',
           mchz:'',
+          cwnumber:'',
+          cwtype:'',
         }
         this.dialogVisible = true
       },
@@ -469,8 +829,6 @@
       },
       /*树形控件的点击事件*/
       handleNodeClick(data) {
-        console.log(data);
-        console.log(data.ftype);
 
         if(data.ftype == 0){
           this.stepone = false;
@@ -478,7 +836,6 @@
           this.stepthree = true;
           this.steplost = false
           this.tableData=data.floorsByFid;
-          console.log(data.floorsByFid)
 
         }else if (data.ftype == 1){
           this.stepone = true;
@@ -494,12 +851,15 @@
           this.steplost = false;
           this.tableData=data.floorsByFid;
           this.fid = data.fid;
+
         }else if (data.ftype == 3){
           this.stepone = false;
           this.steptwo = false;
           this.stepthree = false;
           this.steplost = true;
-
+          this.fid = data.fid;
+          this.fname = data.fname;
+          this.selectByFid();
         }
       },
 
@@ -516,6 +876,7 @@
     created() {
       this.numberhome=0;
       this.tree();
+      this.selectBedType();
     }
   }
 </script>

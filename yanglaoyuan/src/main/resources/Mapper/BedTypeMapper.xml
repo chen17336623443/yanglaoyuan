@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yanglaoyuan.model.Mapper.IBedTypeMapper">
+    <resultMap id="Bedtype" type="com.yanglaoyuan.pojo.Bedtype">
+        <id column="byid" property="byid"/>
+        <result column="byname" property="byname"/>
+        <result column="bymoney" property="bymoney"/>
+        <result column="byallmoney" property="byallmoney"/>
+        <result column="bytime" property="bytime"/>
+        <result column="byinfo" property="byinfo"/>
+        <result column="byimg" property="byimg"/>
+    </resultMap>
+    <select id="selectAll" resultMap="Bedtype">
+         SELECT * FROM bedtype
+    </select>
+</mapper>

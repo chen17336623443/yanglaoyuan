@@ -5,6 +5,7 @@ import login from '@/page/login'
 import hugongguanli from '@/components/hugongguanli'
 import Outregistration from '@/components/Outregistration'
 import Floor from '@/components/Floor'
+import BedType from '@/components/BedType'
 
 import Yucungl from
     '@/components/Yucungl'
@@ -58,7 +59,10 @@ const router = new Router({
                 path:'/Floor',
                 component: Floor
               },
-
+              {
+                path:'/BedType',
+                component: BedType
+              },
               {
                 path: '/ycgl',
                 component: Yucungl
