@@ -4,6 +4,36 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.yanglaoyuan.model.Mapper.INursingMapper">
     <resultMap id="all" type="com.yanglaoyuan.pojo.Nursing">
-
+        <id column="nu_id" property="nuId"/>
+        <result column="nu_name" property="nuName"/>
+        <result column="nu_monry" property="nuMonry"/>
+        <result column="nu_way" property="nuWay"/>
+        <result column="nu_time" property="nuTime"/>
+        <result column="nu_other" property="nuOther"/>
+        <association property="nursingtypeByNtId" javaType="com.yanglaoyuan.pojo.Nursingtype">
+            <id column="nt_id" property="ntId"/>
+            <result column="nt_name" property="ntName"/>
+            <result column="nt_other" property="ntOther"/>
+        </association>
     </resultMap>
+
+    <select id="selectall" resultMap="all">
+        select * from nursing n inner join nursingtype t on n.nt_id=t.nt_id
+    </select>
+
+    <select id="selectbyid" resultMap="all">
+        select * from nursing n inner join nursingtype t on n.nt_id=t.nt_id where n.nt_id=#{id}
+    </select>
+
+    <delete id="del">
+        delete from nursing where nu_id=#{id}
+    </delete>
+
+    <update id="upd">
+        update nursing set nu_name=#{nuname},nu_monry=#{numonry},nu_time=#{nutime},nu_other=#{nuother} where nu_id=#{nuid}
+    </update>
+
+    <select id="selectid" resultMap="all">
+         select * from nursing where nt_id=#{id}
+    </select>
 </mapper>

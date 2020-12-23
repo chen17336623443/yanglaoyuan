@@ -18,6 +18,7 @@ public class Nursing {
 
     @Id
     @Column(name = "nu_id", nullable = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     public Integer getNuId() {
         return nuId;
     }

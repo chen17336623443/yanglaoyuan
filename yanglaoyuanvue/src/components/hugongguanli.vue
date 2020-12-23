@@ -127,11 +127,12 @@
         </el-table>
 
         <el-pagination
+          background
           style="float: right; margin-top: 20px"
           @current-change="handleCurrentChange"
+          :current-page.sync="currentPage"
           :page-size="pagesize"
-          background
-          layout="prev, pager, next, jumper"
+          layout="total, prev, pager, next"
           :total="total"
         >
         </el-pagination>
@@ -268,6 +269,7 @@ export default {
     return {
       form: {},
       laoren: [],
+      currentPage: 0,
       xuanzhe: [],
       kongxian: [],
       tableData: [],
@@ -303,6 +305,7 @@ export default {
         this.tableData = res.list;
         this.pagesize = res.pageSize;
         this.total = res.total;
+        this.currentPage = res.pageNum;
       });
       this.$http.get("oldman/noall").then((res) => {
         this.kongxian = res;
@@ -323,6 +326,7 @@ export default {
           this.pagenum = 1;
           this.tableData = res.list;
           this.pagesize = res.pageSize;
+          this.currentPage = res.pageNum;
           this.total = res.total;
         });
       } else if (this.pagenum == 2) {
@@ -339,6 +343,7 @@ export default {
             this.pagenum = 2;
             this.tableData = res.list;
             this.pagesize = res.pageSize;
+            this.currentPage = res.pageNum;
             this.total = res.total;
           });
       }
@@ -369,6 +374,7 @@ export default {
             this.pagenum = 2;
             this.tableData = res.list;
             this.pagesize = res.pageSize;
+        this.currentPage=res.pageNum
             this.total = res.total;
           });
       }

@@ -6,8 +6,7 @@ import hugongguanli from '@/components/hugongguanli'
 import Outregistration from '@/components/Outregistration'
 import Floor from '@/components/Floor'
 
-import Yucungl from
-    '@/components/Yucungl'
+import Yucungl from '@/components/Yucungl'
 import FoodManage from '@/components/FoodManage'
 import FoodPackge from '@/components/FoodPackge'
 
@@ -17,7 +16,7 @@ import consult from '@/components/consult'
 import Huliguanli from '@/components/Huliguanli'
 
 import Feiyonls from '@/components/Feiyonls'
-
+import Hulijibie from '@/components/Hulijibie'
 Vue.use(Router)
 
 const router = new Router({
@@ -31,54 +30,56 @@ const router = new Router({
         {
 
             path: '/home',
-            component: yanglaoyuan
-            ,
-            children: [
-              {
-                path: '/',
-                component: dashboard
-              },
-              {
-                path: '/hugongguanli',
-                component: hugongguanli
-              },
-            {
-                path: '/foodManage',
-                component: FoodManage
-            },
-            {
-                path: '/foodPackge',
-                component: FoodPackge
-            },
-            {
-                path: '/outregistration',
-                component: Outregistration
-              },
-              {
-                path:'/Floor',
-                component: Floor
-              },
+            component: yanglaoyuan,
+            children: [{
+                    path: '/',
+                    component: dashboard
+                },
+                {
+                    path: '/hugongguanli',
+                    component: hugongguanli
+                },
+                {
+                    path: '/hugongguanli',
+                    component: hugongguanli
+                },
+                {
+                    path: '/foodManage',
+                    component: FoodManage
+                },
+                {
+                    path: '/Hulijibie',
+                    component: Hulijibie
+                },
+                {
+                    path: '/outregistration',
+                    component: Outregistration
+                },
+                {
+                    path: '/Floor',
+                    component: Floor
+                },
 
-              {
-                path: '/ycgl',
-                component: Yucungl
-              },
-              {
-                path: '/outregistration',
-                component: Outregistration
-              },
-              {
-                path: '/consult',
-                component: consult
-              },
-              {
-                path: '/fyls',
-                component: Feiyonls
-              },
-              {
-                path: '/Huliguanli',
-                component: Huliguanli
-              }
+                {
+                    path: '/ycgl',
+                    component: Yucungl
+                },
+                {
+                    path: '/outregistration',
+                    component: Outregistration
+                },
+                {
+                    path: '/consult',
+                    component: consult
+                },
+                {
+                    path: '/fyls',
+                    component: Feiyonls
+                },
+                {
+                    path: '/Huliguanli',
+                    component: Huliguanli
+                }
             ]
         }
     ]
