@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--
+    @description: 点餐Mybatis配置文件
+    @author: YeJin Tan
+    @create: 2020-12-23 14:14
+-->
+<mapper namespace="com.yanglaoyuan.model.Mapper.IFoodorderMapper">
+    <resultMap id="FoodorderMap" type="Foodorder">
+        <id property="foId" column="fo_id"/>
+        <result property="foMeals" column="fo_meals"/>
+        <result property="foTime" column="fo_time"/>
+        <result property="foPrice" column="fo_price"/>
+        <result property="foState" column="fo_state"/>
+        <association property="oldmanByOmId" javaType="Oldman">
+            <id property="omId" column="om_id"/>
+            <result property="tomName" column="tom_name"/>
+            <result property="tomCard" column="tom_card"/>
+            <result property="tomSex" column="tom_sex"/>
+            <result property="tomNumber" column="tom_number"/>
+            <result property="tomAddress" column="tom_address"/>
+            <result property="tomCategory" column="tom_category"/>
+            <result property="tomDiet" column="tom_diet"/>
+            <result property="tomLabour" column="tom_labour"/>
+            <result property="tomCheckIntime" column="tom_check_intime"/>
+            <result property="tomFn" column="tom_fn"/>
+            <result property="tomImg" column="tom_img"/>
+        </association>
+        <collection property="foodorderdetails" ofType="Foodorderdetails" column="fo_id" select="com.yanglaoyuan.model.Mapper.IFoodorderdetailsMapper.selectFoodorderdetailsByFoId">
+            <id property="fodId" column="fod_id"/>
+            <result property="fodNumber" column="fod_number"/>
+            <result property="fodTotal" column="fod_total"/>
+        </collection>
+    </resultMap>
+    <!--//新增点餐
+    Integer insertFoodorder(@Param("forder")Foodorder forder);-->
+    <insert id="insertFoodorder" parameterType="Foodorder" useGeneratedKeys="true" keyProperty="foId">
+        insert into foodorder(fo_id,om_id,fo_meals,fo_time,fo_price,fo_state)
+        value(null,#{forder.oldmanByOmId.omId},#{forder.foMeals},#{forder.foTime},#{forder.foPrice},#{forder.foState})
+    </insert>
+    <!--//查询所有点餐
+    List<Foodorder> selectFoodorderAll();-->
+    <select id="selectFoodorderAll" resultMap="FoodorderMap">
+        select * from foodorder fo left join oldman om on fo.om_id=om.om_id
+    </select>
+    <!--//送餐改变状态
+    Integer updateFoodorderState(Integer fo_id);-->
+    <update id="updateFoodorderState" parameterType="java.lang.Integer">
+        update foodorder set fo_state=2 where fo_id=#{fo_id}
+    </update>
+    <!--//根据id查询点餐数据  送餐查询
+    Foodorder selectFoodorderByFoId(Integer fo_id);-->
+    <select id="selectFoodorderByFoId" resultMap="FoodorderMap">
+        select * from foodorder fo left join oldman om on fo.om_id=om.om_id where fo.fo_id=#{fo_id}
+    </select>
+</mapper>

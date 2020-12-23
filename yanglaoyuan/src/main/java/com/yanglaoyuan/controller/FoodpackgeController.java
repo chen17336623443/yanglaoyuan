@@ -5,8 +5,12 @@ import com.yanglaoyuan.service.FoodpackgeServices;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
 
 /**
@@ -57,5 +61,26 @@ public class FoodpackgeController {
      */
     public Integer updateFoodpackge(@ModelAttribute Foodpackge fpackge){
         return fps.updateFoodpackge(fpackge);
+    }
+
+    //给套餐修改图片
+    @RequestMapping("/updateImg")
+    /**
+     *@Description 方法是:updateFoodpackgeImg
+     *@Param 参数是:[fp_id, file]
+     *@Return 返回类型是:java.lang.Integer
+     *@Author tanyejin
+     *@Date 2020-12-23 11:09
+     */
+    public Integer updateFoodpackgeImg(@RequestParam("fp_id") Integer fp_id, MultipartFile file){
+        System.out.println("文件名："+file.getOriginalFilename()+",id是："+fp_id);
+        String path="D:/Yanglaoyuan/yanglaoyuan/yanglaoyuanvue/static/imgs/"+file.getOriginalFilename();
+        try {
+            file.transferTo(new File(path));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        int result=fps.updateFoodpackgeImg(fp_id, file.getOriginalFilename());
+        return result;
     }
 }

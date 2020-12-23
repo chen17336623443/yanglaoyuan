@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--
+    @description: 食物周次Mybatis配合文件
+    @author: YeJin Tan
+    @create: 2020-12-23 11:11
+-->
+<mapper namespace="com.yanglaoyuan.model.Mapper.IFoodweekMapper">
+    <resultMap id="FoodweekMap" type="Foodweek">
+        <id property="fwId" column="fw_id"/>
+        <result property="fwWeekday" column="fw_weekday"/>
+        <result property="fwMeals" column="fw_meals"/>
+        <result property="fwFoods" column="fw_foods"/>
+        <collection property="foods" ofType="Food">
+
+        </collection>
+    </resultMap>
+    <!--//根据套餐id查询食物周次
+    List<Foodweek> selectFoodweekByFpId(Integer fp_id);-->
+    <select id="selectFoodweekByFpId" resultMap="FoodweekMap">
+        select * from foodweek where fp_id=#{fp_id}
+    </select>
+</mapper>

@@ -1,5 +1,7 @@
 package com.yanglaoyuan.pojo;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.sql.Timestamp;
@@ -11,11 +13,11 @@ public class Foodorder {
     private Integer foId;
     private String foMeals;
     private Timestamp foTime;
-    private String foFoods;
     private BigDecimal foPrice;
     private Integer foState;
     private List<Fooddelivered> fooddeliveredsByFoId;
     private Oldman oldmanByOmId;
+    private List<Foodorderdetails> foodorderdetails;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -39,6 +41,7 @@ public class Foodorder {
     }
 
     @Basic
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
     @Column(name = "fo_time", nullable = true)
     public Timestamp getFoTime() {
         return foTime;
@@ -46,16 +49,6 @@ public class Foodorder {
 
     public void setFoTime(Timestamp foTime) {
         this.foTime = foTime;
-    }
-
-    @Basic
-    @Column(name = "fo_foods", nullable = true, length = 255)
-    public String getFoFoods() {
-        return foFoods;
-    }
-
-    public void setFoFoods(String foFoods) {
-        this.foFoods = foFoods;
     }
 
     @Basic
@@ -86,14 +79,13 @@ public class Foodorder {
         return Objects.equals(foId, foodorder.foId) &&
                 Objects.equals(foMeals, foodorder.foMeals) &&
                 Objects.equals(foTime, foodorder.foTime) &&
-                Objects.equals(foFoods, foodorder.foFoods) &&
                 Objects.equals(foPrice, foodorder.foPrice) &&
                 Objects.equals(foState, foodorder.foState);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(foId, foMeals, foTime, foFoods, foPrice, foState);
+        return Objects.hash(foId, foMeals, foTime, foPrice, foState);
     }
 
     @OneToMany(mappedBy = "foodorderByFoId")
@@ -113,5 +105,14 @@ public class Foodorder {
 
     public void setOldmanByOmId(Oldman oldmanByOmId) {
         this.oldmanByOmId = oldmanByOmId;
+    }
+
+    @OneToMany(mappedBy = "foodorder")
+    public List<Foodorderdetails> getFoodorderdetails() {
+        return foodorderdetails;
+    }
+
+    public void setFoodorderdetails(List<Foodorderdetails> foodorderdetails) {
+        this.foodorderdetails = foodorderdetails;
     }
 }

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--
+    @description: 送餐Mybatis配置文件
+    @author: YeJin Tan
+    @create: 2020-12-24 02:24
+-->
+<mapper namespace="com.yanglaoyuan.model.Mapper.IFooddeliveredMapper">
+    <resultMap id="FooddeliveredMap" type="Fooddelivered">
+        <id property="fdId" column="fd_id"/>
+        <result property="fdType" column="fd_type"/>
+        <result property="fdTime" column="fd_time"/>
+        <result property="fdAddress" column="fd_address"/>
+        <association property="foodorderByFoId" javaType="Foodorder">
+            <id property="foId" column="fo_id"/>
+            <result property="foMeals" column="fo_meals"/>
+            <result property="foTime" column="fo_time"/>
+            <result property="foPrice" column="fo_price"/>
+            <result property="foState" column="fo_state"/>
+        </association>
+    </resultMap>
+    <!--//送餐新增
+    Integer insertFooddelivered(@Param("fdel") Fooddelivered fdel);-->
+    <insert id="insertFooddelivered" parameterType="Fooddelivered">
+        insert into fooddelivered(fd_id,fo_id,fd_type,fd_time,fd_address)
+        value (null,#{fdel.foodorderByFoId.foId},#{fdel.fdType},#{fdel.fdTime},#{fdel.fdAddress})
+    </insert>
+    <!--//查询所有送餐记录
+    List<Fooddelivered> selectFooddeliveredAll();-->
+    <select id="selectFooddeliveredAll" resultMap="FooddeliveredMap">
+        select * from fooddelivered
+    </select>
+</mapper>

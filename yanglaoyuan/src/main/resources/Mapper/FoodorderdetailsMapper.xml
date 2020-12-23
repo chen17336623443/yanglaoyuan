@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--
+    @description: 点餐详情Mybatis配置文件
+    @author: YeJin Tan
+    @create: 2020-12-23 15:28
+-->
+<mapper namespace="com.yanglaoyuan.model.Mapper.IFoodorderdetailsMapper">
+    <resultMap id="FoodorderdetailsMap" type="Foodorderdetails">
+        <id property="fodId" column="fod_id"/>
+        <result property="fodNumber" column="fod_number"/>
+        <result property="fodTotal" column="fod_total"/>
+        <!--点餐表-->
+        <association property="foodorder" javaType="Foodorder">
+            <id property="foId" column="fo_id"/>
+            <result property="foMeals" column="fo_meals"/>
+            <result property="foTime" column="fo_time"/>
+            <result property="foPrice" column="fo_price"/>
+            <result property="foState" column="fo_state"/>
+        </association>
+        <!--食物表-->
+        <association property="food" javaType="Food">
+            <id property="fId" column="f_id"/>
+            <result property="fName" column="f_name"/>
+            <result property="fPrice" column="f_price"/>
+            <result property="fPiquancy" column="f_piquancy"/>
+            <result property="fTaste" column="f_taste"/>
+            <result property="fImg" column="f_img"/>
+            <result property="fSales" column="f_sales"/>
+            <result property="fRemark" column="f_remark"/>
+        </association>
+    </resultMap>
+    <!--//根据点餐id查询点餐详情
+    List<Foodorderdetails> selectFoodorderdetailsByFoId(Integer fo_id);-->
+    <select id="selectFoodorderdetailsByFoId" resultMap="FoodorderdetailsMap">
+        select * from foodorderdetails fod
+        inner join foodorder fo on fod.fo_id=fo.fo_id
+        inner join food f on fod.f_id=f.f_id
+        where fod.fo_id=#{fo_id}
+    </select>
+    <!--//点餐详情新增
+    Integer insertFoodorderdetails(List<Foodorderdetails> params);-->
+    <insert id="insertFoodorderdetails" parameterType="ArrayList">
+        insert into foodorderdetails(fod_id,fo_id,f_id,fod_number,fod_total)
+        values
+        <foreach collection="list" item="item" separator=",">
+            (null,#{item.foodorder.foId},#{item.food.fId},#{item.fodNumber},#{item.fodTotal})
+        </foreach>
+    </insert>
+</mapper>

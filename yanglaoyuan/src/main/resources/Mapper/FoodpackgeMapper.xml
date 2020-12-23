@@ -37,4 +37,9 @@
     <delete id="deleteFoodpackge" parameterType="java.lang.Integer">
         delete from foodpackge where fp_id=#{fp_id}
     </delete>
+    <!--//给套餐修改图片
+    Integer updateFoodpackgeImg(@Param("fp_id") Integer fp_id,@Param("fp_img") String fp_img);-->
+    <update id="updateFoodpackgeImg">
+        update from foodpackge set fp_img=#{fp_img} where fp_id=#{fp_id}
+    </update>
 </mapper>

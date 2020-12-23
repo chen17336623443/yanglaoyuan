@@ -46,6 +46,12 @@ public class FoodController {
         return fs.selectFoodAll(new Integer(pageNo), new Integer(pageSize));
     }
 
+    //查询所有食物 不带分页
+    @RequestMapping("/allNotPage")
+    public List<Food> selectFoodAll2(){
+        return fs.selectFoodAll2();
+    }
+
     //所有食物类型
     @RequestMapping("/alltype")
     public List<Foodtype> selectFoodtypeAll(){
@@ -62,6 +68,7 @@ public class FoodController {
      *@Date 2020-12-22 9:33
      */
     public Integer updateFood(@RequestBody Food food){
+        //如果食物有禁忌人群则添加关联
         if(food.getTaboocrowds().size()>0){
             fs.deleteFoodTabs(food.getfId());
             List<Map<String,Integer>> list=new ArrayList<>();
@@ -163,5 +170,27 @@ public class FoodController {
      */
     public List<Taboocrowd> selectTaboocrowdAll(){
         return fs.selectTaboocrowdAll();
+    }
+
+    //点餐 组合查询食物
+    @RequestMapping("/groupFood")
+    public List<Food> groupFood(@RequestParam(value = "fPiquancy",required = false) String fPiquancy,@RequestParam(value = "fTaste",required = false) String fTaste,
+                                @RequestParam(value = "maxPrice",required = false) Integer maxPrice,
+                               @RequestParam(value = "minPrice",required = false) Integer minPrice,
+                                @RequestParam(value = "taboocrowds",required = false) String taboocrowds){
+        List<Integer> list=new ArrayList<>();
+        if(taboocrowds!=null){
+            String[] array=taboocrowds.split(",");
+            for (String s : array) {
+                list.add(new Integer(s));
+            }
+        }
+        List<Food> foods=fs.groupFood(fPiquancy,fTaste,maxPrice, minPrice, list);
+        System.out.println("查询的长度为："+foods.size());
+        for (Food food : foods) {
+            System.out.println(food);
+        }
+        return foods;
+
     }
 }
