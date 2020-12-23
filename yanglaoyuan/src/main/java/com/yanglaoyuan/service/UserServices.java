@@ -9,7 +9,12 @@ import org.springframework.stereotype.Service;
 public class UserServices {
     @Autowired
     IUserMapper um;
+
     public User login(String phone,String upass){
         return um.login(phone, upass);
+    }
+
+    public User selectByuid(Integer uid){
+        return um.selectByUid(uid);
     }
 }

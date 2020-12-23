@@ -16,6 +16,7 @@ public class Foodpackge {
     private List<Oldman> oldmans;
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "fp_id", nullable = false)
     public Integer getFpId() {
         return fpId;

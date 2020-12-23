@@ -20,6 +20,12 @@ public interface IOldmanMapper {
 
     List<Oldman> selectoldmanByid(Integer acid);
 
+    /*根据老人主键查询*/
+    Oldman selectOldmanByomid(Integer omid);
+
+    /*查询未外出的老人*/
+    List<Oldman> selectNotOut();
+
     //护工离职 老人外键删除
     int del(Integer id);
 

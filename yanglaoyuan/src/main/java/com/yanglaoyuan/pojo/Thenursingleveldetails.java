@@ -10,7 +10,7 @@ public class Thenursingleveldetails {
     private Integer tsldType;
     private Integer tsldNumber;
     private Timestamp tsldTime;
-    private Nursing nursingByNurId;
+    private Nursing nursingByNuId;
     private Thenursinglevel thenursinglevelByTslId;
 
     @Id
@@ -71,12 +71,12 @@ public class Thenursingleveldetails {
 
     @ManyToOne
     @JoinColumn(name = "nu_id", referencedColumnName = "nu_id")
-    public Nursing getNursingByNurId() {
-        return nursingByNurId;
+    public Nursing getNursingByNuId() {
+        return nursingByNuId;
     }
 
-    public void setNursingByNurId(Nursing nursingByNurId) {
-        this.nursingByNurId = nursingByNurId;
+    public void setNursingByNuId(Nursing nursingByNuId) {
+        this.nursingByNuId = nursingByNuId;
     }
 
     @ManyToOne

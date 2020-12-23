@@ -2,6 +2,7 @@ package com.yanglaoyuan.model.Dao;
 
 import com.yanglaoyuan.pojo.Nursing;
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.stereotype.Repository;
 
 /**
  * @program: yanglaoyuan
@@ -9,5 +10,6 @@ import org.springframework.data.repository.CrudRepository;
  * @author: JiaWei Liu
  * @create: 2020-12-22 21:44
  */
+@Repository
 public interface INursingDao extends CrudRepository<Nursing,Integer> {
 }

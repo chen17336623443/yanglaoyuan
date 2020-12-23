@@ -23,6 +23,12 @@ public class OldmanController {
         return oldmanServices.selectAll();
     }
 
+    /*查询未外出的老人*/
+    @PostMapping("/selectNotOut")
+    public List<Oldman> selectNotOut(){
+        return oldmanServices.selectNotOut();
+    }
+
     @RequestMapping("/del")
     public void del(Integer omid){
         oldmanServices.del(omid);

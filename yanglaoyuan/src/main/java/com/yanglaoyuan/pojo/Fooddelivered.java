@@ -13,6 +13,7 @@ public class Fooddelivered {
     private Foodorder foodorderByFoId;
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "fd_id", nullable = false)
     public Integer getFdId() {
         return fdId;

@@ -12,6 +12,7 @@ public class Foodweek {
     private Foodpackge foodpackgeByFpId;
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "fw_id", nullable = false)
     public Integer getFwId() {
         return fwId;

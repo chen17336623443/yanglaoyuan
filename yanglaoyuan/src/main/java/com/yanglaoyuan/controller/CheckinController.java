@@ -2,7 +2,6 @@ package com.yanglaoyuan.controller;
 
 import com.github.pagehelper.PageInfo;
 import com.yanglaoyuan.pojo.Checkin;
-import com.yanglaoyuan.pojo.Deposit;
 import com.yanglaoyuan.service.CheckinService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;

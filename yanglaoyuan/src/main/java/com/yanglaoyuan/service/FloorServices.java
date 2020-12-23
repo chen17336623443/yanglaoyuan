@@ -1,6 +1,7 @@
 package com.yanglaoyuan.service;
 
-import com.yanglaoyuan.model.Mapper.FloorMapper;
+import com.yanglaoyuan.model.Dao.IFloorDao;
+import com.yanglaoyuan.model.Mapper.IFloorMapper;
 import com.yanglaoyuan.pojo.Floor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,8 +17,15 @@ import java.util.List;
 @Service
 public class FloorServices {
     @Autowired
-    FloorMapper mapper;
+    IFloorMapper mapper;
+    @Autowired
+    IFloorDao dao;
+
     public List<Floor> selectAll(){
         return mapper.selectAll();
+    }
+
+    public Floor insertLou2(Floor floor){
+        return dao.save(floor);
     }
 }

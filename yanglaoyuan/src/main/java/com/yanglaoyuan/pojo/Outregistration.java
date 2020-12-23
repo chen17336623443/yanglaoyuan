@@ -1,5 +1,7 @@
 package com.yanglaoyuan.pojo;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import javax.persistence.*;
 import java.sql.Timestamp;
 import java.util.Objects;
@@ -7,10 +9,13 @@ import java.util.Objects;
 @Entity
 public class Outregistration {
     private Integer outId;
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss" , timezone = " GMT+8 " )
     private Timestamp outTime;
     private String outAccompanyname;
     private String outAccompanyphone;
+    @JsonFormat (pattern = "yyyy-MM-dd HH:mm:ss" , timezone = " GMT+8 " )
     private Timestamp outReturntime;
+    @JsonFormat (pattern = "yyyy-MM-dd HH:mm:ss" , timezone = " GMT+8 " )
     private Timestamp outReturnestimate;
     private Integer outOutsum;
     private String outReason;
@@ -20,6 +25,7 @@ public class Outregistration {
 
     @Id
     @Column(name = "out_id", nullable = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     public Integer getOutId() {
         return outId;
     }
@@ -129,6 +135,21 @@ public class Outregistration {
     @Override
     public int hashCode() {
         return Objects.hash(outId,outTime, outAccompanyname, outAccompanyphone, outReturntime, outReturnestimate, outOutsum, outReason, outTrue);
+    }
+
+    @Override
+    public String toString() {
+        return "Outregistration{" +
+                "outId=" + outId +
+                ", outTime=" + outTime +
+                ", outAccompanyname='" + outAccompanyname + '\'' +
+                ", outAccompanyphone='" + outAccompanyphone + '\'' +
+                ", outReturntime=" + outReturntime +
+                ", outReturnestimate=" + outReturnestimate +
+                ", outOutsum=" + outOutsum +
+                ", outReason='" + outReason + '\'' +
+                ", outTrue=" + outTrue +
+                '}';
     }
 
     @ManyToOne

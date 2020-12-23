@@ -5,6 +5,7 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
+import java.sql.Timestamp;
 import java.util.List;
 
 /**
@@ -17,6 +18,9 @@ import java.util.List;
 @Mapper
 public interface IOutregistrationMapper {
 
-    List<Outregistration> selectByParam(@Param("tomName")String tomName,@Param("outtrue")String outtrue,@Param("time1")String time1,@Param("time2")String time2);
+    List<Outregistration> selectByParam(@Param("tomName")String tomName,@Param("outtrue")Integer outtrue,@Param("time1")String time1,@Param("time2")String time2);
 
+    Integer updateOutregistration(@Param("outid")Integer outid, @Param("outReturntime")Timestamp outReturntime);
+
+    Integer updateOutReturnestimate(@Param("outid")Integer outid, @Param("outReturnestimate")Timestamp outReturnestimate);
 }

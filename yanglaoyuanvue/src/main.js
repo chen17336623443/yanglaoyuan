@@ -6,17 +6,22 @@ import router from './router' /*路由 src/router/index.js*/
 /*引用axios*/
 import axios from 'axios'
 import http from './util/http'
-/*引用qs */
-import qs from 'qs'
-Vue.prototype.$qs = qs;
+
+/*引用moment*/
+import moment from 'moment'
+Vue.use(require('vue-moment'));
+Vue.prototype.moment = moment;
 
 /* 3、全局导入element-ui */
 import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
 /*4.文字图标*/
 import * as socketApi from './util/socket'
+//引入字体图标 cnpm i font-awesome -S
+import 'font-awesome/css/font-awesome.min.css'
 // fade/zoom 等
 import 'element-ui/lib/theme-chalk/base.css';
+
 // collapse 展开折叠
 import CollapseTransition from 'element-ui/lib/transitions/collapse-transition';
 Vue.component(CollapseTransition.name, CollapseTransition)

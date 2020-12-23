@@ -22,15 +22,73 @@
             <result property="ftName" column="ft_name"/>
             <result property="ftRemark" column="ft_remark"/>
         </association>
+        <collection property="taboocrowds" ofType="Taboocrowd" column="f_id" select="com.yanglaoyuan.model.Mapper.ITaboocrowdMapper.selectTaboocrowdByFid">
+            <id property="tcId" column="tc_id"/>
+            <result property="tcName" column="tc_name"/>
+            <result property="tcRemark" column="tc_remark"/>
+        </collection>
     </resultMap>
     <!--//查询所有食物
     List<Food> selectFoodAll();-->
     <select id="selectFoodAll" resultMap="FoodMap">
-        select * from food f left join foodtype ft on f.ft_id=ft.ft_id order by f_id desc
+        select * from food f left join foodtype ft on f.ft_id=ft.ft_id order by f.f_id desc
     </select>
     <!--//根据类别id查询该类别下的所有食物
     List<Food> selectFoodAllByFoodtypeId(Integer ft_id);-->
     <select id="selectFoodAllByFoodtypeId" resultMap="FoodMap" parameterType="java.lang.Integer">
         select * from food where ft_id=#{ft_id}
     </select>
+    <!--//修改食物
+    Integer updateFood(@Param("food")Food food);-->
+    <update id="updateFood" parameterType="Food">
+        update food set ft_id=#{food.foodtypeByFtId.ftId},f_name=#{food.fName},f_price=#{food.fPrice},f_piquancy=#{food.fPiquancy}
+        ,f_taste=#{food.fTaste},f_remark=#{food.fRemark} where f_id=#{food.fId}
+    </update>
+    <!--//修改食物图片
+    Integer updateFoodImg(@Param("f_id")Integer f_id,@Param("f_img")String f_img);-->
+    <update id="updateFoodImg">
+        update food set f_img=#{f_img} where f_id=#{f_id}
+    </update>
+    <!--//组合查询食物
+    List<Food> comQueryFood(@Param("ft_id")Integer ft_id,@Param("f_name")String f_name,@Param("f_reamrk")String f_remark);-->
+    <select id="comQueryFood" resultMap="FoodMap">
+        select * from food f left join foodtype ft on f.ft_id=ft.ft_id
+        <where>
+            <if test="ft_id!=null and ft_id>0">
+                and f.ft_id =#{ft_id}
+            </if>
+            <if test="f_name !=null and f_name!=''">
+                and f.f_name like concat('%',#{f_name},'%')
+            </if>
+            <if test="f_remark!=null and f_remark!=''">
+                and f.f_remark like concat('%',#{f_remark},'%')
+            </if>
+        </where>
+        order by f.f_id desc
+    </select>
+    <!--//新增食物
+    Integer insertFood(@Param("food") Food food);-->
+    <insert id="insertFood" parameterType="Food" useGeneratedKeys="true" keyProperty="fId">
+        insert into food(f_id,ft_id,f_name,f_price,f_piquancy,f_taste,f_img,f_sales,f_remark)
+        value(null,#{food.foodtypeByFtId.ftId},#{food.fName},#{food.fPrice},#{food.fPiquancy},#{food.fTaste},#{food.fImg},0,#{food.fRemark})
+    </insert>
+    <!--//删除食物
+    Integer deleteFood(Integer f_id);-->
+    <delete id="deleteFood" parameterType="java.lang.Integer">
+        delete from food where f_id=#{f_id}
+    </delete>
+    <!--//删除食物的禁忌人群(删除中间表)
+    Integer deleteFoodTabs(Integer f_id);-->
+    <delete id="deleteFoodTabs" parameterType="java.lang.Integer">
+        delete from foodtaboocrowd where f_id=#{f_id}
+    </delete>
+    <!--//给食物添加禁忌人群
+    Integer insertFoodTabs(List<Map<String,Integer>> listParam);-->
+    <insert id="insertFoodTabs" parameterType="ArrayList">
+        insert into foodtaboocrowd(ftc_id,tc_id,f_id)
+        values
+        <foreach collection="list" item="l" separator="," >
+            (null,#{l.tc_id},#{l.f_id})
+        </foreach>
+    </insert>
 </mapper>

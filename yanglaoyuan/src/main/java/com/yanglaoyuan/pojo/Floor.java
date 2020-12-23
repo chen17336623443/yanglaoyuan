@@ -9,6 +9,7 @@ public class Floor {
     private Integer fid;
     private String fname;
     private Integer fdad;
+    private Integer ftype;
     private List<Bed> bedsByFid;
     private Floor floorByFloFid;
     private List<Floor> floorsByFid;
@@ -16,6 +17,7 @@ public class Floor {
 
     @Id
     @Column(name = "fid", nullable = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     public Integer getFid() {
         return fid;
     }
@@ -45,6 +47,18 @@ public class Floor {
         this.fdad = fdad;
     }
 
+
+    @Basic
+    @Column(name = "ftype", nullable = true)
+    public Integer getFtype() {
+        return ftype;
+    }
+
+    public void setFtype(Integer ftype) {
+        this.ftype = ftype;
+    }
+
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -52,12 +66,13 @@ public class Floor {
         Floor floor = (Floor) o;
         return Objects.equals(fid, floor.fid) &&
                 Objects.equals(fname, floor.fname) &&
-                Objects.equals(fdad, floor.fdad);
+                Objects.equals(fdad, floor.fdad)&&
+                 Objects.equals(ftype, floor.ftype);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(fid,  fname, fdad);
+        return Objects.hash(fid,  fname, fdad, ftype);
     }
 
     @OneToMany(mappedBy = "floorByFid")
