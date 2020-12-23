@@ -11,7 +11,7 @@ public class Nursing {
     private String nuName;
     private BigDecimal nuMonry;
     private Nursingtype nursingtypeByNtId;
-    private List<Thenursingleveldetails> thenursingleveldetailsByNurId;
+    private List<Thenursingleveldetails> thenursingleveldetailsByNuId;
     private String nuWay;
     private String nuTime;
     private String nuOther;
@@ -24,16 +24,6 @@ public class Nursing {
 
     public void setNuId(Integer nuId) {
         this.nuId = nuId;
-    }
-
-    @Id
-    @Column(name = "nu_id", nullable = false)
-    public Integer getNurId() {
-        return nuId;
-    }
-
-    public void setNurId(Integer nurId) {
-        this.nuId = nurId;
     }
 
     @Basic
@@ -81,13 +71,13 @@ public class Nursing {
         this.nursingtypeByNtId = nursingtypeByNtId;
     }
 
-    @OneToMany(mappedBy = "nursingByNurId")
-    public List<Thenursingleveldetails> getThenursingleveldetailsByNurId() {
-        return thenursingleveldetailsByNurId;
+    @OneToMany(mappedBy = "nursingByNuId")
+    public List<Thenursingleveldetails> getThenursingleveldetailsByNuId() {
+        return thenursingleveldetailsByNuId;
     }
 
-    public void setThenursingleveldetailsByNurId(List<Thenursingleveldetails> thenursingleveldetailsByNurId) {
-        this.thenursingleveldetailsByNurId = thenursingleveldetailsByNurId;
+    public void setThenursingleveldetailsByNuId(List<Thenursingleveldetails> thenursingleveldetailsByNuId) {
+        this.thenursingleveldetailsByNuId = thenursingleveldetailsByNuId;
     }
 
     @Basic
