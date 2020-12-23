@@ -7,9 +7,7 @@ import com.yanglaoyuan.service.AcareService;
 import com.yanglaoyuan.service.OldmanServices;
 import org.aspectj.lang.annotation.After;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -61,13 +59,35 @@ public class AcareController {
      */
     @GetMapping("/like")
     public PageInfo<Acare> selectlike(Integer num, String acname, String acphone) {
-        if (acname == "undefined"||acname.equals("undefined")) {
+        if (acname == "undefined" || acname.equals("undefined")) {
             return as.selectlike(num, "", acphone.trim());
-        } else if (acphone == "undefined"||acphone.equals("undefined")) {
+        } else if (acphone == "undefined" || acphone.equals("undefined")) {
             return as.selectlike(num, acname.trim(), "");
         } else {
             return as.selectlike(num, acname.trim(), acphone.trim());
         }
 
+    }
+
+    /**
+     * 添加新护工
+     *
+     * @param acare
+     * @return
+     */
+    @PostMapping("/add")
+    public String add(@RequestBody Acare acare) {
+        try {
+            as.add(acare);
+            return "添加护工成功！";
+        } catch (Exception e) {
+            e.printStackTrace();
+            return "添加护工失败！" + e;
+        }
+    }
+
+    @GetMapping("/del")
+    public String del(Integer acid) {
+        return as.del(acid) == 1 ? "护工离职成功！" : "护工离职失败！";
     }
 }

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yanglaoyuan.model.Mapper.INursingtypeMapper">
+    <resultMap id="all" type="com.yanglaoyuan.pojo.Nursingtype">
+        <id column="nt_id" property="ntId"/>
+        <result column="nt_name" property="ntName"/>
+        <result column="nt_other" property="ntOther"/>
+    </resultMap>
+
+    <select id="selectall" resultMap="all">
+        select * from nursingtype
+    </select>
+
+    <select id="selectbyid" resultMap="all">
+        select * from nursingtype where nt_id=#{ntid}
+    </select>
+
+    <update id="updateNur">
+        update nursingtype set nt_name=#{name},nt_other=#{other} where nt_id=#{ntid}
+    </update>
+</mapper>

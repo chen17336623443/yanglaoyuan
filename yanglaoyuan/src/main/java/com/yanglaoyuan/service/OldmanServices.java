@@ -27,8 +27,29 @@ public class OldmanServices {
     }
 
 
+    /*查询未外出的老人*/
+    public List<Oldman> selectNotOut(){
+        return mapper.selectNotOut();
+    }
+
+    /*根据id查询老人*/
+    public Oldman selectByomid(Integer omid){
+        return mapper.selectOldmanByomid(omid);
+    }
 
     public List<Oldman> selectoldmanByid(Integer acid){
         return mapper.selectoldmanByid(acid);
+    }
+
+    public Integer del(Integer id){
+        return mapper.del(id);
+    }
+
+    public Integer updateid(Integer acid,Integer omid){
+        return mapper.updateid(acid, omid);
+    }
+
+    public List<Oldman> selectnoacid(){
+        return mapper.selectnoacid();
     }
 }

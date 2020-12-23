@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--
+    @description: 禁忌人群Mybatis配置文件
+    @author: YeJin Tan
+    @create: 2020-12-22 14:44
+-->
+<mapper namespace="com.yanglaoyuan.model.Mapper.ITaboocrowdMapper">
+    <resultMap id="TaboocrowdMap" type="Taboocrowd">
+        <id property="tcId" column="tc_id"/>
+        <result property="tcName" column="tc_name"/>
+        <result property="tcRemark" column="tc_remark"/>
+    </resultMap>
+
+    <!--//查询所有禁忌人群
+    List<Taboocrowd> selectTaboocrowdAll();-->
+    <select id="selectTaboocrowdAll" resultMap="TaboocrowdMap">
+        select * from taboocrowd
+    </select>
+
+    <!--//根据食物id查询该食物的禁忌人群
+    List<Taboocrowd> selectTaboocrowdByFid(Integer f_id);-->
+    <select id="selectTaboocrowdByFid" resultMap="TaboocrowdMap">
+        select * from taboocrowd tc inner join foodtaboocrowd ftc on tc.tc_id=ftc.tc_id
+        where ftc.f_id=#{f_id}
+    </select>
+</mapper>

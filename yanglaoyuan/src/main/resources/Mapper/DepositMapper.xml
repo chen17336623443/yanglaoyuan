@@ -20,12 +20,45 @@
         </association>
     </resultMap>
 
-    <select id="selectall" resultMap="resultDeposit">
+    <select id="selectalls" resultMap="resultDeposit">
         select dep_id, dep_money, dep_date, dep_payment, dep_paytype, dep_remarks, o.om_id,
             o.tom_name, o.tom_card, o.tom_number, u.uid, u.uname from deposit d
             inner join oldman o on d.om_id = o.om_id
             inner join user u on d.uid = u.uid
         order by dep_date desc
     </select>
+
+    <select id="selectbykwy" resultMap="resultDeposit">
+        select dep_id, dep_money, dep_date, dep_payment, dep_paytype, dep_remarks, o.om_id,
+            o.tom_name, o.tom_card, o.tom_number, u.uid, u.uname from deposit d
+            inner join oldman o on d.om_id = o.om_id
+            inner join user u on d.uid = u.uid
+            <where>
+                <if test="name!=null and name!=''">
+                    and o.tom_name like #{name}
+                </if>
+                <if test="phone!=null and phone!=''">
+                    and o.tom_number = #{phone}
+                </if>
+                <if test="card!=null and card!=''">
+                    and o.tom_card = #{card}
+                </if>
+            </where>
+        order by dep_date desc
+    </select>
+
+    <select id="selectbyid" resultMap="resultDeposit">
+        select dep_id, dep_money, dep_date, dep_payment, dep_paytype, dep_remarks, o.om_id,
+            o.tom_name, o.tom_card, o.tom_number, u.uid, u.uname from deposit d
+            inner join oldman o on d.om_id = o.om_id
+            inner join user u on d.uid = u.uid
+            where d.om_id = #{omid}
+        order by dep_date desc
+    </select>
+
+    <update id="upadtedep">
+        update deposit set dep_money=#{depMoney},dep_date=#{depDate},dep_payment=#{depPayment},dep_paytype=#{depPaytype},
+        dep_remarks=#{depRemarks} where om_id = #{omid}
+    </update>
 
 </mapper>

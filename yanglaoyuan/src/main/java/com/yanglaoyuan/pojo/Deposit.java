@@ -1,5 +1,7 @@
 package com.yanglaoyuan.pojo;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.sql.Timestamp;
@@ -9,6 +11,7 @@ import java.util.Objects;
 public class Deposit {
     private Integer depId;
     private BigDecimal depMoney;
+    @JsonFormat( pattern = "yyyy-MM-dd HH:mm:ss" , timezone = " GMT+8 " )
     private Timestamp depDate;
     private String depPayment;
     private String depPaytype;
@@ -62,7 +65,7 @@ public class Deposit {
     }
 
     @Basic
-    @Column(name = "dep_payment", nullable = false, length = 30)
+    @Column(name = "dep_payment", nullable = true, length = 30)
     public String getDepPayment() {
         return depPayment;
     }
@@ -72,7 +75,7 @@ public class Deposit {
     }
 
     @Basic
-    @Column(name = "dep_paytype", nullable = false, length = 30)
+    @Column(name = "dep_paytype", nullable = true, length = 30)
     public String getDepPaytype() {
         return depPaytype;
     }

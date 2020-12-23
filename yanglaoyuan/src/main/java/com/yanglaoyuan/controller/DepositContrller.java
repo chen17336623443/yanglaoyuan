@@ -1,7 +1,11 @@
 package com.yanglaoyuan.controller;
 
 import com.github.pagehelper.PageInfo;
+import com.yanglaoyuan.pojo.Costflow;
 import com.yanglaoyuan.pojo.Deposit;
+import com.yanglaoyuan.pojo.Oldman;
+import com.yanglaoyuan.pojo.User;
+import com.yanglaoyuan.service.CostflowService;
 import com.yanglaoyuan.service.DepositServices;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -9,6 +13,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.math.BigDecimal;
+import java.sql.Timestamp;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -24,6 +31,45 @@ public class DepositContrller {
 
     @Autowired
     DepositServices ds;
+    @Autowired
+    CostflowService cs;
+
+    @RequestMapping("/upd")
+    public PageInfo<Deposit> update(@RequestParam("no") Integer no, @RequestParam(value="size",required = false) Integer size,
+                                    @RequestParam("zmoney") BigDecimal zmoney, @RequestParam("jmoney") BigDecimal jmoney,
+                                    @RequestParam("jfr") String jfr, @RequestParam("sfr") Integer sfr,
+                                    @RequestParam("jffs") String jffs, @RequestParam("bz") String bz,@RequestParam("omid") Integer omid){
+        ds.update(zmoney,new Timestamp(new Date().getTime()),jffs,jfr,bz,omid);
+        Costflow c = new Costflow();
+        User u = new User();
+        Oldman ol = new Oldman();
+        ol.setOmId(omid);
+        u.setUid(sfr);
+        c.setCosCategory("交费");
+        c.setCosDate(new Timestamp(new Date().getTime()));
+        c.setCosMoney(jmoney);
+        c.setUserByUid(u);
+        c.setCosExplain("费用预存");
+        c.setOldmanByOmId(ol);
+        cs.doinsert(c);
+        Integer pageSize = 5;
+        if(size!=null){
+            pageSize = size;
+        }
+        return ds.selectByPager(no,size);
+    }
+
+    /**
+     * @Description 方法:a
+     * @Param 参是:a
+     * @Return 返回型是:a
+     * @Author chenxing
+     * @Date 2020/12/22 20:16
+     */
+    @RequestMapping("/byid")
+    public Deposit selectbyid(@RequestParam("omid")Integer omid){
+        return ds.selectbyid(omid);
+    }
 
     /**
      * @Description 方法是pager
@@ -41,10 +87,21 @@ public class DepositContrller {
         return ds.selectByPager(no,size);
     }
 
-    @RequestMapping("/sele")
-    public List<Deposit> sele(){
-        System.out.println(111);
-        return ds.select();
+    /**
+     * @Description 方法是a
+     * @Param 参数:a
+     * @Return 返回类是:a
+     * @Author chenxing
+     * @Date 2020/12/22 10:14
+     */
+    @RequestMapping("/pagers")
+    public PageInfo<Deposit> pagers(@RequestParam("no") Integer no, @RequestParam(value="size",required = false) Integer size,
+                                    @RequestParam("name")String name,@RequestParam("phone")String phone,@RequestParam("card")String card){
+        Integer pageSize = 5;
+        if(size!=null){
+            pageSize = size;
+        }
+        return ds.selectByPagers(no, size, name, phone, card);
     }
 
 }

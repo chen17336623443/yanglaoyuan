@@ -20,4 +20,7 @@ public interface IAcareMapper {
 
     //护工模糊条件查询
     List<Acare> selectlike(String acname,String acphone);
+
+    //护工离职
+    Integer del(Integer acid);
 }

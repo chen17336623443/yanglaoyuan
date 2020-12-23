@@ -11,16 +11,19 @@ public class Nursing {
     private String nuName;
     private BigDecimal nuMonry;
     private Nursingtype nursingtypeByNtId;
-    private List<Thenursingleveldetails> thenursingleveldetailsByNurId;
+    private List<Thenursingleveldetails> thenursingleveldetailsByNuId;
+    private String nuWay;
+    private String nuTime;
+    private String nuOther;
 
     @Id
     @Column(name = "nu_id", nullable = false)
-    public Integer getNurId() {
+    public Integer getNuId() {
         return nuId;
     }
 
-    public void setNurId(Integer nurId) {
-        this.nuId = nurId;
+    public void setNuId(Integer nuId) {
+        this.nuId = nuId;
     }
 
     @Basic
@@ -68,12 +71,42 @@ public class Nursing {
         this.nursingtypeByNtId = nursingtypeByNtId;
     }
 
-    @OneToMany(mappedBy = "nursingByNurId")
-    public List<Thenursingleveldetails> getThenursingleveldetailsByNurId() {
-        return thenursingleveldetailsByNurId;
+    @OneToMany(mappedBy = "nursingByNuId")
+    public List<Thenursingleveldetails> getThenursingleveldetailsByNuId() {
+        return thenursingleveldetailsByNuId;
     }
 
-    public void setThenursingleveldetailsByNurId(List<Thenursingleveldetails> thenursingleveldetailsByNurId) {
-        this.thenursingleveldetailsByNurId = thenursingleveldetailsByNurId;
+    public void setThenursingleveldetailsByNuId(List<Thenursingleveldetails> thenursingleveldetailsByNuId) {
+        this.thenursingleveldetailsByNuId = thenursingleveldetailsByNuId;
+    }
+
+    @Basic
+    @Column(name = "nu_way", nullable = true, length = 255)
+    public String getNuWay() {
+        return nuWay;
+    }
+
+    public void setNuWay(String nuWay) {
+        this.nuWay = nuWay;
+    }
+
+    @Basic
+    @Column(name = "nu_time", nullable = true, length = 255)
+    public String getNuTime() {
+        return nuTime;
+    }
+
+    public void setNuTime(String nuTime) {
+        this.nuTime = nuTime;
+    }
+
+    @Basic
+    @Column(name = "nu_other", nullable = true, length = 255)
+    public String getNuOther() {
+        return nuOther;
+    }
+
+    public void setNuOther(String nuOther) {
+        this.nuOther = nuOther;
     }
 }

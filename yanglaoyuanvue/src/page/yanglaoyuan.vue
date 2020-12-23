@@ -87,11 +87,11 @@
               <router-link to="/hugongguanli" style="text-decoration: none">
                 <el-menu-item index="5-1">护工管理</el-menu-item>
               </router-link>
-              <router-link to="" style="text-decoration: none">
-                <el-menu-item index="5-2">护理级别设置</el-menu-item>
+              <router-link to="Huliguanli" style="text-decoration: none">
+                <el-menu-item index="5-2">护理项目设置</el-menu-item>
               </router-link>
               <router-link to="" style="text-decoration: none">
-                <el-menu-item index="5-3">护理项目设置</el-menu-item>
+                <el-menu-item index="5-3">护理级别设置</el-menu-item>
               </router-link>
               <router-link to="" style="text-decoration: none">
                 <el-menu-item index="5-4">护理记录</el-menu-item>
@@ -106,7 +106,7 @@
               <router-link to="foodManage" style="text-decoration: none">
                 <el-menu-item index="6-1">食物管理</el-menu-item>
               </router-link>
-              <router-link to="" style="text-decoration: none">
+              <router-link to="foodPackge" style="text-decoration: none">
                 <el-menu-item index="6-2">食谱管理</el-menu-item>
               </router-link>
               <router-link to="" style="text-decoration: none">
@@ -134,7 +134,7 @@
               <router-link to="" style="text-decoration: none">
                 <el-menu-item index="7-4">欠费管理</el-menu-item>
               </router-link>
-              <router-link to="" style="text-decoration: none">
+              <router-link tag="span" to="/fyls" style="text-decoration: none">
                 <el-menu-item index="7-5">费用流水</el-menu-item>
               </router-link>
             </el-submenu>

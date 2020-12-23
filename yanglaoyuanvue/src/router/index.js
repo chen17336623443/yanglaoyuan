@@ -8,10 +8,14 @@ import Floor from '@/components/Floor'
 
 import Yucungl from '@/components/Yucungl'
 import FoodManage from '@/components/FoodManage'
+import FoodPackge from '@/components/FoodPackge'
 
 import dashboard from '@/components/Dashboard'
 import consult from '@/components/consult'
 
+import Huliguanli from '@/components/Huliguanli'
+
+import Feiyonls from '@/components/Feiyonls'
 
 Vue.use(Router)
 
@@ -41,7 +45,11 @@ const router = new Router({
                 path: '/foodManage',
                 component: FoodManage
             },
-              {
+            {
+                path: '/foodPackge',
+                component: FoodPackge
+            },
+            {
                 path: '/outregistration',
                 component: Outregistration
               },
@@ -61,6 +69,14 @@ const router = new Router({
               {
                 path: '/consult',
                 component: consult
+              },
+              {
+                path: '/fyls',
+                component: Feiyonls
+              },
+              {
+                path: '/Huliguanli',
+                component: Huliguanli
               }
             ]
         }

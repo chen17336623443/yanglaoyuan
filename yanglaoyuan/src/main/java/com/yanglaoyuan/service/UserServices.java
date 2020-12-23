@@ -13,6 +13,10 @@ public class UserServices {
         return um.login(phone, upass);
     }
 
+    public User selectByuid(Integer uid){
+        return um.selectByUid(uid);
+    }
+
     public  User byuphone(String name){
         return  um.byuphone(name);
     }

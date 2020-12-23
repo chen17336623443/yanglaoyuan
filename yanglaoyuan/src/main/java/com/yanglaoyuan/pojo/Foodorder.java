@@ -18,6 +18,7 @@ public class Foodorder {
     private Oldman oldmanByOmId;
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "fo_id", nullable = false)
     public Integer getFoId() {
         return foId;

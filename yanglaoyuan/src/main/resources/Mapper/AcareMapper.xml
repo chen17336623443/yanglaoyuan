@@ -17,7 +17,7 @@
         </collection>
     </resultMap>
     <select id="selectall" resultMap="all">
-        select * from acare a left join oldman o on a.ac_id=o.ac_id
+        select * from acare
     </select>
     <select id="selectlike" resultMap="all">
         select * from acare a left join oldman o on a.ac_id=o.ac_id where 1=1
@@ -28,4 +28,8 @@
             and a.ac_phone like #{acphone}
         </if>
     </select>
+
+    <delete id="del">
+        delete from acare where ac_id=#{acid}
+    </delete>
 </mapper>

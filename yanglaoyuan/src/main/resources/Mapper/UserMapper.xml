@@ -18,4 +18,8 @@
     <select id="byuphone" resultMap="all">
         select * from user where uphone=#{phone} limit 1
     </select>
+
+    <select id="selectByUid" resultMap="all">
+        select * from user where uid=#{uid}
+    </select>
 </mapper>
