@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yanglaoyuan.model.Mapper.ICheckinsMapper">
+    <resultMap id="all" type="com.yanglaoyuan.pojo.Checkins">
+        <id column="checkinid" property="checkinid"/>
+       <result column="accomplish" property="accomplish"/>
+        <result column="checkintype" property="checkintype"/>
+        <result column="checkinbegin" property="checkinbegin"/>
+        <result column="checkinnew" property="checkinnew"/>
+        <result column="checkinend" property="checkinend"/>
+
+
+
+        <association property="myoldman" column="om_id" >
+            <id column="om_id" property="omId"/>
+            <result property="tomName" column="tom_name"/>
+            <result property="tomCard" column="tom_card"/>
+            <result property="tomNumber" column="tom_number"/>
+            <result property="tomSex" column="tom_sex"/>
+            <result property="tomAddress" column="tom_address"/>
+            <result property="tomCategory" column="tom_category"/>
+            <result property="tomDiet" column="tom_diet"/>
+            <result property="tomLabour" column="tom_labour"/>
+            <result property="tomCheckIntime" column="tom_check_intime"/>
+            <result property="tomImg" column="tom_img"/>
+            <result property="tomName" column="tom_name"/>
+            <result property="tomName" column="tom_name"/>
+
+
+
+
+
+
+        </association>
+
+
+
+
+
+    </resultMap>
+    <select id="checkinsall" resultMap="all">
+    select *  from  checkins c left join oldman u on c.om_id=u.om_id
+
+        <where>
+            <if test="d.accomplish!=null and d.accomplish!=''">
+                and   c.accomplish =#{d.accomplish}
+
+            </if>
+            <if test="d.checkintype!=null and d.checkintype!=''">
+                and   c.checkintype =#{d.checkintype}
+
+            </if>
+
+
+
+            <if test="tomName!=null and tomName!=''">
+                and   c.om_id  =(select u1.om_id from oldman u1 where u1.tom_name like concat('%',#{tomName},'%') limit 1)
+
+            </if>
+
+
+            <if test="shengribegin!=null and shengribegin!=''  and shengriend!=null and shengriend!=''">
+                and c.checkinnew between #{shengribegin} and #{shengriend}
+            </if>
+
+
+
+
+        </where>
+    </select>
+
+
+
+    
+    <insert id="insertcheckins">
+        insert  into checkins(accomplish,checkintype,checkinbegin,checkinend,checkinnew,om_id) values
+        (#{d.accomplish},#{d.checkintype},#{d.checkinbegin},#{d.checkinend},#{d.checkinnew},#{d.myoldman.omId})
+    </insert>
+
+    <!--删除入职登记信息-->
+    <delete id="delete">
+        delete from  checkins  where checkinid=#{id}
+    </delete>
+
+</mapper>

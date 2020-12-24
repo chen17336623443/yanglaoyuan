@@ -13,6 +13,7 @@
     "axios": "^0.21.0",
     "element-china-area-data": "^5.0.2",
     "element-ui": "^2.14.1",
+    "font-awesome": "^4.7.0",
     "moment": "^2.29.1",
     "qs": "^6.9.4",
     "vue": "^2.5.2",

@@ -76,8 +76,8 @@
     
     
     <!--删除咨询信息-->
-    <insert id="delectconsult">
+    <delete id="delectconsult">
         delete from consult where c_id=#{cid}
-    </insert>
+    </delete>
 
 </mapper>

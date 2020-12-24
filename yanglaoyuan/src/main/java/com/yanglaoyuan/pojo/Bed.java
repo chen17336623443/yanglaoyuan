@@ -9,6 +9,7 @@ public class Bed {
     private String bname;
     private Bedtype bedtypeByByid;
     private Floor floorByFid;
+    private Oldman myoldman;
 
     @Id
     @Column(name = "bid", nullable = false)
@@ -62,5 +63,15 @@ public class Bed {
 
     public void setFloorByFid(Floor floorByFid) {
         this.floorByFid = floorByFid;
+    }
+
+    @ManyToOne
+    @JoinColumn(name = "om_id", referencedColumnName = "om_id")
+    public Oldman getMyoldman() {
+        return myoldman;
+    }
+
+    public void setMyoldman(Oldman myoldman) {
+        this.myoldman = myoldman;
     }
 }
