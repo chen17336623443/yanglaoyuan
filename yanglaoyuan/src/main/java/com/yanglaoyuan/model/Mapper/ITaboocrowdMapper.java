@@ -19,4 +19,7 @@ public interface ITaboocrowdMapper {
     List<Taboocrowd> selectTaboocrowdAll();
     //根据食物id查询该食物的禁忌人群
     List<Taboocrowd> selectTaboocrowdByFid(Integer f_id);
+
+    /*根据主键插叙疾病信息*/
+    Taboocrowd bytcId(Integer id);
 }

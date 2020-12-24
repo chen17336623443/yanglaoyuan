@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yanglaoyuan.model.Mapper.IHealthMapper">
+    <resultMap id="all" type="com.yanglaoyuan.pojo.Health">
+        <id column="hid" property="hid"/>
+
+        <association property="userByUid" column="uid" >
+            <id column="uid" property="uid"/>
+            <result property="uname" column="uname"/>
+        </association>
+        <association property="oldmanByOmId" column="uid" >
+            <id column="om_id" property="omId"/>
+            <result property="tomName" column="tom_name"/>
+        </association>
+        <collection property="otmans"  column="hid" select="com.yanglaoyuan.model.Mapper.IotmanMapper.byhid"/>
+
+
+
+
+    </resultMap>
+
+
+    <!--根据老人主键查询老人健康信息-->
+    <select id="byomid" resultMap="all">
+
+        select  *  from  health h left join oldman o on  h.om_id=o.om_id left join user u on h.uid=u.uid where h.om_id=#{omid}
+    </select>
+
+
+
+
+
+</mapper>
