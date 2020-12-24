@@ -1,14 +1,17 @@
 package com.yanglaoyuan.controller;
 
+import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.yanglaoyuan.pojo.Fooddelivered;
 import com.yanglaoyuan.service.FooddeliveredServices;
+import com.yanglaoyuan.service.FoodorderServices;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.sql.Timestamp;
 import java.util.List;
 
 /**
@@ -22,6 +25,8 @@ import java.util.List;
 public class FooddeliveredController {
     @Autowired
     FooddeliveredServices fds;
+    @Autowired
+    FoodorderServices fos;
 
     //送餐新增
     @RequestMapping("/insert")
@@ -33,7 +38,10 @@ public class FooddeliveredController {
      *@Date 2020-12-24 2:37
      */
     public Integer insertFooddelivered(@RequestBody Fooddelivered fdel){
-        return fds.insertFooddelivered(fdel);
+        //先新增送餐数据
+        fds.insertFooddelivered(fdel);
+        //再把点餐状态修改为已送餐
+        return fos.updateFoodorderState(fdel.getFoodorderByFoId().getFoId());
     }
 
     //查询所有送餐记录
@@ -47,5 +55,21 @@ public class FooddeliveredController {
      */
     public PageInfo<Fooddelivered> selectFooddeliveredAll(@RequestParam("pageNo")Integer pageNo,@RequestParam("pageSize")Integer pageSize){
         return fds.selectFooddeliveredAll(pageNo, pageSize);
+    }
+
+    //组合查询送餐记录
+    @RequestMapping("/groupQuery")
+    /**
+     *@Description 方法是:gruopQueryFooddelivered
+     *@Param 参数是:[fdAddress, startTime, endTime, pageNo, pageSize]
+     *@Return 返回类型是:com.github.pagehelper.PageInfo<com.yanglaoyuan.pojo.Fooddelivered>
+     *@Author tanyejin
+     *@Date 2020-12-24 13:22
+     */
+    public PageInfo<Fooddelivered> gruopQueryFooddelivered(@RequestParam(value = "fdAddress",required = false) String fdAddress, @RequestParam(value = "startTime",required = false) Timestamp startTime, 
+                                                           @RequestParam(value = "endTime",required = false) Timestamp endTime, @RequestParam("pageNo") Integer pageNo, @RequestParam("pageSize") Integer pageSize){
+        PageInfo<Fooddelivered> pageInfo=fds.gruopQueryFooddelivered(fdAddress, startTime, endTime, pageNo, pageSize);
+        System.out.println(pageInfo.getList().size());
+        return pageInfo;
     }
 }

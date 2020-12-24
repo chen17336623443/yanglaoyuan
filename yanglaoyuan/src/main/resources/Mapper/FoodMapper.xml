@@ -95,7 +95,8 @@
     List<Food> groupFood(@Param("fPiquancy")String fPiquancy,@Param("fTaste") String fTaste,@Param("maxPrice")Integer maxPrice,
                          @Param("minPrice")Integer minPrice,@Param("taboocrowds")List<Integer> taboocrowds);-->
     <select id="groupFood" resultMap="FoodMap">
-        select * from food f left join foodtype ft on f.ft_id=ft.ft_id left join foodtaboocrowd ftc on f.f_id=ftc.f_id
+        select * from food f left join foodtype ft on f.ft_id=ft.ft_id
+        left join foodtaboocrowd ftc on f.f_id=ftc.f_id
         <where>
             <if test="fPiquancy!=null">
                 and f.f_piquancy=#{fPiquancy}
@@ -106,7 +107,7 @@
             <if test="minPrice!=null and maxPrice!=null">
                 and f.f_price between #{minPrice} and #{maxPrice}
             </if>
-            <if test="list!=null and list.size()>0">
+            <if test="list!=null  and list.size()>0">
                 and f.f_id not in (
                     select f.f_id from food f,foodtaboocrowd ftc where f.f_id=ftc.f_id and ftc.tc_id in
                     <foreach collection="list" item="item" separator="," open="(" close=")">

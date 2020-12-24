@@ -186,10 +186,6 @@ public class FoodController {
             }
         }
         List<Food> foods=fs.groupFood(fPiquancy,fTaste,maxPrice, minPrice, list);
-        System.out.println("查询的长度为："+foods.size());
-        for (Food food : foods) {
-            System.out.println(food);
-        }
         return foods;
 
     }

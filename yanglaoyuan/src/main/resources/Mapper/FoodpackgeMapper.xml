@@ -13,7 +13,6 @@
         <result property="fpName" column="fp_name"/>
         <result property="fpPrice" column="fp_price"/>
         <result property="fpRemark" column="fp_remark"/>
-        <result property="fpImg" column="fp_img"/>
     </resultMap>
     <!--查询用户的套餐-->
     <select id="selectByomidFood" resultMap="FoodpackgeMap">
@@ -27,14 +26,14 @@
     <!--//新增套餐
     Integer insertFoodpackge(@Param("fpackge")Foodpackge fpackge);-->
     <insert id="insertFoodpackge" parameterType="Foodpackge" useGeneratedKeys="true" keyProperty="fpId">
-        insert into foodpackge(fp_id,fp_name,fp_price,fp_remark,fp_img)
-        value(#{fpackge.fpId},#{fpackge.fpName},#{fpackge.fpPrice},#{fpackge.fpRemark},#{fpackge.fpImg})
+        insert into foodpackge(fp_id,fp_name,fp_price,fp_remark)
+        value(#{fpackge.fpId},#{fpackge.fpName},#{fpackge.fpPrice},#{fpackge.fpRemark})
     </insert>
     <!--//修改套餐
     Integer updateFoodpackge(@Param("fpackge")Foodpackge fpackge);-->
     <update id="updateFoodpackge" parameterType="Foodpackge">
-        update foodpackge set fp_name=#{fpackge.fpName},fp_price=#{fpackge.fpPrice},fp_remark=#{fpackge.fpRemark},fp_img=#{fpackge.fpImg}
-        where fp_id=#{fpackeg.fpId}
+        update foodpackge set fp_name=#{fpackge.fpName},fp_price=#{fpackge.fpPrice},fp_remark=#{fpackge.fpRemark}
+        where fp_id=#{fpackge.fpId}
     </update>
     <!--//删除套餐
     Integer deleteFoodpackge(Integer fp_id);-->
@@ -44,6 +43,6 @@
     <!--//给套餐修改图片
     Integer updateFoodpackgeImg(@Param("fp_id") Integer fp_id,@Param("fp_img") String fp_img);-->
     <update id="updateFoodpackgeImg">
-        update from foodpackge set fp_img=#{fp_img} where fp_id=#{fp_id}
+        update foodpackge set fp_img=#{fp_img} where fp_id=#{fp_id}
     </update>
 </mapper>

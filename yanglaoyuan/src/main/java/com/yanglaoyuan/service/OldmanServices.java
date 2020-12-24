@@ -63,4 +63,9 @@ public class OldmanServices {
     public Oldman  insertoldman(Oldman d){
         return  dao.save(d);
     }
+
+    //查询所有点过餐的老人
+    public List<Oldman> selectOldmanByHaveFoid(){
+        return mapper.selectOldmanByHaveFoid();
+    }
 }

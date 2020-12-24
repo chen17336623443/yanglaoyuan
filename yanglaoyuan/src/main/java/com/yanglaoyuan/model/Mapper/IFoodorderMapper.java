@@ -5,6 +5,7 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
+import java.sql.Timestamp;
 import java.util.List;
 
 /**
@@ -24,6 +25,8 @@ public interface IFoodorderMapper {
     Integer updateFoodorderState(Integer fo_id);
     //根据id查询点餐数据  送餐查询
     Foodorder selectFoodorderByFoId(Integer fo_id);
+    //组合查询点餐信息
+    List<Foodorder> groupQuerytFoodorder(@Param("om_id")Integer om_id, @Param("fo_meals")String fo_meals, @Param("startTime")Timestamp startTime,@Param("endTime")Timestamp endTime);
 
     /*根据omid查询点餐数据*/
     List<Foodorder> selectByOmid(Integer omid);

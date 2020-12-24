@@ -41,6 +41,9 @@ public interface IOldmanMapper {
 
     /*新增老人*/
 
+    //查询所有点过餐的老人
+    List<Oldman> selectOldmanByHaveFoid();
+
 
 
 }

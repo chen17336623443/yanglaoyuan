@@ -13,7 +13,7 @@
         <result property="fdType" column="fd_type"/>
         <result property="fdTime" column="fd_time"/>
         <result property="fdAddress" column="fd_address"/>
-        <association property="foodorderByFoId" javaType="Foodorder">
+        <association property="foodorderByFoId" javaType="Foodorder" column="fo_id" select="com.yanglaoyuan.model.Mapper.IFoodorderMapper.selectFoodorderByFoId">
             <id property="foId" column="fo_id"/>
             <result property="foMeals" column="fo_meals"/>
             <result property="foTime" column="fo_time"/>
@@ -30,6 +30,20 @@
     <!--//查询所有送餐记录
     List<Fooddelivered> selectFooddeliveredAll();-->
     <select id="selectFooddeliveredAll" resultMap="FooddeliveredMap">
+        select * from fooddelivered order by fd_time desc
+    </select>
+    <!--//组合查询送餐记录
+    List<Fooddelivered> gruopQueryFooddelivered(@Param("fdAddress")String fdAddress, @Param("startTime")Timestamp startTime,@Param("endTime")Timestamp endTime);-->
+    <select id="gruopQueryFooddelivered" resultMap="FooddeliveredMap">
         select * from fooddelivered
+        <where>
+            <if test="fdAddress!=null">
+                and fd_address like concat('%',#{fdAddress},'%')
+            </if>
+            <if test="startTime!=null and endTime!=null">
+                and fd_time between #{startTime} and #{endTime}
+            </if>
+        </where>
+        order by fd_time desc
     </select>
 </mapper>

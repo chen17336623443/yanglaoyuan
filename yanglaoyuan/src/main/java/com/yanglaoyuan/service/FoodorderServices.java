@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.beans.Transient;
+import java.sql.Timestamp;
 import java.util.List;
 
 /**
@@ -36,8 +37,17 @@ public class FoodorderServices {
         PageInfo<Foodorder> pageInfo=new PageInfo<>(list);
         return pageInfo;
     }
+
     //送餐改变状态
     public Integer updateFoodorderState(Integer fo_id){
         return fomapper.updateFoodorderState(fo_id);
+    }
+
+    //组合查询点餐信息
+    public PageInfo<Foodorder> groupQuerytFoodorder(Integer om_id, String fo_meals, Timestamp startTime, Timestamp endTime,Integer pageNo,Integer pageSize){
+        PageHelper.startPage(pageNo, pageSize);
+        List<Foodorder> list=fomapper.groupQuerytFoodorder(om_id, fo_meals, startTime, endTime);
+        PageInfo<Foodorder> pageInfo=new PageInfo<>(list);
+        return pageInfo;
     }
 }

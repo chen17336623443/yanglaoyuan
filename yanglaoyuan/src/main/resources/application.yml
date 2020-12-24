@@ -17,3 +17,10 @@ mybatis:
 jackson:
   date-format: yyyy-MM-dd
   time-zone: GMT+8
+logging:
+  level:
+    #指定mybatis的Mapper接口所在的包名
+    com:
+      yanglaoyuan:
+        model:
+          Mapper: debug

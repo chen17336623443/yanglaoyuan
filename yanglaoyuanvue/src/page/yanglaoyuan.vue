@@ -109,7 +109,7 @@
               <router-link to="foodOrderManage" style="text-decoration: none">
                 <el-menu-item index="6-3">点餐管理</el-menu-item>
               </router-link>
-              <router-link to="" style="text-decoration: none">
+              <router-link to="foodDelivered" style="text-decoration: none">
                 <el-menu-item index="6-4">送餐记录</el-menu-item>
               </router-link>
             </el-submenu>
@@ -162,7 +162,7 @@
           </el-menu>
         </el-header>
         <el-main>
-          <router-view ></router-view>
+          <router-view style="width:1124px;"></router-view>
         </el-main>
       </el-container>
     </el-container>

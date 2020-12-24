@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.sql.Timestamp;
 import java.util.List;
 
 /**
@@ -33,4 +34,12 @@ public class FooddeliveredServices {
         PageInfo<Fooddelivered> pageInfo=new PageInfo<>(list);
         return pageInfo;
     }
+    //组合查询送餐记录
+    public PageInfo<Fooddelivered> gruopQueryFooddelivered(String fdAddress, Timestamp startTime, Timestamp endTime,Integer pageNo,Integer pageSize){
+        PageHelper.startPage(pageNo, pageSize);
+        List<Fooddelivered> list=fdmapper.gruopQueryFooddelivered(fdAddress, startTime, endTime);
+        PageInfo<Fooddelivered> pageInfo=new PageInfo<>(list);
+        return pageInfo;
+    }
+
 }

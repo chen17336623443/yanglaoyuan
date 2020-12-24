@@ -274,10 +274,10 @@ export default {
         this.taboocrowds.push(t.tcId);
       });
     },
-    handleAvatarSuccess(res, file) {
-      console.log(res);
-      console.log(file);
-      console.log(URL.createObjectURL(file.raw));
+    //上传图片成功后调用
+    handleAvatarSuccess(e) {
+      this.$set(this.food,'fImg',e.url);
+      this.loadData();
     },
     beforeAvatarUpload(file) {
         return new Promise((resolve, reject) => {
@@ -301,7 +301,7 @@ export default {
           }
         });
       });
-      let url = this.isAdd ? "food/insert" : "food/update";
+      let url = this.isAdd ? "http://localhost:8089/food/insert" : "http://localhost:8089/food/update";
       this.$axios.post(url, this.food).then((r) => {
         if ((r) => 0) {
           if (this.isAdd) {
