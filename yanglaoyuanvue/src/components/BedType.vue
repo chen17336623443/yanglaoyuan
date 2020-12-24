@@ -177,7 +177,7 @@
                   console.log(deldet);
                   let byid = this.$qs.stringify(deldet);
                   this.$axios.post("http://localhost:8089/bedType/delete",byid)
-                  this.all();
+
                 }
                 if(num == this.multipleSelection.length){
                   console.log(num)
@@ -187,7 +187,7 @@
                     message: '删除成功!'
                   });
                 }
-
+                this.all();
               }).catch(() => {
                 this.$message({
                   type: 'info',

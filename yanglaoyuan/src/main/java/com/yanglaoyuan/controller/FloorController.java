@@ -27,7 +27,19 @@ public class FloorController {
     @Autowired
     BedServices bedServices;
 
-
+    @RequestMapping("selectByFtype")
+    /**
+     *@Description 方法是:selectByFtype
+     *@Param 参数是:[]
+     *@Return 返回类型是:java.util.List<com.yanglaoyuan.pojo.Floor>
+     *@Author LiuJingZhao
+     *@Date 2020/12/24 10:28
+     * 根据Ftype=1查询所有的楼栋
+     */
+    public List<Floor> selectByFtype(){
+        List<Floor> floors = services.selectByFtype();
+        return floors;
+    }
 
     @RequestMapping("updateNameByFid")
     /**
@@ -132,6 +144,7 @@ public class FloorController {
         List<Bed> beds = bedServices.selectByFid(fid);
         return beds;
     }
+
 
 
     @RequestMapping("/tree")

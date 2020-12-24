@@ -11,6 +11,7 @@ public class Publicshouse {
 
     @Id
     @Column(name = "phid", nullable = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     public Integer getPhid() {
         return phid;
     }

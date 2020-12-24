@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yanglaoyuan.model.Mapper.IFloorinfoMapper">
+    <!-- private Integer fiid;
+    private String fiinfo;
+    private List<Culturalhouse> culturalhousesByFiid;
+    private List<Equipmenthouse> equipmenthousesByFiid;
+    private Floor floorByFid;
+    private List<Publicshouse> publicshousesByFiid;
+    private List<Safetyhouse> safetyhousesByFiid;-->
+    <resultMap id="floorinfo" type="com.yanglaoyuan.pojo.Floorinfo">
+        <id column="fiid" property="fiid"/>
+        <result column="fiinfo" property="fiinfo"/>
+        <association property="floorByFid" javaType="com.yanglaoyuan.pojo.Floor">
+            <id column="fid" property="fid"/>
+            <result column="fname" property="fname"/>
+            <result column="fdad" property="fdad"/>
+            <result column="ftype" property="ftype"/>
+        </association>
+    </resultMap>
+    <select id="selectAll" resultMap="floorinfo">
+         SELECT * FROM floorinfo
+    </select>
+
+</mapper>

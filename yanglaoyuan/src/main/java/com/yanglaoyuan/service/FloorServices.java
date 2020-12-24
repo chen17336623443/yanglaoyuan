@@ -1,6 +1,7 @@
 package com.yanglaoyuan.service;
 
 import com.yanglaoyuan.model.Dao.IFloorDao;
+import com.yanglaoyuan.model.Dao.IPublicshouseDao;
 import com.yanglaoyuan.model.Mapper.IFloorMapper;
 import com.yanglaoyuan.pojo.Floor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +22,8 @@ public class FloorServices {
     @Autowired
     IFloorDao dao;
 
+
+
     public List<Floor> selectAll(){
         return mapper.selectAll();
     }
@@ -28,7 +31,9 @@ public class FloorServices {
     public List<Floor> selectByFid(Integer fid){
         return mapper.selectByFid(fid);
     }
-
+    public Floor selectfid(Integer fid){
+        return mapper.selectfid(fid);
+    }
     public List<Floor> selectByFidlc(Integer fid){
         return mapper.selectByFidlc(fid);
     }
@@ -47,6 +52,10 @@ public class FloorServices {
 
     public int updateNameByFid(Integer fid,String fname){
         return mapper.updateNameByFid(fid,fname);
+    }
+
+    public List<Floor> selectByFtype(){
+        return mapper.selectByFtype();
     }
 
 }

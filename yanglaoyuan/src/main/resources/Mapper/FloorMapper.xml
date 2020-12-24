@@ -65,6 +65,55 @@
             </collection>
         </collection>
     </resultMap>
+
+    <resultMap id="floortwo" type="com.yanglaoyuan.pojo.Floor">
+        <id column="fid" property="fid"/>
+        <result column="fname" property="fname"/>
+        <result column="fdad" property="fdad"/>
+        <result column="ftype" property="ftype"/>
+        <collection property="floorinfosByFid" ofType="com.yanglaoyuan.pojo.Floorinfo">
+            <id column="fiid" property="fiid"/>
+            <result column="fiinfo" property="fiinfo"/>
+
+            <collection property="culturalhousesByFiid" ofType="com.yanglaoyuan.pojo.Culturalhouse">
+                <id column="chid" property="chid"/>
+                <result column="chnamech" property="chname"/>
+            </collection>
+
+            <collection property="equipmenthousesByFiid" ofType="com.yanglaoyuan.pojo.Equipmenthouse">
+                <id column="ehid" property="ehid"/>
+                <result column="shnameeh" property="shname"/>
+            </collection>
+
+            <collection property="publicshousesByFiid" ofType="com.yanglaoyuan.pojo.Publicshouse">
+                <id column="phid" property="phid"/>
+                <result column="chnameph" property="chname"/>
+            </collection>
+
+            <collection property="safetyhousesByFiid" ofType="com.yanglaoyuan.pojo.Safetyhouse">
+                <id column="shid" property="shid"/>
+                <result column="shnamesh" property="shname"/>
+            </collection>
+
+        </collection>
+    </resultMap>
+
+    <select id="selectByFtype" resultMap="floortwo">
+         SELECT f.fid,f.fid, f.flo_fid, f.fname, f.fdad, ftype,
+          f2.fiid, f2.fid, fiinfo,
+          ch.chid, ch.fiid, ch.chname as chnamech,
+          eh.ehid, eh.fiid, eh.shname as shnameeh,
+          ph.phid, ph.fiid, ph.chname as chnameph,
+          sh.shid, sh.fiid, sh.shname as shnamesh
+          FROM `floor` f
+                left join floorinfo f2 on f.fid = f2.fid
+                  left join culturalhouse ch  on ch.fiid = f2.fiid
+                  left join equipmenthouse eh on eh.fiid = f2.fiid
+                  left join publicshouse ph on ph.fiid = f2.fiid
+                  left join safetyhouse sh on sh.fiid = f2.fiid
+            WHERE ftype = 1
+    </select>
+
     <select id="selectAll" resultMap="floor">
          SELECT
             f1.fid,f1.fname,f1.fdad,f1.ftype,
@@ -113,6 +162,10 @@
     <update id="updateNameByFid">
         update floor set fname=#{fname} where fid=#{fid}
     </update>
+
+    <select id="selectfid" resultMap="floor">
+       select * from  floor WHERE fid=#{fid}
+    </select>
 
     <delete id="deldetByFid">
         DELETE FROM floor  where  fid=#{fid}
