@@ -12,6 +12,7 @@ import FoodManage from '@/components/FoodManage'
 import FoodPackge from '@/components/FoodPackge'
 import FoodOrderManage from '@/components/FoodOrderManage'
 import FoodOrder from '@/components/FoodOrder'
+import FoodDelivered from '@/components/FoodDelivered'
 
 import dashboard from '@/components/Dashboard'
 import consult from '@/components/consult'
@@ -59,6 +60,10 @@ const router = new Router({
             {
                 path: '/foodOrder',
                 component: FoodOrder
+            },
+            {
+                path: '/foodDelivered',
+                component: FoodDelivered
             },
             {
                 path: '/outregistration',

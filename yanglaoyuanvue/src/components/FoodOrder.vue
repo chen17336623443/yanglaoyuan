@@ -74,10 +74,10 @@
                                     <el-tag type="warning">{{f.fPrice}}元</el-tag>
                                 </p>
                                 <div class="bottom clearfix">
-                                    <el-button type="text">-</el-button>
-                                    <input type="number" v-model="f.count" style="width:30px"/>
-                                    <el-button type="text">+</el-button>
-                                    <el-button type="text" icon="el-icon-plus" style="color: #E6A23C;font-size:12px;" @click="addCart(f)">加入</el-button>
+                                    <el-button type="text" style="padding:3px;" @click="miusNumber(f)">-</el-button>
+                                    <el-input size="mini" v-model.number="f.count" style="width:30px;" class="counts"/>
+                                    <el-button type="text" style="padding:3px;" @click="addNumber(f)">+</el-button>
+                                    <el-button type="text" icon="el-icon-shopping-cart-2" style="color: #E6A23C;font-size:12px;" @click="addCart(f)">加入</el-button>
                                 </div>
                             </div>
                         </el-card>
@@ -102,8 +102,8 @@
               <el-table-column prop="priceTotal" label="小计"></el-table-column>
               <el-table-column label="操作">
                   <template slot-scope="scope">
-                      <el-button type="text" @click="minusFood(scope.row)">-</el-button>
-                      <el-button type="text" @click="addFood(scope.row)">+</el-button>
+                      <el-button type="text" @click="minusFood(scope.row)" style="padding:3px;">-</el-button>
+                      <el-button type="text" @click="addFood(scope.row)" style="padding:3px;">+</el-button>
                       <el-popconfirm
                         confirm-button-text='确定'
                         cancel-button-text='取消'
@@ -251,6 +251,20 @@ export default {
             console.log("组合所有食物：",this.foodDatac);
         })
     },
+    //减数量
+    miusNumber(food){
+        if(food.count==1){
+            this.$message.warning("最小数量为1！");
+            return;
+        }
+        food.count--;
+        this.$set(this.chooseFood,this.chooseFood[this.chooseFood.indexOf(food)],food);
+    },
+    //加数量
+    addNumber(food){
+        food.count++;
+        this.$set(this.chooseFood,this.chooseFood[this.chooseFood.indexOf(food)],food);
+    },
     //切换食物类型
     chooseFoodType(ftId){
         this.foodDatac=[];
@@ -382,6 +396,9 @@ export default {
 </script>
 
 <style scoped>
+.counts /deep/ .el-input__inner{
+    padding:0 5px;
+}
 .ulstyle{
     width: 100%;
     list-style: none;
@@ -399,6 +416,7 @@ export default {
     color:rgb(255, 208, 75);
 }
 .maxDiv {
+ 
   overflow: hidden;
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;

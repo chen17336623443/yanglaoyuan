@@ -13,7 +13,7 @@
         <result property="fdType" column="fd_type"/>
         <result property="fdTime" column="fd_time"/>
         <result property="fdAddress" column="fd_address"/>
-        <association property="foodorderByFoId" javaType="Foodorder">
+        <association property="foodorderByFoId" javaType="Foodorder" column="fo_id" select="com.yanglaoyuan.model.Mapper.IFoodorderMapper.selectFoodorderByFoId">
             <id property="foId" column="fo_id"/>
             <result property="foMeals" column="fo_meals"/>
             <result property="foTime" column="fo_time"/>
@@ -30,6 +30,6 @@
     <!--//查询所有送餐记录
     List<Fooddelivered> selectFooddeliveredAll();-->
     <select id="selectFooddeliveredAll" resultMap="FooddeliveredMap">
-        select * from fooddelivered
+        select * from fooddelivered order by fd_time desc
     </select>
 </mapper>

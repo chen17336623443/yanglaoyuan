@@ -3,6 +3,7 @@ package com.yanglaoyuan.controller;
 import com.github.pagehelper.PageInfo;
 import com.yanglaoyuan.pojo.Fooddelivered;
 import com.yanglaoyuan.service.FooddeliveredServices;
+import com.yanglaoyuan.service.FoodorderServices;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,6 +23,8 @@ import java.util.List;
 public class FooddeliveredController {
     @Autowired
     FooddeliveredServices fds;
+    @Autowired
+    FoodorderServices fos;
 
     //送餐新增
     @RequestMapping("/insert")
@@ -33,7 +36,10 @@ public class FooddeliveredController {
      *@Date 2020-12-24 2:37
      */
     public Integer insertFooddelivered(@RequestBody Fooddelivered fdel){
-        return fds.insertFooddelivered(fdel);
+        //先新增送餐数据
+        fds.insertFooddelivered(fdel);
+        //再把点餐状态修改为已送餐
+        return fos.updateFoodorderState(fdel.getFoodorderByFoId().getFoId());
     }
 
     //查询所有送餐记录
