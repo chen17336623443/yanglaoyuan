@@ -1,5 +1,7 @@
 package com.yanglaoyuan.pojo;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import javax.persistence.*;
 import java.sql.Timestamp;
 import java.util.Objects;
@@ -11,7 +13,9 @@ public class Visit {
     private String vPhone;
     private Integer vRelationship;
     private String vReason;
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss" , timezone = " GMT+8 " )
     private Timestamp vVisittime;
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss" , timezone = " GMT+8 " )
     private Timestamp vLeavetime;
     private String vRemarks;
     private User userByUid;
@@ -19,6 +23,7 @@ public class Visit {
 
     @Id
     @Column(name = "v_id", nullable = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     public Integer getvId() {
         return vId;
     }
@@ -110,6 +115,22 @@ public class Visit {
                 Objects.equals(vVisittime, visit.vVisittime) &&
                 Objects.equals(vLeavetime, visit.vLeavetime) &&
                 Objects.equals(vRemarks, visit.vRemarks);
+    }
+
+    @Override
+    public String toString() {
+        return "Visit{" +
+                "vId=" + vId +
+                ", vName='" + vName + '\'' +
+                ", vPhone='" + vPhone + '\'' +
+                ", vRelationship=" + vRelationship +
+                ", vReason='" + vReason + '\'' +
+                ", vVisittime=" + vVisittime +
+                ", vLeavetime=" + vLeavetime +
+                ", vRemarks='" + vRemarks + '\'' +
+                ", userByUid=" + userByUid +
+                ", oldmanByOmId=" + oldmanByOmId +
+                '}';
     }
 
     @Override

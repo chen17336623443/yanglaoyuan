@@ -28,7 +28,12 @@ public class OutregistrationController {
 
     @PostMapping("/page")
     /*分页模糊查询*/
-    public PageInfo<Outregistration> selectBypage(@RequestParam("no")Integer no,@RequestParam("size")Integer size,@RequestParam("tomName")String tomName,@RequestParam("outtrue")String outtrue,@RequestParam(value="time[0]",required = false)String time1,@RequestParam(value="time[1]",required = false)String time2){
+    public PageInfo<Outregistration> selectBypage(@RequestParam("no")Integer no,
+                                                  @RequestParam("size")Integer size,
+                                                  @RequestParam("tomName")String tomName,
+                                                  @RequestParam("outtrue")String outtrue,
+                                                  @RequestParam(value="time[0]",required = false)String time1,
+                                                  @RequestParam(value="time[1]",required = false)String time2){
         Integer pageSize=4;
         if (size!=null){
             pageSize=size;

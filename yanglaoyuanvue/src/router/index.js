@@ -14,6 +14,8 @@ import Huliguanli from '@/components/Huliguanli'
 import Feiyonls from '@/components/Feiyonls'
 import Jiaofeidj from '@/components/Jiaofeidj'
 import Qianfeigl from '@/components/Qianfeigl'
+import Visit from '@/components/Visit'
+import Accident from '@/components/Accident'
 
 Vue.use(Router)
 
@@ -83,6 +85,14 @@ const router = new Router({
               {
                 path: '/qfgl',
                 component: Qianfeigl
+              },
+              {
+                path: '/visit',
+                component: Visit
+              },
+              {
+                path: '/accident',
+                component: Accident
               }
             ]
         }
