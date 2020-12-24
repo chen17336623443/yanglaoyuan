@@ -61,4 +61,8 @@
         dep_remarks=#{depRemarks} where om_id = #{omid}
     </update>
 
+    <update id="updatemoney">
+        update deposit set dep_money=#{depMoney} where om_id = #{omid}
+    </update>
+
 </mapper>

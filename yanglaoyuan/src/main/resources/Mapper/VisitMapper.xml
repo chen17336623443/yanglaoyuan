@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--
+    @description: 
+    @author: ChenZhiPeng
+    @create: 2020-12-23 09:55
+-->
+<mapper namespace="com.yanglaoyuan.model.Mapper.IVisitMapper">
+    <resultMap id="visit" type="com.yanglaoyuan.pojo.Visit">
+        <id property="vId" column="v_id"/>
+        <result property="vName" column="v_name"/>
+        <result property="vPhone" column="v_phone"/>
+        <result property="vRelationship" column="v_relationship"/>
+        <result property="vReason" column="v_reason"/>
+        <result property="vVisittime" column="v_visittime"/>
+        <result property="vLeavetime" column="v_leavetime"/>
+        <result property="vRemarks" column="v_remarks"/>
+        <association property="userByUid" column="uid" select="com.yanglaoyuan.model.Mapper.IUserMapper.selectByUid"/>
+        <association property="oldmanByOmId" column="om_id" select="com.yanglaoyuan.model.Mapper.IOldmanMapper.selectOldmanByomid"/>
+    </resultMap>
+
+    <select id="selectByPage" resultMap="visit">
+        select * from visit v left join oldman o on v.om_id = o.om_id where 1=1
+        <if test="tomname!=null and tomname!=''">
+            and o.tom_name like concat('%',#{tomname,jdbcType=VARCHAR},'%')
+        </if>
+        <if test="vname!=null and vname!=''">
+            and v.v_name like concat('%',#{vname,jdbcType=VARCHAR},'%')
+        </if>
+        <if test="time1!=null and time1!='' and time2!=null and time2!=''">
+            and v.v_visittime between #{time1} and #{time2}
+        </if>
+        order by v.v_id desc
+    </select>
+
+    <update id="leaveVisit">
+        update visit set v_leavetime=#{leavetime} where v_id=#{vid}
+    </update>
+
+    <select id="selectByvid" resultMap="visit">
+        select * from visit where v_id=#{vid}
+    </select>
+
+    <update id="updateVisit">
+        update visit set v_name=#{vName},v_phone=#{vPhone},v_reason=#{vReason},v_relationship=#{vRelationship},v_remarks=#{vRemarks} where v_id=#{vId}
+    </update>
+
+</mapper>

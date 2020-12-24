@@ -5,9 +5,8 @@ import login from '@/page/login'
 import hugongguanli from '@/components/hugongguanli'
 import Outregistration from '@/components/Outregistration'
 import Floor from '@/components/Floor'
-
-import Yucungl from
-    '@/components/Yucungl'
+import BedType from '@/components/BedType'
+import Yucungl from '@/components/Yucungl'
 import FoodManage from '@/components/FoodManage'
 import FoodPackge from '@/components/FoodPackge'
 import FoodOrderManage from '@/components/FoodOrderManage'
@@ -20,6 +19,16 @@ import consult from '@/components/consult'
 import Huliguanli from '@/components/Huliguanli'
 
 import Feiyonls from '@/components/Feiyonls'
+import Jiaofeidj from '@/components/Jiaofeidj'
+import Qianfeigl from '@/components/Qianfeigl'
+import Visit from '@/components/Visit'
+import Accident from '@/components/Accident'
+
+import Hulijibie from '@/components/Hulijibie'
+import checkins from '@/components/checkins'
+import checkinsadd from '@/components/checkinsadd'
+
+
 
 Vue.use(Router)
 
@@ -53,6 +62,10 @@ const router = new Router({
                 path: '/foodPackge',
                 component: FoodPackge
             },
+              {
+                path: '/Hulijibie',
+                component: Hulijibie
+              },
             {
                 path: '/foodOrderManage',
                 component: FoodOrderManage
@@ -73,7 +86,10 @@ const router = new Router({
                 path:'/Floor',
                 component: Floor
               },
-
+              {
+                path:'/BedType',
+                component: BedType
+              },
               {
                 path: '/ycgl',
                 component: Yucungl
@@ -93,6 +109,30 @@ const router = new Router({
               {
                 path: '/Huliguanli',
                 component: Huliguanli
+              },
+              {
+                path: '/checkins',
+                component: checkins
+              },
+              {
+                path: '/checkinsadd',
+                component: checkinsadd
+              },
+              {
+                path: '/jfdj',
+                component: Jiaofeidj
+              },
+              {
+                path: '/qfgl',
+                component: Qianfeigl
+              },
+              {
+                path: '/visit',
+                component: Visit
+              },
+              {
+                path: '/accident',
+                component: Accident
               }
             ]
         }

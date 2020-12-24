@@ -52,4 +52,10 @@ public class OldmanServices {
     public List<Oldman> selectnoacid(){
         return mapper.selectnoacid();
     }
+
+
+    /*新增老人*/
+    public Oldman  insertoldman(Oldman d){
+        return  dao.save(d);
+    }
 }

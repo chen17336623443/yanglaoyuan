@@ -36,4 +36,8 @@ public interface IOldmanMapper {
     List<Oldman> selectnoacid();
 
 
+    /*新增老人*/
+
+
+
 }

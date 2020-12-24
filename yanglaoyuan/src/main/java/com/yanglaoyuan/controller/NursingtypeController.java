@@ -3,9 +3,7 @@ package com.yanglaoyuan.controller;
 import com.yanglaoyuan.pojo.Nursingtype;
 import com.yanglaoyuan.service.NursingtypeServices;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -46,7 +44,7 @@ public class NursingtypeController {
      * @return
      */
     @PostMapping("/add")
-    public String  add(Nursingtype nursingtype) {
+    public String  add(@RequestBody Nursingtype nursingtype) {
         return ns.add(nursingtype)==1?"新增类别成功！":"新增类别失败！";
     }
 
@@ -57,7 +55,7 @@ public class NursingtypeController {
      * @param ntid
      * @return
      */
-    @PostMapping("/update")
+    @GetMapping("/update")
     public String  updateNur(String name,String other,Integer ntid) {
         return ns.updateNur(name, other, ntid)==1?"修改类别成功！":"修改类别失败！";
     }

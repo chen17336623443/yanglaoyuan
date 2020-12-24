@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--
+    @description: 
+    @author: ChenZhiPeng
+    @create: 2020-12-23 19:20
+-->
+<mapper namespace="com.yanglaoyuan.model.Mapper.IAccidentMapper">
+
+    <resultMap id="accident" type="com.yanglaoyuan.pojo.Accident">
+        <id property="accId" column="acc_id"/>
+        <result property="accTime" column="acc_time"/>
+        <result property="accType" column="acc_type"/>
+        <result property="accReason" column="acc_reason"/>
+        <result property="accDescribe" column="acc_describe"/>
+        <association property="userByUid" column="uid" select="com.yanglaoyuan.model.Mapper.IUserMapper.selectByUid"/>
+        <association property="oldmanByOmId" column="om_id" select="com.yanglaoyuan.model.Mapper.IOldmanMapper.selectOldmanByomid"/>
+    </resultMap>
+
+    <select id="selectByPage" resultMap="accident">
+        select * from accident a left join oldman o on a.om_id = o.om_id where 1=1
+        <if test="tomname!=null and tomname!=''">
+            and o.tom_name like concat('%',#{tomname,jdbcType=VARCHAR},'%')
+        </if>
+        order by a.acc_id desc
+    </select>
+
+    <select id="selectByaccid" resultMap="accident">
+        select * from accident where acc_id=#{accid}
+    </select>
+
+    <update id="updateAccident">
+        update accident set acc_time=#{acctime},acc_type=#{acctype},acc_reason=#{accreason},acc_describe=#{accdescribe}
+        where acc_id=#{accid}
+    </update>
+
+    <delete id="deleteAccident">
+        delete from accident where acc_id=#{accid}
+    </delete>
+
+</mapper>

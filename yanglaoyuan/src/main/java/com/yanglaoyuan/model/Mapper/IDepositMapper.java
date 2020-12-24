@@ -29,6 +29,7 @@ public interface IDepositMapper {
     List<Deposit> selectalls();
 
     /**
+     * 多条件查询
      * @Description 方法:a
      * @Param 参是:a
      * @Return 返回型是:a
@@ -38,6 +39,7 @@ public interface IDepositMapper {
     List<Deposit> selectbykwy(String name,String phone,String card);
 
     /**
+     * 根据id查询
      * @Description 方法:a
      * @Param 参是:a
      * @Return 返回型是:a
@@ -46,6 +48,24 @@ public interface IDepositMapper {
      */
     Deposit selectbyid(Integer omid);
 
+    /**
+     * 修改
+     * @Description 方法:a
+     * @Param 参是:a
+     * @Return 返回型是:a
+     * @Author chenxing
+     * @Date 2020/12/23 8:33
+     */
     void upadtedep(BigDecimal depMoney, Timestamp depDate,String depPayment,String depPaytype,String depRemarks,Integer omid);
+
+    /**
+     * 修改余额
+     * @Description 方法:a
+     * @Param 参是:a
+     * @Return 返回型是:a
+     * @Author chenxing
+     * @Date 2020/12/23 15:29
+     */
+    void updatemoney(BigDecimal depMoney,Integer omid);
 
 }

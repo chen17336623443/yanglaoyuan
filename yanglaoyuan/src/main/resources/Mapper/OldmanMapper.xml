@@ -55,4 +55,13 @@
         select * from oldman where ac_id is null
     </select>
 
+
+
+    <!--新增老人-->
+    <insert id="inseroldman" >
+        insert into  oldman(tom_name,tom_card,tom_sex,tom_number,tom_address,tom_category,tom_diet,tom_labour,
+        tom_check_intime,tom_img) values (#{d.tomName},#{d.tomCard},#{d.tomSex},#{d.tomNumber},#{d.tomAddress},
+        #{d.tomCategory},#{d.tomDiet},#{d.tomLabour},#{tomCheckIntime},#{d.tomImg})
+    </insert>
+
 </mapper>

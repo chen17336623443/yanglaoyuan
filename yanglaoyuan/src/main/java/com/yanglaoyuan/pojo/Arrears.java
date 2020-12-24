@@ -11,6 +11,7 @@ public class Arrears {
     private BigDecimal arrMonth;
     private BigDecimal arrOther;
     private String arrSfpay;
+
     private Oldman oldmanByOmId;
 
     @Id

@@ -27,6 +27,40 @@
                     <result column="fname4" property="fname"/>
                     <result column="fdad4" property="fdad"/>
                     <result column="ftype4" property="ftype"/>
+                    <collection property="bedsByFid" ofType="com.yanglaoyuan.pojo.Bed">
+                        <id column="bid" property="bid"/>
+                        <result column="bname" property="bname"/>
+                        <association property="bedtypeByByid" javaType="com.yanglaoyuan.pojo.Bedtype">
+                            <id column="byid" property="byid"/>
+                            <result column="byname" property="byname"/>
+                            <result column="bymoney" property="bymoney"/>
+                            <result column="byallmoney" property="byallmoney"/>
+                            <result column="bytime" property="bytime"/>
+                            <result column="byinfo" property="byinfo"/>
+                            <result column="byimg" property="byimg"/>
+                        </association>
+                        <association property="floorByFid" javaType="com.yanglaoyuan.pojo.Floor">
+                            <id column="fid" property="fid"/>
+                            <result column="fname" property="fname"/>
+                            <result column="fdad" property="fdad"/>
+                            <result column="ftype" property="ftype"/>
+                        </association>
+                        <association property="myoldman" javaType="com.yanglaoyuan.pojo.Oldman">
+                            <id property="omId" column="om_id"/>
+                            <result property="tomName" column="tom_name"/>
+                            <result property="tomCard" column="tom_card"/>
+                            <result property="tomSex" column="tom_sex"/>
+                            <result property="tomNumber" column="tom_number"/>
+                            <result property="tomAddress" column="tom_address"/>
+                            <result property="tomCategory" column="tom_category"/>
+                            <result property="tomDiet" column="tom_diet"/>
+                            <result property="tomLabour" column="tom_labour"/>
+                            <result property="tomCheckIntime" column="tom_check_intime"/>
+                            <result property="tomFn" column="tom_fn"/>
+                            <result property="tomImg" column="tom_img"/>
+                        </association>
+                    </collection>
+
                 </collection>
             </collection>
         </collection>
@@ -39,8 +73,48 @@
             f4.fid AS fid4,f4.fname AS fname4,f4.fdad AS fdad4,f4.ftype AS ftype4
         FROM `floor` f1,`floor` f2,`floor` f3,`floor` f4 WHERE f1.fid = f2.fdad AND f2.fid = f3.fdad  AND f3.fid = f4.fdad
     </select>
+
+    <select id="selectByFidlc" resultMap="floor">
+         SELECT
+            f1.fid,f1.fname,f1.fdad,f1.ftype,
+            f2.fid AS fid2,f2.fname AS fname2,f2.fdad AS fdad2,f2.ftype AS ftype2,
+            f3.fid AS fid3,f3.fname AS fname3,f3.fdad AS fdad3,f3.ftype AS ftype3,
+            f4.fid AS fid4,f4.fname AS fname4,f4.fdad AS fdad4,f4.ftype AS ftype4
+          FROM `floor` f1,`floor` f2,`floor` f3,`floor` f4
+          join bed b on f4.fid = b.fid
+          join oldman o on b.om_id = o.om_id
+          WHERE f1.fid = f2.fdad AND f2.fid = f3.fdad  AND f3.fid = f4.fdad and f3.fid=#{fid}
+    </select>
+
+    <select id="selectByFidfj" resultMap="floor">
+       select * from  floor f
+                join  bed b on f.fid = b.fid
+                join oldman o on b.om_id = o.om_id
+          WHERE  f.fid=#{fid}
+    </select>
+
+
+    <select id="selectByFid" resultMap="floor">
+         SELECT
+            f1.fid,f1.fname,f1.fdad,f1.ftype,
+            f2.fid AS fid2,f2.fname AS fname2,f2.fdad AS fdad2,f2.ftype AS ftype2,
+            f3.fid AS fid3,f3.fname AS fname3,f3.fdad AS fdad3,f3.ftype AS ftype3,
+            f4.fid AS fid4,f4.fname AS fname4,f4.fdad AS fdad4,f4.ftype AS ftype4
+          FROM `floor` f1,`floor` f2,`floor` f3,`floor` f4
+          join bed b on f4.fid = b.fid
+          join oldman o on b.om_id = o.om_id
+          WHERE f1.fid = f2.fdad AND f2.fid = f3.fdad  AND f3.fid = f4.fdad and f2.fid=#{fid}
+    </select>
+
     <insert id="insertLou"  parameterType="com.yanglaoyuan.pojo.Floor" useGeneratedKeys="true" keyProperty="fid">
         INSERT INTO `floor`(fid,flo_fid,fname,fdad,ftype) VALUES (#{fid},null,#{fname},#{fdad},#{ftype})
     </insert>
+<!--    int updateNameByFid(Integer fid,String fname);-->
+    <update id="updateNameByFid">
+        update floor set fname=#{fname} where fid=#{fid}
+    </update>
 
+    <delete id="deldetByFid">
+        DELETE FROM floor  where  fid=#{fid}
+    </delete>
 </mapper>

@@ -7,14 +7,15 @@ import java.util.Objects;
 @Entity
 public class Thenursingleveldetails {
     private Integer tsldId;
-    private Integer tsldType;
-    private Integer tsldNumber;
-    private Timestamp tsldTime;
+    private String tsldType;
+    private String tsldNumber;
+    private String tsldTime;
     private Nursing nursingByNuId;
     private Thenursinglevel thenursinglevelByTslId;
 
     @Id
     @Column(name = "tsld_id", nullable = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     public Integer getTsldId() {
         return tsldId;
     }
@@ -24,32 +25,34 @@ public class Thenursingleveldetails {
     }
 
     @Basic
-    @Column(name = "tsld_type", nullable = true)
-    public Integer getTsldType() {
+    @Column(name = "tsld_type", nullable = true, length = 255)
+    public String getTsldType() {
         return tsldType;
     }
 
-    public void setTsldType(Integer tsldType) {
+    public void setTsldType(String tsldType) {
         this.tsldType = tsldType;
     }
 
+
     @Basic
-    @Column(name = "tsld_number", nullable = true)
-    public Integer getTsldNumber() {
+    @Column(name = "tsld_number", nullable = true, length = 255)
+    public String getTsldNumber() {
         return tsldNumber;
     }
 
-    public void setTsldNumber(Integer tsldNumber) {
+    public void setTsldNumber(String tsldNumber) {
         this.tsldNumber = tsldNumber;
     }
 
+
     @Basic
-    @Column(name = "tsld_time", nullable = true)
-    public Timestamp getTsldTime() {
+    @Column(name = "tsld_time", nullable = true, length = 255)
+    public String getTsldTime() {
         return tsldTime;
     }
 
-    public void setTsldTime(Timestamp tsldTime) {
+    public void setTsldTime(String tsldTime) {
         this.tsldTime = tsldTime;
     }
 

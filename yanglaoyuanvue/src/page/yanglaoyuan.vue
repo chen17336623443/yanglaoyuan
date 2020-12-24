@@ -24,8 +24,8 @@
                 <i class="el-icon-bell"></i>
                 <span>接待管理</span>
               </template>
-              <router-link to="" style="text-decoration: none">
-                <el-menu-item index="2-1">咨询登记</el-menu-item>
+              <router-link to="consult" style="text-decoration: none">
+                <el-menu-item index="2-1" >咨询登记</el-menu-item>
               </router-link>
               <router-link to="" style="text-decoration: none">
                 <el-menu-item index="2-2">预约登记</el-menu-item>
@@ -49,10 +49,10 @@
               <router-link tag="span" to="/outregistration" style="text-decoration: none">
                 <el-menu-item index="3-1">外出登记</el-menu-item>
               </router-link>
-              <router-link to="" style="text-decoration: none">
+              <router-link tag="span" to="/visit" style="text-decoration: none">
                 <el-menu-item index="3-2">探视来访</el-menu-item>
               </router-link>
-              <router-link to="" style="text-decoration: none">
+              <router-link tag="span" to="/accident" style="text-decoration: none">
                 <el-menu-item index="3-3">意外记录</el-menu-item>
               </router-link>
               <router-link to="" style="text-decoration: none">
@@ -71,8 +71,8 @@
               <router-link to="/Floor" style="text-decoration: none">
                 <el-menu-item index="4-1">楼房管理</el-menu-item>
               </router-link>
-              <router-link to="" style="text-decoration: none">
-                <el-menu-item index="4-2">床位类型设置</el-menu-item>
+              <router-link to="/BedType" style="text-decoration: none">
+                <el-menu-item index="4-2">床位类型管理</el-menu-item>
               </router-link>
               <router-link to="" style="text-decoration: none">
                 <el-menu-item index="4-3">机构信息维护</el-menu-item>
@@ -90,7 +90,7 @@
               <router-link to="Huliguanli" style="text-decoration: none">
                 <el-menu-item index="5-2">护理项目设置</el-menu-item>
               </router-link>
-              <router-link to="" style="text-decoration: none">
+              <router-link to="Hulijibie" style="text-decoration: none">
                 <el-menu-item index="5-3">护理级别设置</el-menu-item>
               </router-link>
               <router-link to="" style="text-decoration: none">
@@ -128,10 +128,10 @@
               <router-link to="" style="text-decoration: none">
                 <el-menu-item index="7-2">入住缴费</el-menu-item>
               </router-link>
-              <router-link to="" style="text-decoration: none">
+              <router-link tag="span" to="/jfdj" style="text-decoration: none">
                 <el-menu-item index="7-3">缴费登记</el-menu-item>
               </router-link>
-              <router-link to="" style="text-decoration: none">
+              <router-link tag="span" to="/qfgl" style="text-decoration: none">
                 <el-menu-item index="7-4">欠费管理</el-menu-item>
               </router-link>
               <router-link tag="span" to="/fyls" style="text-decoration: none">
