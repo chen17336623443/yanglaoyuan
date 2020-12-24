@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yanglaoyuan.model.Mapper.IThenursinglevelMapper">
+    <resultMap id="all" type="com.yanglaoyuan.pojo.Thenursinglevel">
+        <id column="tsl_id" property="tslId"/>
+        <result column="tsl_name" property="tslName"/>
+        <result column="tsl_money" property="tslMoney"/>
+        <result column="tsl_other" property="tslOther"/>
+        <result column="tsl_object" property="tslObject"/>
+    </resultMap>
+
+    <select id="selectall" resultMap="all">
+        select * from thenursinglevel
+    </select>
+
+    <select id="selectbyid" resultMap="all">
+        select * from thenursinglevel where tsl_id=#{id}
+    </select>
+</mapper>

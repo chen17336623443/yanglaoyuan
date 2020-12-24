@@ -90,7 +90,7 @@
               <router-link to="Huliguanli" style="text-decoration: none">
                 <el-menu-item index="5-2">护理项目设置</el-menu-item>
               </router-link>
-              <router-link to="" style="text-decoration: none">
+              <router-link to="Hulijibie" style="text-decoration: none">
                 <el-menu-item index="5-3">护理级别设置</el-menu-item>
               </router-link>
               <router-link to="" style="text-decoration: none">

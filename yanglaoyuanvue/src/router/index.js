@@ -11,12 +11,14 @@ import FoodPackge from '@/components/FoodPackge'
 import dashboard from '@/components/Dashboard'
 import consult from '@/components/consult'
 import Huliguanli from '@/components/Huliguanli'
+
 import Feiyonls from '@/components/Feiyonls'
 import Jiaofeidj from '@/components/Jiaofeidj'
 import Qianfeigl from '@/components/Qianfeigl'
 import Visit from '@/components/Visit'
 import Accident from '@/components/Accident'
 
+import Hulijibie from '@/components/Hulijibie'
 Vue.use(Router)
 
 const router = new Router({
@@ -30,32 +32,38 @@ const router = new Router({
         {
 
             path: '/home',
-            component: yanglaoyuan
-            ,
-            children: [
+            component: yanglaoyuan,
+            children: [{
+                    path: '/',
+                    component: dashboard
+                },
+                {
+                    path: '/hugongguanli',
+                    component: hugongguanli
+                },
+                {
+                    path: '/hugongguanli',
+                    component: hugongguanli
+                },
+                {
+                    path: '/foodManage',
+                    component: FoodManage
+                },
+                {
+                    path: '/Hulijibie',
+                    component: Hulijibie
+                },
+                {
+                    path: '/outregistration',
+                    component: Outregistration
+                },
+                {
+                    path: '/Floor',
+                    component: Floor
+                },
               {
-                path: '/',
-                component: dashboard
-              },
-              {
-                path: '/hugongguanli',
-                component: hugongguanli
-              },
-            {
-                path: '/foodManage',
-                component: FoodManage
-            },
-            {
                 path: '/foodPackge',
                 component: FoodPackge
-            },
-            {
-                path: '/outregistration',
-                component: Outregistration
-              },
-              {
-                path:'/Floor',
-                component: Floor
               },
 
               {
