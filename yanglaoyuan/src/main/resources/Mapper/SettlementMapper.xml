@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--
+    @description: 
+    @author: ChenZhiPeng
+    @create: 2020-12-24 09:55
+-->
+<mapper namespace="com.yanglaoyuan.model.Mapper.ISettlementMapper">
+
+    <resultMap id="settlement" type="com.yanglaoyuan.pojo.Settlement">
+        <id property="seId" column="se_id"/>
+        <result property="seTime" column="se_time"/>
+        <result property="seDue" column="se_due"/>
+        <result property="seWithdrawn" column="se_withdrawn"/>
+        <association property="userByUid" column="uid" select="com.yanglaoyuan.model.Mapper.IUserMapper.selectByUid"/>
+        <association property="oldmanByOmId" column="om_id" select="com.yanglaoyuan.model.Mapper.IOldmanMapper.selectOldmanByomid"/>
+        <collection property="staybacksBySeId" column="se_id" select="com.yanglaoyuan.model.Mapper.IStaybackMapper.selectByseid"/>
+    </resultMap>
+
+    <select id="selectByseid" resultMap="settlement">
+        select * from settlement where se_id=#{seid}
+    </select>
+
+    <select id="selectByPage" resultMap="settlement">
+        select * from settlement s inner join oldman o on s.om_id = o.om_id where 1=1
+        <if test="tomname!=null and tomname!=''">
+            and o.tom_name like concat('%',#{tomname,jdbcType=VARCHAR},'%')
+        </if>
+        order by se_id desc
+    </select>
+
+</mapper>

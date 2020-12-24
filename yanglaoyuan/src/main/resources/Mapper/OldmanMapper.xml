@@ -22,6 +22,12 @@
         <result property="tomCheckIntime" column="tom_check_intime"/>
         <result property="tomFn" column="tom_fn"/>
         <result property="tomImg" column="tom_img"/>
+        <association property="foodpackge" column="om_id" select="com.yanglaoyuan.model.Mapper.IFoodpackgeMapper.selectByomidFood"/>
+        <association property="thenursinglevelByTslId" column="om_id" select="com.yanglaoyuan.model.Mapper.IThenursinglevelMapper.selectByomidThen"/>
+        <collection property="beds" column="om_id" select="com.yanglaoyuan.model.Mapper.IBedMapper.selectByomid"/>
+        <collection property="foodordersByOmId" column="om_id" select="com.yanglaoyuan.model.Mapper.IFoodorderMapper.selectByOmid"/>
+        <collection property="nursingrecordsByOmId" column="om_id" select="com.yanglaoyuan.model.Mapper.INursingrecordMapper.selectbyomid"/>
+        <collection property="costflowsByOmId" column="om_id" select="com.yanglaoyuan.model.Mapper.ICostflowMapper.selectByomidOld"/>
     </resultMap>
 
     <!--查询所有老人-->
@@ -37,6 +43,11 @@
     <!--查询未外出的老人-->
     <select id="selectNotOut" resultMap="oldman">
         select * from oldman where om_id not in (select o.om_id from outregistration o where o.out_true=1)
+    </select>
+
+    <!--查询未出院的老人-->
+    <select id="selectNotSettle" resultMap="oldman">
+        select * from oldman where om_id not in (select settlement.om_id from settlement)
     </select>
 
     <select id="selectoldmanByid" resultMap="oldman">

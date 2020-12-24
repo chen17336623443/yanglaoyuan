@@ -26,6 +26,7 @@ import Accident from '@/components/Accident'
 import Hulijibie from '@/components/Hulijibie'
 import checkins from '@/components/checkins'
 import checkinsadd from '@/components/checkinsadd'
+import Settlement from '@/components/Settlement'
 
 
 
@@ -128,6 +129,10 @@ const router = new Router({
               {
                 path: '/accident',
                 component: Accident
+              },
+              {
+                path: '/settlement',
+                component: Settlement
               }
             ]
         }

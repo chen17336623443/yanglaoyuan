@@ -1,5 +1,7 @@
 package com.yanglaoyuan.pojo;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.sql.Timestamp;
@@ -9,6 +11,7 @@ import java.util.Objects;
 @Entity
 public class Settlement {
     private Integer seId;
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss" , timezone = " GMT+8 " )
     private Timestamp seTime;
     private BigDecimal seDue;
     private BigDecimal seWithdrawn;
@@ -18,6 +21,7 @@ public class Settlement {
 
     @Id
     @Column(name = "se_id", nullable = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     public Integer getSeId() {
         return seId;
     }

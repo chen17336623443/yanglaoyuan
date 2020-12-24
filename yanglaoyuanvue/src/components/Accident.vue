@@ -13,10 +13,6 @@
           <span style="font-size: 14px">老人姓名：</span>
           <el-input size="small" style="width: 60%" v-model="selectAccident.tomname" clearable placeholder="请输入姓名"></el-input>
         </el-col>
-        <el-col :span="5">
-          <span style="font-size: 14px">床位号：</span>
-          <el-input size="small" clearable style="width: 60%" v-model="selectAccident.bname" placeholder="请输入床位号"></el-input>
-        </el-col>
         <el-col :span="4">
           <el-button type="success" round size="small" @click="selectByPage">查询</el-button>
           <el-button type="info" round size="small" style="margin-left: 10px" @click="insertAccidentShow">意外登记</el-button>
@@ -36,11 +32,6 @@
             prop="oldmanByOmId.tomName"
             width="120"
             label="老人姓名">
-          </el-table-column>
-          <el-table-column
-            prop=""
-            width="120"
-            label="床位号">
           </el-table-column>
           <el-table-column
             prop="accTime"
@@ -500,6 +491,7 @@
         .then(r=>{
           this.accidentPage=r.list;
           this.total=r.total;
+          console.log(r,"查询到的数据");
         })
       },
       /*查询所有老人*/

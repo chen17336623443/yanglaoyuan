@@ -28,6 +28,7 @@ public class User {
 
     @Id
     @Column(name = "uid", nullable = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     public Integer getUid() {
         return uid;
     }
@@ -75,6 +76,16 @@ public class User {
                 Objects.equals(uname, user.uname) &&
                 Objects.equals(uphone, user.uphone) &&
                 Objects.equals(upass, user.upass);
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "uid=" + uid +
+                ", uname='" + uname + '\'' +
+                ", uphone='" + uphone + '\'' +
+                ", upass='" + upass + '\'' +
+                '}';
     }
 
     @Override

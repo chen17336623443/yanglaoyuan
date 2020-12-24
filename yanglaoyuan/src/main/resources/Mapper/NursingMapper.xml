@@ -36,4 +36,5 @@
     <select id="selectid" resultMap="all">
          select * from nursing where nu_id=#{id}
     </select>
+
 </mapper>

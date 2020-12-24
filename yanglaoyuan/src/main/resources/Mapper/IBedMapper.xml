@@ -69,4 +69,12 @@
     <delete id="del">
         DELETE FROM bed  where  fid=#{fid}
     </delete>
+
+    <select id="selectByomid" resultMap="Bedt">
+        select * from bed where om_id=#{omid}
+    </select>
+
+    <select id="selecyBybid" resultMap="Bedt">
+        select * from bed b left join bedtype b2 on b.byid = b2.byid where b.bid=#{bid}
+    </select>
 </mapper>

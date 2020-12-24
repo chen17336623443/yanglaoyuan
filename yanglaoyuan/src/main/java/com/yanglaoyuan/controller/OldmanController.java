@@ -1,7 +1,9 @@
 package com.yanglaoyuan.controller;
 
 import com.yanglaoyuan.config.MyResult;
+import com.yanglaoyuan.pojo.Bed;
 import com.yanglaoyuan.pojo.Oldman;
+import com.yanglaoyuan.service.BedServices;
 import com.yanglaoyuan.service.OldmanServices;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -18,6 +20,8 @@ import java.util.List;
 public class OldmanController {
     @Autowired
     OldmanServices oldmanServices;
+    @Autowired
+    BedServices bedServices;
 
     @RequestMapping("/selectAll")
     public List<Oldman> selectAll(){
@@ -28,6 +32,12 @@ public class OldmanController {
     @PostMapping("/selectNotOut")
     public List<Oldman> selectNotOut(){
         return oldmanServices.selectNotOut();
+    }
+
+    /*查询未出院老人*/
+    @PostMapping("/selectNotSettle")
+    public List<Oldman> selectNotSettle(){
+        return oldmanServices.selectNotSettle();
     }
 
     @RequestMapping("/del")
@@ -48,8 +58,20 @@ public class OldmanController {
 
     /*新增老人*/
     @RequestMapping("insertoldman")
-    public  Oldman insertoldman(@RequestBody Oldman d){
+    public Oldman insertoldman(@RequestBody Oldman d){
         d.setTomCheckIntime(new Timestamp(System.currentTimeMillis()));
         return  oldmanServices.insertoldman(d);
+    }
+
+    /*根据老人id查询*/
+    @PostMapping("/selectByomid")
+    public Oldman selectByomid(@RequestParam("omid")Integer omid){
+        return oldmanServices.selectByomid(omid);
+    }
+
+    /*根据编号查询床套餐*/
+    @PostMapping("/selecyBybid")
+    public Bed selecyBybid(@RequestParam("bid")Integer bid){
+        return bedServices.selecyBybid(bid);
     }
 }

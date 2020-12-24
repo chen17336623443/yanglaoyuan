@@ -11,6 +11,10 @@
         <result column="tsl_object" property="tslObject"/>
     </resultMap>
 
+    <select id="selectByomidThen" resultMap="all">
+        select * from thenursinglevel t left join oldman o on t.tsl_id = o.tsl_id where o.om_id=#{omid}
+    </select>
+
     <select id="selectall" resultMap="all">
         select * from thenursinglevel
     </select>

@@ -27,6 +27,11 @@
         </association>
     </resultMap>
 
+    <select id="selectByomidOld" resultMap="resultCostflow">
+        select * from costflow c left join oldman o on c.om_id = o.om_id where c.om_id=#{omid} and c.cos_category='交费'
+        order by c.cos_date desc
+    </select>
+
     <select id="selectall" resultMap="resultCostflow">
         select cos_id, cos_category, cos_money, cos_date, cos_explain, cos_remarks,
                o.om_id, o.tom_name, o.tom_number, o.tom_card, u.uid, u.uname,

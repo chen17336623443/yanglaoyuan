@@ -28,4 +28,10 @@ public interface IBedMapper {
     List<Bed> selectbyid(Integer fid);
     int del(Integer fid);
     int delbybid(Integer bid);
+
+    /*根据老人id查询床号*/
+    List<Bed> selectByomid(Integer omid);
+
+    /*根据编号查询类型*/
+    Bed selecyBybid(Integer bid);
 }

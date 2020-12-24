@@ -55,11 +55,8 @@
               <router-link tag="span" to="/accident" style="text-decoration: none">
                 <el-menu-item index="3-3">意外记录</el-menu-item>
               </router-link>
-              <router-link to="" style="text-decoration: none">
+              <router-link tag="span" to="/settlement" style="text-decoration: none">
                 <el-menu-item index="3-4">退住登记</el-menu-item>
-              </router-link>
-              <router-link to="" style="text-decoration: none">
-                <el-menu-item index="3-5">退住查询</el-menu-item>
               </router-link>
             </el-submenu>
 

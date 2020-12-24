@@ -1,5 +1,7 @@
 package com.yanglaoyuan.pojo;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import javax.persistence.*;
 import java.sql.Timestamp;
 import java.util.Objects;
@@ -9,6 +11,7 @@ public class Stayback {
     private Integer stId;
     private String stType;
     private String stForm;
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss" , timezone = " GMT+8 " )
     private Timestamp stTime;
     private String stReason;
     private User userByUid;
@@ -16,6 +19,7 @@ public class Stayback {
 
     @Id
     @Column(name = "st_id", nullable = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     public Integer getStId() {
         return stId;
     }

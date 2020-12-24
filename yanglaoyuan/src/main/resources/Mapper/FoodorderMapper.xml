@@ -55,4 +55,9 @@
     <select id="selectFoodorderByFoId" resultMap="FoodorderMap">
         select * from foodorder fo left join oldman om on fo.om_id=om.om_id where fo.fo_id=#{fo_id}
     </select>
+
+    <!--根据omid查询点餐数据-->
+    <select id="selectByOmid" resultMap="FoodorderMap">
+        select * from foodorder f left join oldman o on f.om_id = o.om_id where o.om_id=#{omid}
+    </select>
 </mapper>
