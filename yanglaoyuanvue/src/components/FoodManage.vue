@@ -90,7 +90,7 @@
           </el-col>
           <el-col :span="12">
             <el-form-item label="类别：">
-              <el-select v-model="food.foodtypeByFtId.ftId">
+              <el-select v-model="food.foodtypeByFtId.ftId" style="width:257px;">
                 <el-option
                   v-for="f in foodtypeData"
                   :key="f.ftId"
@@ -367,7 +367,7 @@ export default {
   width: 170px;
   height: 255px;
   float: left;
-  margin: 0 10px 10px 0;
+  margin: 0 9px 9px 0;
   box-shadow: 0px 0px 5px 5px gainsboro;
 }
 .bottom {

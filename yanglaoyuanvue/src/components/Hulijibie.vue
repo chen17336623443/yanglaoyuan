@@ -224,13 +224,6 @@
             <el-card class="box-card">
               <div slot="header" class="clearfix">
                 <span>基本信息</span>
-                <el-button
-                  style="float: right; padding: 3px 0"
-                  type="text"
-                  @click="xiugaijb"
-                >
-                  修改
-                </el-button>
               </div>
 
               <el-form
@@ -536,6 +529,7 @@ export default {
                 message: "护理级别设置成功！",
                 type: "success",
               });
+              this.dialogTableVisibleadd=false;
               this.fullscreenLoading = false;
             }, 2000);
           });

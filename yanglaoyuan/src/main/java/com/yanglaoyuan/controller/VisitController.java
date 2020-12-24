@@ -62,6 +62,7 @@ public class VisitController {
         Oldman oldman=oldmanServices.selectByomid(omid);
         visit.setOldmanByOmId(oldman);
         User user=userServices.selectByuid(uid);
+        System.out.println(user.toString());
         visit.setUserByUid(user);
         Integer i=visitServices.insertVisit(visit);
         return i;

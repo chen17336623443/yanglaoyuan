@@ -74,7 +74,7 @@
             width="100"
             label="与老人关系">
             <template slot-scope="x">
-              <span v-for="item in options" v-if="x.row.vRelationship==item.value">
+              <span v-for="item in options" :key="item.index" v-if="x.row.vRelationship==item.value">
                 {{item.label}}
               </span>
             </template>

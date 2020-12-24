@@ -465,6 +465,7 @@
                 showClose: true,
               })
               this.insertAccidentClose();
+               this.selectByPage();
             }
           })
         }

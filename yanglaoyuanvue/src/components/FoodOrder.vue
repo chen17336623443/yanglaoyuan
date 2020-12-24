@@ -331,6 +331,7 @@ export default {
     },
     //购物车中食物数量发生变化触发
     handleCartChange(food) {
+      food.priceTotal=food.count*food.fPrice;
       //更新数据/视图
       this.$set(this.chooseFood, this.chooseFood.indexOf(food), food);
       //购物车食物总数量 重新赋值
@@ -485,8 +486,11 @@ export default {
       }
       //给购物车中的每一样食物计算小计
       this.chooseFood.forEach((c) => {
-        c.priceTotal = c.fPrice * c.count;
+        c.priceTotal =  c.count * c.fPrice;
       });
+      
+      this.chooseFood.push({});
+      this.chooseFood.pop();
       this.cartDialog = true;
     },
     //计算购物车中的总价
@@ -660,7 +664,7 @@ export default {
   width: 170px;
   height: 290px;
   float: left;
-  margin: 0 8px 8px 0;
+  margin: 0 5px 5px 0;
   box-shadow: 0px 0px 5px 5px gainsboro;
 }
 .bottom {

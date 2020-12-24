@@ -56,6 +56,7 @@ public class AccidentController {
         accident.setAccTime(accTime);
         accident.setAccType(accType);
         User user=userServices.selectByuid(uid);
+        System.out.println(user.toString());
         accident.setUserByUid(user);
         Oldman oldman=oldmanServices.selectByomid(omid);
         accident.setOldmanByOmId(oldman);
