@@ -8,6 +8,8 @@ import com.yanglaoyuan.service.OldmanServices;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.math.BigDecimal;
+import java.sql.Timestamp;
 import java.util.List;
 
 /**
@@ -44,8 +46,11 @@ public class NursingrecordController {
         return nrs.selectbyomid(omid);
     }
 
-    @PostMapping("/add/{omid}/{nuid}")
-    public String add(@RequestBody Nursingrecord n, @PathVariable("omid")Integer omid,@PathVariable("nuid") Integer nuid){
+    @PostMapping("/add/{omid}/{nuid}/{mony}")
+    public String add(@PathVariable("omid")Integer omid,@PathVariable("nuid") Integer nuid,@PathVariable("mony")Integer mony){
+        Nursingrecord n=new Nursingrecord();
+        n.setNrMoney(new BigDecimal(mony));
+        n.setNrTime(new Timestamp(System.currentTimeMillis()));
         n.setOldmanByOmId(ol.selectByomid(omid));
         n.setNursingByNuId(ns.selectid(nuid));
         return nrs.add(n)==1?"新增记录成功！":"新增记录失败！";

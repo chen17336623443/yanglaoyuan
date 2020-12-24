@@ -16,7 +16,7 @@ import dashboard from '@/components/Dashboard'
 import consult from '@/components/consult'
 
 import Huliguanli from '@/components/Huliguanli'
-
+import Hulijilu from '@/components/Hulijilu'
 import Feiyonls from '@/components/Feiyonls'
 import Jiaofeidj from '@/components/Jiaofeidj'
 import Qianfeigl from '@/components/Qianfeigl'
@@ -24,6 +24,7 @@ import Visit from '@/components/Visit'
 import Accident from '@/components/Accident'
 
 import Hulijibie from '@/components/Hulijibie'
+import hple from '@/components/hple'
 import checkins from '@/components/checkins'
 import checkinsadd from '@/components/checkinsadd'
 import Settlement from '@/components/Settlement'
@@ -53,6 +54,14 @@ const router = new Router({
               {
                 path: '/hugongguanli',
                 component: hugongguanli
+              },
+              {
+                path: '/Hulijilu',
+                component: Hulijilu
+              },
+              {
+                path: '/hple',
+                component: hple
               },
             {
                 path: '/foodManage',

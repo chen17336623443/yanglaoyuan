@@ -20,6 +20,7 @@ public class Nursingrecord {
 
     @Id
     @Column(name = "nr_id", nullable = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     public Integer getNrId() {
         return nrId;
     }
@@ -31,6 +32,7 @@ public class Nursingrecord {
     public void setNrId(Integer nrId) {
         this.nrId = nrId;
     }
+
 
     @Basic
     @Column(name = "nr_time", nullable = true)
@@ -53,10 +55,11 @@ public class Nursingrecord {
     }
 
     @Basic
-    @Column(name = "nr_money", nullable = true)
+    @Column(name = "nr_money", nullable = true, precision = 0)
     public BigDecimal getNrMoney() {
         return nrMoney;
     }
+
 
     public void setNrMoney(BigDecimal nrMoney) {
         this.nrMoney = nrMoney;
