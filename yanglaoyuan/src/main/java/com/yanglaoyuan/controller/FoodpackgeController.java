@@ -3,10 +3,7 @@ package com.yanglaoyuan.controller;
 import com.yanglaoyuan.pojo.Foodpackge;
 import com.yanglaoyuan.service.FoodpackgeServices;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
@@ -46,8 +43,9 @@ public class FoodpackgeController {
      *@Author tanyejin
      *@Date 2020-12-22 21:44
      */
-    public Integer insertFoodpackge(@ModelAttribute Foodpackge fpackge){
-        return fps.insertFoodpackge(fpackge);
+    public Integer insertFoodpackge(@RequestBody Foodpackge fpackge){
+        int result=fps.insertFoodpackge(fpackge);
+        return  result>0?fpackge.getFpId():0;
     }
 
     //修改套餐
@@ -59,7 +57,8 @@ public class FoodpackgeController {
      *@Author tanyejin
      *@Date 2020-12-22 21:45
      */
-    public Integer updateFoodpackge(@ModelAttribute Foodpackge fpackge){
+    public Integer updateFoodpackge(@RequestBody Foodpackge fpackge){
+        System.out.println("参数是："+fpackge);
         return fps.updateFoodpackge(fpackge);
     }
 

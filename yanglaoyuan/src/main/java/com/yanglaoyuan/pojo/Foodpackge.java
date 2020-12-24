@@ -12,7 +12,6 @@ public class Foodpackge {
     private BigDecimal fpPrice;
     private String fpRemark;
     private List<Foodweek> foodweeksByFpId;
-    private String fpImg;
     private List<Oldman> oldmans;
 
     @Id
@@ -68,6 +67,16 @@ public class Foodpackge {
     }
 
     @Override
+    public String toString() {
+        return "Foodpackge{" +
+                "fpId=" + fpId +
+                ", fpName='" + fpName + '\'' +
+                ", fpPrice=" + fpPrice +
+                ", fpRemark='" + fpRemark + '\'' +
+                '}';
+    }
+
+    @Override
     public int hashCode() {
         return Objects.hash(fpId, fpName, fpPrice, fpRemark);
     }
@@ -81,15 +90,7 @@ public class Foodpackge {
         this.foodweeksByFpId = foodweeksByFpId;
     }
 
-    @Basic
-    @Column(name = "fp_img")
-    public String getFpImg() {
-        return fpImg;
-    }
 
-    public void setFpImg(String fpImg) {
-        this.fpImg = fpImg;
-    }
 
     @OneToMany(mappedBy = "foodpackge")
     public List<Oldman> getOldmans() {

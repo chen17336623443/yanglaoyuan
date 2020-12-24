@@ -64,4 +64,10 @@
         #{d.tomCategory},#{d.tomDiet},#{d.tomLabour},#{tomCheckIntime},#{d.tomImg})
     </insert>
 
+    <!--//查询所有点过餐的老人
+    List<Oldman> selectOldmanByHaveFoid();-->
+    <select id="selectOldmanByHaveFoid" resultMap="oldman">
+        select * from oldman om inner join foodorder fo on om.om_id=fo.om_id
+    </select>
+
 </mapper>

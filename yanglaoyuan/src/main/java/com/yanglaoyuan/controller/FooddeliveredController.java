@@ -1,5 +1,6 @@
 package com.yanglaoyuan.controller;
 
+import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.yanglaoyuan.pojo.Fooddelivered;
 import com.yanglaoyuan.service.FooddeliveredServices;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.sql.Timestamp;
 import java.util.List;
 
 /**
@@ -53,5 +55,21 @@ public class FooddeliveredController {
      */
     public PageInfo<Fooddelivered> selectFooddeliveredAll(@RequestParam("pageNo")Integer pageNo,@RequestParam("pageSize")Integer pageSize){
         return fds.selectFooddeliveredAll(pageNo, pageSize);
+    }
+
+    //组合查询送餐记录
+    @RequestMapping("/groupQuery")
+    /**
+     *@Description 方法是:gruopQueryFooddelivered
+     *@Param 参数是:[fdAddress, startTime, endTime, pageNo, pageSize]
+     *@Return 返回类型是:com.github.pagehelper.PageInfo<com.yanglaoyuan.pojo.Fooddelivered>
+     *@Author tanyejin
+     *@Date 2020-12-24 13:22
+     */
+    public PageInfo<Fooddelivered> gruopQueryFooddelivered(@RequestParam(value = "fdAddress",required = false) String fdAddress, @RequestParam(value = "startTime",required = false) Timestamp startTime, 
+                                                           @RequestParam(value = "endTime",required = false) Timestamp endTime, @RequestParam("pageNo") Integer pageNo, @RequestParam("pageSize") Integer pageSize){
+        PageInfo<Fooddelivered> pageInfo=fds.gruopQueryFooddelivered(fdAddress, startTime, endTime, pageNo, pageSize);
+        System.out.println(pageInfo.getList().size());
+        return pageInfo;
     }
 }

@@ -5,18 +5,17 @@
       class="demo-form-inline"
       style="margin-top:10px;"
     >
-      <el-form-item label="客户姓名">
-        <el-input
-          v-model="omNmae"
-          placeholder="客户姓名"
-          clearable
-        ></el-input>
+      <el-form-item label="客户姓名：">
+        <el-select v-model="oldmanId" placeholder="请选择" clearable style="width:180px;">
+            <el-option v-for="o in oldmanData" :key="o.omId" :label="o.tomName" :value="o.omId"></el-option>
+        </el-select>
       </el-form-item>
-      <el-form-item label="餐次">
+      <el-form-item label="餐次：">
         <el-select
-          v-model="meals"
+          v-model="foMeals"
           placeholder="请选择餐次"
           clearable
+          style="width:180px;"
         >
           <el-option
             label="早餐"
@@ -32,13 +31,24 @@
           ></el-option>
         </el-select>
       </el-form-item>
+      <el-form-item label="点餐时间：">
+        <el-date-picker
+          v-model="foTime"
+          type="datetimerange"
+          range-separator="至"
+          start-placeholder="开始日期"
+          end-placeholder="结束日期"
+        >
+        </el-date-picker>
+      </el-form-item>
       <el-form-item>
         <el-button
           type="primary"
-          @click="groupQuery"
+          @click="isGroup=true,loadData()"
         >查询</el-button>
         <el-button @click="toFoodMenu">点餐</el-button>
       </el-form-item>
+      
     </el-form>
     <el-table :data="foodorderData" border style="width:100%;text-align:center;">
         <el-table-column prop="foId" label="ID" min-width="8%"></el-table-column>
@@ -96,14 +106,21 @@
 export default {
   data() {
     return {
-        //老人姓名
-        omNmae:'',
+        //老人id
+        oldmanId:'',
         //餐次
-        meals:'',
+        foMeals:'',
+        //点餐时间
+        foTime:[],
         pageSize:5,
         current:1,
         total:0,
-        foodorderData:[]
+        //点餐数据
+        foodorderData:[],
+        //点过餐的老人数据
+        oldmanData:[],
+        isGroup:false,
+        groupCount:0
 
     };
   },
@@ -118,13 +135,38 @@ export default {
     },
     //组合查询
     groupQuery() {},
-    //加载数据
+    //加载数据  + 组合查询
     loadData(){
-        this.$axios.get("http://localhost:8089/foodorder/all?pageNo="+this.current+"&pageSize="+this.pageSize)
+        let url=this.isGroup?"http://localhost:8089/foodorder/groupQuery":"http://localhost:8089/foodorder/all";
+        let param={pageNo:this.current,pageSize:this.pageSize};
+        if(this.isGroup){
+            if(this.oldmanId=="" && this.foMeals.length<1 && this.foTime.length>1){
+                this.loadData();
+                this.isGroup=false;
+                this.current=1;
+                this.$message.warning("请至少输入一个条件！(已为您查询所有)");
+                return;
+            }
+            this.groupCount++;
+            this.current=(this.groupCount>1)?this.current:1;
+            if(this.oldmanId!=null && this.oldmanId>0)param.om_id=this.oldmanId;
+            if(this.foMeals.length>0)param.fo_meals=this.foMeals;
+            if(this.foTime.length>1){
+                param.startTime=this.$Dateformat(this.foTime[0],'yyyy-MM-dd HH:mm:ss');
+                param.endTime=this.$Dateformat(this.foTime[1],'yyyy-MM-dd HH:mm:ss');
+            }
+        }
+        //加载点餐数据
+        this.$axios.get(url,{params:param})
         .then(r=>{
             console.log(r);
             this.foodorderData=r.list;
             this.total=r.total;
+        });
+        //加载老人数据
+        this.$axios.get("http://localhost:8089/foodorder/haveFoid")
+        .then(r=>{
+            this.oldmanData=r;
         })
     },
     //点餐

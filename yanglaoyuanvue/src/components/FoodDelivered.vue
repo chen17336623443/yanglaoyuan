@@ -5,13 +5,14 @@
       class="demo-form-inline"
       style="margin-top:10px;"
     >
-      <el-form-item label="送餐区域">
+      <el-form-item label="送餐区域：">
         <el-input
           v-model="fdAddress"
           clearable
+          style="width:180px;"
         />
       </el-form-item>
-      <el-form-item label="送餐时间">
+      <el-form-item label="送餐时间：">
         <el-date-picker
           v-model="fdTime"
           type="datetimerange"
@@ -21,7 +22,7 @@
         >
         </el-date-picker>
       </el-form-item>
-      <el-form-item><el-button>查询</el-button></el-form-item>
+      <el-form-item><el-button @click="isGroup=true,loadData()">查询</el-button></el-form-item>
     </el-form>
     <el-table :data="fooddeliData" style="width:100%" border>
         <el-table-column type="expand">
@@ -86,6 +87,10 @@ export default {
       fdAddress:'',
       //送餐时间
       fdTime:[],
+      //是否组合查询
+      isGroup:false,
+      //连续组合查询次数
+      groupCount:0,
     };
   },
   methods: {
@@ -98,13 +103,29 @@ export default {
         this.loadData();
     },
     loadData() {
+      let url=this.isGroup?'http://localhost:8089/fooddeli/groupQuery':'http://localhost:8089/fooddeli/all';
+      let param={pageNo:this.current,pageSize:this.pageSize};
+      if(this.isGroup){
+          if(this.fdAddress.length<1 && this.fdTime.length<1){
+            this.$message.warning("请至少输入一个条件！(已为您查询所有)");
+            this.current=1;
+            this.isGroup=false;
+            this.loadData();
+            return;
+        }
+        //组合查询次数+1
+        this.groupCount++;
+        this.current=(this.groupCount>1)?this.current:1;
+        if(this.fdAddress.length>0)param.fdAddress=this.fdAddress;
+        if(this.fdTime.length>1){
+            param.startTime=this.$Dateformat(this.fdTime[0],'yyyy-MM-dd HH:mm:ss');
+            param.entTime=this.$Dateformat(this.fdTime[1],'yyyy-MM-dd HH:mm:ss');
+        }
+      }
+      console.log("即将查询的参数：",param);
+      //查询送餐记录
       this.$axios
-        .get(
-          "http://localhost:8089/fooddeli/all?pageNo=" +
-            this.current +
-            "&pageSize=" +
-            this.pageSize
-        )
+        .get(url,{params:param})
         .then((r) => {
             console.log("送餐数据：",r);
           this.fooddeliData = r.list;
@@ -118,7 +139,8 @@ export default {
             count+=f.fodNumber;
         });
         return count;
-    }
+    },
+    
   },
   created() {
     this.loadData();

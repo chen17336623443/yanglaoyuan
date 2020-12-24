@@ -55,4 +55,21 @@
     <select id="selectFoodorderByFoId" resultMap="FoodorderMap">
         select * from foodorder fo left join oldman om on fo.om_id=om.om_id where fo.fo_id=#{fo_id}
     </select>
+
+    <!--//组合查询点餐信息
+    List<Foodorder> groupQuerytFoodorder(@Param("om_id")Integer om_id, @Param("fo_meals")String fo_meals, @Param("startTime")Timestamp startTime,@Param("endTime")Timestamp endTime);-->
+    <select id="groupQuerytFoodorder" resultMap="FoodorderMap">
+        select * from foodorder fo left join oldman om on fo.om_id=om.om_id
+        <where>
+            <if test="om_id!=null and om_id>0">
+                and fo.om_id=#{om_id}
+            </if>
+            <if test="fo_meals!=null">
+                and fo.fo_meals=#{fo_meals}
+            </if>
+            <if test="startTime !=null and endTime!=null">
+                and fo.fo_time between #{startTime} and #{endTime}
+            </if>
+        </where>
+    </select>
 </mapper>

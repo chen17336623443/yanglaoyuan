@@ -32,4 +32,18 @@
     <select id="selectFooddeliveredAll" resultMap="FooddeliveredMap">
         select * from fooddelivered order by fd_time desc
     </select>
+    <!--//组合查询送餐记录
+    List<Fooddelivered> gruopQueryFooddelivered(@Param("fdAddress")String fdAddress, @Param("startTime")Timestamp startTime,@Param("endTime")Timestamp endTime);-->
+    <select id="gruopQueryFooddelivered" resultMap="FooddeliveredMap">
+        select * from fooddelivered
+        <where>
+            <if test="fdAddress!=null">
+                and fd_address like concat('%',#{fdAddress},'%')
+            </if>
+            <if test="startTime!=null and endTime!=null">
+                and fd_time between #{startTime} and #{endTime}
+            </if>
+        </where>
+        order by fd_time desc
+    </select>
 </mapper>
