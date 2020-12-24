@@ -26,4 +26,12 @@
         select * from taboocrowd tc inner join foodtaboocrowd ftc on tc.tc_id=ftc.tc_id
         where ftc.f_id=#{f_id}
     </select>
+
+
+    <!--根据健康信息主键id查询疾病信息-->
+    <select id="bytcId" resultMap="TaboocrowdMap">
+        select *  from taboocrowd where  tc_id=#{id}
+
+    </select>
+
 </mapper>

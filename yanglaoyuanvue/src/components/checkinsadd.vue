@@ -305,6 +305,129 @@
             <i class="el-icon-arrow-right"></i>
           </span>
         </span>
+        <!-- 健康信内容下方 -->
+
+        <el-card shadow="hover">
+          <el-form
+            label-width="140px"
+            inline
+            :model="health"
+            :rules="healthyanzheng"
+            ref="health"
+            class="demo-ruleForm"
+          >
+            <el-row>
+              <el-col></el-col>
+            </el-row>
+
+            <el-form-item prop="capacity" label="能力评估等级">
+              <el-select
+                v-model="health.capacity"
+                size="mini"
+                placeholder="能力评估等级"
+                style="float: left;"
+              >
+                <el-option label="优秀" value="优秀"></el-option>
+                <el-option label="良好" value="良好"></el-option>
+                <el-option label="一般" value="一般"></el-option>
+                <el-option label="差" value="差"></el-option>
+                <el-option label="极差" value="极差"></el-option>
+                <el-option label="其他" value="其他"></el-option>
+              </el-select>
+            </el-form-item>
+
+            <el-form-item prop="accommodation" label="自理情况">
+              <el-select
+                v-model="health.accommodation"
+                size="mini"
+                placeholder="自理情况"
+                style="float: left;"
+              >
+                <el-option label="介助" value="介助"></el-option>
+                <el-option label="介护" value="介护"></el-option>
+                
+                <el-option label="其他" value="其他"></el-option>
+              </el-select>
+            </el-form-item>
+            <el-form-item label="过敏药物">
+              <el-input size="mini" v-model="health.allergy"></el-input>
+            </el-form-item>
+
+            <el-form-item prop="vision" label="视力">
+              <el-select
+                v-model="health.vision"
+                size="mini"
+                placeholder="视力"
+                style="float: left;"
+              >
+                <el-option label="正常" value="正常"></el-option>
+                <el-option label="有损" value="有损"></el-option>
+                <el-option label="失明" value="失明"></el-option>
+                
+                <el-option label="其他" value="其他"></el-option>
+              </el-select>
+            </el-form-item>
+
+            <el-form-item prop="hearing" label="听力">
+              <el-select
+                v-model="health.hearing"
+                size="mini"
+                placeholder="视力情况"
+                style="float: left;"
+              >
+                <el-option label="正常" value="正常"></el-option>
+                <el-option label="轻度听力障碍" value="轻度听力障碍"></el-option>
+                <el-option label="重度听力障碍" value="重度听力障碍"></el-option>
+               
+                <el-option label="其他" value="其他"></el-option>
+              </el-select>
+            </el-form-item>
+
+            <el-form-item label="登记人">
+              <el-input size="mini" v-model="relation.userByUid.uname" :disabled="true"></el-input>
+            </el-form-item>
+
+            <el-row>
+              <el-col :span="24">
+              
+                <el-form-item label="病史" style>
+                  <el-input
+                    type="textarea"
+                    v-model="health.medical"
+                    style="display: inline-block;width:820px; "
+                  ></el-input>
+                </el-form-item>
+              </el-col>
+
+              <el-col :span="24">
+                <el-form-item label="主要疾病">
+                  <el-checkbox-group v-model="jibings">
+                    <el-checkbox
+                      :key="item.tcId"
+                      v-for="item in taboocrowds"
+                      :label="item.tcId"
+                      name="type"
+                    >{{item.tcName}}</el-checkbox>
+                  </el-checkbox-group>
+                </el-form-item>
+              </el-col>
+            </el-row>
+
+            <el-row>
+              <el-col :span="24">
+                <div style="display: inline;">
+                  <el-button size="mini" icon="el-icon-close" @click="resetForm('relation')">重置</el-button>
+                  <el-button
+                    type="warning"
+                    size="mini"
+                    icon="el-icon-check"
+                    @click="submithelath('health')"
+                  >新增</el-button>
+                </div>
+              </el-col>
+            </el-row>
+          </el-form>
+        </el-card>
       </el-tab-pane>
 
       <el-tab-pane label name="fourth">
@@ -458,20 +581,85 @@ export default {
         ],
         desc: [{ required: true, message: "请填写活动形式", trigger: "blur" }],
       },
+      // 健康信息验证
+            healthyanzheng: {
+       
+       
+        capacity: [
+          {
+            required: true,
+            message: "请选择你们之间的关系",
+            trigger: "change",
+          },
+        ],
+        accommodation: [
+          {
+            required: true,
+            message: "请选择你们之间的关系",
+            trigger: "change",
+          },
+        ],
+      vision: [
+          {
+            required: true,
+            message: "请选择你们之间的关系",
+            trigger: "change",
+          },
+        ],
+         hearing: [
+          {
+            required: true,
+            message: "请选择你们之间的关系",
+            trigger: "change",
+          },
+        ],
+     
+       
+      },
       xg: false,
+      taboocrowds: [],
+      health:{
+          hid:'',
+          capacity:'',
+          accommodation:'',
+          vision:'',
+          hearing:'',
+          medical:'',
+          userByUid:{
+            uname:''
+          },
+          Oldman:{
+            
+          },
+         
+          allergy:''
+      }
+      ,
+      jibings:[]
     };
   },
   created() {
     this.relationall();
+    this.taboocrowd();
   },
   methods: {
+    // 查询所有的禁忌
+    taboocrowd() {
+      this.$axios
+        .get("http://localhost:8089/food/tabAll")
+        .then((res) => {
+          this.taboocrowds = res;
+        })
+
+        .catch((e) => {
+          console.log("查询所有禁忌报错了", e);
+        });
+    },
     // 修改家属信息
     xiugai(zhi) {
-     
-
       this.relation = JSON.parse(JSON.stringify(zhi));
-      this.relation.oldmanByOmId={omId:zhi.oldmanByOmId.omId}
-       console.log("修改的信息",this.relation)
+      this.relation.oldmanByOmId = { omId: zhi.oldmanByOmId.omId };
+      console.log("修改的信息", this.relation);
       this.xg = true;
     },
 
@@ -489,8 +677,8 @@ export default {
     },
     // 新增家属信息
     submitForm(formName) {
-      this.relation.site=this.relation.site+'';
-      
+      this.relation.site = this.relation.site + "";
+
       this.$refs[formName].validate((valid) => {
         if (valid) {
           if (!this.xg) {
@@ -509,6 +697,7 @@ export default {
               .post("http://localhost:8089/relation/update", this.relation)
               .then((res) => {
                 this.$message.success("修改成功！");
+
                 this.xg = false;
                 this.relation = {
                   rname: "",
@@ -523,12 +712,36 @@ export default {
                     omId: "",
                   },
                 };
+                this.resetForm("relation");
                 this.relationall();
               })
               .catch((e) => {
                 console.log("修改家属信息报错了");
               });
           }
+        } else {
+          console.log("error submit!!");
+          return false;
+        }
+      });
+    },
+
+    // 新增健康信息
+        submithelath(formName) {
+    
+
+      this.$refs[formName].validate((valid) => {
+        if (valid) {
+            this.$axios
+              .post("http://localhost:8089/health/save", this.health)
+              .then((res) => {
+                this.$message.success("新增成功！");
+                this.relationall();
+              })
+              .catch((e) => {
+                console.log("新增家属信息报错了");
+              });
+         
         } else {
           console.log("error submit!!");
           return false;
@@ -543,7 +756,9 @@ export default {
       this.relation.userByUid.uname = localStorage.getItem("uname");
       this.$axios
         .get(
-          "http://localhost:8089/relation/selectbyomid?omid=1&no=" +
+          "http://localhost:8089/relation/selectbyomid?omid=" +
+            this.oldman.omId +
+            "&no=" +
             this.pageNum +
             "&size=" +
             this.pageSize
@@ -657,6 +872,7 @@ export default {
 .div {
   margin: 0;
   padding: 20px;
+  width: 1084px;
 }
 .avatar {
   width: 178px;

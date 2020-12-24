@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yanglaoyuan.model.Mapper.IotmanMapper">
+    <!--查询健康信息对应的疾病信息-->
+
+    <resultMap id="jibing" type="com.yanglaoyuan.pojo.Otman">
+        <id column="zid" property="zid"></id>
+        <association property="mytaboocrowd" column="tc_id" select="com.yanglaoyuan.model.Mapper.ITaboocrowdMapper.bytcId"/>
+
+
+    </resultMap>
+    <select id="byhid" resultMap="jibing">
+        select  * from otman where hid=#{hid}
+    </select>
+
+</mapper>

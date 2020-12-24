@@ -1,6 +1,7 @@
 package com.yanglaoyuan.pojo;
 
 import javax.persistence.*;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -13,9 +14,12 @@ public class Health {
     private String medical;
     private User userByUid;
     private Oldman oldmanByOmId;
+    private List<Otman> otmans;
+    private String allergy;
 
     @Id
     @Column(name = "hid", nullable = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     public Integer getHid() {
         return hid;
     }
@@ -23,7 +27,6 @@ public class Health {
     public void setHid(Integer hid) {
         this.hid = hid;
     }
-
 
     @Basic
     @Column(name = "capacity", nullable = true, length = 255)
@@ -111,5 +114,24 @@ public class Health {
 
     public void setOldmanByOmId(Oldman oldmanByOmId) {
         this.oldmanByOmId = oldmanByOmId;
+    }
+
+    @OneToMany(mappedBy = "myhealth")
+    public List<Otman> getOtmans() {
+        return otmans;
+    }
+
+    public void setOtmans(List<Otman> otmans) {
+        this.otmans = otmans;
+    }
+
+    @Basic
+    @Column(name = "allergy", nullable = true, length = 1000)
+    public String getAllergy() {
+        return allergy;
+    }
+
+    public void setAllergy(String allergy) {
+        this.allergy = allergy;
     }
 }

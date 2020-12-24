@@ -11,6 +11,7 @@ public class Taboocrowd {
     private String tcRemark;
     private List<Shiwuzhongjianbiao> shiwuzhongjianbiaosByTcId;
     private List<Food> foods;
+    private List<Otman> otmans;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -74,5 +75,14 @@ public class Taboocrowd {
 
     public void setFoods(List<Food> foods) {
         this.foods = foods;
+    }
+
+    @OneToMany(mappedBy = "mytaboocrowd")
+    public List<Otman> getOtmans() {
+        return otmans;
+    }
+
+    public void setOtmans(List<Otman> otmans) {
+        this.otmans = otmans;
     }
 }
