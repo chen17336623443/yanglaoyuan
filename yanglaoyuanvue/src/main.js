@@ -7,17 +7,18 @@ import router from './router' /*路由 src/router/index.js*/
 import axios from 'axios'
 import http from './util/http'
 
-import qs from 'qs'
-Vue.prototype.$qs = qs;
-
 /*引用moment*/
 import moment from 'moment'
 Vue.use(require('vue-moment'));
 Vue.prototype.moment = moment;
 
-/*引用qs*/
+/*导入qs*/
 import qs from 'qs'
-Vue.prototype.$qs = qs;
+Vue.prototype.$qs=qs;
+
+/*导入格式化日期*/
+import Dateformat from './util/dateFormat'
+Vue.prototype.$Dateformat=Dateformat;
 
 /* 3、全局导入element-ui */
 import ElementUI from 'element-ui';

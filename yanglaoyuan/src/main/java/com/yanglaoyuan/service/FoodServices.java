@@ -35,6 +35,10 @@ public class FoodServices {
         PageInfo<Food> pageInfo=new PageInfo<>(list);
         return pageInfo;
     }
+    //查询所有食物 不带分页
+    public List<Food> selectFoodAll2(){
+        return fmapper.selectFoodAll();
+    }
     //修改食物
     public Integer updateFood(Food food){
         return fmapper.updateFood(food);
@@ -72,5 +76,11 @@ public class FoodServices {
     //给食物添加禁忌人群
     public Integer insertFoodTabs(List<Map<String,Integer>> listParam){
         return fmapper.insertFoodTabs(listParam);
+    }
+
+    //点餐 组合查询食物
+    public List<Food> groupFood(String fPiquancy,String fTaste,Integer maxPrice,
+                         Integer minPrice,List<Integer> list){
+        return fmapper.groupFood(fPiquancy, fTaste, maxPrice, minPrice, list);
     }
 }

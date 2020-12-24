@@ -9,6 +9,8 @@ import BedType from '@/components/BedType'
 import Yucungl from '@/components/Yucungl'
 import FoodManage from '@/components/FoodManage'
 import FoodPackge from '@/components/FoodPackge'
+import FoodOrderManage from '@/components/FoodOrderManage'
+import FoodOrder from '@/components/FoodOrder'
 
 import dashboard from '@/components/Dashboard'
 import consult from '@/components/consult'
@@ -58,6 +60,14 @@ const router = new Router({
                 path: '/Hulijibie',
                 component: Hulijibie
               },
+            {
+                path: '/foodOrderManage',
+                component: FoodOrderManage
+            },
+            {
+                path: '/foodOrder',
+                component: FoodOrder
+            },
             {
                 path: '/outregistration',
                 component: Outregistration

@@ -109,7 +109,7 @@
               <router-link to="foodPackge" style="text-decoration: none">
                 <el-menu-item index="6-2">食谱管理</el-menu-item>
               </router-link>
-              <router-link to="" style="text-decoration: none">
+              <router-link to="foodOrderManage" style="text-decoration: none">
                 <el-menu-item index="6-3">点餐管理</el-menu-item>
               </router-link>
               <router-link to="" style="text-decoration: none">

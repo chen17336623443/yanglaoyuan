@@ -1,6 +1,7 @@
 package com.yanglaoyuan.pojo;
 
 import javax.persistence.*;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -10,6 +11,16 @@ public class Foodweek {
     private String fwMeals;
     private String fwFoods;
     private Foodpackge foodpackgeByFpId;
+    private List<Food> foods;
+
+    @Transient
+    public List<Food> getFoods() {
+        return foods;
+    }
+
+    public void setFoods(List<Food> foods) {
+        this.foods = foods;
+    }
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

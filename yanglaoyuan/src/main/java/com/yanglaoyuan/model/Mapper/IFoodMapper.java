@@ -37,4 +37,7 @@ public interface IFoodMapper {
     Integer deleteFoodTabs(Integer f_id);
     //给食物添加禁忌人群
     Integer insertFoodTabs(List<Map<String,Integer>> listParam);
+    //点餐 组合查询食物
+    List<Food> groupFood(@Param("fPiquancy")String fPiquancy,@Param("fTaste") String fTaste,@Param("maxPrice")Integer maxPrice,
+                         @Param("minPrice")Integer minPrice,@Param("list")List<Integer> list);
 }

@@ -34,4 +34,9 @@ public class FoodpackgeServices {
     public Integer updateFoodpackge(Foodpackge fpackge){
         return fpmapper.updateFoodpackge(fpackge);
     }
+
+    //给套餐修改图片
+    public Integer updateFoodpackgeImg(Integer fp_id,String fp_img){
+        return fpmapper.updateFoodpackgeImg(fp_id, fp_img);
+    }
 }

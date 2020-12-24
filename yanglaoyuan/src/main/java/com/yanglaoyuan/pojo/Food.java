@@ -18,6 +18,7 @@ public class Food {
     private Foodtype foodtypeByFtId;
     private List<Shiwuzhongjianbiao> shiwuzhongjianbiaosByFId;
     private List<Taboocrowd> taboocrowds;
+    private List<Foodorderdetails> foodorderdetails;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -147,5 +148,14 @@ public class Food {
 
     public void setTaboocrowds(List<Taboocrowd> taboocrowds) {
         this.taboocrowds = taboocrowds;
+    }
+
+    @OneToMany(mappedBy = "food")
+    public List<Foodorderdetails> getFoodorderdetails() {
+        return foodorderdetails;
+    }
+
+    public void setFoodorderdetails(List<Foodorderdetails> foodorderdetails) {
+        this.foodorderdetails = foodorderdetails;
     }
 }
