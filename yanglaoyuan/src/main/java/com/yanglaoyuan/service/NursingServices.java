@@ -38,6 +38,8 @@ public class NursingServices {
         return nursingPageInfo;
     }
 
+
+
     /**
      * 查询所有护理分页
      *
@@ -49,6 +51,10 @@ public class NursingServices {
         List<Nursing> selectall = um.selectall();
         PageInfo<Nursing> nursingPageInfo = new PageInfo<>(selectall);
         return nursingPageInfo;
+    }
+
+    public Nursing selectbynuid(Integer id) {
+        return um.selectid(id);
     }
 
     public List<Nursing> selectAllall(){

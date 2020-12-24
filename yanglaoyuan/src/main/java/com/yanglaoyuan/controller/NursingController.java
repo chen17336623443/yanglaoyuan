@@ -66,4 +66,9 @@ public class NursingController {
     public List<Nursing> selectallall(){
         return ns.selectAllall();
     }
+
+    @RequestMapping("/idall")
+    public Nursing selectbynuid(Integer nuid){
+        return ns.selectbynuid(nuid);
+    }
 }

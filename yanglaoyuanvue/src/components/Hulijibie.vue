@@ -4,7 +4,7 @@
       <el-tab-pane label="护理信息">
         <el-row>
           <el-col :span="6" style="margin-left: 15px">
-            <el-card class="box-card" style="height: 590px">
+            <el-card class="box-card" style="height: 700px">
               <div slot="header" class="clearfix">
                 <span>护理级别菜单</span>
                 <el-button

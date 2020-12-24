@@ -15,6 +15,7 @@ public class Nursing {
     private String nuWay;
     private String nuTime;
     private String nuOther;
+    private List<Nursingrecord> nursingrecordsByNuId;
 
     @Id
     @Column(name = "nu_id", nullable = false)
@@ -109,5 +110,14 @@ public class Nursing {
 
     public void setNuOther(String nuOther) {
         this.nuOther = nuOther;
+    }
+
+    @OneToMany(mappedBy = "nursingByNuId")
+    public List<Nursingrecord> getNursingrecordsByNuId() {
+        return nursingrecordsByNuId;
+    }
+
+    public void setNursingrecordsByNuId(List<Nursingrecord> nursingrecordsByNuId) {
+        this.nursingrecordsByNuId = nursingrecordsByNuId;
     }
 }

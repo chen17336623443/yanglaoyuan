@@ -14,9 +14,10 @@ import dashboard from '@/components/Dashboard'
 import consult from '@/components/consult'
 
 import Huliguanli from '@/components/Huliguanli'
-
+import Hulijilu from '@/components/Hulijilu'
 import Feiyonls from '@/components/Feiyonls'
 import Hulijibie from '@/components/Hulijibie'
+import hple from '@/components/hple'
 Vue.use(Router)
 
 const router = new Router({
@@ -36,12 +37,16 @@ const router = new Router({
                     component: dashboard
                 },
                 {
-                    path: '/hugongguanli',
-                    component: hugongguanli
+                    path: '/Hulijilu',
+                    component: Hulijilu
                 },
                 {
                     path: '/hugongguanli',
                     component: hugongguanli
+                },
+                {
+                    path: '/hple',
+                    component: hple
                 },
                 {
                     path: '/foodManage',

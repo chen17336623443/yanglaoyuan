@@ -1,6 +1,7 @@
 package com.yanglaoyuan.pojo;
 
 import javax.persistence.*;
+import java.math.BigDecimal;
 import java.sql.Timestamp;
 import java.util.Objects;
 
@@ -9,12 +10,14 @@ public class Nursingrecord {
     private Integer nrId;
     private Timestamp nrTime;
     private Integer nrCompletion;
-    private Timestamp nrMoney;
+    private BigDecimal nrMoney;
     private String nrOther;
     private Oldman oldmanByOmId;
+    private Nursing nursingByNuId;
 
     @Id
     @Column(name = "nr_id", nullable = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     public Integer getNrId() {
         return nrId;
     }
@@ -22,7 +25,6 @@ public class Nursingrecord {
     public void setNrId(Integer nrId) {
         this.nrId = nrId;
     }
-
 
     @Basic
     @Column(name = "nr_time", nullable = true)
@@ -45,12 +47,13 @@ public class Nursingrecord {
     }
 
     @Basic
-    @Column(name = "nr_money", nullable = true)
-    public Timestamp getNrMoney() {
+    @Column(name = "nr_money", nullable = true, precision = 0)
+    public BigDecimal getNrMoney() {
         return nrMoney;
     }
 
-    public void setNrMoney(Timestamp nrMoney) {
+
+    public void setNrMoney(BigDecimal nrMoney) {
         this.nrMoney = nrMoney;
     }
 
@@ -89,5 +92,15 @@ public class Nursingrecord {
 
     public void setOldmanByOmId(Oldman oldmanByOmId) {
         this.oldmanByOmId = oldmanByOmId;
+    }
+
+    @ManyToOne
+    @JoinColumn(name = "nu_id", referencedColumnName = "nu_id")
+    public Nursing getNursingByNuId() {
+        return nursingByNuId;
+    }
+
+    public void setNursingByNuId(Nursing nursingByNuId) {
+        this.nursingByNuId = nursingByNuId;
     }
 }

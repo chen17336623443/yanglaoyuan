@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yanglaoyuan.model.Mapper.INursingrecordMapper">
+    <resultMap id="all" type="com.yanglaoyuan.pojo.Nursingrecord">
+        <id column="nr_id" property="nrId"/>
+        <result column="nr_time" property="nrTime"/>
+        <result column="nr_completion" property="nrCompletion"/>
+        <result column="nr_money" property="nrMoney"/>
+        <result column="nr_other" property="nrOther"/>
+        <association property="oldmanByOmId" javaType="com.yanglaoyuan.pojo.Oldman">
+            <id property="omId" column="om_id"/>
+            <result property="tomName" column="tom_name"/>
+            <result property="tomCard" column="tom_card"/>
+            <result property="tomSex" column="tom_sex"/>
+            <result property="tomNumber" column="tom_number"/>
+            <result property="tomAddress" column="tom_address"/>
+            <result property="tomCategory" column="tom_category"/>
+            <result property="tomDiet" column="tom_diet"/>
+            <result property="tomLabour" column="tom_labour"/>
+            <result property="tomCheckIntime" column="tom_check_intime"/>
+            <result property="tomFn" column="tom_fn"/>
+            <result property="tomImg" column="tom_img"/>
+        </association>
+        <association property="nursingByNuId" javaType="com.yanglaoyuan.pojo.Nursing">
+            <id column="nu_id" property="nuId"/>
+            <result column="nu_name" property="nuName"/>
+            <result column="nu_monry" property="nuMonry"/>
+            <result column="nu_way" property="nuWay"/>
+            <result column="nu_time" property="nuTime"/>
+            <result column="nu_other" property="nuOther"/>
+        </association>
+    </resultMap>
+
+    <select id="selectall" resultMap="all">
+        select * from nursingrecord n inner join oldman o on n.om_id=o.om_id inner join nursing u on n.nu_id=u.nu_id
+    </select>
+
+    <select id="selectbyomid" resultMap="all">
+        select * from nursingrecord n inner join oldman o on n.om_id=o.om_id inner join nursing u on n.nu_id=u.nu_id where n.om_id=#{omid}
+    </select>
+</mapper>

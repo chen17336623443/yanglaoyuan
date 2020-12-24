@@ -93,7 +93,7 @@
               <router-link to="Hulijibie" style="text-decoration: none">
                 <el-menu-item index="5-3">护理级别设置</el-menu-item>
               </router-link>
-              <router-link to="" style="text-decoration: none">
+              <router-link to="Hulijilu" style="text-decoration: none">
                 <el-menu-item index="5-4">护理记录</el-menu-item>
               </router-link>
             </el-submenu>
@@ -157,7 +157,10 @@
                 <i class="el-icon-s-custom"></i>
                 {{ user }}
               </template>
-              <el-menu-item index="8-1" @click="tuichu">退出</el-menu-item>
+              <router-link tag="span" to="/hple" style="text-decoration: none">
+              <el-menu-item index="8-1">帮助</el-menu-item>
+              </router-link>
+              <el-menu-item index="8-2" @click="tuichu">退出</el-menu-item>
             </el-submenu>
           </el-menu>
         </el-header>
