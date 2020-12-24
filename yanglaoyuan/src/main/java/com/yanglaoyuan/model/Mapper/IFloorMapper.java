@@ -1,5 +1,6 @@
 package com.yanglaoyuan.model.Mapper;
 
+import com.yanglaoyuan.pojo.Bedtype;
 import com.yanglaoyuan.pojo.Floor;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
@@ -26,4 +27,6 @@ public interface IFloorMapper {
     List<Floor> selectByFidfj(Integer fid);
 
     int updateNameByFid(Integer fid,String fname);
+
+    Bedtype bytype(Integer id);
 }

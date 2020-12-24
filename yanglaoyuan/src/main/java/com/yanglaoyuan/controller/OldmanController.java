@@ -52,4 +52,21 @@ public class OldmanController {
         d.setTomCheckIntime(new Timestamp(System.currentTimeMillis()));
         return  oldmanServices.insertoldman(d);
     }
+
+    /*修改老人的护理套餐*/
+    @RequestMapping("updatetsl")
+    public Integer updatetsl(@RequestParam("omid") Integer omid,@RequestParam("id") Integer id){
+        System.out.println(omid
+        +"---"+id);
+        return  oldmanServices.updatetsl(omid,id);
+    }
+
+
+    /*修改老人餐饮套餐*/
+    @RequestMapping("updatefp")
+    public Integer updatefp(@RequestParam("omid") Integer omid,@RequestParam("id") Integer id){
+        System.out.println(omid
+                +"---"+id);
+        return  oldmanServices.updatefp(omid,id);
+    }
 }

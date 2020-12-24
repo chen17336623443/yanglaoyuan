@@ -30,14 +30,14 @@
                     <collection property="bedsByFid" ofType="com.yanglaoyuan.pojo.Bed">
                         <id column="bid" property="bid"/>
                         <result column="bname" property="bname"/>
-                        <association property="bedtypeByByid" javaType="com.yanglaoyuan.pojo.Bedtype">
-                            <id column="byid" property="byid"/>
-                            <result column="byname" property="byname"/>
-                            <result column="bymoney" property="bymoney"/>
-                            <result column="byallmoney" property="byallmoney"/>
-                            <result column="bytime" property="bytime"/>
-                            <result column="byinfo" property="byinfo"/>
-                            <result column="byimg" property="byimg"/>
+                        <association property="bedtypeByByid"  javaType="com.yanglaoyuan.pojo.Bedtype" column="byid"  select="com.yanglaoyuan.model.Mapper.IFloorMapper.bytype">
+<!--                            <id column="byid" property="byid"/>-->
+<!--                            <result column="byname" property="byname"/>-->
+<!--                            <result column="bymoney" property="bymoney"/>-->
+<!--                            <result column="byallmoney" property="byallmoney"/>-->
+<!--                            <result column="bytime" property="bytime"/>-->
+<!--                            <result column="byinfo" property="byinfo"/>-->
+<!--                            <result column="byimg" property="byimg"/>-->
                         </association>
                         <association property="floorByFid" javaType="com.yanglaoyuan.pojo.Floor">
                             <id column="fid" property="fid"/>
@@ -65,6 +65,7 @@
             </collection>
         </collection>
     </resultMap>
+<!--    zhege-->
     <select id="selectAll" resultMap="floor">
          SELECT
             f1.fid,f1.fname,f1.fdad,f1.ftype,
@@ -117,4 +118,15 @@
     <delete id="deldetByFid">
         DELETE FROM floor  where  fid=#{fid}
     </delete>
+<resultMap id="typp" type="com.yanglaoyuan.pojo.Bedtype">
+    <id column="byid" property="byid"/>
+    <result column="byname" property="byname"/>
+    <result column="bymoney" property="bymoney"/>
+    <result column="byallmoney" property="byallmoney"/>
+</resultMap>
+
+    <select id="bytype" resultMap="typp">
+
+        select * from bedtype where byid=#{id}
+    </select>
 </mapper>

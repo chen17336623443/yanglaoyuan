@@ -345,7 +345,7 @@
               >
                 <el-option label="介助" value="介助"></el-option>
                 <el-option label="介护" value="介护"></el-option>
-                
+
                 <el-option label="其他" value="其他"></el-option>
               </el-select>
             </el-form-item>
@@ -354,16 +354,11 @@
             </el-form-item>
 
             <el-form-item prop="vision" label="视力">
-              <el-select
-                v-model="health.vision"
-                size="mini"
-                placeholder="视力"
-                style="float: left;"
-              >
+              <el-select v-model="health.vision" size="mini" placeholder="视力" style="float: left;">
                 <el-option label="正常" value="正常"></el-option>
                 <el-option label="有损" value="有损"></el-option>
                 <el-option label="失明" value="失明"></el-option>
-                
+
                 <el-option label="其他" value="其他"></el-option>
               </el-select>
             </el-form-item>
@@ -378,7 +373,7 @@
                 <el-option label="正常" value="正常"></el-option>
                 <el-option label="轻度听力障碍" value="轻度听力障碍"></el-option>
                 <el-option label="重度听力障碍" value="重度听力障碍"></el-option>
-               
+
                 <el-option label="其他" value="其他"></el-option>
               </el-select>
             </el-form-item>
@@ -389,7 +384,6 @@
 
             <el-row>
               <el-col :span="24">
-              
                 <el-form-item label="病史" style>
                   <el-input
                     type="textarea"
@@ -438,6 +432,108 @@
             <i class="el-icon-arrow-right"></i>
           </span>
         </span>
+        <!-- 护理任务设置 -->
+
+        <el-card shadow="hover">
+          <el-form
+            label-width="140px"
+            inline
+            :model="oldman"
+            :rules="huliyanzheng"
+            ref="oldman"
+            class="demo-ruleForm"
+          >
+            <el-form-item prop="thenursinglevelByTslId" label="护理级别">
+              <el-select
+                @change="jibei()"
+                v-model="oldman.thenursinglevelByTslId.tslName"
+                size="mini"
+                placeholder="护理级别"
+                style="float: left;"
+              >
+                <el-option :label="i.tslName" :value="i.tslName" v-for="i in tnsls" :key="i.tslId"></el-option>
+              </el-select>
+            </el-form-item>
+            <el-form-item label="护理说明">
+              <el-input
+                style="color:red"
+                size="mini"
+                v-model="oldman.thenursinglevelByTslId.tslObject"
+                :disabled="true"
+              ></el-input>
+            </el-form-item>
+            <el-form-item label="护理总费用">
+              <el-input
+                style="color:red"
+                size="mini"
+                v-model="oldman.thenursinglevelByTslId.tslMoney"
+                :disabled="true"
+              ></el-input>
+            </el-form-item>
+
+            <el-row>
+              <el-col :span="24">
+                <div style="display: inline;">
+                  <el-button size="mini" icon="el-icon-close" @click="resetForm('relation')">重置</el-button>
+                  <el-button
+                    type="warning"
+                    size="mini"
+                    icon="el-icon-check"
+                    @click="relation.site=relation.site+'';submithuli('oldman')"
+                  >保存</el-button>
+                </div>
+              </el-col>
+            </el-row>
+          </el-form>
+        </el-card>
+
+        <el-card
+          class="box-card"
+          style="margin-top: 5px"
+          v-show="Thenursingleveldetails.length!=0?true:false"
+        >
+          <div slot="header" class="clearfix">
+            <span>护理级别项目</span>
+          </div>
+          <el-table :data="Thenursingleveldetails" size="mini" height="250" style="width: 720px">
+            <el-table-column label="护理名称" width="100">
+              <template slot-scope="s">
+                <el-popover trigger="hover" placement="top">
+                  <p>{{ s.row.nursingByNuId.nuName }}</p>
+                  <div
+                    slot="reference"
+                    class="name-wrapper"
+                  >{{ s.row.nursingByNuId.nuName | handleText }}</div>
+                </el-popover>
+              </template>
+            </el-table-column>
+            <el-table-column prop="nursingByNuId.nuMonry" label="护理费用" width="120"></el-table-column>
+            <el-table-column prop="nursingByNuId.nuWay" label="收费方式" width="120"></el-table-column>
+            <el-table-column label="执行频次" width="120">
+              <template slot-scope="s">{{ s.row.tsldNumber }}</template>
+            </el-table-column>
+            <el-table-column label="执行时间" width="120">
+              <template slot-scope="s">
+                <el-popover trigger="hover" placement="top">
+                  <p>{{ s.row.tsldTime }}</p>
+                  <div slot="reference" class="name-wrapper">{{ s.row.tsldTime | handleText }}</div>
+                </el-popover>
+              </template>
+            </el-table-column>
+            <el-table-column label="任务类型" width="120">
+              <template slot-scope="s">{{ s.row.tsldType }}</template>
+            </el-table-column>
+          </el-table>
+          <el-pagination
+            @size-change="handleSizeChange"
+            @current-change="handleCurrentChange"
+            :current-page="currentPage"
+            :page-sizes="[4, 8, 12, 16]"
+            :page-size="pagesize"
+            layout="total, sizes, prev, pager, next, jumper"
+            :total="total"
+          ></el-pagination>
+        </el-card>
       </el-tab-pane>
 
       <el-tab-pane label name="canyin">
@@ -448,6 +544,123 @@
             <i class="el-icon-arrow-right"></i>
           </span>
         </span>
+
+        <!--餐饮设置 -->
+
+        <el-card shadow="hover">
+          <el-form
+            label-width="140px"
+            inline
+            :model="oldman"
+            :rules="huliyanzheng"
+            ref="oldman"
+            class="demo-ruleForm"
+          >
+          
+            <el-form-item prop="thenursinglevelByTslId" label="餐饮套餐">
+              <el-select
+                @change="jibei()"
+                v-model="oldman.foodpackge.fpName"
+                size="mini"
+                placeholder="餐饮套餐"
+                style="float: left;"
+              >
+                 
+                <el-option  v-for="i in foodpackges" :key="i.fpId" :label="i.fpName" :value="i"></el-option>
+              </el-select>
+            </el-form-item>
+            <el-form-item label="套餐详情">
+              <el-input
+                style="color:red"
+                size="mini"
+                v-model="oldman.foodpackge.fpRemark"
+                :disabled="true"
+              ></el-input>
+            </el-form-item>
+            <el-form-item label="套餐费用">
+              <el-input
+                style="color:red"
+                size="mini"
+                v-model="oldman.foodpackge.fpPrice"
+                :disabled="true"
+              ></el-input>
+            </el-form-item>
+          </el-form>
+
+          <el-dialog
+            title="选择床位"
+            :visible.sync="dialogVisible"
+            width="30%"
+            :before-close="handleClose"
+          >
+            <span>
+              <el-tree
+                show-checkbox
+                :check-strictly="true"
+                node-key="id"
+                ref="tree"
+                highlight-current
+                :data="floortree"
+                :props="defaultProps"
+              ></el-tree>
+            </span>
+            <span slot="footer" class="dialog-footer">
+              <el-button @click="dialogVisible = false">取 消</el-button>
+              <el-button type="primary" @click="getCheckedNodes()">确 定</el-button>
+            </span>
+          </el-dialog>
+        </el-card>
+
+        <el-card shadow="hover">
+          <el-form
+            label-width="140px"
+            inline
+            :model="oldman"
+            :rules="huliyanzheng"
+            ref="oldman"
+            class="demo-ruleForm"
+          >
+            <el-form-item prop="thenursinglevelByTslId" label="床位信息">
+               <el-input
+                style="color:red"
+                size="mini"
+                v-model="oldman.foodpackge.fname"
+                :disabled="true"
+              ></el-input>
+              <el-button type="text" @click="dialogVisible = true">选择床位</el-button>
+            </el-form-item>
+            <el-form-item label="床位类型">
+              <el-input
+                style="color:red"
+                size="mini"
+                v-model="bedtype.byname"
+                :disabled="true"
+              ></el-input>
+            </el-form-item>
+            <el-form-item label="床位费用">
+              <el-input
+                style="color:red"
+                size="mini"
+                v-model="bedtype.bymoney"
+                :disabled="true"
+              ></el-input>
+            </el-form-item>
+
+            <el-row>
+              <el-col :span="24">
+                <div style="display: inline;">
+                  <el-button size="mini" icon="el-icon-close" @click="resetForm('relation')">重置</el-button>
+                  <el-button
+                    type="warning"
+                    size="mini"
+                    icon="el-icon-check"
+                    @click="relation.site=relation.site+'';submithuli('oldman')"
+                  >保存</el-button>
+                </div>
+              </el-col>
+            </el-row>
+          </el-form>
+        </el-card>
       </el-tab-pane>
 
       <el-tab-pane label name="caiwu">
@@ -466,6 +679,21 @@ import { regionData, CodeToText } from "element-china-area-data";
 export default {
   data() {
     return {
+      bedtype:{
+        byname:"",
+        bymoney:'',
+
+      },
+
+
+      defaultProps: {
+        children: "floorsByFid",
+        label: "fname",
+      },
+      tableData: [],
+      floortree: [],
+      dialogVisible: false,
+      Thenursingleveldetails: [],
       relations: [],
       options: regionData,
       oldman: {
@@ -478,7 +706,18 @@ export default {
         tomCategory: "",
         tomDiet: "",
         tomLabour: "",
+        thenursinglevelByTslId: {
+          tslId: "",
+          tslMoney: "",
+          tslObject: "",
+        },
 
+        foodpackge: {
+          fpId: "",
+          fpName: "",
+          fpPrice: "",
+          fpRemark: "",
+        },
         tomImg: "",
       },
       checkins: {
@@ -582,9 +821,7 @@ export default {
         desc: [{ required: true, message: "请填写活动形式", trigger: "blur" }],
       },
       // 健康信息验证
-            healthyanzheng: {
-       
-       
+      healthyanzheng: {
         capacity: [
           {
             required: true,
@@ -599,50 +836,150 @@ export default {
             trigger: "change",
           },
         ],
-      vision: [
+        vision: [
           {
             required: true,
             message: "请选择你们之间的关系",
             trigger: "change",
           },
         ],
-         hearing: [
+        hearing: [
           {
             required: true,
             message: "请选择你们之间的关系",
             trigger: "change",
           },
         ],
-     
-       
+      },
+      huliyanzheng: {
+        thenursinglevelByTslId: [
+          {
+            required: true,
+            message: "请选择护理级别",
+            trigger: "change",
+          },
+        ],
       },
       xg: false,
       taboocrowds: [],
-      health:{
-          hid:'',
-          capacity:'',
-          accommodation:'',
-          vision:'',
-          hearing:'',
-          medical:'',
-          userByUid:{
-            uname:''
-          },
-          Oldman:{
-            
-          },
-         
-          allergy:''
-      }
-      ,
-      jibings:[]
+      health: {
+        hid: "",
+        capacity: "",
+        accommodation: "",
+        vision: "",
+        hearing: "",
+        medical: "",
+        userByUid: {
+          uname: "",
+        },
+        Oldman: {},
+
+        allergy: "",
+      },
+      jibings: [],
+      tnsls: [],
+      size: 5,
+      pagesize: 5,
+      currentPage: 5,
+      total: 0,
+      foodpackges: [],
     };
   },
   created() {
+    this.tree();
     this.relationall();
     this.taboocrowd();
+    this.tnslall();
+    this.canyin();
+  },
+  filters: {
+    handleText(value) {
+      if (!value) return "";
+      if (value.length > 5) {
+        return value.slice(0, 5) + "...";
+      }
+      return value;
+    },
   },
   methods: {
+    getCheckedNodes() {
+      console.log(this.$refs.tree.getCheckedNodes());
+      if(this.$refs.tree.getCheckedNodes().length>1){
+        this.$message.warning("默认只可以选一个哦")
+      }else if(this.$refs.tree.getCheckedNodes().length==1){
+        let a=this.$refs.tree.getCheckedNodes();
+        this.oldman.foodpackge=a[0];
+
+this.$http.post("http://localhost:8089/floor/selectByFid?fid="+a[0].fid)
+          .then((res) => {
+            console.log("我要的值",res)
+           if(res.length!=0){
+          this.bedtype.bymoney=res[0].bedtypeByByid.bymoney;
+           this.bedtype.byname=res[0].bedtypeByByid.byname;
+        }
+           
+          })
+
+       
+        this.dialogVisible = false;
+      }else{
+        this.dialogVisible = false;
+      }
+    },
+    /*查询floor的树形数据*/
+    tree() {
+      this.$http.post("http://localhost:8089/floor/tree").then((res) => {
+        this.floortree = res.floors;
+        this.tableData = res.floors[0].floorsByFid;
+      });
+    },
+    handleClose(done) {
+      this.$confirm("确认关闭？")
+        .then((_) => {
+          done();
+        })
+        .catch((_) => {});
+    },
+    // 查询
+    canyin() {
+      this.$axios
+        .get("http://localhost:8089/foodpackge/all")
+        .then((res) => {
+          this.foodpackges = res;
+        })
+        .catch((e) => {
+          console.log("获取餐饮套餐时报错了", e);
+        });
+    },
+    //级别选取
+    jibei() {
+      console.log();
+      this.$http
+        .get(
+          "thvt/allbyid?num=1&size=" +
+            this.size +
+            "&tslid=" +
+            this.oldman.thenursinglevelByTslId.tslId
+        )
+        .then((res) => {
+          this.Thenursingleveldetails = res.list;
+          this.pagesize = res.pageSize;
+          this.currentPage = res.pageNum;
+          this.total = res.total;
+        });
+    },
+
+    // 查询所有的护理级别
+    tnslall() {
+      this.$axios
+        .get("http://localhost:8089/tnsl/all")
+        .then((res) => {
+          this.tnsls = res;
+        })
+        .catch((e) => {
+          console.log("查询护理级别报错了", e);
+        });
+    },
     // 查询所有的禁忌
     taboocrowd() {
       this.$axios
@@ -727,21 +1064,42 @@ export default {
     },
 
     // 新增健康信息
-        submithelath(formName) {
-    
-
+    submithelath(formName) {
       this.$refs[formName].validate((valid) => {
         if (valid) {
-            this.$axios
-              .post("http://localhost:8089/health/save", this.health)
-              .then((res) => {
-                this.$message.success("新增成功！");
-                this.relationall();
-              })
-              .catch((e) => {
-                console.log("新增家属信息报错了");
-              });
-         
+          this.$axios
+            .post("http://localhost:8089/health/save", this.health)
+            .then((res) => {
+              this.$message.success("新增成功！");
+              this.relationall();
+            })
+            .catch((e) => {
+              console.log("新增家属信息报错了");
+            });
+        } else {
+          console.log("error submit!!");
+          return false;
+        }
+      });
+    },
+
+    // 修改护理套餐
+    submithuli(formName) {
+      this.$refs[formName].validate((valid) => {
+        if (valid) {
+          this.$axios
+            .get(
+              "http://localhost:8089/oldman/updatetsl?omid=1" +
+                this.oldman.omId +
+                "&id=" +
+                this.oldman.thenursinglevelByTslId.tslId
+            )
+            .then((res) => {
+              this.$message.success("设置成功！");
+            })
+            .catch((e) => {
+              console.log("新增家属信息报错了");
+            });
         } else {
           console.log("error submit!!");
           return false;
