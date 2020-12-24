@@ -55,15 +55,27 @@
             </el-table-column>
             <el-table-column
               label="身份证号"
-              width="240">
+              header-align="center"
+              align="center"
+              width="210">
               <template slot-scope="scope">
                 <i class="fa fa-vcard"></i>
                 {{scope.row.oldmanByOmId.tomCard}}
               </template>
             </el-table-column>
             <el-table-column
-              prop=""
-              label="床位号">
+              label="床位号"
+              header-align="center"
+              align="center"
+              width="210">
+              <template slot-scope="scope">
+                <span v-if="scope.row.oldmanByOmId.beds.length>0">
+                  {{scope.row.oldmanByOmId.beds[0].ldh+'—'+scope.row.oldmanByOmId.beds[0].fjh+'—'+scope.row.oldmanByOmId.beds[0].bid}}
+                </span>
+                <span v-else>
+                  暂无
+                </span>
+              </template>
             </el-table-column>
             <el-table-column
               label="账号存款余额">
@@ -82,6 +94,11 @@
               </template>
             </el-table-column>
           </el-table>
+          <div style="padding: 10px;color: #606266">
+            <el-tag effect="dark">
+              合计：<i class="fa fa-cny"></i> {{zmoney}}
+            </el-tag>
+          </div>
         </div>
         <el-pagination
           @size-change="handleSizeChange"
@@ -257,6 +274,7 @@
           olds:[],
           cons:[],
           yucxq:false,
+          zmoney:0,
         }
       },
       methods: {
@@ -294,7 +312,6 @@
           this.ycdate = '';
         },
         xuanz(){
-          console.log(this.form.name)
           let param={
             omid:this.form.name
           };
@@ -304,6 +321,12 @@
               console.log("dep:",r);
               this.zhye = r.depMoney;
               this.ycdate = r.depDate;
+              let a = r.oldmanByOmId.beds.length;
+              if(a>0){
+                this.cwh = r.oldmanByOmId.beds[0].ldh+'—'+r.oldmanByOmId.beds[0].fjh+'—'+r.oldmanByOmId.beds[0].bid;
+              }else{
+                this.cwh = '暂无';
+              }
             })
             .catch(e=>{
 
@@ -319,8 +342,12 @@
             sfr: this.uid,
             jffs: this.form.jffs,
             bz: this.form.bz,
+            sfqf: 0,
             no:1,
             size:this.pageSize
+          }
+          if(parseInt(s.jmoney)>parseInt(s.zmoney)){
+            s.sfqf = 1
           }
           console.log(s);
           let ppp = this.$qs.stringify(s);
@@ -328,8 +355,13 @@
             .then(r=>{
               console.log("dep:",r.list);
               this.deps = r.list;
+              this.$message({
+                message: '预存成功，已进入余额！！！',
+                type: 'success'
+              });
               this.total = r.total;
               this.current = 1;
+              this.sjqk();
             })
             .catch(e=>{
 
@@ -380,6 +412,11 @@
             .then(r=>{
               console.log("dep:",r.list);
               this.deps = r.list;
+              let m = 0;
+              this.deps.forEach((v, i) => {
+                m += v.depMoney
+              })
+              this.zmoney = m;
               this.total = r.total;
               this.current = 1;
             })
@@ -401,6 +438,11 @@
             .then(r=>{
               console.log("dep:",r.list);
               this.deps = r.list;
+              let m = 0;
+              this.deps.forEach((v, i) => {
+                m += v.depMoney
+              })
+              this.zmoney = m;
               this.total = r.total
             })
             .catch(e=>{
@@ -434,6 +476,11 @@
             .then(r=>{
               console.log("dep:",r.list);
               this.deps = r.list;
+              let m = 0;
+              this.deps.forEach((v, i) => {
+                m += v.depMoney
+              })
+              this.zmoney = m;
               this.total = r.total
             })
             .catch(e=>{
@@ -452,18 +499,18 @@
           //参数是当前页码
           this.current = pagerindex;
           if(this.selet.omname!=null || this.selet.phone!=null || this.selet.card!=null){
-            this.select();
-          }else{
             this.selects();
+          }else{
+            this.select();
           }
         },
         /* pageSize 改变时会触发*/
         handleSizeChange(pagesize){
           this.pageSize=pagesize;
           if(this.selet.omname!=null || this.selet.phone!=null || this.selet.card!=null){
-            this.select();
-          }else{
             this.selects();
+          }else{
+            this.select();
           }
         }
       },

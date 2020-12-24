@@ -5,6 +5,7 @@ import com.yanglaoyuan.pojo.Costflow;
 import com.yanglaoyuan.pojo.Deposit;
 import com.yanglaoyuan.pojo.Oldman;
 import com.yanglaoyuan.pojo.User;
+import com.yanglaoyuan.service.ArrearsService;
 import com.yanglaoyuan.service.CostflowService;
 import com.yanglaoyuan.service.DepositServices;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,6 +33,8 @@ public class DepositContrller {
     DepositServices ds;
     @Autowired
     CostflowService cs;
+    @Autowired
+    ArrearsService as;
 
     /**
      * 预存修改
@@ -44,7 +47,7 @@ public class DepositContrller {
     @RequestMapping("/upd")
     public PageInfo<Deposit> update(@RequestParam("no") Integer no, @RequestParam(value="size",required = false) Integer size,
                                     @RequestParam("zmoney") BigDecimal zmoney, @RequestParam("jmoney") BigDecimal jmoney,
-                                    @RequestParam("jfr") String jfr, @RequestParam("sfr") Integer sfr,
+                                    @RequestParam("jfr") String jfr, @RequestParam("sfr") Integer sfr,@RequestParam("sfqf") Integer sfqf,
                                     @RequestParam("jffs") String jffs, @RequestParam("bz") String bz,@RequestParam("omid") Integer omid){
         ds.update(zmoney,new Timestamp(new Date().getTime()),jffs,jfr,bz,omid);
         Costflow c = new Costflow();
@@ -59,6 +62,11 @@ public class DepositContrller {
         c.setCosExplain("费用预存");
         c.setOldmanByOmId(ol);
         cs.doinsert(c);
+        System.out.println(sfqf);
+        if(sfqf>0){
+            System.out.println("是");
+            as.updatesfqf("是",omid);
+        }
         Integer pageSize = 5;
         if(size!=null){
             pageSize = size;

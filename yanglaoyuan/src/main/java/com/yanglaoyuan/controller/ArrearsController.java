@@ -3,6 +3,7 @@ package com.yanglaoyuan.controller;
 import com.github.pagehelper.PageInfo;
 import com.yanglaoyuan.pojo.Arrears;
 import com.yanglaoyuan.service.ArrearsService;
+import com.yanglaoyuan.service.DepositServices;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,6 +25,20 @@ public class ArrearsController {
 
     @Autowired
     ArrearsService as;
+    @Autowired
+    DepositServices ds;
+
+    @RequestMapping("/upd")
+    public PageInfo<Arrears> updatebyid(@RequestParam("no") Integer no, @RequestParam(value="size",required = false) Integer size,
+                                        @RequestParam("arrid") Integer arrid,@RequestParam("omid") Integer omid){
+        as.updatebyid(arrid);
+        ds.updatemoney(new BigDecimal(0),omid);
+        Integer pageSize = 5;
+        if(size!=null){
+            pageSize = size;
+        }
+        return as.selectBypager(no,size);
+    }
 
     @RequestMapping("/pager")
     public PageInfo<Arrears> selectBypager(@RequestParam("no") Integer no, @RequestParam(value="size",required = false) Integer size){

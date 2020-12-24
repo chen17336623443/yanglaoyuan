@@ -48,9 +48,15 @@
           <el-table-column
             label="床位号"
             header-align="center"
-            align="center">
+            align="center"
+            width="210">
             <template slot-scope="scope">
-
+                <span v-if="scope.row.oldmanByOmId.beds.length>0">
+                  {{scope.row.oldmanByOmId.beds[0].ldh+'—'+scope.row.oldmanByOmId.beds[0].fjh+'—'+scope.row.oldmanByOmId.beds[0].bid}}
+                </span>
+              <span v-else>
+                  暂无
+                </span>
             </template>
           </el-table-column>
           <el-table-column
@@ -164,19 +170,19 @@
                   </el-input>
                 </td>
               </tr>
-              <tr style="height: 40px;">
-                <td class="st">应缴金额:</td>
-                <td class="sj" colspan="3">
-                  <el-input
-                    placeholder="应缴金额"
-                    v-model="yjmoney"
-                    style="width: 300px;"
-                    :disabled="true"
-                    clearable>
-                  </el-input>
-                  <el-button type="primary" icon="el-icon-document" size="mini">查看账单</el-button>
-                </td>
-              </tr>
+<!--              <tr style="height: 40px;">-->
+<!--                <td class="st">应缴金额:</td>-->
+<!--                <td class="sj" colspan="3">-->
+<!--                  <el-input-->
+<!--                    placeholder="应缴金额"-->
+<!--                    v-model="yjmoney"-->
+<!--                    style="width: 300px;"-->
+<!--                    :disabled="true"-->
+<!--                    clearable>-->
+<!--                  </el-input>-->
+<!--                  <el-button type="primary" icon="el-icon-document" size="mini">查看账单</el-button>-->
+<!--                </td>-->
+<!--              </tr>-->
               <tr style="height: 40px;">
                 <td class="st">交费金额:</td>
                 <td class="sj" colspan="3">
@@ -376,7 +382,16 @@
                 m += v.regMoney
               })
               this.zmoney = m;
-              this.total = r.total
+              if(this.total < r.total){
+                this.$message({
+                  message: '缴费成功！！！',
+                  type: 'success'
+                });
+              }else{
+                this.$message.error('缴费失败！！！');
+              }
+              this.total = r.total;
+              this.sjqk();
             })
             .catch(e=>{
 
@@ -398,6 +413,12 @@
                 this.form.jffs = '余额';
                 this.zff = true;
                 this.jffs();
+              }
+              let a = r.oldmanByOmId.beds.length;
+              if(a>0){
+                this.cwh = r.oldmanByOmId.beds[0].ldh+'—'+r.oldmanByOmId.beds[0].fjh+'—'+r.oldmanByOmId.beds[0].bid;
+              }else{
+                this.cwh = '暂无';
               }
             })
             .catch(e=>{
@@ -538,18 +559,18 @@
           //参数是当前页码
           this.current = pagerindex;
           if(this.selet.omname!=null || this.selet.dgdate!=null){
-            this.select();
-          }else{
             this.selects();
+          }else{
+            this.select();
           }
         },
         /* pageSize 改变时会触发*/
         handleSizeChange(pagesize){
           this.pageSize=pagesize;
           if(this.selet.omname!=null || this.selet.dgdate!=null){
-            this.select();
-          }else{
             this.selects();
+          }else{
+            this.select();
           }
         }
       },

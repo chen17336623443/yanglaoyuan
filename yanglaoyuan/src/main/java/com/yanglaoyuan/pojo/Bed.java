@@ -11,6 +11,48 @@ public class Bed {
     private Floor floorByFid;
     private Oldman myoldman;
 
+    private String fjh;
+    private String cshu;
+    private String ldh;
+
+    @Override
+    public String toString() {
+        return "Bed{" +
+                "bid=" + bid +
+                ", bname='" + bname + '\'' +
+                ", bedtypeByByid=" + bedtypeByByid +
+                ", floorByFid=" + floorByFid +
+                ", myoldman=" + myoldman +
+                ", fjh='" + fjh + '\'' +
+                ", cshu='" + cshu + '\'' +
+                ", ldh='" + ldh + '\'' +
+                '}';
+    }
+
+    public String getFjh() {
+        return fjh;
+    }
+
+    public void setFjh(String fjh) {
+        this.fjh = fjh;
+    }
+
+    public String getCshu() {
+        return cshu;
+    }
+
+    public void setCshu(String cshu) {
+        this.cshu = cshu;
+    }
+
+    public String getLdh() {
+        return ldh;
+    }
+
+    public void setLdh(String ldh) {
+        this.ldh = ldh;
+    }
+
     @Id
     @Column(name = "bid", nullable = false)
     public Integer getBid() {

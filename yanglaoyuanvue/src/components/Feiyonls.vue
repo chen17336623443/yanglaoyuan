@@ -53,9 +53,15 @@
           <el-table-column
             label="床位号"
             header-align="center"
-            align="center">
+            align="center"
+            width="210">
             <template slot-scope="scope">
-
+                <span v-if="scope.row.oldmanByOmId.beds.length>0">
+                  {{scope.row.oldmanByOmId.beds[0].ldh+'—'+scope.row.oldmanByOmId.beds[0].fjh+'—'+scope.row.oldmanByOmId.beds[0].bid}}
+                </span>
+              <span v-else>
+                  暂无
+                </span>
             </template>
           </el-table-column>
           <el-table-column
@@ -311,19 +317,19 @@
         handleCurrentChange(pagerindex){
           //参数是当前页码
           this.current = pagerindex;
-          if(this.selet.omname!=null || this.selet.fylb!=null || this.selet.dgdate!=null){
-            this.select();
-          }else{
+          if(this.selet.omname!=null || this.selet.fylb!=null || this.selet.dgdate!=null || this.selet.fylb!=""){
             this.selects();
+          }else{
+            this.select();
           }
         },
         /* pageSize 改变时会触发*/
         handleSizeChange(pagesize){
           this.pageSize=pagesize;
           if(this.selet.omname!=null || this.selet.fylb!=null || this.selet.dgdate!=null){
-            this.select();
-          }else{
             this.selects();
+          }else{
+            this.select();
           }
         }
       },

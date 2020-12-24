@@ -1,10 +1,8 @@
 package com.yanglaoyuan.controller;
 
 import com.github.pagehelper.PageInfo;
-import com.yanglaoyuan.pojo.Costflow;
-import com.yanglaoyuan.pojo.Oldman;
-import com.yanglaoyuan.pojo.Register;
-import com.yanglaoyuan.pojo.User;
+import com.yanglaoyuan.pojo.*;
+import com.yanglaoyuan.service.ArrearsService;
 import com.yanglaoyuan.service.CostflowService;
 import com.yanglaoyuan.service.DepositServices;
 import com.yanglaoyuan.service.RegisterService;
@@ -35,6 +33,8 @@ public class RegisterController {
     DepositServices ds;
     @Autowired
     CostflowService cs;
+    @Autowired
+    ArrearsService as;
 
     @RequestMapping("/add")
     public PageInfo<Register> add(@RequestParam("no")Integer no, @RequestParam("size")Integer size,
@@ -49,6 +49,11 @@ public class RegisterController {
         u.setUid(sfr);
         if(jffs.equals("余额")){
             ds.updatemoney(moneyc,omid);
+            Arrears ar = new Arrears();
+            ar.setOldmanByOmId(ol);
+            ar.setArrMoney(moneyc.multiply(new BigDecimal(-1)));
+            ar.setArrSfpay("否");
+            as.doinsert(ar);
         }
         //交费新增
         Register reg = new Register();
