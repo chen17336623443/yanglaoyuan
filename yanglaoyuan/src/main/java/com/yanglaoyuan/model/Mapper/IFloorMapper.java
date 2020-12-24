@@ -19,11 +19,15 @@ public interface IFloorMapper {
 
     int insertLou(Floor floor);
 
+    Floor selectfid(Integer fid);
+
     int deldetByFid(Integer fid);
 
     List<Floor> selectByFid(Integer fid);
     List<Floor> selectByFidlc(Integer fid);
     List<Floor> selectByFidfj(Integer fid);
+
+    List<Floor> selectByFtype();
 
     int updateNameByFid(Integer fid,String fname);
 }

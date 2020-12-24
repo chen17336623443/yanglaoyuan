@@ -11,6 +11,7 @@ public class Safetyhouse {
 
     @Id
     @Column(name = "shid", nullable = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     public Integer getShid() {
         return shid;
     }

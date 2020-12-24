@@ -5,6 +5,7 @@ import login from '@/page/login'
 import hugongguanli from '@/components/hugongguanli'
 import Outregistration from '@/components/Outregistration'
 import Floor from '@/components/Floor'
+import Floorinfo from '@/components/Floorinfo'
 import BedType from '@/components/BedType'
 import Yucungl from '@/components/Yucungl'
 import FoodManage from '@/components/FoodManage'
@@ -80,6 +81,10 @@ const router = new Router({
               {
                 path:'/Floor',
                 component: Floor
+              },
+              {
+                path:'/Floorinfo',
+                component: Floorinfo
               },
               {
                 path:'/BedType',

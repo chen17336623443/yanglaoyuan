@@ -11,6 +11,7 @@ public class Equipmenthouse {
 
     @Id
     @Column(name = "ehid", nullable = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     public Integer getEhid() {
         return ehid;
     }

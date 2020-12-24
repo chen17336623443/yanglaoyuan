@@ -16,6 +16,7 @@ public class Floorinfo {
 
     @Id
     @Column(name = "fiid", nullable = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     public Integer getFiid() {
         return fiid;
     }

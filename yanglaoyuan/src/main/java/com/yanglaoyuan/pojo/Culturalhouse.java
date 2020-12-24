@@ -11,6 +11,7 @@ public class Culturalhouse {
 
     @Id
     @Column(name = "chid", nullable = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     public Integer getChid() {
         return chid;
     }
