@@ -46,4 +46,6 @@ public interface ICostflowMapper {
      */
     List<Costflow> selectbyomid(Integer omid,String type);
 
+    List<Costflow> selectByomidOld(Integer omid);
+
 }

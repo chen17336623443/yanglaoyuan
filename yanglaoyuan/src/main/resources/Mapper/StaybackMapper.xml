@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--
+    @description: 
+    @author: ChenZhiPeng
+    @create: 2020-12-24 10:07
+-->
+<mapper namespace="com.yanglaoyuan.model.Mapper.IStaybackMapper">
+
+    <resultMap id="stayback" type="com.yanglaoyuan.pojo.Stayback">
+        <id property="stId" column="st_id"/>
+        <result property="stType" column="st_type"/>
+        <result property="stForm" column="st_form"/>
+        <result property="stTime" column="st_time"/>
+        <result property="stReason" column="st_reason"/>
+    </resultMap>
+
+    <select id="selectByseid" resultMap="stayback">
+        select * from stayback where se_id=#{seid}
+    </select>
+</mapper>

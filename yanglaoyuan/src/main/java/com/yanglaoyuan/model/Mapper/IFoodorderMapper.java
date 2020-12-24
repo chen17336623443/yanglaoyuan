@@ -24,4 +24,7 @@ public interface IFoodorderMapper {
     Integer updateFoodorderState(Integer fo_id);
     //根据id查询点餐数据  送餐查询
     Foodorder selectFoodorderByFoId(Integer fo_id);
+
+    /*根据omid查询点餐数据*/
+    List<Foodorder> selectByOmid(Integer omid);
 }

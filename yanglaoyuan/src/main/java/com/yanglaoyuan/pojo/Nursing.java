@@ -15,12 +15,17 @@ public class Nursing {
     private String nuWay;
     private String nuTime;
     private String nuOther;
+    private List<Nursingrecord> nursingrecordsByNuId;
 
     @Id
     @Column(name = "nu_id", nullable = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     public Integer getNuId() {
         return nuId;
+    }
+
+    public void setNuId(int nuId) {
+        this.nuId = nuId;
     }
 
     public void setNuId(Integer nuId) {
@@ -109,5 +114,14 @@ public class Nursing {
 
     public void setNuOther(String nuOther) {
         this.nuOther = nuOther;
+    }
+
+    @OneToMany(mappedBy = "nursingByNuId")
+    public List<Nursingrecord> getNursingrecordsByNuId() {
+        return nursingrecordsByNuId;
+    }
+
+    public void setNursingrecordsByNuId(List<Nursingrecord> nursingrecordsByNuId) {
+        this.nursingrecordsByNuId = nursingrecordsByNuId;
     }
 }

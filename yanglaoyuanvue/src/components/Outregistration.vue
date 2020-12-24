@@ -68,11 +68,6 @@
             label="老人姓名">
           </el-table-column>
           <el-table-column
-            prop="name"
-            width="100"
-            label="床位号">
-          </el-table-column>
-          <el-table-column
             prop="outAccompanyname"
             width="100"
             label="陪同人姓名">

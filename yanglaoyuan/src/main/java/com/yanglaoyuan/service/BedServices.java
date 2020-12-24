@@ -33,4 +33,8 @@ public class BedServices {
     public int del(Integer fid){
         return mapper.del(fid);
     }
+
+    public Bed selecyBybid(Integer bid){
+         return mapper.selecyBybid(bid);
+    }
 }

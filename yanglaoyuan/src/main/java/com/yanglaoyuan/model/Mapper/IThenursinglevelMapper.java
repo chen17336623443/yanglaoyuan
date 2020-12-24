@@ -2,6 +2,7 @@ package com.yanglaoyuan.model.Mapper;
 
 import com.yanglaoyuan.pojo.Thenursinglevel;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -20,4 +21,6 @@ public interface IThenursinglevelMapper {
 
     //根据主键查询护理级别
     Thenursinglevel selectbyid(Integer id);
+
+    Thenursinglevel selectByomidThen(@Param("omid")Integer omid);
 }

@@ -1,17 +1,22 @@
 package com.yanglaoyuan.pojo;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import javax.persistence.*;
+import java.math.BigDecimal;
 import java.sql.Timestamp;
 import java.util.Objects;
 
 @Entity
 public class Nursingrecord {
     private Integer nrId;
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss" , timezone = " GMT+8 " )
     private Timestamp nrTime;
     private Integer nrCompletion;
-    private Timestamp nrMoney;
+    private BigDecimal nrMoney;
     private String nrOther;
     private Oldman oldmanByOmId;
+    private Nursing nursingByNuId;
 
     @Id
     @Column(name = "nr_id", nullable = false)
@@ -19,10 +24,13 @@ public class Nursingrecord {
         return nrId;
     }
 
-    public void setNrId(Integer nrId) {
+    public void setNrId(int nrId) {
         this.nrId = nrId;
     }
 
+    public void setNrId(Integer nrId) {
+        this.nrId = nrId;
+    }
 
     @Basic
     @Column(name = "nr_time", nullable = true)
@@ -46,11 +54,11 @@ public class Nursingrecord {
 
     @Basic
     @Column(name = "nr_money", nullable = true)
-    public Timestamp getNrMoney() {
+    public BigDecimal getNrMoney() {
         return nrMoney;
     }
 
-    public void setNrMoney(Timestamp nrMoney) {
+    public void setNrMoney(BigDecimal nrMoney) {
         this.nrMoney = nrMoney;
     }
 
@@ -89,5 +97,15 @@ public class Nursingrecord {
 
     public void setOldmanByOmId(Oldman oldmanByOmId) {
         this.oldmanByOmId = oldmanByOmId;
+    }
+
+    @ManyToOne
+    @JoinColumn(name = "nu_id", referencedColumnName = "nu_id")
+    public Nursing getNursingByNuId() {
+        return nursingByNuId;
+    }
+
+    public void setNursingByNuId(Nursing nursingByNuId) {
+        this.nursingByNuId = nursingByNuId;
     }
 }

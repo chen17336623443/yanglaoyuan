@@ -15,6 +15,10 @@
         <result property="fpRemark" column="fp_remark"/>
         <result property="fpImg" column="fp_img"/>
     </resultMap>
+    <!--查询用户的套餐-->
+    <select id="selectByomidFood" resultMap="FoodpackgeMap">
+        select * from foodpackge f left join oldman o on f.fp_id = o.fp_id where o.om_id=#{omid}
+    </select>
     <!--//查询所有套餐
     List<Foodpackge> selectFoodpackgeAll();-->
     <select id="selectFoodpackgeAll" resultMap="FoodpackgeMap">

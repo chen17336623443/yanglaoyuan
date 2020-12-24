@@ -26,4 +26,6 @@ public interface IFoodpackgeMapper {
     Integer deleteFoodpackge(Integer fp_id);
     //给套餐修改图片
     Integer updateFoodpackgeImg(@Param("fp_id") Integer fp_id,@Param("fp_img") String fp_img);
+    /*根据omid查询*/
+    Foodpackge selectByomidFood(@Param("omid")Integer omid);
 }

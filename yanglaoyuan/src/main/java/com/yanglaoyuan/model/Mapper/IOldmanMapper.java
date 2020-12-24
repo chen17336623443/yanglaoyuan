@@ -26,6 +26,9 @@ public interface IOldmanMapper {
     /*查询未外出的老人*/
     List<Oldman> selectNotOut();
 
+    /*查询未出院的老人*/
+    List<Oldman> selectNotSettle();
+
     //护工离职 老人外键删除
     int del(Integer id);
 
