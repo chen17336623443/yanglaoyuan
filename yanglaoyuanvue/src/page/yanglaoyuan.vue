@@ -71,8 +71,8 @@
               <router-link to="/Floor" style="text-decoration: none">
                 <el-menu-item index="4-1">楼房管理</el-menu-item>
               </router-link>
-              <router-link to="" style="text-decoration: none">
-                <el-menu-item index="4-2">床位类型设置</el-menu-item>
+              <router-link to="/BedType" style="text-decoration: none">
+                <el-menu-item index="4-2">床位类型管理</el-menu-item>
               </router-link>
               <router-link to="" style="text-decoration: none">
                 <el-menu-item index="4-3">机构信息维护</el-menu-item>

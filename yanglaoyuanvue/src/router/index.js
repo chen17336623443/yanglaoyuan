@@ -5,11 +5,14 @@ import login from '@/page/login'
 import hugongguanli from '@/components/hugongguanli'
 import Outregistration from '@/components/Outregistration'
 import Floor from '@/components/Floor'
+import BedType from '@/components/BedType'
 import Yucungl from '@/components/Yucungl'
 import FoodManage from '@/components/FoodManage'
 import FoodPackge from '@/components/FoodPackge'
+
 import dashboard from '@/components/Dashboard'
 import consult from '@/components/consult'
+
 import Huliguanli from '@/components/Huliguanli'
 
 import Feiyonls from '@/components/Feiyonls'
@@ -32,40 +35,41 @@ const router = new Router({
         {
 
             path: '/home',
-            component: yanglaoyuan,
-            children: [{
-                    path: '/',
-                    component: dashboard
-                },
-                {
-                    path: '/hugongguanli',
-                    component: hugongguanli
-                },
-                {
-                    path: '/hugongguanli',
-                    component: hugongguanli
-                },
-                {
-                    path: '/foodManage',
-                    component: FoodManage
-                },
-                {
-                    path: '/Hulijibie',
-                    component: Hulijibie
-                },
-                {
-                    path: '/outregistration',
-                    component: Outregistration
-                },
-                {
-                    path: '/Floor',
-                    component: Floor
-                },
+            component: yanglaoyuan
+            ,
+            children: [
               {
+                path: '/',
+                component: dashboard
+              },
+              {
+                path: '/hugongguanli',
+                component: hugongguanli
+              },
+            {
+                path: '/foodManage',
+                component: FoodManage
+            },
+            {
                 path: '/foodPackge',
                 component: FoodPackge
+            },
+              {
+                path: '/Hulijibie',
+                component: Hulijibie
               },
-
+            {
+                path: '/outregistration',
+                component: Outregistration
+              },
+              {
+                path:'/Floor',
+                component: Floor
+              },
+              {
+                path:'/BedType',
+                component: BedType
+              },
               {
                 path: '/ycgl',
                 component: Yucungl

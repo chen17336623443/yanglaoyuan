@@ -15,6 +15,18 @@ public class Floor {
     private List<Floor> floorsByFid;
     private List<Floorinfo> floorinfosByFid;
 
+    @Override
+    public String toString() {
+        return "Floor{" +
+                "fid=" + fid +
+                ", fname='" + fname + '\'' +
+                ", fdad=" + fdad +
+                ", ftype=" + ftype +
+                ", bedsByFid=" + bedsByFid +
+                ", floorinfosByFid=" + floorinfosByFid +
+                '}';
+    }
+
     @Id
     @Column(name = "fid", nullable = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -25,7 +25,28 @@ public class FloorServices {
         return mapper.selectAll();
     }
 
+    public List<Floor> selectByFid(Integer fid){
+        return mapper.selectByFid(fid);
+    }
+
+    public List<Floor> selectByFidlc(Integer fid){
+        return mapper.selectByFidlc(fid);
+    }
+    public List<Floor> selectByFidfj(Integer fid){
+        return mapper.selectByFidfj(fid);
+    }
+
+
+    public int deldetByFid(Integer fid){
+        return mapper.deldetByFid(fid);
+    }
+
     public Floor insertLou2(Floor floor){
         return dao.save(floor);
     }
+
+    public int updateNameByFid(Integer fid,String fname){
+        return mapper.updateNameByFid(fid,fname);
+    }
+
 }

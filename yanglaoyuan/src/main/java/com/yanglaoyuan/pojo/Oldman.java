@@ -21,7 +21,7 @@ public class Oldman {
     private String tomLabour;
     @JsonFormat( pattern = "yyyy-MM-dd HH:mm:ss" , timezone = " GMT+8 " )
     private Timestamp tomCheckIntime;
-    private String tomFn;
+
     private String tomImg;
 
     private List<Accident> accidentsByOmId;
@@ -40,6 +40,7 @@ public class Oldman {
     private List<Settlement> settlementsByOmId;
     private List<Visit> visitsByOmId;
     private Foodpackge foodpackge;
+    private List<Bed> beds;
 
     @Id
     @Column(name = "om_id", nullable = false)
@@ -143,16 +144,6 @@ public class Oldman {
     }
 
     @Basic
-    @Column(name = "tom_fn", nullable = true, length = 255)
-    public String getTomFn() {
-        return tomFn;
-    }
-
-    public void setTomFn(String tomFn) {
-        this.tomFn = tomFn;
-    }
-
-    @Basic
     @Column(name = "tom_img", nullable = true, length = 255)
     public String getTomImg() {
         return tomImg;
@@ -177,7 +168,7 @@ public class Oldman {
                 Objects.equals(tomDiet, oldman.tomDiet) &&
                 Objects.equals(tomLabour, oldman.tomLabour) &&
                 Objects.equals(tomCheckIntime, oldman.tomCheckIntime) &&
-                Objects.equals(tomFn, oldman.tomFn) &&
+
                 Objects.equals(tomImg, oldman.tomImg);
     }
 
@@ -194,14 +185,14 @@ public class Oldman {
                 ", tomDiet='" + tomDiet + '\'' +
                 ", tomLabour='" + tomLabour + '\'' +
                 ", tomCheckIntime=" + tomCheckIntime +
-                ", tomFn='" + tomFn + '\'' +
+
                 ", tomImg='" + tomImg + '\'' +
                 '}';
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(omId, tomName, tomCard, tomSex, tomNumber, tomAddress, tomCategory, tomDiet, tomLabour, tomCheckIntime, tomFn, tomImg);
+        return Objects.hash(omId, tomName, tomCard, tomSex, tomNumber, tomAddress, tomCategory, tomDiet, tomLabour, tomCheckIntime, tomImg);
     }
 
     @OneToMany(mappedBy = "oldmanByOmId")
@@ -349,5 +340,16 @@ public class Oldman {
 
     public void setFoodpackge(Foodpackge foodpackge) {
         this.foodpackge = foodpackge;
+    }
+
+
+
+    @OneToMany(mappedBy = "myoldman")
+    public List<Bed> getBeds() {
+        return beds;
+    }
+
+    public void setBeds(List<Bed> beds) {
+        this.beds = beds;
     }
 }

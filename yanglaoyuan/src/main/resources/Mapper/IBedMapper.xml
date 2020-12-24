@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yanglaoyuan.model.Mapper.IBedMapper">
+    <resultMap id="Bedt" type="com.yanglaoyuan.pojo.Bed">
+        <id column="bid" property="bid"/>
+        <result column="bname" property="bname"/>
+        <association property="bedtypeByByid" javaType="com.yanglaoyuan.pojo.Bedtype">
+            <id column="byid" property="byid"/>
+            <result column="byname" property="byname"/>
+            <result column="bymoney" property="bymoney"/>
+            <result column="byallmoney" property="byallmoney"/>
+            <result column="bytime" property="bytime"/>
+            <result column="byinfo" property="byinfo"/>
+            <result column="byimg" property="byimg"/>
+        </association>
+        <association property="floorByFid" javaType="com.yanglaoyuan.pojo.Floor">
+            <id column="fid" property="fid"/>
+            <result column="fname" property="fname"/>
+            <result column="fdad" property="fdad"/>
+            <result column="ftype" property="ftype"/>
+        </association>
+        <association property="myoldman" javaType="com.yanglaoyuan.pojo.Oldman">
+            <id property="omId" column="om_id"/>
+            <result property="tomName" column="tom_name"/>
+            <result property="tomCard" column="tom_card"/>
+            <result property="tomSex" column="tom_sex"/>
+            <result property="tomNumber" column="tom_number"/>
+            <result property="tomAddress" column="tom_address"/>
+            <result property="tomCategory" column="tom_category"/>
+            <result property="tomDiet" column="tom_diet"/>
+            <result property="tomLabour" column="tom_labour"/>
+            <result property="tomCheckIntime" column="tom_check_intime"/>
+            <result property="tomFn" column="tom_fn"/>
+            <result property="tomImg" column="tom_img"/>
+        </association>
+    </resultMap>
+
+    <insert id="insert">
+        insert into bed values (null,#{byid},#{fid},#{bname},null)
+    </insert>
+    <!--    List<Bed> selectByFid(Integer fid);-->
+    <select id="selectByFid" resultMap="Bedt">
+        select * from bed b
+        join bedtype bt on b.byid = bt.byid
+        join floor f on b.fid = f.fid
+        left join oldman o on b.om_id = o.om_id
+         where b.fid=#{fid}
+    </select>
+
+    <delete id="delbybid">
+        DELETE FROM bed  where  bid=#{bid}
+    </delete>
+    <delete id="del">
+        DELETE FROM bed  where  fid=#{fid}
+    </delete>
+</mapper>
