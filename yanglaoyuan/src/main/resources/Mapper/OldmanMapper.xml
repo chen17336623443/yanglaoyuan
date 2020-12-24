@@ -75,6 +75,18 @@
         #{d.tomCategory},#{d.tomDiet},#{d.tomLabour},#{tomCheckIntime},#{d.tomImg})
     </insert>
 
+
+    <!--修改老人的护理套餐-->
+    <update id="updatetsl">
+        update  oldman set tsl_id=#{id}  where om_id=#{omid}
+    </update>
+
+    <!--给老人设置餐饮套餐-->
+    <update id="updatefp">
+        update  oldman set fp_id=#{id}  where om_id=#{omid}
+    </update>
+
+
     <!--//查询所有点过餐的老人
     List<Oldman> selectOldmanByHaveFoid();-->
     <select id="selectOldmanByHaveFoid" resultMap="oldman">

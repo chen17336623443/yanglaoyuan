@@ -68,4 +68,16 @@ public class OldmanServices {
     public List<Oldman> selectOldmanByHaveFoid(){
         return mapper.selectOldmanByHaveFoid();
     }
+
+
+    /*修改老人的护理套餐*/
+
+    public Integer updatetsl(Integer omid, Integer id){
+        return  mapper.updatetsl(omid,id);
+    }
+
+    /*给老人设置餐饮套餐*/
+    public Integer updatefp (Integer omid, Integer id){
+        return  mapper.updatefp(omid,id);
+    }
 }
