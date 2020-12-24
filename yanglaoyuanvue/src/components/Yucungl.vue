@@ -78,7 +78,7 @@
               align="center"
               label="操作">
               <template slot-scope="scope">
-                <el-button type="primary" size="mini" icon="el-icon-search" plain>详情</el-button>
+                <el-button type="primary" size="mini" icon="el-icon-search" plain @click="ycxq(scope.row)">详情</el-button>
               </template>
             </el-table-column>
           </el-table>
@@ -152,6 +152,8 @@
                   <td class="sj" colspan="3">
                     <el-input
                       placeholder="交费金额"
+                      type="number"
+                      min="0"
                       v-model="form.jmoney"
                       style="width: 400px;"
                       clearable>
@@ -207,9 +209,18 @@
             </el-form>
           </div>
           <span slot="footer" class="dialog-footer">
-            <el-button @click="centerDialogVisible = false">取 消</el-button>
+            <el-button @click="quxiao()">取 消</el-button>
             <el-button type="primary" @click="updyuc()">确 定</el-button>
           </span>
+        </el-dialog>
+        <el-dialog width="60%" center title="预存详情" :visible.sync="yucxq">
+          <el-table :data="cons">
+            <el-table-column property="cosMoney" label="预存金额" width="150"></el-table-column>
+            <el-table-column property="cosDate" label="收费时间" width="200"></el-table-column>
+            <el-table-column property="userByUid.uname" label="收费员"></el-table-column>
+            <el-table-column property="cosExplain" label="说明" width="200"></el-table-column>
+            <el-table-column property="cosRemarks" label="备注"></el-table-column>
+          </el-table>
         </el-dialog>
       </div>
     </div>
@@ -244,9 +255,44 @@
           ycdate:'',
           cwh:'',
           olds:[],
+          cons:[],
+          yucxq:false,
         }
       },
       methods: {
+        ycxq(row){
+          this.yucxq = true;
+          let s = {
+            omid:row.oldmanByOmId.omId,
+            type:'费用预存'
+          }
+          let ppp = this.$qs.stringify(s);
+          this.$axios.post('costflow/byomid',ppp)
+            .then(r=>{
+              console.log("cons:",r);
+              this.cons = r;
+            })
+            .catch(e=>{
+
+            })
+        },
+        quxiao(){
+          this.centerDialogVisible = false
+          this.sjqk();
+        },
+        sjqk(){
+          let a = {
+            name:'',
+            jmoney:'',
+            jfr:'',
+            sfr:localStorage.getItem("uname"),
+            jffs:'现金',
+            bz:''
+          }
+          this.form = a;
+          this.zhye = '';
+          this.ycdate = '';
+        },
         xuanz(){
           console.log(this.form.name)
           let param={
@@ -397,6 +443,7 @@
         handleClose(done) {
           this.$confirm('确认关闭？')
             .then(_ => {
+              this.sjqk();
               done();
             })
             .catch(_ => {});

@@ -128,10 +128,10 @@
               <router-link to="" style="text-decoration: none">
                 <el-menu-item index="7-2">入住缴费</el-menu-item>
               </router-link>
-              <router-link to="" style="text-decoration: none">
+              <router-link tag="span" to="/jfdj" style="text-decoration: none">
                 <el-menu-item index="7-3">缴费登记</el-menu-item>
               </router-link>
-              <router-link to="" style="text-decoration: none">
+              <router-link tag="span" to="/qfgl" style="text-decoration: none">
                 <el-menu-item index="7-4">欠费管理</el-menu-item>
               </router-link>
               <router-link tag="span" to="/fyls" style="text-decoration: none">

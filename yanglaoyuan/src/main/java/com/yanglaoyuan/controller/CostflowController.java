@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 /**
  * @program: yanglaoyuan
  * @description: 费用流水Controller
@@ -23,6 +25,19 @@ public class CostflowController {
     @Autowired
     CostflowService cs;
 
+    @RequestMapping("/byomid")
+    public List<Costflow> selectbyomid(@RequestParam("omid")Integer omid,@RequestParam("type")String type){
+        return cs.selectbyomid(omid,type);
+    }
+
+    /**
+     * 分页
+     * @Description 方法是a
+     * @Param 参数:a
+     * @Return 返回类是:a
+     * @Author chenxing
+     * @Date 2020/12/23 8:38
+     */
     @RequestMapping("/pager")
     public PageInfo<Costflow> pager(@RequestParam("no")Integer no,@RequestParam(value="size",required = false)Integer size){
         Integer pageSize = 5;
@@ -32,6 +47,14 @@ public class CostflowController {
         return cs.selectBypager(no, size);
     }
 
+    /**
+     * 多条件分页
+     * @Description 方法是a
+     * @Param 参数:a
+     * @Return 返回类是:a
+     * @Author chenxing
+     * @Date 2020/12/23 8:38
+     */
     @RequestMapping("/pagers")
     public PageInfo<Costflow> pagers(@RequestParam("no")Integer no,@RequestParam(value="size",required = false)Integer size,
                                      @RequestParam("name")String name,@RequestParam("fylb")String fylb,

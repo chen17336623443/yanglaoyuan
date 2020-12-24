@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.RestController;
 import java.math.BigDecimal;
 import java.sql.Timestamp;
 import java.util.Date;
-import java.util.List;
 
 /**
  * @program: yanglaoyuan
@@ -34,6 +33,14 @@ public class DepositContrller {
     @Autowired
     CostflowService cs;
 
+    /**
+     * 预存修改
+     * @Description 方法:a
+     * @Param 参是:a
+     * @Return 返回型是:a
+     * @Author chenxing
+     * @Date 2020/12/23 8:31
+     */
     @RequestMapping("/upd")
     public PageInfo<Deposit> update(@RequestParam("no") Integer no, @RequestParam(value="size",required = false) Integer size,
                                     @RequestParam("zmoney") BigDecimal zmoney, @RequestParam("jmoney") BigDecimal jmoney,
@@ -60,6 +67,7 @@ public class DepositContrller {
     }
 
     /**
+     * 根据老人id查询预存
      * @Description 方法:a
      * @Param 参是:a
      * @Return 返回型是:a
@@ -72,6 +80,7 @@ public class DepositContrller {
     }
 
     /**
+     * 预存查询分页
      * @Description 方法是pager
      * @Param 参数:no,size
      * @Return 返回类是:PageInfo<Deposit>
@@ -88,6 +97,7 @@ public class DepositContrller {
     }
 
     /**
+     * 预存多条件查询分页
      * @Description 方法是a
      * @Param 参数:a
      * @Return 返回类是:a

@@ -25,6 +25,19 @@ public class CostflowService {
     ICostflowDao dao;
 
     /**
+     * 根据老人id查询
+     * @Description 方法是:a
+     * @Param 参数是:a
+     * @Return 返回类型是:a
+     * @Author chenxing
+     * @Date 2020/12/23 19:22
+     */
+    public List<Costflow> selectbyomid(Integer omid,String type){
+        return mapper.selectbyomid(omid, type);
+    }
+
+    /**
+     * 新增
      * @Description 方法:a
      * @Param 参是:a
      * @Return 返回型是:a
@@ -42,6 +55,7 @@ public class CostflowService {
     }
 
     /**
+     * 分页查询
      * @Description 方法:a
      * @Param 参是:a
      * @Return 返回型是:a
@@ -55,6 +69,7 @@ public class CostflowService {
     }
 
     /**
+     * 多条件分页查询
      * @Description 方法:a
      * @Param 参是:a
      * @Return 返回型是:a

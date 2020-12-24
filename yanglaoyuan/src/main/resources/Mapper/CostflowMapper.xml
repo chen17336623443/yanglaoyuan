@@ -47,4 +47,13 @@
         order by cos_date desc
     </select>
 
+    <select id="selectbyomid" resultMap="resultCostflow">
+        select cos_id, cos_category, cos_money, cos_date, cos_explain, cos_remarks,
+               o.om_id, o.tom_name, o.tom_number, o.tom_card, u.uid, u.uname from costflow c
+                inner join oldman o on c.om_id = o.om_id
+                inner join user u on c.uid = u.uid
+                where c.om_id = #{omid} and c.cos_explain = #{type}
+        order by cos_date desc
+    </select>
+
 </mapper>
