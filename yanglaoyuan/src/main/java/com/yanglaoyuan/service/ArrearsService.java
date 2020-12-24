@@ -26,6 +26,30 @@ public class ArrearsService {
     IArrearsMapper mapper;
 
     /**
+     * 根据id修改
+     * @Description 方法是:a
+     * @Param 参数是:a
+     * @Return 返回类型是:a
+     * @Author chenxing
+     * @Date 2020/12/24 15:23
+     */
+    public void updatebyid(Integer arrid){
+        mapper.updatebyid(arrid);
+    }
+
+    /**
+     * 修改是否欠费
+     * @Description 方法是:a
+     * @Param 参数是:a
+     * @Return 返回类型是:a
+     * @Author chenxing
+     * @Date 2020/12/24 11:56
+     */
+    public void updatesfqf(String sf,Integer omid){
+        mapper.updatesfqf(sf, omid);
+    }
+
+    /**
      * 新增
      * @Description 方法是:a
      * @Param 参数是:a

@@ -6,6 +6,9 @@
     <resultMap id="Bedt" type="com.yanglaoyuan.pojo.Bed">
         <id column="bid" property="bid"/>
         <result column="bname" property="bname"/>
+        <result column="fjh" property="fjh"/>
+        <result column="cshu" property="cshu"/>
+        <result column="ldh" property="ldh"/>
         <association property="bedtypeByByid" javaType="com.yanglaoyuan.pojo.Bedtype">
             <id column="byid" property="byid"/>
             <result column="byname" property="byname"/>
@@ -45,6 +48,17 @@
         select * from bed b
         join bedtype bt on b.byid = bt.byid
         join floor f on b.fid = f.fid
+        left join oldman o on b.om_id = o.om_id
+         where b.fid=#{fid}
+    </select>
+
+    <select id="selectbyid" resultMap="Bedt">
+        select b.bid,b.fid,byname,bymoney,byallmoney,bytime,
+        f.fname as fjh,f1.fname as cshu,f2.fname as ldh,o.tom_name from bed b
+        join bedtype bt on b.byid = bt.byid
+        join floor f on b.fid = f.fid
+        left join floor f1 on f1.fid = f.fdad
+        left join floor f2 on f2.fid = f1.fdad
         left join oldman o on b.om_id = o.om_id
          where b.fid=#{fid}
     </select>

@@ -125,9 +125,9 @@
               <router-link tag="span" to="/ycgl" style="text-decoration: none">
                 <el-menu-item index="7-1">预存管理</el-menu-item>
               </router-link>
-              <router-link to="" style="text-decoration: none">
-                <el-menu-item index="7-2">入住缴费</el-menu-item>
-              </router-link>
+<!--              <router-link to="" style="text-decoration: none">-->
+<!--                <el-menu-item index="7-2">入住缴费</el-menu-item>-->
+<!--              </router-link>-->
               <router-link tag="span" to="/jfdj" style="text-decoration: none">
                 <el-menu-item index="7-3">缴费登记</el-menu-item>
               </router-link>

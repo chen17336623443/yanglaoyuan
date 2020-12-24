@@ -13,6 +13,13 @@
             <result property="tomName" column="tom_name"/>
             <result property="tomCard" column="tom_card"/>
             <result property="tomNumber" column="tom_number"/>
+            <collection property="beds" ofType="com.yanglaoyuan.pojo.Bed">
+                <id column="bid" property="bid"/>
+                <result column="bname" property="bname"/>
+                <result column="fjh" property="fjh"/>
+                <result column="cshu" property="cshu"/>
+                <result column="ldh" property="ldh"/>
+            </collection>
         </association>
         <association property="userByUid" javaType="com.yanglaoyuan.pojo.User">
             <id property="uid" column="uid"/>
@@ -22,17 +29,27 @@
 
     <select id="selectall" resultMap="resultCostflow">
         select cos_id, cos_category, cos_money, cos_date, cos_explain, cos_remarks,
-               o.om_id, o.tom_name, o.tom_number, o.tom_card, u.uid, u.uname from costflow c
+               o.om_id, o.tom_name, o.tom_number, o.tom_card, u.uid, u.uname,
+                b.bid, b.bname, f.fname as fjh,f1.fname as cshu,f2.fname as ldh from costflow c
                 inner join oldman o on c.om_id = o.om_id
                 inner join user u on c.uid = u.uid
+                left join bed b on o.om_id = b.om_id
+                left join floor f on b.fid = f.fid
+                left join floor f1 on f1.fid = f.fdad
+                left join floor f2 on f2.fid = f1.fdad
         order by cos_date desc
     </select>
 
     <select id="selectbykwy" resultMap="resultCostflow">
         select cos_id, cos_category, cos_money, cos_date, cos_explain, cos_remarks,
-               o.om_id, o.tom_name, o.tom_number, o.tom_card, u.uid, u.uname from costflow c
+               o.om_id, o.tom_name, o.tom_number, o.tom_card, u.uid, u.uname,
+                b.bid, b.bname, f.fname as fjh,f1.fname as cshu,f2.fname as ldh from costflow c
                 inner join oldman o on c.om_id = o.om_id
                 inner join user u on c.uid = u.uid
+                left join bed b on o.om_id = b.om_id
+                left join floor f on b.fid = f.fid
+                left join floor f1 on f1.fid = f.fdad
+                left join floor f2 on f2.fid = f1.fdad
                 <where>
                     <if test="name!=null and name!=''">
                         and o.tom_name like #{name}
@@ -49,9 +66,14 @@
 
     <select id="selectbyomid" resultMap="resultCostflow">
         select cos_id, cos_category, cos_money, cos_date, cos_explain, cos_remarks,
-               o.om_id, o.tom_name, o.tom_number, o.tom_card, u.uid, u.uname from costflow c
+               o.om_id, o.tom_name, o.tom_number, o.tom_card, u.uid, u.uname,
+                b.bid, b.bname, f.fname as fjh,f1.fname as cshu,f2.fname as ldh from costflow c
                 inner join oldman o on c.om_id = o.om_id
                 inner join user u on c.uid = u.uid
+                left join bed b on o.om_id = b.om_id
+                left join floor f on b.fid = f.fid
+                left join floor f1 on f1.fid = f.fdad
+                left join floor f2 on f2.fid = f1.fdad
                 where c.om_id = #{omid} and c.cos_explain = #{type}
         order by cos_date desc
     </select>

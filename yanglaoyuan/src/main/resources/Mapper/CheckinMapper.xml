@@ -15,6 +15,13 @@
             <result property="tomName" column="tom_name"/>
             <result property="tomCard" column="tom_card"/>
             <result property="tomNumber" column="tom_number"/>
+            <collection property="beds" ofType="com.yanglaoyuan.pojo.Bed">
+                <id column="bid" property="bid"/>
+                <result column="bname" property="bname"/>
+                <result column="fjh" property="fjh"/>
+                <result column="cshu" property="cshu"/>
+                <result column="ldh" property="ldh"/>
+            </collection>
         </association>
         <association property="userByUid" javaType="com.yanglaoyuan.pojo.User">
             <id property="uid" column="uid"/>
@@ -24,9 +31,14 @@
 
     <select id="selectall" resultMap="resultCheckin">
         select che_id, che_bed, che_nursing, che_canying, che_due, che_actual, che_mode, che_remarks,
-            o.om_id, o.tom_name, o.tom_card, o.tom_number, u.uid, u.uname from checkin c
+            o.om_id, o.tom_name, o.tom_card, o.tom_number, u.uid, u.uname,
+            b.bid, b.bname, f.fname as fjh,f1.fname as cshu,f2.fname as ldh from checkin c
 	        inner join oldman o on c.om_id = o.om_id
     	    inner join user u on c.uid = u.uid
+    	    left join bed b on o.om_id = b.om_id
+            left join floor f on b.fid = f.fid
+            left join floor f1 on f1.fid = f.fdad
+            left join floor f2 on f2.fid = f1.fdad
         order by che_id desc;
     </select>
 

@@ -13,20 +13,37 @@
             <result property="tomCard" column="tom_card"/>
             <result property="tomNumber" column="tom_number"/>
             <result property="tomCheckIntime" column="tom_check_intime"/>
+            <collection property="beds" ofType="com.yanglaoyuan.pojo.Bed">
+                <id column="bid" property="bid"/>
+                <result column="bname" property="bname"/>
+                <result column="fjh" property="fjh"/>
+                <result column="cshu" property="cshu"/>
+                <result column="ldh" property="ldh"/>
+            </collection>
         </association>
     </resultMap>
 
     <select id="selectall" resultMap="resultArrears">
         select arr_id, arr_money, arr_month, arr_other, arr_sfpay,
-               o.om_id, o.tom_name, o.tom_card, o.tom_number, o.tom_check_intime from arrears a
+               o.om_id, o.tom_name, o.tom_card, o.tom_number, o.tom_check_intime, b.bid, b.bname,
+               f.fname as fjh,f1.fname as cshu,f2.fname as ldh from arrears a
             inner join oldman o on a.om_id = o.om_id
+            left join bed b on o.om_id = b.om_id
+            left join floor f on b.fid = f.fid
+            left join floor f1 on f1.fid = f.fdad
+            left join floor f2 on f2.fid = f1.fdad
         order by arr_id desc
     </select>
 
     <select id="selectbykwy" resultMap="resultArrears">
-        select arr_id, arr_money, arr_month, arr_other, arr_sfpay,
-               o.om_id, o.tom_name, o.tom_card, o.tom_number, o.tom_check_intime from arrears a
+        select arr_id, arr_money, arr_month, arr_other, arr_sfpay, b.bid, b.bname,
+               o.om_id, o.tom_name, o.tom_card, o.tom_number, o.tom_check_intime,
+                f.fname as fjh,f1.fname as cshu,f2.fname as ldh from arrears a
             inner join oldman o on a.om_id = o.om_id
+            left join bed b on o.om_id = b.om_id
+            left join floor f on b.fid = f.fid
+            left join floor f1 on f1.fid = f.fdad
+            left join floor f2 on f2.fid = f1.fdad
             <where>
                 <if test="name!=null and name!=''">
                     and o.tom_name like #{name}
@@ -46,5 +63,13 @@
             </where>
         order by arr_id desc
     </select>
+
+    <update id="updatesfqf">
+        update arrears set arr_sfpay=#{sf} where om_id = #{omid}
+    </update>
+
+    <update id="updatebyid">
+        update arrears set arr_sfpay='是' where arr_id = #{arrid}
+    </update>
 
 </mapper>

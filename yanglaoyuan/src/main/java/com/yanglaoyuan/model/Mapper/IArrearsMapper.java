@@ -37,4 +37,24 @@ public interface IArrearsMapper {
      */
     List<Arrears> selectbykwy(String name, String sfz, String cwh, String qfje,String kdate,String jdate,String zt);
 
+    /**
+     * 修改是否欠费
+     * @Description 方法是:a
+     * @Param 参数是:a
+     * @Return 返回类型是:a
+     * @Author chenxing
+     * @Date 2020/12/24 11:52
+     */
+    void updatesfqf(String sf,Integer omid);
+
+    /**
+     * 根据id修改
+     * @Description 方法:a
+     * @Param 参是:a
+     * @Return 返回型是:a
+     * @Author chenxing
+     * @Date 2020/12/24 15:21
+     */
+    void updatebyid(Integer arrid);
+
 }

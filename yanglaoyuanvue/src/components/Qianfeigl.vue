@@ -50,21 +50,16 @@
           </el-select>
           <el-button type="primary" size="small" icon="el-icon-search" @click="select()">查询</el-button>
           <el-button type="warning" size="small" icon="el-icon-refresh" style="margin-left: 0px;" @click="cz()">重置</el-button>
-          <el-button type="success" size="small" icon="el-icon-plus" style="margin-left: 0px;">缴费</el-button>
+          <el-button type="success" size="small" icon="el-icon-plus" style="margin-left: 0px;" @click="jiaofeis()">缴费</el-button>
         </div>
         <div style="border: 1px solid #EBEEF5">
           <el-table
             ref="multipleTable"
             :data="arres"
             tooltip-effect="dark"
-            @selection-change="handleSelectionChange"
+            highlight-current-row
+            @current-change="lrxz"
             style="width: 100%">
-            <el-table-column
-              type="selection"
-              width="50"
-              header-align="center"
-              align="center">
-            </el-table-column>
             <el-table-column
               label="老人姓名"
               header-align="center"
@@ -96,9 +91,15 @@
             <el-table-column
               label="床位号"
               header-align="center"
-              align="center">
+              align="center"
+              width="200">
               <template slot-scope="scope">
-
+                <span v-if="scope.row.oldmanByOmId.beds.length>0">
+                  {{scope.row.oldmanByOmId.beds[0].ldh+'—'+scope.row.oldmanByOmId.beds[0].fjh+'—'+scope.row.oldmanByOmId.beds[0].bid}}
+                </span>
+                <span v-else>
+                  暂无
+                </span>
               </template>
             </el-table-column>
             <el-table-column
@@ -134,7 +135,12 @@
               header-align="center"
               align="center">
               <template slot-scope="scope">
-                {{scope.row.arrSfpay}}
+                <span v-if="scope.row.arrSfpay=='是'">
+                  <el-tag type="success" effect="dark">是</el-tag>
+                </span>
+                <span v-else>
+                  <el-tag type="danger" effect="dark">否</el-tag>
+                </span>
               </template>
             </el-table-column>
           </el-table>
@@ -154,6 +160,42 @@
           layout="total, sizes, prev, pager, next, jumper"
           :total="total">
         </el-pagination>
+        <el-dialog
+          title="缴费"
+          :visible.sync="jiaofei"
+          width="30%"
+          center
+          :before-close="handleClose">
+          <div style="background: whitesmoke;padding: 20px;border-radius: 5px;" v-if="arre!=null">
+            <p style="margin: 10px">
+              <sapn style="font-weight: bold;width: 100px;display: inline-block;">老人姓名：</sapn>
+              <span>{{arre.oldmanByOmId.tomName}}</span>
+            </p>
+            <p style="margin: 10px">
+              <sapn style="font-weight: bold;width: 100px;display: inline-block;">身份证号：</sapn>
+              <span>{{arre.oldmanByOmId.tomCard}}</span>
+            </p>
+            <p style="margin: 10px">
+              <sapn style="font-weight: bold;width: 100px;display: inline-block;">床位号：</sapn>
+              <span>
+                <span v-if="arre.oldmanByOmId.beds.length>0">
+                  {{arre.oldmanByOmId.beds[0].ldh+'—'+arre.oldmanByOmId.beds[0].fjh+'—'+arre.oldmanByOmId.beds[0].bid}}
+                </span>
+                <span v-else>
+                  暂无
+                </span>
+              </span>
+            </p>
+            <p style="margin: 10px">
+              <sapn style="font-weight: bold;width: 100px;display: inline-block;">欠费金额：</sapn>
+              <span>{{arre.arrMoney}}</span>
+            </p>
+          </div>
+          <span slot="footer" class="dialog-footer">
+            <el-button @click="jiaofei = false">取 消</el-button>
+            <el-button type="primary" @click="updyuc()">缴 费</el-button>
+          </span>
+        </el-dialog>
       </div>
     </div>
 </template>
@@ -212,9 +254,61 @@
               }
             }]
           },
+          arre:null,
+          jiaofei:false,
         }
       },
       methods:{
+        updyuc(){
+          this.jiaofei = false;
+          let s = {
+            arrid:this.arre.arrId,
+            omid:this.arre.oldmanByOmId.omId,
+            no:1,
+            size:this.pageSize
+          }
+          console.log(s);
+          let ppp = this.$qs.stringify(s);
+          this.$axios.post('arrears/upd',ppp)
+            .then(r=>{
+              console.log("arre:",r.list);
+              this.$message({
+                message: '缴费成功！！！',
+                type: 'success'
+              });
+              this.arres = r.list;
+              let m = 0;
+              this.arres.forEach((v, i) => {
+                m += v.arrMoney
+              })
+              this.zmoney = m;
+              this.total = r.total
+            })
+            .catch(e=>{
+
+            })
+        },
+        jiaofeis(){
+          if(this.arre!=null){
+            this.jiaofei = true;
+          }else{
+            this.$message({
+              message: '请选择一条欠费记录！！！',
+              type: 'warning'
+            });
+          }
+        },
+        lrxz(val){
+          console.log(val);
+          this.arre = val;
+          if(this.arre.arrSfpay=="是"){
+            this.arre = null;
+            this.$message({
+              message: '该记录已缴费！！！',
+              type: 'warning'
+            });
+          }
+        },
         yanzhe(i){
           if(i==1){
             if(this.selet.sfz.toString().length!=18){
@@ -359,9 +453,9 @@
           this.current = pagerindex;
           if(this.selet.omname!=null || this.selet.sfz!=null || this.selet.cwh!=null || this.selet.qfje!=null
             || this.selet.dgdate!=null || this.selet.zt!=null ){
-            this.select();
-          }else{
             this.selects();
+          }else{
+            this.select();
           }
         },
         /* pageSize 改变时会触发*/
@@ -369,14 +463,11 @@
           this.pageSize=pagesize;
           if(this.selet.omname!=null || this.selet.sfz!=null || this.selet.cwh!=null || this.selet.qfje!=null
             || this.selet.dgdate!=null || this.selet.zt!=null ){
-            this.select();
-          }else{
             this.selects();
+          }else{
+            this.select();
           }
         },
-        handleSelectionChange(val) {
-          this.multipleSelection = val;
-        }
       },
       mounted() {
         this.getarre();
@@ -392,6 +483,11 @@
     background: whitesmoke;
     height: 530px;
     width: 1090px;
+  }
+
+  .el-dialog--center .el-dialog__body {
+    text-align: initial;
+    padding: 10px 25px 10px;
   }
 
   .el-range-editor.el-input__inner {

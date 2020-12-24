@@ -13,6 +13,13 @@
             <result property="tomName" column="tom_name"/>
             <result property="tomCard" column="tom_card"/>
             <result property="tomNumber" column="tom_number"/>
+            <collection property="beds" ofType="com.yanglaoyuan.pojo.Bed">
+                <id column="bid" property="bid"/>
+                <result column="bname" property="bname"/>
+                <result column="fjh" property="fjh"/>
+                <result column="cshu" property="cshu"/>
+                <result column="ldh" property="ldh"/>
+            </collection>
         </association>
         <association property="userByUid" javaType="com.yanglaoyuan.pojo.User">
             <id property="uid" column="uid"/>
@@ -21,18 +28,26 @@
     </resultMap>
 
     <select id="selectalls" resultMap="resultDeposit">
-        select dep_id, dep_money, dep_date, dep_payment, dep_paytype, dep_remarks, o.om_id,
-            o.tom_name, o.tom_card, o.tom_number, u.uid, u.uname from deposit d
+        select dep_id, dep_money, dep_date, dep_payment, dep_paytype, dep_remarks, o.om_id, b.bid, b.bname,
+            o.tom_name, o.tom_card, o.tom_number, u.uid, u.uname, f.fname as fjh,f1.fname as cshu,f2.fname as ldh from deposit d
             inner join oldman o on d.om_id = o.om_id
             inner join user u on d.uid = u.uid
+            left join bed b on o.om_id = b.om_id
+            left join floor f on b.fid = f.fid
+            left join floor f1 on f1.fid = f.fdad
+            left join floor f2 on f2.fid = f1.fdad
         order by dep_date desc
     </select>
 
     <select id="selectbykwy" resultMap="resultDeposit">
-        select dep_id, dep_money, dep_date, dep_payment, dep_paytype, dep_remarks, o.om_id,
-            o.tom_name, o.tom_card, o.tom_number, u.uid, u.uname from deposit d
+        select dep_id, dep_money, dep_date, dep_payment, dep_paytype, dep_remarks, o.om_id, b.bid, b.bname,
+            o.tom_name, o.tom_card, o.tom_number, u.uid, u.uname, f.fname as fjh,f1.fname as cshu,f2.fname as ldh from deposit d
             inner join oldman o on d.om_id = o.om_id
             inner join user u on d.uid = u.uid
+            left join bed b on o.om_id = b.om_id
+            left join floor f on b.fid = f.fid
+            left join floor f1 on f1.fid = f.fdad
+            left join floor f2 on f2.fid = f1.fdad
             <where>
                 <if test="name!=null and name!=''">
                     and o.tom_name like #{name}
@@ -48,10 +63,14 @@
     </select>
 
     <select id="selectbyid" resultMap="resultDeposit">
-        select dep_id, dep_money, dep_date, dep_payment, dep_paytype, dep_remarks, o.om_id,
-            o.tom_name, o.tom_card, o.tom_number, u.uid, u.uname from deposit d
+        select dep_id, dep_money, dep_date, dep_payment, dep_paytype, dep_remarks, o.om_id, b.bid, b.bname,
+            o.tom_name, o.tom_card, o.tom_number, u.uid, u.uname, f.fname as fjh,f1.fname as cshu,f2.fname as ldh from deposit d
             inner join oldman o on d.om_id = o.om_id
             inner join user u on d.uid = u.uid
+            left join bed b on o.om_id = b.om_id
+            left join floor f on b.fid = f.fid
+            left join floor f1 on f1.fid = f.fdad
+            left join floor f2 on f2.fid = f1.fdad
             where d.om_id = #{omid}
         order by dep_date desc
     </select>

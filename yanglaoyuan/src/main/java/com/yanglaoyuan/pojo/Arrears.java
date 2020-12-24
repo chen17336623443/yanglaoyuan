@@ -16,6 +16,7 @@ public class Arrears {
 
     @Id
     @Column(name = "arr_id", nullable = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     public Integer getArrId() {
         return arrId;
     }
@@ -35,7 +36,7 @@ public class Arrears {
     }
 
     @Basic
-    @Column(name = "arr_month", nullable = false, precision = 2)
+    @Column(name = "arr_month", nullable = true, precision = 2)
     public BigDecimal getArrMonth() {
         return arrMonth;
     }
@@ -45,7 +46,7 @@ public class Arrears {
     }
 
     @Basic
-    @Column(name = "arr_other", nullable = false, precision = 2)
+    @Column(name = "arr_other", nullable = true, precision = 2)
     public BigDecimal getArrOther() {
         return arrOther;
     }
