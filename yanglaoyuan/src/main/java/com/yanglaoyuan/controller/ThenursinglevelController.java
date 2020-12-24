@@ -44,7 +44,8 @@ public class ThenursinglevelController {
 
     @PostMapping("/add")
     public String add(@RequestBody Thenursinglevel t){
-        return ts.add(t)==1?"新增护理级别成功！":"新增护理级别失败！";
+        ts.add(t);
+        return String.valueOf(t.getTslId());
     }
 
 }

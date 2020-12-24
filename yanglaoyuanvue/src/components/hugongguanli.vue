@@ -144,7 +144,9 @@
               label-width="70px"
               :inline="true"
             >
-              <el-form-item label="护工名称">
+              <fieldset style="padding:20px;border-color:#F2F6FC">
+                <legend>护工信息</legend>
+                <el-form-item label="护工名称">
                 <el-input
                   v-model="from1.name"
                   style="width: 140px"
@@ -160,16 +162,20 @@
                   disabled
                 ></el-input>
               </el-form-item>
-              <el-divider content-position="left">未安排护工的老人</el-divider>
+              </fieldset>
+              <fieldset style="padding:20px;margin-top:10px;border-color:#F2F6FC">
+                <legend>老人选择</legend>
               <el-checkbox-group v-model="laoren" size="medium">
                 <el-checkbox
                   v-for="k in kongxian"
                   :key="k.index"
                   :label="k.omId"
                   border
+                  style="margin-top:10px"
                   >{{ k.tomName }}</el-checkbox
                 >
               </el-checkbox-group>
+              </fieldset>
               <el-form-item style="float: right; margin-top: 20px">
                 <el-button type="primary" plain @click="anpailaor">
                   确认安排

@@ -34,102 +34,116 @@
             width="60%"
             :before-close="handleClose"
           >
-            <el-form
-              ref="formadd"
-              :model="formadd"
-              label-width="70px"
-              :inline="true"
+            <fieldset style="padding: 20px; border-color: #f2f6fc">
+              <legend>级别基本信息填写</legend>
+              <el-form
+                ref="formadd"
+                :model="formadd"
+                label-width="70px"
+                :inline="true"
+              >
+                <el-form-item label="级别名称">
+                  <el-input
+                    v-model="formadd.tslName"
+                    style="width: 250px"
+                  ></el-input>
+                </el-form-item>
+                <br />
+                <el-form-item label="护理对象">
+                  <el-select
+                    v-model="formadd.tslObject"
+                    placeholder="请选择活动区域"
+                    style="width: 250px"
+                  >
+                    <el-option label="自理" value="自理"></el-option>
+                    <el-option label="介助" value="介助"></el-option>
+                    <el-option label="介护" value="介护"></el-option>
+                    <el-option label="其他" value="其他"></el-option>
+                  </el-select>
+                </el-form-item>
+                <el-form-item label="级别费用">
+                  <el-input
+                    v-model="tslMoney"
+                    style="width: 250px"
+                    :readonly="true"
+                  ></el-input>
+                </el-form-item>
+                <el-form-item label="护理备注">
+                  <el-input
+                    type="textarea"
+                    v-model="formadd.tslOther"
+                    rows="3"
+                    style="width: 588px"
+                    resize="none"
+                  ></el-input>
+                </el-form-item>
+              </el-form>
+            </fieldset>
+            <fieldset
+              style="padding: 20px; margin-top: 10px; border-color: #f2f6fc"
             >
-              <el-form-item label="级别名称">
-                <el-input
-                  v-model="formadd.tslName"
-                  style="width: 250px"
-                ></el-input>
-              </el-form-item>
-              <br />
-              <el-form-item label="护理对象">
-                <el-select
-                  v-model="formadd.tslObject"
-                  placeholder="请选择活动区域"
-                  style="width: 250px"
-                >
-                  <el-option label="自理" value="自理"></el-option>
-                  <el-option label="介助" value="介助"></el-option>
-                  <el-option label="介护" value="介护"></el-option>
-                  <el-option label="其他" value="其他"></el-option>
-                </el-select>
-              </el-form-item>
-              <el-form-item label="级别费用">
-                <el-input
-                  v-model="tslMoney"
-                  style="width: 250px"
-                  :readonly="true"
-                ></el-input>
-              </el-form-item>
-              <el-form-item label="护理备注">
-                <el-input
-                  type="textarea"
-                  v-model="formadd.tslOther"
-                  rows="3"
-                  style="width: 588px"
-                  resize="none"
-                ></el-input>
-              </el-form-item>
-            </el-form>
-            <el-table
-              ref="multipleTable"
-              :data="tableData"
-              tooltip-effect="dark"
-              size="mini"
-              height="250"
-              style="width: 720px; margin-left: 20px"
-              @selection-change="handleSelectionChange"
-            >
-              <el-table-column type="selection" width="55"> </el-table-column>
+              <legend>设置护理计划</legend>
+              <el-table
+                ref="multipleTable"
+                :data="tableData"
+                tooltip-effect="dark"
+                size="mini"
+                height="250"
+                style="width: 720px"
+                @selection-change="handleSelectionChange"
+              >
+                <el-table-column type="selection" width="55"> </el-table-column>
 
-              <el-table-column label="护理名称" width="100">
-                <template slot-scope="s">
-                  <el-popover trigger="hover" placement="top">
-                    <p>{{ s.row.nuName }}</p>
-                    <div slot="reference" class="name-wrapper">
-                      {{ s.row.nuName | handleText }}
-                    </div>
-                  </el-popover>
-                </template>
-              </el-table-column>
-              <el-table-column prop="nuMonry" label="护理费用" width="80">
-              </el-table-column>
-              <el-table-column prop="nuWay" label="收费方式" width="80">
-              </el-table-column>
-              <el-table-column label="执行频次" width="100">
-                <template slot-scope="s"> {{ s.row.tsldNumber }} </template>
-              </el-table-column>
-              <el-table-column label="执行时间" width="100">
-                <template slot-scope="s">
-                  <el-popover trigger="hover" placement="top">
-                    <p>{{ s.row.tsldTime }}</p>
-                    <div slot="reference" class="name-wrapper">
-                      {{ s.row.tsldTime | handleText }}
-                    </div>
-                  </el-popover>
-                </template>
-              </el-table-column>
-              <el-table-column label="任务类型" width="100">
-                <template slot-scope="s"> {{ s.row.tsldType }} </template>
-              </el-table-column>
-              <el-table-column label="操作">
-                <template slot-scope="s">
-                  <el-button type="text" size="mini" @click="xuanze(s.row)">
-                    设置时间
-                  </el-button>
-                </template>
-              </el-table-column>
-            </el-table>
+                <el-table-column label="护理名称" width="100">
+                  <template slot-scope="s">
+                    <el-popover trigger="hover" placement="top">
+                      <p>{{ s.row.nuName }}</p>
+                      <div slot="reference" class="name-wrapper">
+                        {{ s.row.nuName | handleText }}
+                      </div>
+                    </el-popover>
+                  </template>
+                </el-table-column>
+                <el-table-column prop="nuMonry" label="护理费用" width="80">
+                </el-table-column>
+                <el-table-column prop="nuWay" label="收费方式" width="80">
+                </el-table-column>
+                <el-table-column label="执行频次" width="100">
+                  <template slot-scope="s"> {{ s.row.tsldNumber }} </template>
+                </el-table-column>
+                <el-table-column label="执行时间" width="100">
+                  <template slot-scope="s">
+                    <el-popover trigger="hover" placement="top">
+                      <p>{{ s.row.tsldTime }}</p>
+                      <div slot="reference" class="name-wrapper">
+                        {{ s.row.tsldTime | handleText }}
+                      </div>
+                    </el-popover>
+                  </template>
+                </el-table-column>
+                <el-table-column label="任务类型" width="100">
+                  <template slot-scope="s"> {{ s.row.tsldType }} </template>
+                </el-table-column>
+                <el-table-column label="操作">
+                  <template slot-scope="s">
+                    <el-button type="text" size="mini" @click="xuanze(s.row)">
+                      设置时间
+                    </el-button>
+                  </template>
+                </el-table-column>
+              </el-table>
+            </fieldset>
             <span slot="footer" class="dialog-footer">
               <el-button @click="dialogTableVisibleadd = false">
                 取 消
               </el-button>
-              <el-button type="primary" @click="addqd"> 确 定 </el-button>
+              <el-button
+                type="primary"
+                @click="addqd"
+                v-loading.fullscreen.lock="fullscreenLoading"
+              >
+                确 定
+              </el-button>
             </span>
             <el-dialog
               width="40%"
@@ -264,6 +278,53 @@
               <div slot="header" class="clearfix">
                 <span>级别项目</span>
               </div>
+              <el-table
+                :data="Thenursingleveldetails"
+                size="mini"
+                height="250"
+                style="width: 720px"
+              >
+                <el-table-column label="护理名称" width="100">
+                  <template slot-scope="s">
+                    <el-popover trigger="hover" placement="top">
+                      <p>{{ s.row.nursingByNuId.nuName }}</p>
+                      <div slot="reference" class="name-wrapper">
+                        {{ s.row.nursingByNuId.nuName | handleText }}
+                      </div>
+                    </el-popover>
+                  </template>
+                </el-table-column>
+                <el-table-column prop="nursingByNuId.nuMonry" label="护理费用" width="120">
+                </el-table-column>
+                <el-table-column prop="nursingByNuId.nuWay" label="收费方式" width="120">
+                </el-table-column>
+                <el-table-column label="执行频次" width="120">
+                  <template slot-scope="s"> {{ s.row.tsldNumber }} </template>
+                </el-table-column>
+                <el-table-column label="执行时间" width="120">
+                  <template slot-scope="s">
+                    <el-popover trigger="hover" placement="top">
+                      <p>{{ s.row.tsldTime }}</p>
+                      <div slot="reference" class="name-wrapper">
+                        {{ s.row.tsldTime | handleText }}
+                      </div>
+                    </el-popover>
+                  </template>
+                </el-table-column>
+                <el-table-column label="任务类型" width="120">
+                  <template slot-scope="s"> {{ s.row.tsldType }} </template>
+                </el-table-column>
+              </el-table>
+              <el-pagination
+                @size-change="handleSizeChange"
+                @current-change="handleCurrentChange"
+                :current-page="currentPage"
+                :page-sizes="[4, 8, 12, 16]"
+                :page-size="pagesize"
+                layout="total, sizes, prev, pager, next, jumper"
+                :total="total"
+              >
+              </el-pagination>
             </el-card>
           </el-col>
         </el-row>
@@ -280,6 +341,7 @@ export default {
       time: "",
       a1: false,
       a2: false,
+      Thenursingleveldetails: [],
       pinci: "",
       leibei: "",
       jb: [],
@@ -302,9 +364,11 @@ export default {
       tslMoney: 0,
       currentPage: 0,
       total: 0,
+      pagesize: 0,
       size: 4,
       feiyong: [],
       r: {},
+      fullscreenLoading: false,
     };
   },
   filters: {
@@ -328,10 +392,12 @@ export default {
     },
     //确认添加任务设置
     addsss() {
-      var i = 0;
       if (this.a1 == true) {
+        var i1 = 0;
         this.tableData.forEach((t) => {
           if (t.nuId == this.r.nuId) {
+            console.log(t.nuName);
+            console.log(i1);
             var str = "";
             for (var i = 0; i < this.checkList.length; i++) {
               str += this.checkList[i] + ",";
@@ -340,15 +406,18 @@ export default {
             if (str.length > 0) {
               str = str.substr(0, str.length - 1);
             }
-            this.tableData[i].tsldTime = str;
-            this.tableData[i].tsldNumber = this.leibei;
-            this.tableData[i].tsldType = this.pinci;
+            this.tableData[i1].tsldTime = str;
+            this.tableData[i1].tsldNumber = this.leibei;
+            this.tableData[i1].tsldType = this.pinci;
           }
-          i++;
+          i1++;
         });
       } else {
+        var i = 0;
         this.tableData.forEach((t) => {
           if (t.nuId == this.r.nuId) {
+            console.log(t.nuName);
+            console.log(i);
             var str = "";
             str = this.time;
             this.tableData[i].tsldTime = str;
@@ -369,6 +438,7 @@ export default {
     },
     //选择设置
     xuanze(row) {
+      this.r = {};
       this.r = row;
       this.innerVisible = true;
       this.dialogTableVisibleadd = false;
@@ -376,6 +446,48 @@ export default {
     //级别选取
     jibei(val) {
       this.form = val;
+      this.$http
+        .get(
+          "thvt/allbyid?num=1&size=" + this.size + "&tslid=" + this.form.tslId
+        )
+        .then((res) => {
+          this.Thenursingleveldetails = res.list;
+          this.pagesize = res.pageSize;
+          this.currentPage = res.pageNum;
+          this.total = res.total;
+        });
+    },
+    //级别选取上下页跳转
+    handleCurrentChange(val) {
+      this.$http
+        .get(
+          "thvt/allbyid?num=" +
+            val +
+            "&size=" +
+            this.size +
+            "&tslid=" +
+            this.form.tslId
+        )
+        .then((res) => {
+          this.Thenursingleveldetails = res.list;
+          this.pagesize = res.pageSize;
+          this.currentPage = res.pageNum;
+          this.total = res.total;
+        });
+    },
+    //级别选取切换当前页条数
+    handleSizeChange(val) {
+      this.size = val;
+      this.$http
+        .get(
+          "thvt/allbyid?num=1&size=" + this.size + "&tslid=" + this.form.tslId
+        )
+        .then((res) => {
+          this.Thenursingleveldetails = res.list;
+          this.pagesize = res.pageSize;
+          this.currentPage = res.pageNum;
+          this.total = res.total;
+        });
     },
     //选中的护理
     handleSelectionChange(val) {
@@ -395,10 +507,39 @@ export default {
     addqd() {
       if (this.feiyong.length == 0) {
         this.$message.error("请选择对应级别的护理！");
+      } else {
+        this.fullscreenLoading = true;
+        this.$http
+          .post("tnsl/add", {
+            tslName: this.formadd.tslName,
+            tslMoney: this.tslMoney,
+            tslOther: this.formadd.tslOther,
+            tslObject: this.formadd.tslObject,
+          })
+          .then((id) => {
+            console.log(id);
+            this.feiyong.forEach((r) => {
+              console.log(r.nuId);
+              this.$http.post("thvt/add/" + id + "/" + r.nuId, {
+                tsldType: r.tsldType,
+                tsldNumber: r.tsldNumber,
+                tsldTime: r.tsldTime,
+              });
+            });
+            setTimeout(() => {
+              this.loding();
+              this.formadd = {};
+              this.tslMoney = 0;
+              this.feiyong = [];
+              this.$message({
+                showClose: true,
+                message: "护理级别设置成功！",
+                type: "success",
+              });
+              this.fullscreenLoading = false;
+            }, 2000);
+          });
       }
-      console.log(this.feiyong);
-      console.log(this.tslMoney);
-      console.log(this.formadd);
     },
     //改变事件
     gaibian() {

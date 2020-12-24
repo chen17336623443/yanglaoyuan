@@ -17,6 +17,7 @@ public class Thenursinglevel {
 
     @Id
     @Column(name = "tsl_id", nullable = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     public Integer getTslId() {
         return tslId;
     }
