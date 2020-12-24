@@ -6,6 +6,7 @@ import com.yanglaoyuan.service.OldmanServices;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.sql.Timestamp;
 import java.util.List;
 
 /**
@@ -42,5 +43,13 @@ public class OldmanController {
     @RequestMapping("/noall")
     public List<Oldman> selectnoacid(){
         return oldmanServices.selectnoacid();
+    }
+
+
+    /*新增老人*/
+    @RequestMapping("insertoldman")
+    public  Oldman insertoldman(@RequestBody Oldman d){
+        d.setTomCheckIntime(new Timestamp(System.currentTimeMillis()));
+        return  oldmanServices.insertoldman(d);
     }
 }

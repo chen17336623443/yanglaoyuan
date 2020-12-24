@@ -24,6 +24,7 @@ public class User {
     private List<Stayback> staybacksByUid;
     private List<Tryout> tryoutsByUid;
     private List<Visit> visitsByUid;
+    private List<Consult> consults;
 
     @Id
     @Column(name = "uid", nullable = false)
@@ -196,5 +197,14 @@ public class User {
 
     public void setVisitsByUid(List<Visit> visitsByUid) {
         this.visitsByUid = visitsByUid;
+    }
+
+    @OneToMany(mappedBy = "myuser")
+    public List<Consult> getConsults() {
+        return consults;
+    }
+
+    public void setConsults(List<Consult> consults) {
+        this.consults = consults;
     }
 }

@@ -24,8 +24,8 @@
                 <i class="el-icon-bell"></i>
                 <span>接待管理</span>
               </template>
-              <router-link to="" style="text-decoration: none">
-                <el-menu-item index="2-1">咨询登记</el-menu-item>
+              <router-link to="consult" style="text-decoration: none">
+                <el-menu-item index="2-1" >咨询登记</el-menu-item>
               </router-link>
               <router-link to="" style="text-decoration: none">
                 <el-menu-item index="2-2">预约登记</el-menu-item>

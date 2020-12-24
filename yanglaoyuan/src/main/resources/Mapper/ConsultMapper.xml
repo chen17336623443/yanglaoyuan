@@ -16,6 +16,11 @@
         <result column="way" property="way"/>
         <result column="cphone" property="cphone"/>
         <result column="content" property="content"/>
+        <result column="site" property="site"/>
+        <association property="myuser" column="uid" >
+            <id column="uid" property="uid"/>
+            <result property="uname" column="uname"/>
+        </association>
 
 
 
@@ -23,6 +28,56 @@
 
     </resultMap>
     <select id="consultall" resultMap="all">
-    select *  from  consult
+    select *  from  consult c left join user u on c.uid=u.uid
+
+        <where>
+            <if test="ename!=null and ename!=''">
+                and   c.omname  like concat('%',#{ename},'%')
+                <if test="shengribegin!=null and shengribegin!=''  and shengriend!=null and shengriend!=''">
+                    and c.newtime between #{shengribegin} and #{shengriend}
+                </if>
+            </if>
+
+            <if test="ename!=null and ename!=''">
+                or   c.oname  like concat('%',#{ename},'%')
+                <if test="shengribegin!=null and shengribegin!=''  and shengriend!=null and shengriend!=''">
+                    and c.newtime between #{shengribegin} and #{shengriend}
+                </if>
+            </if>
+
+            <if test="ename!=null and ename!=''">
+                or   c.uid  =(select u1.uid from user u1 where u1.uname like concat('%',#{ename},'%') limit 1)
+                <if test="shengribegin!=null and shengribegin!=''  and shengriend!=null and shengriend!=''">
+                    and c.newtime between #{shengribegin} and #{shengriend}
+                </if>
+            </if>
+
+
+            <if test="shengribegin!=null and shengribegin!=''  and shengriend!=null and shengriend!=''">
+                and c.newtime between #{shengribegin} and #{shengriend}
+            </if>
+
+
+        </where>
     </select>
+
+
+    <!--新增咨询信息-->
+    <insert id="inserconsult">
+       insert  into  consult  values (null,#{d.myuser.uid},#{d.omname},#{d.card},#{d.omsex},#{d.omage},#{d.omselfCare},#{d.oname},#{d.relation},#{d.newtime},#{d.way},#{d.cphone},#{d.content},#{d.site})
+    </insert>
+
+
+    <!--修改咨询信息-->
+    <update id="updateconsult">
+        update consult  set  uid=#{d.myuser.uid},omname=#{d.omname},card=#{d.card},omsex=#{d.omsex},omage=#{d.omage},omself_care=#{d.omselfCare},oname=#{d.oname},relation=#{d.relation},newtime=#{d.newtime},way=#{d.way},cphone=#{d.cphone},site=#{d.site} where  c_id=#{d.cId}
+
+    </update>
+    
+    
+    <!--删除咨询信息-->
+    <delete id="delectconsult">
+        delete from consult where c_id=#{cid}
+    </delete>
+
 </mapper>

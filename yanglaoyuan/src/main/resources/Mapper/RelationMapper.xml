@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yanglaoyuan.model.Mapper.IRelationMapper">
+    <resultMap id="all" type="com.yanglaoyuan.pojo.Relation">
+        <id column="rid" property="rid"/>
+       <result column="rname" property="rname"/>
+        <result column="phone" property="phone"/>
+        <result column="card" property="card"/>
+        <result column="relation" property="relation"/>
+        <result column="omsex" property="omsex"/>
+        <result column="site" property="site"/>
+        <result column="guardian" property="guardian"/>
+
+        <association property="userByUid" column="uid" >
+            <id column="uid" property="uid"/>
+            <result property="uname" column="uname"/>
+        </association>
+        <association property="oldmanByOmId" column="om_id" >
+            <id column="om_id" property="omId"/>
+            <result property="tomName" column="tom_name"/>
+        </association>
+
+
+
+
+
+    </resultMap>
+
+    <!--新增咨询信息-->
+    <insert id="addrelation">
+       insert  into  relation(uid,om_id,rname,phone,card,relation,omsex,site,guardian)
+        values (#{d.userByUid.uid},#{d.oldmanByOmId.omId},#{d.rname},#{d.phone},#{d.card},#{d.relation},#{d.omsex},#{d.site},#{d.guardian})
+    </insert>
+
+
+    <!--根据老人id查询老人家属列表-->
+    <select id="selectbyomid" resultMap="all">
+        select  *  from relation r left join user u  on r.uid=u.uid left join oldman o on r.om_id=o.om_id where  r.om_id=#{id}
+    </select>
+
+<!--删除老人家属信息-->
+    <delete id="delete">
+        delete FROM relation WHERE rid=#{id}
+    </delete>
+
+</mapper>

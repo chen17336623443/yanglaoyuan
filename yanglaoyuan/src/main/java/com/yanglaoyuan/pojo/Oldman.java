@@ -40,6 +40,7 @@ public class Oldman {
     private List<Settlement> settlementsByOmId;
     private List<Visit> visitsByOmId;
     private Foodpackge foodpackge;
+    private List<Checkins> checkins;
     private List<Bed> beds;
 
     @Id
@@ -343,6 +344,17 @@ public class Oldman {
     }
 
 
+
+
+
+    @OneToMany(mappedBy = "myoldman")
+    public List<Checkins> getCheckins() {
+        return checkins;
+    }
+
+    public void setCheckins(List<Checkins> checkins) {
+        this.checkins = checkins;
+    }
 
     @OneToMany(mappedBy = "myoldman")
     public List<Bed> getBeds() {

@@ -1,6 +1,6 @@
 <template>
   <div class="div">
-    <el-row :gutter="20" class="goodsindex-queryInfo" v-show="show">
+    <el-row :gutter="20" class="goodsindex-queryInfo" v-show="show" style="margin-bottom:30px">
       <el-col :xs="8" :sm="6" :md="6" :lg="4" :xl="4">
         <el-input
           class="goodsindex-queryInfo-li"
@@ -8,27 +8,57 @@
           @keyup.enter.native="pageNum=0; shuju()"
           clearable
           size="mini"
-          placeholder="输入名称"
+          placeholder="输入老人名称"
         ></el-input>
       </el-col>
 
       <el-col :span="9.5">
         <div class="block" style="font-size: 12px; ">
-          咨询日期：
+          
           <el-date-picker
             @change="pageNum=1;bukeyiweikong();"
             size="mini"
-			style=""
+			style="width:280px"
             value-format="yyyy-MM-dd"
             v-model="juese.hiredate"
             type="datetimerange"
             :picker-options="pickerOptions"
             range-separator="至"
-            start-placeholder="开始日期"
-            end-placeholder="结束日期"
+            start-placeholder="登记开始日期"
+            end-placeholder="登记结束日期"
             align="right"
           ></el-date-picker>
         </div>
+      </el-col>
+      <el-col :span="4">
+         <el-select
+                    v-model="checkins.accomplish"
+                    size="mini"
+                    placeholder="是否完成登记"
+                    style="float: left;"
+                    @change="pageNum=1;shuju()"
+                  >
+                    <el-option label="已完成" value="已完成"></el-option>
+                    <el-option label="否" value="否"></el-option>
+                  
+                    <el-option label="其他" value="其他"></el-option>
+                    <el-option label="" value=""></el-option>
+                  </el-select>
+      </el-col>
+       <el-col :span="4">
+         <el-select
+                    v-model="checkins.checkintype"
+                    size="mini"
+                    placeholder="入住状态"
+                    style="float: left;"
+                     @change="pageNum=1;shuju()"
+                  >
+                    <el-option label="入住" value="入住"></el-option>
+                    <el-option label="未入住" value="未入住"></el-option>
+                  
+                    <el-option label="其他" value="其他"></el-option>
+                    <el-option label="" value=""></el-option>
+                  </el-select>
       </el-col>
 
       <el-col :xs="6" :sm="4" :md="3" :lg="2" :xl="2">
@@ -75,7 +105,7 @@
       <el-col :span="24">
         <el-card class="box-card">
           <div slot="header" class="clearfix">
-            <span>咨询列表</span>
+            <span>入住登记</span>
             <el-button style="float: right; padding: 3px 0" type="text">操作按钮</el-button>
           </div>
           <el-row>
@@ -89,16 +119,18 @@
                 :load="load"
                 :tree-props="{menus: 'menus', hasChildren: 'hasChildren'}"
               >
-                <el-table-column prop="cId" label="编号" width="60"></el-table-column>
+                <el-table-column prop="checkinid" label="编号" width="60"></el-table-column>
 
-                <el-table-column prop="oname" label="咨询人姓名"></el-table-column>
+                <el-table-column prop="myoldman.tomName" label="老人姓名"></el-table-column>
 
-                <el-table-column prop="way" label="咨询方式"></el-table-column>
-                <el-table-column prop="omname" label="老人姓名"></el-table-column>
-                <el-table-column prop="newtime" label="咨询日期"></el-table-column>
-                <el-table-column prop="cphone" label="联系电话"></el-table-column>
-                <el-table-column prop="myuser.uname" label="接待人"></el-table-column>
-
+                <el-table-column prop="myoldman.tomSex" label="性别"></el-table-column>
+                <el-table-column prop="myoldman.tomCard" label="身份证"></el-table-column>
+                <el-table-column prop="accomplish" label="是否完成登记"></el-table-column>
+                <el-table-column prop="checkintype" label="入住状态"></el-table-column>
+                <el-table-column prop="checkinbegin" label="入住开始时间"></el-table-column>
+                 <el-table-column prop="checkinnew" label="登记时间"></el-table-column>
+                  <el-table-column prop="checkinend" label="合同到期时间"></el-table-column>
+                  
                 <el-table-column prop label="操作">
                   <template slot-scope="scope">
 				
@@ -114,7 +146,7 @@
                       icon="el-icon-delete"
                       size="mini"
                       circle
-                      @click="deletebymid(scope.row.cId)"
+                      @click="deletebymid(scope.row.checkinid)"
                     ></el-button>
                   </template>
                 </el-table-column>
@@ -318,6 +350,10 @@ import { regionData, CodeToText } from "element-china-area-data";
 export default {
   data() {
     return {
+      checkins:{
+        accomplish:'',
+        checkintype:''
+      },
 		
       options: regionData,
       update: false,
@@ -550,7 +586,7 @@ export default {
     /* 删除某个菜单 */
     deletebymid(mid) {
       this.$axios
-        .get("http://localhost:8089/consult/deleteconsult?cid=" + mid)
+        .get("http://localhost:8089/checkins/delete?id=" + mid)
         .then((res) => {
           if (res != 0) {
             this.$message.success("删除成功");
@@ -651,17 +687,17 @@ export default {
 		this.consult.myuser.uname= localStorage.getItem("uname");
       if (this.juese.hiredate != "" && this.juese.hiredate != null) {
         this.$axios
-          .get(
-            "http://localhost:8089/consult/all?no=" +
+          .post(
+            ("http://localhost:8089/checkins/all?no=" +
               this.pageNum +
               "&size=" +
               this.pageSize +
-              "&name=" +
+              "&tomName=" +
               this.juese.name +
               "&begin=" +
               this.juese.hiredate[0] +
               "&end=" +
-              this.juese.hiredate[1]
+              this.juese.hiredate[1]),this.checkins
           )
           .then((res) => {
 			this.tableData1 = res;

@@ -24,6 +24,11 @@ import Visit from '@/components/Visit'
 import Accident from '@/components/Accident'
 
 import Hulijibie from '@/components/Hulijibie'
+import checkins from '@/components/checkins'
+import checkinsadd from '@/components/checkinsadd'
+
+
+
 Vue.use(Router)
 
 const router = new Router({
@@ -99,6 +104,14 @@ const router = new Router({
               {
                 path: '/Huliguanli',
                 component: Huliguanli
+              },
+              {
+                path: '/checkins',
+                component: checkins
+              },
+              {
+                path: '/checkinsadd',
+                component: checkinsadd
               },
               {
                 path: '/jfdj',

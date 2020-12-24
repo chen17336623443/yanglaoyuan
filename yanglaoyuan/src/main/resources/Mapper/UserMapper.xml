@@ -9,9 +9,14 @@
         <result column="uphone" property="uphone"/>
         <result column="upass" property="upass"/>
     </resultMap>
-
     <select id="login" resultMap="all">
         select * from user where uphone=#{phone} and upass=#{upass}
+    </select>
+
+
+    <!--根据用户名查询用户信息-->
+    <select id="byuphone" resultMap="all">
+        select * from user where uphone=#{phone} limit 1
     </select>
 
     <select id="selectByUid" resultMap="all">
